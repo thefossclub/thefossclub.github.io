@@ -1,59 +1,130 @@
-body.dark-mode {
-  background-color: #1a1a1a;
-  color: #fff;
+/* Reset and base styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+/* Header and navigation */
 header {
-  background-color: #222;
+  background-color: #333;
+  color: #fff;
+  padding: 1rem;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+}
+
+nav ul li {
+  margin-left: 1rem;
 }
 
 nav ul li a {
   color: #fff;
+  text-decoration: none;
 }
 
+/* Hero section */
 .hero {
-  background-color: #222;
+  background-color: #f4f4f4;
+  padding: 4rem 2rem;
+  text-align: center;
 }
 
-.hero h1,
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
 .hero p {
-  color: #fff;
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
 }
 
 .hero button {
-  background-color: #fff;
-  color: #222;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 0.8rem 1.6rem;
+  font-size: 1rem;
+  cursor: pointer;
 }
 
+/* Section styles */
 section {
-  background-color: #333;
+  padding: 4rem 2rem;
 }
 
 section h2 {
-  color: #fff;
+  font-size: 2rem;
+  margin-bottom: 2rem;
 }
 
+/* Footer styles */
 footer {
-  background-color: #222;
+  background-color: #333;
+  color: #fff;
+  padding: 1rem;
+  text-align: center;
+}
+
+footer nav ul {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  margin-top: 1rem;
+}
+
+footer nav ul li {
+  margin: 0 0.5rem;
 }
 
 footer nav ul li a {
   color: #fff;
+  text-decoration: none;
+}
+
+/* Light mode (default) */
+body {
+  background-color: #fff;
+  color: #333;
+}
+
+/* Dark mode */
+body.dark-mode {
+  background-color: #333;
+  color: #fff;
+}
+
+/* Dark mode toggle button */
+#darkModeToggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
 }
 
 .dark-mode-icon {
-  display: inline;
-}
-
-.light-mode-icon {
   display: none;
 }
 
 body.dark-mode .dark-mode-icon {
-  display: none;
-}
-
-body.dark-mode .light-mode-icon {
   display: inline;
 }
 
+body.dark-mode .light-mode-icon {
+  display: none;
+}
