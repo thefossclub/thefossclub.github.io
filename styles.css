@@ -1,0 +1,59 @@
+body.dark-mode {
+  background-color: #1a1a1a;
+  color: #fff;
+}
+
+header {
+  background-color: #222;
+}
+
+nav ul li a {
+  color: #fff;
+}
+
+.hero {
+  background-color: #222;
+}
+
+.hero h1,
+.hero p {
+  color: #fff;
+}
+
+.hero button {
+  background-color: #fff;
+  color: #222;
+}
+
+section {
+  background-color: #333;
+}
+
+section h2 {
+  color: #fff;
+}
+
+footer {
+  background-color: #222;
+}
+
+footer nav ul li a {
+  color: #fff;
+}
+
+.dark-mode-icon {
+  display: inline;
+}
+
+.light-mode-icon {
+  display: none;
+}
+
+body.dark-mode .dark-mode-icon {
+  display: none;
+}
+
+body.dark-mode .light-mode-icon {
+  display: inline;
+}
+
