@@ -1,162 +1,345 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+:root {
+    --primary-color: #00ff00;
+    --secondary-color: #1a1a1a;
+    --background-color: #0a0a0a;
+    --text-color: #f0f0f0;
+    --accent-color: #ff00ff;
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --header-bg: rgba(0, 0, 0, 0.8);
 }
 
 body {
-  font-family: Arial, sans-serif;
-  line-height: 1.6;
+    font-family: "Roboto Mono", monospace;
+    line-height: 1.6;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    transition:
+        background-color 0.3s,
+        color 0.3s;
 }
 
 header {
-  background-color: #333;
-  color: #fff;
-  padding: 1rem;
+    background-color: var(--header-bg);
+    backdrop-filter: blur(10px);
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 255, 0, 0.2);
 }
 
 nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+}
+
+.logo a {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    text-decoration: none;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
 }
 
 nav ul {
-  display: flex;
-  list-style: none;
+    display: flex;
+    list-style: none;
 }
 
 nav ul li {
-  margin-left: 1rem;
+    margin-left: 1.5rem;
 }
 
 nav ul li a {
-  color: #fff;
-  text-decoration: none;
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+    position: relative;
+}
+
+nav ul li a::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--primary-color);
+    transition: width 0.3s;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+main {
+    padding-top: 70px;
 }
 
 .hero {
-  background-color: #f4f4f4;
-  padding: 4rem 2rem;
-  text-align: center;
+    background: linear-gradient(
+        135deg,
+        var(--secondary-color),
+        var(--background-color)
+    );
+    color: var(--text-color);
+    padding: 6rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 20px,
+        rgba(0, 255, 0, 0.05) 20px,
+        rgba(0, 255, 0, 0.05) 40px
+    );
+    animation: scan 10s linear infinite;
+}
+
+@keyframes scan {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(50%);
+    }
 }
 
 .hero h1 {
-  font-size: 3rem;
-  margin-bottom: 1rem;
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
 }
 
 .hero p {
-  font-size: 1.2rem;
-  margin-bottom: 2rem;
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
 }
 
-.hero button {
-  background-color: #333;
-  color: #fff;
-  border: none;
-  padding: 0.8rem 1.6rem;
-  font-size: 1rem;
-  cursor: pointer;
+.cta-button {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    border: none;
+    padding: 0.8rem 1.6rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    border-radius: 5px;
+    transition:
+        background-color 0.3s,
+        transform 0.3s;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+}
+
+.cta-button:hover {
+    background-color: var(--accent-color);
+    transform: scale(1.05);
 }
 
 section {
-  padding: 4rem 2rem;
+    padding: 4rem 5%;
 }
 
 section h2 {
-  font-size: 2rem;
-  margin-bottom: 2rem;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: var(--primary-color);
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+.project-grid,
+.event-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.project-card,
+.event-item {
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 255, 0, 0.1);
+    transition:
+        transform 0.3s,
+        box-shadow 0.3s;
+    border: 1px solid rgba(0, 255, 0, 0.2);
+}
+
+.project-card:hover,
+.event-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 255, 0, 0.2);
+}
+
+.project-card h3,
+.event-item h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.github-link {
+    display: inline-block;
+    margin-top: 1rem;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.github-link:hover {
+    color: var(--accent-color);
+}
+
+#join-form {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+#join-form input,
+#join-form textarea {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(0, 255, 0, 0.2);
+    border-radius: 5px;
+    color: var(--text-color);
+    font-family: "Roboto Mono", monospace;
+}
+
+#join-form input:focus,
+#join-form textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+}
+
+#join-form button {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    border: none;
+    padding: 0.8rem 1.6rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition:
+        background-color 0.3s,
+        transform 0.3s;
+    font-family: "Roboto Mono", monospace;
+}
+
+#join-form button:hover {
+    background-color: var(--accent-color);
+    transform: scale(1.05);
+}
+
+.resource-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.resource-list li a {
+    display: block;
+    background-color: var(--card-bg);
+    padding: 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    color: var(--text-color);
+    transition:
+        background-color 0.3s,
+        transform 0.3s;
+    border: 1px solid rgba(0, 255, 0, 0.2);
+}
+
+.resource-list li a:hover {
+    background-color: rgba(0, 255, 0, 0.1);
+    transform: translateY(-3px);
 }
 
 footer {
-  background-color: #333;
-  color: #fff;
-  padding: 1rem;
-  text-align: center;
+    background-color: var(--header-bg);
+    color: var(--text-color);
+    padding: 2rem 5%;
+    text-align: center;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.social-links a {
+    color: var(--text-color);
+    font-size: 1.5rem;
+    margin: 0 0.5rem;
+    transition: color 0.3s;
+}
+
+.social-links a:hover {
+    color: var(--primary-color);
 }
 
 footer nav ul {
-  display: flex;
-  justify-content: center;
-  list-style: none;
-  margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    list-style: none;
 }
 
 footer nav ul li {
-  margin: 0 0.5rem;
+    margin: 0 1rem;
 }
 
 footer nav ul li a {
-  color: #fff;
-  text-decoration: none;
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color 0.3s;
 }
 
-body.dark-mode {
-  background-color: #1a1a1a;
-  color: #e6e6e6;
-}
-
-body.dark-mode header {
-  background-color: #2c2c2c;
-}
-
-body.dark-mode nav ul li a {
-  color: #d9d9d9;
-}
-
-body.dark-mode nav ul li a:hover {
-  color: #ffffff;
-}
-
-body.dark-mode section {
-  background-color: #292929;
-}
-
-body.dark-mode .hero {
-  background-color: #1f1f1f;
-}
-
-body.dark-mode .hero h1 {
-  color: #ffffff;
-}
-
-body.dark-mode button {
-  background-color: #4d4d4d;
-  color: #e6e6e6;
-}
-
-body.dark-mode button:hover {
-  background-color: #666666;
-}
-
-body.dark-mode footer {
-  background-color: #2c2c2c;
-}
-
-body.dark-mode footer nav ul li a {
-  color: #d9d9d9;
-}
-
-body.dark-mode footer nav ul li a:hover {
-  color: #ffffff;
+footer nav ul li a:hover {
+    color: var(--primary-color);
 }
 
 #darkModeToggle {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 1.2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: var(--text-color);
 }
 
-.dark-mode-icon {
-  display: none;
-}
+@media (max-width: 768px) {
+    nav ul {
+        display: none;
+    }
 
-body.dark-mode .dark-mode-icon {
-  display: inline;
-}
+    .footer-content {
+        flex-direction: column;
+    }
 
-body.dark-mode .light-mode-icon {
-  display: none;
+    .social-links {
+        margin-bottom: 1rem;
+    }
 }
