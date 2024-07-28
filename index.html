@@ -1,65 +1,204 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The FOSS Club</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-<header>
-  <nav>
-    <div class="logo">
-      <a href="#">The FOSS Club</a>
-    </div>
-    <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Projects</a></li>
-      <li><a href="#">Events</a></li>
-      <li><a href="#">Join</a></li>
-      <li><a href="#">Rules</a></li>
-      <li><a href="#">Resources</a></li>
-      <li>
-        <button id="darkModeToggle">
-          <span class="dark-mode-icon">🌙</span>
-          <span class="light-mode-icon">☀️</span>
-        </button>
-      </li>
-    </ul>
-  </nav>
-</header>
-  <main>
-    <section class="hero">
-      <h1>Welcome to the FOSS Club</h1>
-      <p>Learn, build, and collaborate with fellow tech enthusiasts.</p>
-      <button>Join Now</button>
-    </section>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>
+            The FOSS Club - Open Source Club of Delhi Technical Campus
+        </title>
+        <link rel="stylesheet" href="styles.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    </head>
+    <body>
+        <header>
+            <nav>
+                <div class="logo">
+                    <a href="#"><i class="fab fa-linux"></i> The FOSS Club</a>
+                </div>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#events">Events</a></li>
+                    <li><a href="#join">Join</a></li>
+                    <li><a href="#resources">Resources</a></li>
+                    <li>
+                        <button id="darkModeToggle">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+        </header>
 
-    <section class="activities">
-      <h2>Our Activities</h2>
-      <!-- Add activity cards or sections here -->
-    </section>
+        <main>
+            <section id="home" class="hero">
+                <h1>Welcome to the FOSS Club</h1>
+                <p>
+                    Learn, build, and collaborate with fellow open-source
+                    enthusiasts.
+                </p>
+                <a href="#join" class="cta-button">Join Now</a>
+            </section>
 
-    <section class="events">
-      <h2>Upcoming Events</h2>
-      <!-- Add event cards or list here -->
-    </section>
+            <section id="about">
+                <h2>About Us</h2>
+                <p>
+                    The FOSS Club is a student community-based group in the
+                    Delhi Technical Campus for enthusiasts focused on
+                    contributing to Free and Open Source Software and mentoring
+                    students to achieve excellence in various fields of Computer
+                    Science.
+                </p>
+            </section>
 
-    <!-- Add other sections for projects, testimonials, etc. -->
-  </main>
+            <section id="projects">
+                <h2>Our Projects</h2>
+                <div class="project-grid">
+                    <div class="project-card">
+                        <h3>Passvyn</h3>
+                        <p>
+                            A Python-based secured password manager which is
+                            highly secured using SHA256.
+                        </p>
+                        <a
+                            href="https://github.com/thefossclub/Passvyn"
+                            class="github-link"
+                            ><i class="fab fa-github"></i> View on GitHub</a
+                        >
+                    </div>
+                    <div class="project-card">
+                        <h3>LinkFree</h3>
+                        <p>A free and open source alternative to LinkTree.</p>
+                        <a
+                            href="https://github.com/thefossclub/LinkFree"
+                            class="github-link"
+                            ><i class="fab fa-github"></i> View on GitHub</a
+                        >
+                    </div>
+                    <div class="project-card">
+                        <h3>face-recognition</h3>
+                        <p>
+                            Face Recognition code which detects faces on live
+                            cameras implemented using OpenCV and DLib in Python
+                            and C++.
+                        </p>
+                        <a
+                            href="https://github.com/thefossclub/face-recognition"
+                            class="github-link"
+                            ><i class="fab fa-github"></i> View on GitHub</a
+                        >
+                    </div>
+                </div>
+            </section>
 
-  <footer>
-    <p>&copy; The FOSS Club</p>
-    <nav>
-      <ul>
-        <li><a href="#">Contact</a></li>
-        <li><a href="#">Privacy Policy</a></li>
-        <li><a href="#">Terms of Use</a></li>
-      </ul>
-    </nav>
-  </footer>
+            <section id="events">
+                <h2>Events</h2>
+                <div class="event-list">
+                    <div class="event-item">
+                        <h3>Introduction to FOSS</h3>
+                        <p>Date: December 24, 2023</p>
+                        <p>
+                            Conducted an event on the basic fundamentals of FOSS
+                            and educated students about the key terms used in
+                            the world of open source.
+                        </p>
+                    </div>
+                    <div class="event-item">
+                        <h3>Introduction to Linux and CLI</h3>
+                        <p>Date: February 14, 2024</p>
+                        <p>
+                            Get hands-on experience installing and configuring
+                            Linux distributions and basics of Command Line
+                            Interface.
+                        </p>
+                    </div>
+                    <div class="event-item">
+                        <h3>How_To?</h3>
+                        <p>Date: December 5-7, 2024</p>
+                        <p>
+                            A conference featuring talks, workshops, and
+                            networking opportunities.
+                        </p>
+                    </div>
+                    <div class="event-item">
+                        <h3>FOSS Hack Delhi-NCR</h3>
+                        <p>Date: July 27, 2024</p>
+                        <p>
+                            A national level FOSS hackathon conducted by the
+                            FOSS Club at the college for the whole Delhi NCR.
+                            FOSS Hack is a hackathon conducted by FOSS United
+                            each year.
+                        </p>
+                    </div>
+                </div>
+            </section>
 
-  <script src="scripts.js"></script>
-</body>
+            <section id="join">
+                <h2>Join the FOSS Club</h2>
+                <form id="join-form">
+                    <input type="text" placeholder="Name" required />
+                    <input type="email" placeholder="Email" required />
+                    <textarea
+                        placeholder="Why do you want to join?"
+                        required
+                    ></textarea>
+                    <button type="submit">Submit Application</button>
+                </form>
+            </section>
+
+            <section id="resources">
+                <h2>Resources</h2>
+                <ul class="resource-list">
+                    <li>
+                        <a href="#"
+                            ><i class="fas fa-book"></i> Getting Started with
+                            Git</a
+                        >
+                    </li>
+                    <li>
+                        <a href="#"
+                            ><i class="fas fa-code"></i> Introduction to Linux
+                            Command Line</a
+                        >
+                    </li>
+                    <li>
+                        <a href="#"
+                            ><i class="fas fa-laptop-code"></i> Web Development
+                            Fundamentals</a
+                        >
+                    </li>
+                    <li>
+                        <a href="#"
+                            ><i class="fas fa-shield-alt"></i> Open Source
+                            Licensing Guide</a
+                        >
+                    </li>
+                </ul>
+            </section>
+        </main>
+
+        <footer>
+            <div class="footer-content">
+                <div class="social-links">
+                    <a href="https://github.com/thefossclub"
+                        ><i class="fab fa-github"></i
+                    ></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <p>&copy; 2024 The FOSS Club. All rights reserved.</p>
+        </footer>
+
+        <script src="scripts.js"></script>
+    </body>
 </html>
