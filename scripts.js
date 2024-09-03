@@ -78,9 +78,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Team members data
   const teamMembers = [
-    { name: "John Doe", role: "President", image: "/api/placeholder/150/150" },
+    { name: "vaibhav pratap singh", role: "President", image: "/api/placeholder/150/150" },
     {
-      name: "Jane Smith",
+      name: "Gulshan",
       role: "Vice President",
       image: "/api/placeholder/150/150",
     },
