@@ -3,37 +3,45 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>
-            The FOSS Club - Open Source Club of Delhi Technical Campus
-        </title>
+        <title>The FOSS Club</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        />
         <link rel="stylesheet" href="styles.css" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
     </head>
     <body>
         <header>
             <nav>
                 <div class="logo">
-                    <a href="#"><i class="fab fa-linux"></i> The FOSS Club</a>
+                    <a href="#">The FOSS Club</a>
                 </div>
-                <ul>
+                <ul class="nav-links">
                     <li><a href="#home">Home</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#projects">Projects</a></li>
                     <li><a href="#events">Events</a></li>
+                    <li><a href="#team">Team</a></li>
+                    <li><a href="#blog">Blog</a></li>
                     <li><a href="#join">Join</a></li>
                     <li><a href="#resources">Resources</a></li>
-                    <li>
-                        <button id="darkModeToggle">
-                            <i class="fas fa-moon"></i>
-                        </button>
-                    </li>
                 </ul>
+                <div class="nav-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <button id="darkModeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
             </nav>
         </header>
 
         <main>
             <section id="home" class="hero">
-                <h1>Welcome to the FOSS Club</h1>
+                <h1 id="mainTitle">Welcome to the FOSS Club!</h1>
                 <p>
                     Learn, build, and collaborate with fellow open-source
                     enthusiasts.
@@ -41,7 +49,7 @@
                 <a href="#join" class="cta-button">Join Now</a>
             </section>
 
-            <section id="about">
+            <section id="about" class="section">
                 <h2>About Us</h2>
                 <p>
                     The FOSS Club is a student community-based group in the
@@ -50,9 +58,24 @@
                     students to achieve excellence in various fields of Computer
                     Science.
                 </p>
+                <h3>Core Pillars</h3>
+                <ul>
+                    <li>
+                        Open Source: The FOSS Club focuses on open-source
+                        technologies and tools.
+                    </li>
+                    <li>
+                        Cyber Security: The FOSS Club also focuses on ethical
+                        hacking and cyber security.
+                    </li>
+                    <li>
+                        Decentralization: The FOSS Club will focus on
+                        self-hosted and decentralization technologies and tools.
+                    </li>
+                </ul>
             </section>
 
-            <section id="projects">
+            <section id="projects" class="section">
                 <h2>Our Projects</h2>
                 <div class="project-grid">
                     <div class="project-card">
@@ -64,7 +87,7 @@
                         <a
                             href="https://github.com/thefossclub/Passvyn"
                             class="github-link"
-                            ><i class="fab fa-github"></i> View on GitHub</a
+                            >View on GitHub</a
                         >
                     </div>
                     <div class="project-card">
@@ -73,7 +96,7 @@
                         <a
                             href="https://github.com/thefossclub/LinkFree"
                             class="github-link"
-                            ><i class="fab fa-github"></i> View on GitHub</a
+                            >View on GitHub</a
                         >
                     </div>
                     <div class="project-card">
@@ -86,13 +109,13 @@
                         <a
                             href="https://github.com/thefossclub/face-recognition"
                             class="github-link"
-                            ><i class="fab fa-github"></i> View on GitHub</a
+                            >View on GitHub</a
                         >
                     </div>
                 </div>
             </section>
 
-            <section id="events">
+            <section id="events" class="section">
                 <h2>Events</h2>
                 <div class="event-list">
                     <div class="event-item">
@@ -115,7 +138,7 @@
                     </div>
                     <div class="event-item">
                         <h3>How_To?</h3>
-                        <p>Date: December 5-7, 2024</p>
+                        <p>Date: April 12, 2024</p>
                         <p>
                             A conference featuring talks, workshops, and
                             networking opportunities.
@@ -134,12 +157,86 @@
                 </div>
             </section>
 
-            <section id="join">
+            <section id="team" class="section">
+                <h2>Our Team</h2>
+                <div class="team-grid">
+                    <!-- Team members will be dynamically added here -->
+                </div>
+            </section>
+
+            <section id="blog" class="section">
+                <h2>Latest Blog Posts</h2>
+                <div class="blog-grid">
+                    <article class="blog-post">
+                        <h3>Introduction to Open Source</h3>
+                        <p>
+                            Learn about the basics of open source software and
+                            its impact on the tech industry.
+                        </p>
+                        <a href="#" class="read-more">Read More</a>
+                    </article>
+                    <article class="blog-post">
+                        <h3>FOSS Alternatives to Popular Software</h3>
+                        <p>
+                            Discover free and open source alternatives to
+                            commonly used proprietary software.
+                        </p>
+                        <a href="#" class="read-more">Read More</a>
+                    </article>
+                    <article class="blog-post">
+                        <h3>Contributing to Open Source Projects</h3>
+                        <p>
+                            A beginner's guide to making your first contribution
+                            to an open source project.
+                        </p>
+                        <a href="#" class="read-more">Read More</a>
+                    </article>
+                </div>
+            </section>
+
+            <section id="opensource-tools" class="section">
+                <h2>Open Source Tools We Love</h2>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <i class="fab fa-git-alt fa-3x"></i>
+                        <h3>Git</h3>
+                        <p>Distributed version control system</p>
+                    </div>
+                    <div class="tool-card">
+                        <i class="fab fa-linux fa-3x"></i>
+                        <h3>Linux</h3>
+                        <p>Open source operating system</p>
+                    </div>
+                    <div class="tool-card">
+                        <i class="fas fa-code fa-3x"></i>
+                        <h3>VS Code</h3>
+                        <p>Free source-code editor</p>
+                    </div>
+                    <div class="tool-card">
+                        <i class="fas fa-database fa-3x"></i>
+                        <h3>PostgreSQL</h3>
+                        <p>Open source relational database</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="join" class="section">
                 <h2>Join the FOSS Club</h2>
                 <form id="join-form">
-                    <input type="text" placeholder="Name" required />
-                    <input type="email" placeholder="Email" required />
+                    <input
+                        type="text"
+                        name="name"
+                        placeholder="Your Name"
+                        required
+                    />
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Your Email"
+                        required
+                    />
                     <textarea
+                        name="message"
                         placeholder="Why do you want to join?"
                         required
                     ></textarea>
@@ -147,54 +244,88 @@
                 </form>
             </section>
 
-            <section id="resources">
+            <section id="resources" class="section">
                 <h2>Resources</h2>
                 <ul class="resource-list">
-                    <li>
-                        <a href="#"
-                            ><i class="fas fa-book"></i> Getting Started with
-                            Git</a
-                        >
-                    </li>
-                    <li>
-                        <a href="#"
-                            ><i class="fas fa-code"></i> Introduction to Linux
-                            Command Line</a
-                        >
-                    </li>
-                    <li>
-                        <a href="#"
-                            ><i class="fas fa-laptop-code"></i> Web Development
-                            Fundamentals</a
-                        >
-                    </li>
-                    <li>
-                        <a href="#"
-                            ><i class="fas fa-shield-alt"></i> Open Source
-                            Licensing Guide</a
-                        >
-                    </li>
+                    <li><a href="#">Getting Started with Git</a></li>
+                    <li><a href="#">Introduction to Linux Command Line</a></li>
+                    <li><a href="#">Web Development Fundamentals</a></li>
+                    <li><a href="#">Open Source Licensing Guide</a></li>
                 </ul>
+            </section>
+
+            <section id="faq" class="section">
+                <h2>Frequently Asked Questions</h2>
+                <div class="faq-list">
+                    <details>
+                        <summary>What is FOSS?</summary>
+                        <p>
+                            FOSS stands for Free and Open Source Software. It
+                            refers to software that is freely available for use,
+                            modification, and distribution.
+                        </p>
+                    </details>
+                    <details>
+                        <summary>How can I join the FOSS Club?</summary>
+                        <p>
+                            You can join our club by filling out the application
+                            form in the "Join" section of our website. We
+                            welcome students of all skill levels who are
+                            interested in open source software.
+                        </p>
+                    </details>
+                    <details>
+                        <summary>
+                            Do I need programming experience to join?
+                        </summary>
+                        <p>
+                            No, you don't need prior programming experience to
+                            join. We welcome members with diverse backgrounds
+                            and skill levels. Our club provides learning
+                            opportunities for beginners as well as advanced
+                            developers.
+                        </p>
+                    </details>
+                    <details>
+                        <summary>How often does the club meet?</summary>
+                        <p>
+                            We typically have weekly meetings during the
+                            academic year. The schedule is posted on our website
+                            and social media channels at the beginning of each
+                            semester.
+                        </p>
+                    </details>
+                </div>
             </section>
         </main>
 
         <footer>
             <div class="footer-content">
                 <div class="social-links">
-                    <a href="https://github.com/thefossclub"
-                        ><i class="fab fa-github"></i
+                    <a href="https://github.com/thefossclub" target="_blank"
+                        ><i class="fab fa-github fa-2x"></i
                     ></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                    <a href="#"><i class="fab fa-discord"></i></a>
+                    <a href="https://twitter.com/thefossclub" target="_blank"
+                        ><i class="fab fa-twitter fa-2x"></i
+                    ></a>
+                    <a
+                        href="https://linkedin.com/company/thefossclub"
+                        target="_blank"
+                        ><i class="fab fa-linkedin fa-2x"></i
+                    ></a>
+                    <a href="https://instagram.com/thefossclub" target="_blank"
+                        ><i class="fab fa-instagram fa-2x"></i
+                    ></a>
                 </div>
-                <nav>
-                    <ul>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Use</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
-                </nav>
+                <ul>
+                    <li>
+                        <a href="http://tinyurl.com/fossclubcoc"
+                            >Code of Conduct</a
+                        >
+                    </li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
             </div>
             <p>&copy; 2024 The FOSS Club. All rights reserved.</p>
         </footer>
