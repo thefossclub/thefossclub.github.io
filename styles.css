@@ -122,6 +122,7 @@ main {
         rgba(0, 255, 0, 0.05) 40px
     );
     animation: scan 10s linear infinite;
+    pointer-events: none; /*To fix pointer blocking*/
 }
 
 @keyframes scan {
