@@ -156,6 +156,11 @@
     margin-bottom: 2rem;
 }
   
+
+body.light-mode .hero h1 {
+    text-shadow: 0 0 10px rgba(0, 128, 96, 0.3);
+}
+
   /* Enhanced card styles */
   .project-card, .event-item, .blog-post, .tool-card {
     background: var(--card-bg);
