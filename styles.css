@@ -36,7 +36,7 @@
     transition: background-color 0.3s, color 0.3s;
   }
   
-  /* Enhanced animations */
+
   @keyframes float {
     0% { transform: translateY(0px); }
     50% { transform: translateY(-10px); }
