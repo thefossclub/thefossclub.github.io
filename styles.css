@@ -138,6 +138,7 @@
     pointer-events: none; /*To fix pointer blocking*/
 }
 
+
 @keyframes scan {
     0% {
         transform: translateY(0);
