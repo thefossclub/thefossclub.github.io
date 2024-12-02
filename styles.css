@@ -13,16 +13,16 @@
   
   /* Light mode colors with better contrast */
   body.light-mode {
-    --primary-color: rgba(0, 255, 140, 0.764);
-    --secondary-color: #9e9e9e84;
-    --background-color: #9e9e9e;
-    --text-color: #000000;
+    --primary-color: #008060;
+    --secondary-color: #f5f5f5;
+    --background-color: rgba(244, 224, 175, 0.253);
+    --text-color: #1a1a1a;
     --text-shadow: 2px 5px 6px rgba(17, 18, 17, 0.526);
-    --card-bg: rgba(0, 0, 0, 0.25);
-    --header-bg: #9e9e9e;
-    --border-color: rgba(0, 0, 0, 0.25);
-    --hover-color: rgba(0, 0, 0, 0.25);
-    --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.65);
+    --card-bg: rgba(0, 128, 96, 0.05);
+    --header-bg: rgba(244, 224, 175, 0.345);
+    --border-color: rgba(0, 128, 96, 0.2);
+    --hover-color: rgba(0, 128, 96, 0.1);
+    --card-shadow: 0 4px 20px rgba(0, 128, 96, 0.1);
   }
 
   body {
