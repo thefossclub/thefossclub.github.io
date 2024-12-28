@@ -3,6 +3,7 @@
     --primary-color: #00ff9d;
     --secondary-color: #1a1a1a;
     --background-color: #0a0a0a;
+    --foreground-color: #0a0a0a;
     --text-color: #ffffff;
     --card-bg: rgba(0, 255, 157, 0.05);
     --header-bg: rgba(10, 10, 10, 0.9);
@@ -16,6 +17,7 @@
     --primary-color: #008060;
     --secondary-color: #f5f5f5;
     --background-color: rgba(244, 224, 175, 0.253);
+    --foreground-color: #fcf7ea;
     --text-color: #1a1a1a;
     --text-shadow: 2px 5px 6px rgba(17, 18, 17, 0.526);
     --card-bg: rgba(0, 128, 96, 0.05);
@@ -306,7 +308,7 @@ body.light-mode .hero h1 {
 /* Enhanced buttons */
 .cta-button, button[type="submit"] {
     background: var(--primary-color);
-    color: #fcf7ea;
+    color: var(--foreground-color);
     padding: 1rem 2rem;
     border-radius: 8px;
     font-weight: 600;
