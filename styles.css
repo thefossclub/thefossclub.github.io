@@ -306,7 +306,7 @@ body.light-mode .hero h1 {
 /* Enhanced buttons */
 .cta-button, button[type="submit"] {
     background: var(--primary-color);
-    color: var(--background-color);
+    color: #fcf7ea;
     padding: 1rem 2rem;
     border-radius: 8px;
     font-weight: 600;
