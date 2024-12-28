@@ -78,7 +78,6 @@
     font-size: 1.2rem;
     font-weight: bold;
     color: var(--primary-color);
-    text-shadow: var(--text-shadow);
     text-decoration: none;
   }
   
@@ -257,7 +256,6 @@ body.light-mode .hero h1 {
     margin-bottom: 2rem;
     text-align: center;
     color: var(--primary-color);
-    text-shadow: var(--text-shadow);/*added text shadows*/
   }
   
   .project-grid, .event-list, .team-grid, .blog-grid, .tools-grid, .member-grid {
