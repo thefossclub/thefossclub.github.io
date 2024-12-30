@@ -213,7 +213,7 @@ body.light-mode .hero h1 {
   visibility: visible;
 }
   /* Enhanced card styles */
-  .project-card, .event-item, .blog-post, .tool-card {
+  .project-card, .event- , .blog-post, .tool-card {
     background: var(--card-bg);
     border: 1px solid var(--border-color);
     border-radius: 12px;
@@ -224,12 +224,12 @@ body.light-mode .hero h1 {
     animation: float 6s ease-in-out infinite;
   }
   
-  .project-card:hover, .event-item:hover, .blog-post:hover, .tool-card:hover {
+  .project-card:hover, .event-card:hover, .blog-post:hover, .tool-card:hover {
     transform: translateY(-5px) scale(1.02);
     box-shadow: var(--card-shadow);
   }
   
-  .project-card h3, .event-item h3, .blog-post h3, .tool-card h3 {
+  .project-card h3, .event-card h3, .blog-post h3, .tool-card h3 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
     color: var(--primary-color);
@@ -260,7 +260,7 @@ body.light-mode .hero h1 {
     color: var(--primary-color);
   }
   
-  .project-grid, .event-list, .team-grid, .blog-grid, .tools-grid, .member-grid {
+  .project-grid, .events-grid, .team-grid, .blog-grid, .tools-grid, .member-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
@@ -439,7 +439,7 @@ body.light-mode .hero h1 {
       font-size: clamp(2rem, 4vw, 3rem);
     }
   
-    .member-grid, .project-grid, .event-list, .team-grid, .blog-grid, .tools-grid {
+    .member-grid, .project-grid, .events-grid, .team-grid, .blog-grid, .tools-grid {
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     }
   
@@ -523,3 +523,173 @@ body.light-mode .hero h1 {
     background-color: var(--hover-color);
     transform: translateY(-3px);
   }
+
+  /* General styles for the slideshow section */
+.slideshow-section {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.slideshow-container {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.slide {
+  display: none;
+  width: 100%;
+  height: auto;
+}
+
+.slide img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.caption {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  color: white;
+  font-size: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+
+/* Navigation buttons */
+.prev, .next {
+  position: absolute;
+  top: 50%;
+  padding: 16px;
+  color: white;
+  font-size: 18px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+}
+
+.prev:hover, .next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.prev {
+  left: 10px;
+  transform: translateY(-50%);
+}
+
+.next {
+  right: 10px;
+  transform: translateY(-50%);
+}
+
+/* Responsive Layout */
+@media screen and (max-width: 768px) {
+  .caption {
+      font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .caption {
+      font-size: 14px;
+  }
+}
+
+
+
+
+
+/* Events Grid Layout */
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+
+}
+
+.event-card {
+  background: rgba(0, 128, 96, 0.05);
+  border: 1px solid rgba(0, 255, 140, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 255, 140, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.event-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 30px rgba(0, 255, 140, 0.2);
+  background-color: rgba(0, 255, 140, 0.07);
+}
+
+.event-card h3 {
+  margin: 1rem;
+  font-size: 1.25rem;
+  
+}
+
+.event-card p {
+  margin: 0.5rem 1rem;
+  
+}
+
+.event-card p:first-of-type {
+  
+  font-weight: 500;
+}
+
+/* Event Images */
+.event-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.event-images img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Section Header */
+#events h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  padding-top: 3rem;
+  margin-bottom: 2rem;
+}
+
+
+@media (max-width: 768px) {
+  .events-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    padding: 1rem;
+    gap: 1rem;
+  }
+  
+  #events h2 {
+    font-size: 2rem;
+    padding-top: 2rem;
+  }
+
+  .event-images img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
