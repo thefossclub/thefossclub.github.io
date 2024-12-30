@@ -674,7 +674,7 @@ body.light-mode .hero h1 {
   margin-bottom: 2rem;
 }
 
-/* Responsive Adjustments */
+
 @media (max-width: 768px) {
   .events-grid {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
