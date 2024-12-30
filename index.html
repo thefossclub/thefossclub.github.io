@@ -13,6 +13,8 @@
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
         />
         <link rel="stylesheet" href="styles.css" />
+        <link rel="stylesheet" href=".slideshow.css">
+
     </head>
     <body>
         <header>
@@ -41,7 +43,7 @@
 
         <main>
             <section id="home" class="hero">
-                <h1 id="mainTitle">Welcome to the FOSS Club!</h1>
+                <h1 id="mainTitle">Welcome to The FOSS Club!</h1>
                 <p>
                     Learn, build, and collaborate with fellow open-source
                     enthusiasts.
@@ -115,47 +117,214 @@
                 </div>
             </section>
 
+                  
             <section id="events" class="section">
                 <h2>Events</h2>
-                <div class="event-list">
-                    <div class="event-item">
-                        <h3>Introduction to FOSS</h3>
-                        <p>Date: December 24, 2023</p>
-                        <p>
-                            Conducted an event on the basic fundamentals of FOSS
-                            and educated students about the key terms used in
-                            the world of open source.
-                        </p>
+                <div class="events-grid">
+                  
+                  <!-- Event 1 -->
+                  <div class="event-card">
+                    <div class="event-slideshow" id="slideshow1">
+                      <button class="prev" onclick="changeSlide('slideshow1', -1)">&#10094;</button>
+                      <div class="slide fade">
+                        <img src="images/events/Tux_icon.svg" alt="">
+                      </div>
+                      <div class="slide fade">
+                        <img src="" alt="this event's pic is unavailable2">
+                      </div>
+                      <div class="slide fade">
+                        <img src="" alt="this event's pic is unavailable3">
+                      </div>
+                      <div class="slide fade">
+                        <img src="" alt="this event's pic is unavailable4">
+                      </div>
+                      <button class="next" onclick="changeSlide('slideshow1', 1)">&#10095;</button>
                     </div>
-                    <div class="event-item">
-                        <h3>Introduction to Linux and CLI</h3>
-                        <p>Date: February 14, 2024</p>
-                        <p>
-                            Get hands-on experience installing and configuring
-                            Linux distributions and basics of Command Line
-                            Interface.
-                        </p>
+                    <h3>Introduction to FOSS</h3>
+                    <p>Date: December 24, 2023</p>
+                    <p>
+                      Conducted an event on the basic fundamentals of FOSS and educated students about the key terms used in the world of open source.
+                    </p>
+                  </div>
+              
+                  <!-- Event 2 -->
+                  <div class="event-card">
+                    <div class="event-slideshow" id="slideshow2">
+                      <button class="prev" onclick="changeSlide('slideshow2', -1)">&#10094;</button>
+                      <div class="slide fade">
+                        <img src="images/events/ins2.jpg" alt="fosshack slide 1">
+                      </div>
+                      <div class="slide fade">
+                        <img src="images/events/ins.jpg" alt="fosshack slide 2">
+                      </div>
+                      <div class="slide fade">
+                        <img src="images/events/ins3.jpg" alt="fosshack slide 3">
+                      </div>
+                      <div class="slide fade">
+                        <img src="images/events/ins4.jpg" alt="fosshack slide 4">
+                      </div>
+                      <button class="next" onclick="changeSlide('slideshow2', 1)">&#10095;</button>
                     </div>
-                    <div class="event-item">
-                        <h3>How_To?</h3>
-                        <p>Date: April 12, 2024</p>
-                        <p>
-                            A conference featuring talks, workshops, and
-                            networking opportunities.
-                        </p>
+                    <h3>Introduction to Linux and CLI </h3>
+                    <p>Date: February 14, 2024</p>
+                    <p>
+                        Get hands-on experience installing and configuring Linux distributions and basics of Command Line Interface.
+                    </p>
+                  </div>
+              
+                  <!-- Event 3 -->
+                  <div class="event-card">
+                    <div class="event-slideshow" id="slideshow3">
+                      <button class="prev" onclick="changeSlide('slideshow3', -1)">&#10094;</button>
+                      <div class="slide fade">
+                        <img src="images/events/howto3.jpg" alt="fosshack slide 1">
+                      </div>
+                      <div class="slide fade">
+                        <img src="images/events/howto2.jpg" alt="fosshack slide 2">
+                      </div>
+                      <div class="slide fade">
+                        <img src="images/events/howto4.jpg" alt="fosshack slide 3">
+                      </div>
+                      <div class="slide fade">
+                        <img src="images/events/howto.jpg" alt="fosshack slide 4">
+                      </div>
+                      <button class="next" onclick="changeSlide('slideshow3', 1)">&#10095;</button>
                     </div>
-                    <div class="event-item">
-                        <h3>FOSS Hack Delhi-NCR</h3>
-                        <p>Date: July 27, 2024</p>
-                        <p>
-                            A national level FOSS hackathon conducted by the
-                            FOSS Club at the college for the whole Delhi NCR.
-                            FOSS Hack is a hackathon conducted by FOSS United
-                            each year.
-                        </p>
+                    <h3>How_To?</h3>
+                    <p>Date: April 12, 2024</p>
+                    <p>
+                        A conference featuring talks, workshops, and networking opportunities. 
+                    </p>
+                  </div>
+              
+                  <!-- Event 4 -->
+                  <div class="event-card">
+                    <div class="event-slideshow" id="slideshow4">
+                      <button class="prev" onclick="changeSlide('slideshow4', -1)">&#10094;</button>
+                      <div class="slide fade">
+                        <img src="images/events/fosshack2.jpg" alt="fosshack slide 1">
+                      </div>
+                      <div class="slide fade">
+                        <img src="images/events/fosshack1.jpg" alt="fosshack slide 2">
+                      </div>
+                      <div class="slide fade">
+                        <img src="images/events/fosshack3.jpg" alt="fosshack slide 3">
+                      </div>
+                      <div class="slide fade">
+                        <img src="images/events/fosshack4.jpg" alt="fosshack slide 4">
+                      </div>
+                      <button class="next" onclick="changeSlide('slideshow4', 1)">&#10095;</button>
                     </div>
+                    <h3>FOSS Hack Delhi-NCR</h3>
+                    <p>Date: July 27, 2024</p>
+                    <p>
+                        A national level FOSS hackathon conducted by the FOSS Club at the college for the whole Delhi NCR. FOSS Hack is a hackathon conducted by FOSS United each year.
+                    </p>
+                  </div>
+                
+                            <!-- Event 5 -->
+                            <div class="event-card">
+                                <div class="event-slideshow" id="slideshow4">
+                                  <button class="prev" onclick="changeSlide('slideshow4', -1)">&#10094;</button>
+                                  <div class="slide fade">
+                                    <img src="images/events/inc2.jpg" alt="fosshack slide 1">
+                                  </div>
+                                  <div class="slide fade">
+                                    <img src="images/events/inc3.jpg" alt="fosshack slide 2">
+                                  </div>
+                                  <div class="slide fade">
+                                    <img src="images/events/inc1.png" alt="fosshack slide 3">
+                                  </div>
+                                  
+                                
+                                  <button class="next" onclick="changeSlide('slideshow4', 1)">&#10095;</button>
+                                </div>
+                                <h3>Incepta</h3>
+                                <p>Date: September 4, 2024</p>
+                                <p>
+                                  A robust workshop directed towards Open Source, AI and Entreprenuership
+                                </p>
+                              </div>
+
+                  <div class="event-card">
+                    <div class="event-slideshow" id="slideshow4">
+                      <button class="prev" onclick="changeSlide('slideshow4', -1)">&#10094;</button>
+                      <div class="slide fade">
+                        <img src="images/events/ctf1.jpg" alt="fosshack slide 1">
+                      </div>
+                      <div class="slide fade">
+                        <img src="images/events/ctf2.jpg" alt="fosshack slide 2">
+                      </div>
+                      <div class="slide fade">
+                        <img src="images/events/ctf3.jpg" alt="fosshack slide 3">
+                      </div>
+                      <div class="slide fade">
+                        <img src="images/events/ctf4.jpg" alt="fosshack slide 4">
+                      </div>
+                      <button class="next" onclick="changeSlide('slideshow4', 1)">&#10095;</button>
+                    </div>
+                    <h3>Technovate: CTF</h3>
+                    <p>Date: October 24, 2023</p>
+                    <p>
+                        An exciting Capture The Flag (CTF) challenge designed to test and enhance students' cybersecurity skills. Participants navigated through a series of clues to uncover hidden flags provided on our X handle <a href "https://x.com/thefossclub">@thefossclub</a>
+                    </p>
+                  </div>
+
+                            <!-- Event 4 -->
+                            <div class="event-card">
+                                <div class="event-slideshow" id="slideshow4">
+                                  <button class="prev" onclick="changeSlide('slideshow4', -1)">&#10094;</button>
+                                  <div class="slide fade">
+                                    <img src="images/events/fosspedia1.jpg" alt="fosshack slide 1">
+                                  </div>
+                                  <div class="slide fade">
+                                    <img src="images/events/.jpg" alt="fosshack slide 2">
+                                  </div>
+                                  <div class="slide fade">
+                                    <img src="images/events/.jpg" alt="fosshack slide 3">
+                                  </div>
+                                  <div class="slide fade">
+                                    <img src="images/events/.jpg" alt="fosshack slide 4">
+                                  </div>
+                                  <button class="next" onclick="changeSlide('slideshow4', 1)">&#10095;</button>
+                                </div>
+                                <h3>FOSSPedia</h3>
+                                <p>Weekly Quiz Series</p>
+                                <p>
+                                  Questionnare on our core pillars posted on our instagram handle <a href="https://www.instagram.com/thefossclub/">@thefossclub</a>, a fun way to make our audience learn!
+                                </p>
+                              </div>
+
+                                        <!-- Event 8 -->
+                  <div class="event-card">
+                    <div class="event-slideshow" id="slideshow4">
+                      <button class="prev" onclick="changeSlide('slideshow4', -1)">&#10094;</button>
+                      <div class="slide fade">
+                        <img src="images/events/occ1.jpg" alt="fosshack slide 1">
+                      </div>
+                      <div class="slide fade">
+                        <img src="images/events/occ2.jpg" alt="fosshack slide 2">
+                      </div>
+                      <div class="slide fade">
+                        <img src="images/events/.jpg" alt="fosshack slide 3">
+                      </div>
+                      <div class="slide fade">
+                        <img src="images/events/.jpg" alt="fosshack slide 4">
+                      </div>
+                      <button class="next" onclick="changeSlide('slideshow4', 1)">&#10095;</button>
+                    </div>
+                    <h3>Open Community Call</h3>
+                    <p>Weekly Calls</p>
+                    <p>
+                        Hosted by expert speakers, these sessions cover essential topics such as Version Control,DevOps, Cloud Computing and other foundational subjects. All sessions are hands-on, with concepts taught from the ground up!
+                    </p>
+                  </div>
+                 
                 </div>
-            </section>
+              </section>
+              
+              
+      
 
 
             <section id="team">
@@ -218,7 +387,7 @@
                     </div>
                     <div class="member-card">
                         <img src="/api/placeholder/150/150" alt="Diti Vashisht">
-                        <h3>Diti Vashisht</h3>
+                        <h3>Diti Vasisht</h3>
                         <p class="role">PR & Outreach</p>
                     </div>
                     <div class="member-card">
