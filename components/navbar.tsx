@@ -1,0 +1,205 @@
+"use client"
+
+import { useState, useEffect } from "react"
+import Link from "next/link"
+import { motion, AnimatePresence } from "framer-motion"
+import { Menu, X, Moon, Sun, LogIn } from "lucide-react"
+import { useTheme } from "next-themes"
+
+interface NavbarProps {
+  activeSection: string
+}
+
+export default function Navbar({ activeSection }: NavbarProps) {
+  const [isOpen, setIsOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setScrolled(true)
+      } else {
+        setScrolled(false)
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen)
+  }
+
+  const toggleTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark")
+  }
+
+  const navLinks = [
+    { name: "Home", href: "#home" },
+    { name: "About", href: "#about" },
+    { name: "Projects", href: "#projects" },
+    { name: "Events", href: "#events" },
+    { name: "Team", href: "#team" },
+    { name: "Blog", href: "#blog" },
+    { name: "Resources", href: "#resources" },
+  ]
+
+  return (
+    <AnimatePresence>
+      <motion.header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "py-2" : "py-4"}`}
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <motion.div
+          className={`container mx-auto ${
+            scrolled
+              ? "bg-white/10 dark:bg-black/80 backdrop-blur-md rounded-full mx-4 px-6 border border-gray-200/20 dark:border-gray-800/50 shadow-lg"
+              : "px-4"
+          }`}
+          initial={{ y: scrolled ? -20 : 0, opacity: scrolled ? 0 : 1 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.3 }}
+        >
+          <nav className="flex justify-between items-center">
+            <Link href="#" className="text-2xl font-bold text-black dark:text-white z-50">
+              The FOSS Club
+            </Link>
+
+            {/* Desktop Navigation */}
+            <ul className="hidden md:flex space-x-6">
+              {navLinks.map((link) => (
+                <li key={link.name}>
+                  <Link
+                    href={link.href}
+                    className={`text-sm font-medium transition-colors relative ${
+                      activeSection === link.name.toLowerCase()
+                        ? "text-red-500"
+                        : "text-gray-700 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-500"
+                    }`}
+                  >
+                    {link.name}
+                    {activeSection === link.name.toLowerCase() && (
+                      <motion.span
+                        className="absolute -bottom-1 left-0 right-0 h-0.5 bg-red-500"
+                        layoutId="navbar-indicator"
+                        transition={{ type: "spring", duration: 0.6 }}
+                      />
+                    )}
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <Link
+                  href="https://opnform.com/forms/the-foss-club-registration-nst4zs"
+                  target="_blank"
+                  className="px-4 py-2 bg-red-600 text-white rounded-full text-sm font-medium hover:bg-red-700 transition-colors flex items-center"
+                >
+                  Join
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="#login"
+                  className="px-4 py-2 bg-gray-800 text-white rounded-full text-sm font-medium hover:bg-gray-700 transition-colors flex items-center"
+                >
+                  <LogIn className="h-4 w-4 mr-1" />
+                  Login
+                </Link>
+              </li>
+            </ul>
+
+            <div className="flex items-center space-x-4 z-50">
+              <button
+                onClick={toggleTheme}
+                className="p-2 rounded-full text-gray-700 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-500 hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors"
+                aria-label="Toggle theme"
+              >
+                {mounted && theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+              </button>
+
+              <button
+                onClick={toggleMenu}
+                className="md:hidden p-2 rounded-full text-gray-700 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-500 hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors"
+                aria-label="Toggle menu"
+              >
+                {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              </button>
+            </div>
+
+            {/* Mobile Navigation */}
+            <AnimatePresence>
+              {isOpen && (
+                <motion.div
+                  className="fixed inset-0 bg-white dark:bg-black z-40 flex flex-col items-center justify-center"
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ul className="flex flex-col items-center space-y-6">
+                    {navLinks.map((link) => (
+                      <motion.li
+                        key={link.name}
+                        initial={{ y: 20, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ duration: 0.3, delay: 0.1 }}
+                      >
+                        <Link
+                          href={link.href}
+                          className={`text-xl font-medium ${
+                            activeSection === link.name.toLowerCase()
+                              ? "text-red-500"
+                              : "text-gray-700 dark:text-gray-300"
+                          }`}
+                          onClick={toggleMenu}
+                        >
+                          {link.name}
+                        </Link>
+                      </motion.li>
+                    ))}
+                    <motion.li
+                      initial={{ y: 20, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{ duration: 0.3, delay: 0.2 }}
+                    >
+                      <Link
+                        href="https://opnform.com/forms/the-foss-club-registration-nst4zs"
+                        target="_blank"
+                        className="px-6 py-3 bg-red-600 text-white rounded-full text-lg font-medium hover:bg-red-700 transition-colors flex items-center"
+                        onClick={toggleMenu}
+                      >
+                        Join Now
+                      </Link>
+                    </motion.li>
+                    <motion.li
+                      initial={{ y: 20, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{ duration: 0.3, delay: 0.3 }}
+                    >
+                      <Link
+                        href="#login"
+                        className="px-6 py-3 bg-gray-800 text-white rounded-full text-lg font-medium hover:bg-gray-700 transition-colors flex items-center"
+                        onClick={toggleMenu}
+                      >
+                        <LogIn className="h-5 w-5 mr-2" />
+                        Login
+                      </Link>
+                    </motion.li>
+                  </ul>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </nav>
+        </motion.div>
+      </motion.header>
+    </AnimatePresence>
+  )
+}
+
