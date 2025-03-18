@@ -234,7 +234,7 @@ export default function Home() {
             <div className="relative w-64 h-64 md:w-80 md:h-80 mx-auto">
               <div className="absolute inset-0 bg-red-600 rounded-full opacity-90"></div>
               <div className="absolute inset-0 flex items-center justify-center text-center p-6">
-                <h2 className="text-2xl md:text-3xl font-bold leading-tight">INNOVATE. COLLABORATE. LIBERATE.</h2>
+                <h2 className="text-2xl md:text-3xl font-bold leading-tight">Free & Open Source and Hacker Culture at DTC</h2>
               </div>
             </div>
           </motion.div>
