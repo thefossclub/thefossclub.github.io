@@ -55,10 +55,11 @@ export default function HeroSphere() {
       })
     }
 
+    // Update the sphere with blue-green gradient colors
     const animate = () => {
       ctx.clearRect(0, 0, width, height)
 
-      // Draw sphere
+      // Draw sphere with gradient colors
       for (const point of points) {
         // Update angle for rotation
         point.angle += point.speed
@@ -68,19 +69,30 @@ export default function HeroSphere() {
         const sinA = Math.sin(point.angle)
         const rotatedX = point.x * cosA - point.z * sinA
         const rotatedZ = point.x * sinA + point.z * cosA
+        const rotatedY = point.y
 
         // Project 3D point to 2D with perspective
         const scale = 400 / (400 + rotatedZ)
         const projectedX = centerX + rotatedX * scale
-        const projectedY = centerY + point.y * scale
+        const projectedY = centerY + rotatedY * scale
 
         // Calculate opacity based on z-position
         const opacity = (rotatedZ + radius) / (radius * 2)
 
+        // Draw point with blue-green gradient based on position
+        const blueValue = (Math.abs(rotatedX) / radius) * 255
+        const greenValue = (Math.abs(rotatedY) / radius) * 255
+
         // Draw point
         ctx.beginPath()
         ctx.arc(projectedX, projectedY, point.size * scale, 0, Math.PI * 2)
-        ctx.fillStyle = theme === "dark" ? `rgba(255, 255, 255, ${opacity * 0.8})` : `rgba(0, 0, 0, ${opacity * 0.8})`
+
+        if (theme === "dark") {
+          ctx.fillStyle = `rgba(${Math.min(100, blueValue)}, ${Math.min(200, greenValue)}, 255, ${opacity * 0.8})`
+        } else {
+          ctx.fillStyle = `rgba(0, ${Math.min(150, greenValue)}, ${Math.min(200, blueValue)}, ${opacity * 0.8})`
+        }
+
         ctx.fill()
       }
 

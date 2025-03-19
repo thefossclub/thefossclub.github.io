@@ -208,9 +208,7 @@ export default function Home() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-4xl md:text-6xl font-bold mb-4 text-gradient-blue-green">
-              Welcome to The FOSS Club!
-            </h1>
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 text-gradient-blue-green">Welcome to The FOSS Club!</h1>
             <p className="text-xl md:text-2xl mb-8 text-gray-300 dark:text-gray-300">
               <span className="font-bold">Learn, build, and collaborate</span> with fellow open-source enthusiasts.
             </p>
@@ -240,6 +238,7 @@ export default function Home() {
               </div>
             </div>
           </motion.div>
+        </div>
 
         <motion.div
           className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
@@ -288,23 +287,23 @@ export default function Home() {
                 className="p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-blue-green"
                 whileHover={{ x: 10 }}
               >
-                <strong className="text-gradient-blue-green">Open Source:</strong> The FOSS Club promotes
-                open-source software, FOSS philosophy, self-hosting, Linux, and collaborative development.
+                <strong className="text-gradient-blue-green">Open Source:</strong> The FOSS Club promotes open-source
+                software, FOSS philosophy, self-hosting, Linux, and collaborative development.
               </motion.li>
               <motion.li
                 className="p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-blue-green"
                 whileHover={{ x: 10 }}
               >
-                <strong className="text-gradient-blue-green">Cyber Security:</strong> The FOSS Club explores
-                ethical hacking, CTFs, reverse engineering, digital privacy, OSINT, and cybersecurity research.
+                <strong className="text-gradient-blue-green">Cyber Security:</strong> The FOSS Club explores ethical
+                hacking, CTFs, reverse engineering, digital privacy, OSINT, and cybersecurity research.
               </motion.li>
               <motion.li
                 className="p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-blue-green"
                 whileHover={{ x: 10 }}
               >
-                <strong className="text-gradient-blue-green">Hardware:</strong> The FOSS Club will focus on
-                self-hosted systems, open hardware, embedded devices, SBCs (like Raspberry Pi and RISC-V boards),
-                firmware hacking, retro computing, and all the cool hardware stuff.
+                <strong className="text-gradient-blue-green">Hardware:</strong> The FOSS Club will focus on self-hosted
+                systems, open hardware, embedded devices, SBCs (like Raspberry Pi and RISC-V boards), firmware hacking,
+                retro computing, and all the cool hardware stuff.
               </motion.li>
             </ul>
           </motion.div>
@@ -831,6 +830,6 @@ export default function Home() {
         </div>
       </footer>
     </div>
-  );
+  )
 }
 

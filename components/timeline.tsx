@@ -13,7 +13,7 @@ interface TimelineProps {
 }
 
 export default function Timeline({ events }: TimelineProps) {
-  const { theme } = useTheme()
+  const { theme, resolvedTheme } = useTheme()
 
   return (
     <div className="relative max-w-5xl mx-auto">
@@ -31,10 +31,10 @@ export default function Timeline({ events }: TimelineProps) {
             transition={{ duration: 0.5, delay: index * 0.1 }}
           >
             <motion.div
-              className={`w-16 h-16 ${theme === "dark" ? "bg-gray-900" : "bg-gray-100"} rounded-full border-2 border-red-500 flex items-center justify-center z-10 mb-4`}
-              whileHover={{ scale: 1.1, backgroundColor: theme === "dark" ? "#7f1d1d" : "#fee2e2" }}
+              className={`w-16 h-16 ${resolvedTheme === "dark" ? "bg-gray-900" : "bg-gray-100"} rounded-full border-2 border-gradient border-gradient-blue-green flex items-center justify-center z-10 mb-4`}
+              whileHover={{ scale: 1.1, backgroundColor: resolvedTheme === "dark" ? "#1e3a8a" : "#dbeafe" }}
             >
-              <span className="text-lg font-bold">{event.year}</span>
+              <span className="text-lg font-bold text-gradient-blue-green">{event.year}</span>
             </motion.div>
             <div className={`text-center ${index % 2 === 0 ? "mt-4" : "mb-4 order-first"}`}>
               <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400">{event.title}</h4>

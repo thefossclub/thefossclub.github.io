@@ -6,7 +6,6 @@ import { ThemeProvider } from "@/components/theme-provider"
 export const metadata: Metadata = {
   title: "The FOSS Club",
   description: "Learn, build, and collaborate with fellow open-source enthusiasts.",
-    generator: 'v0.dev'
 }
 
 export default function RootLayout({
@@ -25,6 +24,3 @@ export default function RootLayout({
   )
 }
 
-
-
-import './globals.css'

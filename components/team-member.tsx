@@ -10,6 +10,13 @@ interface TeamMemberProps {
 }
 
 export default function TeamMember({ name, role, color, index }: TeamMemberProps) {
+  // Replace red colors with blue/green
+  const getColor = () => {
+    if (color.includes("red")) return "bg-blue-500"
+    if (color.includes("orange")) return "bg-green-500"
+    return color
+  }
+
   return (
     <motion.div
       className="flex flex-col items-center text-center"
@@ -20,7 +27,7 @@ export default function TeamMember({ name, role, color, index }: TeamMemberProps
       whileHover={{ y: -5 }}
     >
       <motion.div
-        className={`relative w-20 h-20 rounded-full mb-3 ${color} flex items-center justify-center overflow-hidden`}
+        className={`relative w-20 h-20 rounded-full mb-3 ${getColor()} flex items-center justify-center overflow-hidden`}
         whileHover={{ scale: 1.05 }}
       >
         <div className="absolute inset-0 bg-black opacity-20"></div>

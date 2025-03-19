@@ -5,7 +5,7 @@ import { useTheme } from "next-themes"
 
 export default function GridBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const { theme } = useTheme()
+  const { theme, resolvedTheme } = useTheme()
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -27,9 +27,19 @@ export default function GridBackground() {
 
       // Grid settings
       const gridSize = 40
-      const lineWidth = 0.5
-      // Darker grid lines for both modes
-      ctx.strokeStyle = theme === "dark" ? "rgba(255, 255, 255, 0.2)" : "rgba(0, 0, 0, 0.1)"
+      const lineWidth = 1
+
+      // Determine colors based on theme
+      const isDark = resolvedTheme === "dark"
+      const lineColor = isDark ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.1)"
+      const dotColors = [
+        isDark ? "rgba(14, 165, 233, 0.5)" : "rgba(14, 165, 233, 0.4)", // blue
+        isDark ? "rgba(16, 185, 129, 0.5)" : "rgba(16, 185, 129, 0.4)", // green
+        isDark ? "rgba(6, 182, 212, 0.5)" : "rgba(6, 182, 212, 0.4)", // cyan
+        isDark ? "rgba(20, 184, 166, 0.5)" : "rgba(20, 184, 166, 0.4)", // teal
+      ]
+
+      ctx.strokeStyle = lineColor
       ctx.lineWidth = lineWidth
 
       // Draw vertical lines
@@ -48,16 +58,22 @@ export default function GridBackground() {
         ctx.stroke()
       }
 
-      // Add some random dots at grid intersections
-      // Darker dots for both modes
-      ctx.fillStyle = theme === "dark" ? "rgba(255, 255, 255, 0.4)" : "rgba(0, 0, 0, 0.35)"
+      // Add dots at grid intersections with gradient effect
       for (let x = 0; x <= canvas.width; x += gridSize) {
         for (let y = 0; y <= canvas.height; y += gridSize) {
-          if (Math.random() > 0.97) {
+          if (Math.random() > 0.93) {
             // Only draw some dots
-            const dotSize = Math.random() * 2 + 1
+            const dotSize = Math.random() * 3 + 1.5
+            const colorIndex = Math.floor(Math.random() * dotColors.length)
+
+            // Create gradient for dot
+            const gradient = ctx.createRadialGradient(x, y, 0, x, y, dotSize * 2)
+            gradient.addColorStop(0, dotColors[colorIndex])
+            gradient.addColorStop(1, "rgba(0, 0, 0, 0)")
+
             ctx.beginPath()
-            ctx.arc(x, y, dotSize, 0, Math.PI * 2)
+            ctx.arc(x, y, dotSize * 2, 0, Math.PI * 2)
+            ctx.fillStyle = gradient
             ctx.fill()
           }
         }
@@ -73,7 +89,7 @@ export default function GridBackground() {
     return () => {
       window.removeEventListener("resize", resizeCanvas)
     }
-  }, [theme])
+  }, [theme, resolvedTheme])
 
   return (
     <canvas
@@ -81,7 +97,7 @@ export default function GridBackground() {
       className="fixed inset-0 z-0"
       style={{
         pointerEvents: "none",
-        background: theme === "dark" ? "black" : "white",
+        background: resolvedTheme === "dark" ? "black" : "white",
       }}
     />
   )
