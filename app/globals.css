@@ -10,20 +10,26 @@
     --card-foreground: 240 10% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
-    --primary: 0 72.2% 50.6%;
-    --primary-foreground: 0 85.7% 97.3%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
+    --primary: 196 100% 47%; /* Changed to blue */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 142 71% 45%; /* Changed to green */
+    --secondary-foreground: 0 0% 100%;
     --muted: 240 4.8% 95.9%;
     --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
+    --accent: 196 100% 47%; /* Changed to blue */
+    --accent-foreground: 0 0% 100%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
-    --ring: 0 72.2% 50.6%;
+    --ring: 196 100% 47%; /* Changed to blue */
     --radius: 0.5rem;
+
+    /* Cool gradient variables */
+    --gradient-blue-green: linear-gradient(135deg, #0ea5e9 0%, #10b981 100%);
+    --gradient-teal-cyan: linear-gradient(135deg, #14b8a6 0%, #06b6d4 100%);
+    --gradient-emerald-blue: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);
+    --gradient-cyan-indigo: linear-gradient(135deg, #06b6d4 0%, #6366f1 100%);
   }
 
   .dark {
@@ -33,19 +39,25 @@
     --card-foreground: 0 0% 98%;
     --popover: 240 10% 3.9%;
     --popover-foreground: 0 0% 98%;
-    --primary: 0 72.2% 50.6%;
-    --primary-foreground: 0 85.7% 97.3%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
+    --primary: 196 100% 47%; /* Changed to blue */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 142 71% 45%; /* Changed to green */
+    --secondary-foreground: 0 0% 100%;
     --muted: 240 3.7% 15.9%;
     --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
+    --accent: 196 100% 47%; /* Changed to blue */
+    --accent-foreground: 0 0% 100%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
-    --ring: 0 72.2% 50.6%;
+    --ring: 196 100% 47%; /* Changed to blue */
+
+    /* Dark mode gradient variables */
+    --gradient-blue-green: linear-gradient(135deg, #0284c7 0%, #059669 100%);
+    --gradient-teal-cyan: linear-gradient(135deg, #0d9488 0%, #0891b2 100%);
+    --gradient-emerald-blue: linear-gradient(135deg, #059669 0%, #2563eb 100%);
+    --gradient-cyan-indigo: linear-gradient(135deg, #0891b2 0%, #4f46e5 100%);
   }
 }
 
@@ -111,5 +123,102 @@
 
 .reveal.from-bottom.active {
   transform: translateY(0);
+}
+
+/* Make grid more visible */
+.grid-line {
+  stroke-width: 1px !important;
+  stroke: rgba(0, 0, 0, 0.1) !important;
+}
+
+.dark .grid-line {
+  stroke: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Slide animations */
+.slide-in-left {
+  transform: translateX(-100px);
+  opacity: 0;
+  transition: all 0.8s ease-out;
+}
+
+.slide-in-right {
+  transform: translateX(100px);
+  opacity: 0;
+  transition: all 0.8s ease-out;
+}
+
+.slide-in-active {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* Add these gradient utility classes */
+.bg-gradient-blue-green {
+  background: var(--gradient-blue-green);
+}
+
+.bg-gradient-teal-cyan {
+  background: var(--gradient-teal-cyan);
+}
+
+.bg-gradient-emerald-blue {
+  background: var(--gradient-emerald-blue);
+}
+
+.bg-gradient-cyan-indigo {
+  background: var(--gradient-cyan-indigo);
+}
+
+.text-gradient-blue-green {
+  background: var(--gradient-blue-green);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-gradient-teal-cyan {
+  background: var(--gradient-teal-cyan);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-gradient-emerald-blue {
+  background: var(--gradient-emerald-blue);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.border-gradient {
+  border: 2px solid transparent;
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
+}
+
+.border-gradient-blue-green {
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)),
+    var(--gradient-blue-green);
+}
+
+.dark .border-gradient-blue-green {
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), var(--gradient-blue-green);
+}
+
+/* Enhanced grid dots */
+.grid-dot-blue {
+  fill: rgba(14, 165, 233, 0.6);
+  filter: blur(1px);
+}
+
+.grid-dot-green {
+  fill: rgba(16, 185, 129, 0.6);
+  filter: blur(1px);
+}
+
+.grid-dot-cyan {
+  fill: rgba(6, 182, 212, 0.6);
+  filter: blur(1px);
 }
 
