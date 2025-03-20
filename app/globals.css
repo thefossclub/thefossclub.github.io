@@ -10,26 +10,26 @@
     --card-foreground: 240 10% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
-    --primary: 196 100% 47%; /* Changed to blue */
+    --primary: 142 68% 42%; /* Changed to #22b34f green */
     --primary-foreground: 0 0% 100%;
-    --secondary: 142 71% 45%; /* Changed to green */
+    --secondary: 196 100% 47%; /* Blue as secondary */
     --secondary-foreground: 0 0% 100%;
     --muted: 240 4.8% 95.9%;
     --muted-foreground: 240 3.8% 46.1%;
-    --accent: 196 100% 47%; /* Changed to blue */
+    --accent: 142 68% 42%; /* Changed to #22b34f green */
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
-    --ring: 196 100% 47%; /* Changed to blue */
+    --ring: 142 68% 42%; /* Changed to #22b34f green */
     --radius: 0.5rem;
 
-    /* Cool gradient variables */
-    --gradient-blue-green: linear-gradient(135deg, #0ea5e9 0%, #10b981 100%);
-    --gradient-teal-cyan: linear-gradient(135deg, #14b8a6 0%, #06b6d4 100%);
-    --gradient-emerald-blue: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);
-    --gradient-cyan-indigo: linear-gradient(135deg, #06b6d4 0%, #6366f1 100%);
+    /* Green-focused gradient variables */
+    --gradient-green: linear-gradient(135deg, #22b34f 0%, #1ea844 100%);
+    --gradient-green-blue: linear-gradient(135deg, #22b34f 85%, #0ea5e9 100%);
+    --gradient-green-dark: linear-gradient(135deg, #22b34f 0%, #15803d 100%);
+    --gradient-green-light: linear-gradient(135deg, #4ade80 0%, #22b34f 100%);
   }
 
   .dark {
@@ -39,25 +39,25 @@
     --card-foreground: 0 0% 98%;
     --popover: 240 10% 3.9%;
     --popover-foreground: 0 0% 98%;
-    --primary: 196 100% 47%; /* Changed to blue */
+    --primary: 142 68% 42%; /* Changed to #22b34f green */
     --primary-foreground: 0 0% 100%;
-    --secondary: 142 71% 45%; /* Changed to green */
+    --secondary: 196 100% 47%; /* Blue as secondary */
     --secondary-foreground: 0 0% 100%;
     --muted: 240 3.7% 15.9%;
     --muted-foreground: 240 5% 64.9%;
-    --accent: 196 100% 47%; /* Changed to blue */
+    --accent: 142 68% 42%; /* Changed to #22b34f green */
     --accent-foreground: 0 0% 100%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
-    --ring: 196 100% 47%; /* Changed to blue */
+    --ring: 142 68% 42%; /* Changed to #22b34f green */
 
     /* Dark mode gradient variables */
-    --gradient-blue-green: linear-gradient(135deg, #0284c7 0%, #059669 100%);
-    --gradient-teal-cyan: linear-gradient(135deg, #0d9488 0%, #0891b2 100%);
-    --gradient-emerald-blue: linear-gradient(135deg, #059669 0%, #2563eb 100%);
-    --gradient-cyan-indigo: linear-gradient(135deg, #0891b2 0%, #4f46e5 100%);
+    --gradient-green: linear-gradient(135deg, #22b34f 0%, #16a34a 100%);
+    --gradient-green-blue: linear-gradient(135deg, #22b34f 85%, #0284c7 100%);
+    --gradient-green-dark: linear-gradient(135deg, #22b34f 0%, #166534 100%);
+    --gradient-green-light: linear-gradient(135deg, #4ade80 0%, #22b34f 100%);
   }
 }
 
@@ -90,7 +90,7 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #e11d48;
+  background: #22b34f;
 }
 
 /* Reveal animations */
@@ -154,38 +154,38 @@
 }
 
 /* Add these gradient utility classes */
-.bg-gradient-blue-green {
-  background: var(--gradient-blue-green);
+.bg-gradient-green {
+  background: var(--gradient-green);
 }
 
-.bg-gradient-teal-cyan {
-  background: var(--gradient-teal-cyan);
+.bg-gradient-green-blue {
+  background: var(--gradient-green-blue);
 }
 
-.bg-gradient-emerald-blue {
-  background: var(--gradient-emerald-blue);
+.bg-gradient-green-dark {
+  background: var(--gradient-green-dark);
 }
 
-.bg-gradient-cyan-indigo {
-  background: var(--gradient-cyan-indigo);
+.bg-gradient-green-light {
+  background: var(--gradient-green-light);
 }
 
-.text-gradient-blue-green {
-  background: var(--gradient-blue-green);
+.text-gradient-green {
+  background: var(--gradient-green);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
-.text-gradient-teal-cyan {
-  background: var(--gradient-teal-cyan);
+.text-gradient-green-blue {
+  background: var(--gradient-green-blue);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
-.text-gradient-emerald-blue {
-  background: var(--gradient-emerald-blue);
+.text-gradient-green-dark {
+  background: var(--gradient-green-dark);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -197,28 +197,54 @@
   background-origin: padding-box, border-box;
 }
 
-.border-gradient-blue-green {
-  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)),
-    var(--gradient-blue-green);
+.border-gradient-green {
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), var(--gradient-green);
 }
 
-.dark .border-gradient-blue-green {
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), var(--gradient-blue-green);
+.dark .border-gradient-green {
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), var(--gradient-green);
 }
 
 /* Enhanced grid dots */
-.grid-dot-blue {
-  fill: rgba(14, 165, 233, 0.6);
-  filter: blur(1px);
-}
-
 .grid-dot-green {
-  fill: rgba(16, 185, 129, 0.6);
+  fill: rgba(34, 179, 79, 0.6);
   filter: blur(1px);
 }
 
-.grid-dot-cyan {
-  fill: rgba(6, 182, 212, 0.6);
+.grid-dot-green-light {
+  fill: rgba(74, 222, 128, 0.6);
   filter: blur(1px);
+}
+
+.grid-dot-green-dark {
+  fill: rgba(22, 101, 52, 0.6);
+  filter: blur(1px);
+}
+
+/* Animation classes */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Team grid layout */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  justify-content: space-between;
+}
+
+@media (min-width: 768px) {
+  .team-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
 }
 
