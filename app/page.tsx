@@ -31,6 +31,30 @@ export default function Home() {
     resources: useRef<HTMLElement>(null),
   }
 
+  // Add observer for animation on scroll
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible")
+          }
+        })
+      },
+      { threshold: 0.1 },
+    )
+
+    document.querySelectorAll(".animate-on-scroll").forEach((el) => {
+      observer.observe(el)
+    })
+
+    return () => {
+      document.querySelectorAll(".animate-on-scroll").forEach((el) => {
+        observer.unobserve(el)
+      })
+    }
+  }, [])
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 100
@@ -208,7 +232,7 @@ export default function Home() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-4xl md:text-6xl font-bold mb-4 text-gradient-blue-green">Welcome to The FOSS Club!</h1>
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 text-gradient-green">Welcome to The FOSS Club!</h1>
             <p className="text-xl md:text-2xl mb-8 text-gray-300 dark:text-gray-300">
               <span className="font-bold">Learn, build, and collaborate</span> with fellow open-source enthusiasts.
             </p>
@@ -216,7 +240,7 @@ export default function Home() {
               <Link
                 href="https://opnform.com/forms/the-foss-club-registration-nst4zs"
                 target="_blank"
-                className="inline-flex items-center px-6 py-3 bg-gradient-blue-green text-white rounded-full font-medium text-lg hover:opacity-90 transition-opacity"
+                className="inline-flex items-center px-6 py-3 bg-gradient-green text-white rounded-full font-medium text-lg hover:opacity-90 transition-opacity"
               >
                 Join Now <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
@@ -230,7 +254,7 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <div className="relative w-64 h-64 md:w-80 md:h-80 mx-auto">
-              <div className="absolute inset-0 bg-gradient-emerald-blue rounded-full opacity-90"></div>
+              <div className="absolute inset-0 bg-gradient-green-blue rounded-full opacity-90"></div>
               <div className="absolute inset-0 flex items-center justify-center text-center p-6">
                 <h2 className="text-2xl md:text-3xl font-bold leading-tight">
                   Free & Open Source and Hacker Culture at DTC
@@ -253,7 +277,7 @@ export default function Home() {
       <section ref={sectionRefs.about} id="about" className="py-20 relative">
         <div className="container mx-auto px-4">
           <motion.h2
-            className="text-4xl font-bold mb-12 text-center text-gradient-blue-green"
+            className="text-4xl font-bold mb-12 text-center text-gradient-green animate-on-scroll"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -263,7 +287,7 @@ export default function Home() {
           </motion.h2>
 
           <motion.div
-            className="max-w-4xl mx-auto backdrop-blur-sm p-8 rounded-3xl border border-gray-800 dark:border-gray-800 bg-white/5 dark:bg-black/5"
+            className="max-w-4xl mx-auto backdrop-blur-sm p-8 rounded-3xl border border-gray-800 dark:border-gray-800 bg-white/5 dark:bg-black/5 animate-on-scroll"
             initial={{ opacity: 0, x: -100 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -272,7 +296,7 @@ export default function Home() {
             <p className="text-lg mb-8 leading-relaxed">
               The FOSS Club is a student community-based group in the Delhi Technical Campus for enthusiasts focused on
               contributing to
-              <span className="relative mx-2 text-blue-500 font-bold group">
+              <span className="relative mx-2 text-green-500 font-bold group">
                 Free and Open Source Software
                 <span className="absolute opacity-0 group-hover:opacity-100 bg-gray-900 dark:bg-gray-900 text-xs text-white p-2 rounded -bottom-8 left-0 transition-opacity duration-300">
                   Yes! That's the full form of FOSS
@@ -281,27 +305,27 @@ export default function Home() {
               and mentoring students to achieve excellence in various fields of Computer Science.
             </p>
 
-            <h3 className="text-2xl font-bold mb-4 text-gradient-emerald-blue">Core Pillars</h3>
+            <h3 className="text-2xl font-bold mb-4 text-gradient-green-dark">Core Pillars</h3>
             <ul className="space-y-4">
               <motion.li
-                className="p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-blue-green"
+                className="p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green"
                 whileHover={{ x: 10 }}
               >
-                <strong className="text-gradient-blue-green">Open Source:</strong> The FOSS Club promotes open-source
+                <strong className="text-gradient-green">Open Source:</strong> The FOSS Club promotes open-source
                 software, FOSS philosophy, self-hosting, Linux, and collaborative development.
               </motion.li>
               <motion.li
-                className="p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-blue-green"
+                className="p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green"
                 whileHover={{ x: 10 }}
               >
-                <strong className="text-gradient-blue-green">Cyber Security:</strong> The FOSS Club explores ethical
-                hacking, CTFs, reverse engineering, digital privacy, OSINT, and cybersecurity research.
+                <strong className="text-gradient-green">Cyber Security:</strong> The FOSS Club explores ethical hacking,
+                CTFs, reverse engineering, digital privacy, OSINT, and cybersecurity research.
               </motion.li>
               <motion.li
-                className="p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-blue-green"
+                className="p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green"
                 whileHover={{ x: 10 }}
               >
-                <strong className="text-gradient-blue-green">Hardware:</strong> The FOSS Club will focus on self-hosted
+                <strong className="text-gradient-green">Hardware:</strong> The FOSS Club will focus on self-hosted
                 systems, open hardware, embedded devices, SBCs (like Raspberry Pi and RISC-V boards), firmware hacking,
                 retro computing, and all the cool hardware stuff.
               </motion.li>
@@ -309,7 +333,7 @@ export default function Home() {
           </motion.div>
 
           <motion.div
-            className="mt-20"
+            className="mt-20 animate-on-scroll"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -325,7 +349,7 @@ export default function Home() {
       <section ref={sectionRefs.projects} id="projects" className="py-20 relative">
         <div className="container mx-auto px-4">
           <motion.h2
-            className="text-4xl font-bold mb-12 text-center text-gradient-blue-green"
+            className="text-4xl font-bold mb-12 text-center text-gradient-green animate-on-scroll"
             initial={{ opacity: 0, x: 100 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -352,7 +376,7 @@ export default function Home() {
       <section ref={sectionRefs.events} id="events" className="py-20 relative">
         <div className="container mx-auto px-4">
           <motion.h2
-            className="text-4xl font-bold mb-12 text-center text-gradient-blue-green"
+            className="text-4xl font-bold mb-12 text-center text-gradient-green animate-on-scroll"
             initial={{ opacity: 0, x: -100 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -375,7 +399,7 @@ export default function Home() {
           </div>
 
           <motion.div
-            className="mt-16 p-8 rounded-3xl border border-blue-900/50 bg-gradient-to-r from-blue-900/10 to-green-900/10 dark:from-blue-900/30 dark:to-green-900/30"
+            className="mt-16 p-8 rounded-3xl border border-green-900/50 bg-gradient-to-r from-green-900/10 to-green-900/10 dark:from-green-900/30 dark:to-green-900/30 animate-on-scroll"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -383,12 +407,12 @@ export default function Home() {
           >
             <div className="flex flex-col md:flex-row items-center">
               <div className="md:w-1/2 mb-6 md:mb-0 md:pr-8">
-                <h3 className="text-3xl font-bold mb-4 text-gradient-blue-green">FOSS Hack 2025</h3>
+                <h3 className="text-3xl font-bold mb-4 text-gradient-green">FOSS Hack 2025</h3>
                 <p className="text-lg mb-4 dark:text-gray-300">
                   Our biggest hackathon yet! Join us for an incredible weekend of coding, collaboration, and innovation
                   in the open source world.
                 </p>
-                <h4 className="text-xl font-semibold mb-2 text-gradient-teal-cyan">What's in store?</h4>
+                <h4 className="text-xl font-semibold mb-2 text-gradient-green-light">What's in store?</h4>
                 <ul className="space-y-2 dark:text-gray-300">
                   <li>• Expert talks</li>
                   <li>• Intro to Random Shit</li>
@@ -415,7 +439,7 @@ export default function Home() {
       <section id="tools" className="py-20 relative overflow-hidden">
         <div className="container mx-auto px-4">
           <motion.h2
-            className="text-4xl font-bold mb-12 text-center text-gradient-blue-green"
+            className="text-4xl font-bold mb-12 text-center text-gradient-green animate-on-scroll"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -432,7 +456,7 @@ export default function Home() {
       <section ref={sectionRefs.team} id="team" className="py-20 relative">
         <div className="container mx-auto px-4">
           <motion.h2
-            className="text-4xl font-bold mb-12 text-center text-gradient-blue-green"
+            className="text-4xl font-bold mb-12 text-center text-gradient-green animate-on-scroll"
             initial={{ opacity: 0, x: 100 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -442,7 +466,7 @@ export default function Home() {
           </motion.h2>
 
           <motion.h3
-            className="text-2xl font-bold mb-8 text-center text-gradient-blue-green"
+            className="text-2xl font-bold mb-8 text-center text-gradient-green animate-on-scroll"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -451,14 +475,14 @@ export default function Home() {
             Core Team
           </motion.h3>
 
-          <div className="flex flex-wrap justify-center gap-6 mb-16">
+          <div className="team-grid mb-16">
             {coreTeam.map((member, index) => (
               <TeamMember key={index} name={member.name} role={member.role} color={member.color} index={index} />
             ))}
           </div>
 
           <motion.h3
-            className="text-2xl font-bold mb-8 text-center text-gradient-blue-green"
+            className="text-2xl font-bold mb-8 text-center text-gradient-green animate-on-scroll"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -467,14 +491,14 @@ export default function Home() {
             Our Mentors
           </motion.h3>
 
-          <div className="flex flex-wrap justify-center gap-6 mb-16">
+          <div className="team-grid mb-16">
             {mentors.map((member, index) => (
               <TeamMember key={index} name={member.name} role={member.role} color={member.color} index={index} />
             ))}
           </div>
 
           <motion.h3
-            className="text-2xl font-bold mb-8 text-center text-gradient-blue-green"
+            className="text-2xl font-bold mb-8 text-center text-gradient-green animate-on-scroll"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -483,7 +507,7 @@ export default function Home() {
             Active Members
           </motion.h3>
 
-          <div className="flex flex-wrap justify-center gap-6">
+          <div className="team-grid">
             {activeMembers.map((member, index) => (
               <TeamMember key={index} name={member.name} role={member.role} color={member.color} index={index} />
             ))}
@@ -495,7 +519,7 @@ export default function Home() {
       <section ref={sectionRefs.blog} id="blog" className="py-20 relative">
         <div className="container mx-auto px-4">
           <motion.h2
-            className="text-4xl font-bold mb-12 text-center text-gradient-blue-green"
+            className="text-4xl font-bold mb-12 text-center text-gradient-green animate-on-scroll"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -516,7 +540,7 @@ export default function Home() {
       <section ref={sectionRefs.resources} id="resources" className="py-20 relative">
         <div className="container mx-auto px-4">
           <motion.h2
-            className="text-4xl font-bold mb-12 text-center text-gradient-blue-green"
+            className="text-4xl font-bold mb-12 text-center text-gradient-green animate-on-scroll"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -526,7 +550,7 @@ export default function Home() {
           </motion.h2>
 
           <motion.div
-            className="max-w-4xl mx-auto backdrop-blur-sm p-8 rounded-3xl border border-gray-800 dark:border-gray-800 bg-white/5 dark:bg-black/5"
+            className="max-w-4xl mx-auto backdrop-blur-sm p-8 rounded-3xl border border-gray-800 dark:border-gray-800 bg-white/5 dark:bg-black/5 animate-on-scroll"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -534,37 +558,37 @@ export default function Home() {
           >
             <ul className="space-y-4">
               <motion.li
-                className="p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-blue-green transition-all"
+                className="p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green transition-all"
                 whileHover={{ x: 10, backgroundColor: "rgba(31, 41, 55, 0.8)" }}
               >
-                <Link href="#" className="flex items-center text-lg hover:text-gradient-blue-green transition-colors">
+                <Link href="#" className="flex items-center text-lg hover:text-gradient-green transition-colors">
                   <ArrowRight className="mr-2 h-5 w-5" />
                   Getting Started with Git
                 </Link>
               </motion.li>
               <motion.li
-                className="p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-blue-green transition-all"
+                className="p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green transition-all"
                 whileHover={{ x: 10, backgroundColor: "rgba(31, 41, 55, 0.8)" }}
               >
-                <Link href="#" className="flex items-center text-lg hover:text-gradient-blue-green transition-colors">
+                <Link href="#" className="flex items-center text-lg hover:text-gradient-green transition-colors">
                   <ArrowRight className="mr-2 h-5 w-5" />
                   Introduction to Linux Command Line
                 </Link>
               </motion.li>
               <motion.li
-                className="p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-blue-green transition-all"
+                className="p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green transition-all"
                 whileHover={{ x: 10, backgroundColor: "rgba(31, 41, 55, 0.8)" }}
               >
-                <Link href="#" className="flex items-center text-lg hover:text-gradient-blue-green transition-colors">
+                <Link href="#" className="flex items-center text-lg hover:text-gradient-green transition-colors">
                   <ArrowRight className="mr-2 h-5 w-5" />
                   Web Development Fundamentals
                 </Link>
               </motion.li>
               <motion.li
-                className="p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-blue-green transition-all"
+                className="p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green transition-all"
                 whileHover={{ x: 10, backgroundColor: "rgba(31, 41, 55, 0.8)" }}
               >
-                <Link href="#" className="flex items-center text-lg hover:text-gradient-blue-green transition-colors">
+                <Link href="#" className="flex items-center text-lg hover:text-gradient-green transition-colors">
                   <ArrowRight className="mr-2 h-5 w-5" />
                   Open Source Licensing Guide
                 </Link>
@@ -578,7 +602,7 @@ export default function Home() {
       <section id="faq" className="py-20 relative">
         <div className="container mx-auto px-4">
           <motion.h2
-            className="text-4xl font-bold mb-12 text-center text-gradient-blue-green"
+            className="text-4xl font-bold mb-12 text-center text-gradient-green animate-on-scroll"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -588,7 +612,7 @@ export default function Home() {
           </motion.h2>
 
           <motion.div
-            className="max-w-4xl mx-auto space-y-6"
+            className="max-w-4xl mx-auto space-y-6 animate-on-scroll"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -671,7 +695,12 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center mb-8">
             <div className="mb-6 md:mb-0">
-              <h2 className="text-2xl font-bold mb-2">The FOSS Club</h2>
+              <div className="flex items-center mb-3">
+                <div className="w-10 h-10 bg-gradient-green rounded-full flex items-center justify-center mr-3">
+                  <span className="text-white font-bold text-sm">FC</span>
+                </div>
+                <h2 className="text-2xl font-bold">The FOSS Club</h2>
+              </div>
               <p className="text-gray-600 dark:text-gray-400">
                 Learn, build, and collaborate with fellow open-source enthusiasts.
               </p>
@@ -681,7 +710,7 @@ export default function Home() {
                 href="https://github.com/thefossclub"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-blue-500 dark:hover:text-blue-500 transition-colors"
+                className="text-gray-400 hover:text-green-500 dark:hover:text-green-500 transition-colors"
               >
                 <Github className="h-6 w-6" />
                 <span className="sr-only">GitHub</span>
@@ -690,7 +719,7 @@ export default function Home() {
                 href="https://twitter.com/thefossclub"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-blue-500 dark:hover:text-blue-500 transition-colors"
+                className="text-gray-400 hover:text-green-500 dark:hover:text-green-500 transition-colors"
               >
                 <Twitter className="h-6 w-6" />
                 <span className="sr-only">Twitter</span>
@@ -699,7 +728,7 @@ export default function Home() {
                 href="https://linkedin.com/company/thefossclub"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-blue-500 dark:hover:text-blue-500 transition-colors"
+                className="text-gray-400 hover:text-green-500 dark:hover:text-green-500 transition-colors"
               >
                 <Linkedin className="h-6 w-6" />
                 <span className="sr-only">LinkedIn</span>
@@ -708,7 +737,7 @@ export default function Home() {
                 href="https://instagram.com/thefossclub"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-blue-500 dark:hover:text-blue-500 transition-colors"
+                className="text-gray-400 hover:text-green-500 dark:hover:text-green-500 transition-colors"
               >
                 <Instagram className="h-6 w-6" />
                 <span className="sr-only">Instagram</span>
@@ -718,12 +747,12 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             <div>
-              <h3 className="text-lg font-semibold mb-4 text-blue-400 dark:text-blue-400">Quick Links</h3>
+              <h3 className="text-lg font-semibold mb-4 text-green-400 dark:text-green-400">Quick Links</h3>
               <ul className="space-y-2">
                 <li>
                   <Link
                     href="#home"
-                    className="text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-500 transition-colors"
+                    className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-500 transition-colors"
                   >
                     Home
                   </Link>
@@ -731,7 +760,7 @@ export default function Home() {
                 <li>
                   <Link
                     href="#about"
-                    className="text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-500 transition-colors"
+                    className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-500 transition-colors"
                   >
                     About
                   </Link>
@@ -739,7 +768,7 @@ export default function Home() {
                 <li>
                   <Link
                     href="#projects"
-                    className="text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-500 transition-colors"
+                    className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-500 transition-colors"
                   >
                     Projects
                   </Link>
@@ -747,7 +776,7 @@ export default function Home() {
                 <li>
                   <Link
                     href="#events"
-                    className="text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-500 transition-colors"
+                    className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-500 transition-colors"
                   >
                     Events
                   </Link>
@@ -755,12 +784,12 @@ export default function Home() {
               </ul>
             </div>
             <div>
-              <h3 className="text-lg font-semibold mb-4 text-blue-400 dark:text-blue-400">Resources</h3>
+              <h3 className="text-lg font-semibold mb-4 text-green-400 dark:text-green-400">Resources</h3>
               <ul className="space-y-2">
                 <li>
                   <Link
                     href="#"
-                    className="text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-500 transition-colors"
+                    className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-500 transition-colors"
                   >
                     Blog
                   </Link>
@@ -768,7 +797,7 @@ export default function Home() {
                 <li>
                   <Link
                     href="#"
-                    className="text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-500 transition-colors"
+                    className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-500 transition-colors"
                   >
                     Documentation
                   </Link>
@@ -777,7 +806,7 @@ export default function Home() {
                   <Link
                     href="https://github.com/thefossclub/CodeofConduct"
                     target="_blank"
-                    className="text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-500 transition-colors"
+                    className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-500 transition-colors"
                   >
                     Code of Conduct
                   </Link>
@@ -785,7 +814,7 @@ export default function Home() {
                 <li>
                   <Link
                     href="#"
-                    className="text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-500 transition-colors"
+                    className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-500 transition-colors"
                   >
                     Privacy Policy
                   </Link>
@@ -793,13 +822,13 @@ export default function Home() {
               </ul>
             </div>
             <div>
-              <h3 className="text-lg font-semibold mb-4 text-blue-400 dark:text-blue-400">Contact</h3>
+              <h3 className="text-lg font-semibold mb-4 text-green-400 dark:text-green-400">Contact</h3>
               <ul className="space-y-2">
                 <li>
                   <Link
                     href="https://linktr.ee/thefossclub"
                     target="_blank"
-                    className="text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-500 transition-colors"
+                    className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-500 transition-colors"
                   >
                     LinkTree
                   </Link>
@@ -807,7 +836,7 @@ export default function Home() {
                 <li>
                   <Link
                     href="#"
-                    className="text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-500 transition-colors"
+                    className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-500 transition-colors"
                   >
                     Email Us
                   </Link>
@@ -815,7 +844,7 @@ export default function Home() {
                 <li>
                   <Link
                     href="#"
-                    className="text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-500 transition-colors"
+                    className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-500 transition-colors"
                   >
                     Join Discord
                   </Link>
