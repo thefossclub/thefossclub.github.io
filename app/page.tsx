@@ -175,12 +175,11 @@ export default function Home() {
   ]
 
   const timelineEvents = [
-    { year: "2010", title: "Swathanthra Group" },
-    { year: "2013", title: "Mozilla Campus Club" },
-    { year: "2018", title: "ICFOSS Events" },
-    { year: "2018", title: "Abraham & His Legacy" },
-    { year: "2018", title: "FOSS United" },
-    { year: "2024", title: "The Nexus Project" },
+    { year: "2022", title: "Idea Initiated" },
+    { year: "2023", title: "Club Created in DTC" },
+    { year: "2024", title: "Conducted 7+ Events" },
+    { year: "2025", title: "Organized 36 Hours FOSS Hacks" },
+    { year: "2025", title: "Joined FOSS United" },
   ]
 
   return (
