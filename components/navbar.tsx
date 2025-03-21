@@ -52,22 +52,22 @@ export default function Navbar({ activeSection }: NavbarProps) {
   // Fix the navbar font color issue
   const navLinkClass = (isActive: boolean) => {
     if (isActive) {
-      return "text-gradient-blue-green font-medium"
+      return "text-gradient-green font-medium"
     }
 
     // When not scrolled, use different colors based on theme
     if (!scrolled) {
-      return "text-gray-800 dark:text-gray-100 hover:text-gradient-blue-green transition-colors"
+      return "text-gray-800 dark:text-gray-100 hover:text-gradient-green transition-colors"
     }
 
     // When scrolled
-    return "text-gray-700 dark:text-gray-300 hover:text-gradient-blue-green transition-colors"
+    return "text-gray-700 dark:text-gray-300 hover:text-gradient-green transition-colors"
   }
 
   return (
     <AnimatePresence>
       <motion.header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "py-3" : "py-5"}`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "py-2" : "py-3"}`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
@@ -83,9 +83,14 @@ export default function Navbar({ activeSection }: NavbarProps) {
           transition={{ duration: 0.3 }}
         >
           <nav className="flex justify-between items-center">
-            <Link href="#" className="text-2xl font-bold text-black dark:text-white z-50">
-              The FOSS Club
-            </Link>
+            <div className="flex items-center">
+              <div className="w-10 h-10 bg-gradient-green rounded-full flex items-center justify-center mr-3">
+                <span className="text-white font-bold text-sm">FC</span>
+              </div>
+              <Link href="#" className="text-lg font-bold text-black dark:text-white z-50">
+                The FOSS Club
+              </Link>
+            </div>
 
             {/* Desktop Navigation */}
             <ul className="hidden md:flex space-x-6">
@@ -94,13 +99,13 @@ export default function Navbar({ activeSection }: NavbarProps) {
                   <Link
                     href={link.href}
                     className={`text-sm font-medium transition-colors relative ${
-                      activeSection === link.name.toLowerCase() ? "text-gradient-blue-green" : navLinkClass(false)
+                      activeSection === link.name.toLowerCase() ? "text-gradient-green" : navLinkClass(false)
                     }`}
                   >
                     {link.name}
                     {activeSection === link.name.toLowerCase() && (
                       <motion.span
-                        className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-blue-green"
+                        className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-green"
                         layoutId="navbar-indicator"
                         transition={{ type: "spring", duration: 0.6 }}
                       />
@@ -112,7 +117,7 @@ export default function Navbar({ activeSection }: NavbarProps) {
                 <Link
                   href="https://opnform.com/forms/the-foss-club-registration-nst4zs"
                   target="_blank"
-                  className="px-4 py-2 bg-gradient-blue-green text-white rounded-full text-sm font-medium hover:opacity-90 transition-opacity"
+                  className="px-4 py-2 bg-gradient-green text-white rounded-full text-sm font-medium hover:opacity-90 transition-opacity"
                 >
                   Join
                 </Link>
@@ -120,7 +125,7 @@ export default function Navbar({ activeSection }: NavbarProps) {
               <li>
                 <Link
                   href="#login"
-                  className="px-4 py-2 bg-gradient-emerald-blue text-white rounded-full text-sm font-medium hover:opacity-90 transition-opacity flex items-center"
+                  className="px-4 py-2 bg-gradient-green-blue text-white rounded-full text-sm font-medium hover:opacity-90 transition-opacity flex items-center"
                 >
                   <LogIn className="h-4 w-4 mr-1" />
                   Login
@@ -131,7 +136,7 @@ export default function Navbar({ activeSection }: NavbarProps) {
             <div className="flex items-center space-x-4 z-50">
               <button
                 onClick={toggleTheme}
-                className="p-2 rounded-full text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors"
+                className="p-2 rounded-full text-gray-700 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-400 hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors"
                 aria-label="Toggle theme"
               >
                 {mounted && (resolvedTheme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />)}
@@ -139,7 +144,7 @@ export default function Navbar({ activeSection }: NavbarProps) {
 
               <button
                 onClick={toggleMenu}
-                className="md:hidden p-2 rounded-full text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors"
+                className="md:hidden p-2 rounded-full text-gray-700 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-400 hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors"
                 aria-label="Toggle menu"
               >
                 {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -168,7 +173,7 @@ export default function Navbar({ activeSection }: NavbarProps) {
                           href={link.href}
                           className={`text-xl font-medium ${
                             activeSection === link.name.toLowerCase()
-                              ? "text-gradient-blue-green"
+                              ? "text-gradient-green"
                               : "text-gray-700 dark:text-gray-300"
                           }`}
                           onClick={toggleMenu}
@@ -185,7 +190,7 @@ export default function Navbar({ activeSection }: NavbarProps) {
                       <Link
                         href="https://opnform.com/forms/the-foss-club-registration-nst4zs"
                         target="_blank"
-                        className="px-6 py-3 bg-gradient-blue-green text-white rounded-full text-lg font-medium hover:opacity-90 transition-opacity"
+                        className="px-6 py-3 bg-gradient-green text-white rounded-full text-lg font-medium hover:opacity-90 transition-opacity"
                         onClick={toggleMenu}
                       >
                         Join Now
@@ -198,7 +203,7 @@ export default function Navbar({ activeSection }: NavbarProps) {
                     >
                       <Link
                         href="#login"
-                        className="px-6 py-3 bg-gradient-emerald-blue text-white rounded-full text-lg font-medium hover:opacity-90 transition-opacity flex items-center"
+                        className="px-6 py-3 bg-gradient-green-blue text-white rounded-full text-lg font-medium hover:opacity-90 transition-opacity flex items-center"
                         onClick={toggleMenu}
                       >
                         <LogIn className="h-5 w-5 mr-2" />
