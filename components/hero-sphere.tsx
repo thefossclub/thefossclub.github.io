@@ -55,7 +55,7 @@ export default function HeroSphere() {
       })
     }
 
-    // Update the sphere with blue-green gradient colors
+    // Update the sphere with green-focused colors
     const animate = () => {
       ctx.clearRect(0, 0, width, height)
 
@@ -79,18 +79,18 @@ export default function HeroSphere() {
         // Calculate opacity based on z-position
         const opacity = (rotatedZ + radius) / (radius * 2)
 
-        // Draw point with blue-green gradient based on position
-        const blueValue = (Math.abs(rotatedX) / radius) * 255
-        const greenValue = (Math.abs(rotatedY) / radius) * 255
+        // Draw point with green-focused gradient based on position
+        const greenValue = (Math.abs(rotatedX) / radius) * 255
+        const blueValue = (Math.abs(rotatedY) / radius) * 100 // Reduced blue component
 
         // Draw point
         ctx.beginPath()
         ctx.arc(projectedX, projectedY, point.size * scale, 0, Math.PI * 2)
 
         if (theme === "dark") {
-          ctx.fillStyle = `rgba(${Math.min(100, blueValue)}, ${Math.min(200, greenValue)}, 255, ${opacity * 0.8})`
+          ctx.fillStyle = `rgba(${Math.min(50, greenValue)}, ${Math.min(200, greenValue)}, ${Math.min(100, blueValue)}, ${opacity * 0.8})`
         } else {
-          ctx.fillStyle = `rgba(0, ${Math.min(150, greenValue)}, ${Math.min(200, blueValue)}, ${opacity * 0.8})`
+          ctx.fillStyle = `rgba(${Math.min(20, greenValue)}, ${Math.min(150, greenValue)}, ${Math.min(50, blueValue)}, ${opacity * 0.8})`
         }
 
         ctx.fill()
