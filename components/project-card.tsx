@@ -14,7 +14,7 @@ interface ProjectCardProps {
 export default function ProjectCard({ title, description, link, index }: ProjectCardProps) {
   return (
     <motion.div
-      className="backdrop-blur-sm p-6 rounded-3xl border border-gray-800 dark:border-gray-800 bg-white/5 dark:bg-black/5 hover:border-gradient hover:border-gradient-blue-green transition-all group"
+      className="backdrop-blur-sm p-6 rounded-3xl border border-gray-800 dark:border-gray-800 bg-white/5 dark:bg-black/5 hover:border-gradient hover:border-gradient-green transition-all group"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -22,7 +22,7 @@ export default function ProjectCard({ title, description, link, index }: Project
       whileHover={{ y: -5 }}
     >
       <div className="h-full flex flex-col">
-        <h3 className="text-2xl font-bold mb-3 text-gradient-blue-green group-hover:opacity-80 transition-opacity">
+        <h3 className="text-2xl font-bold mb-3 text-gradient-green group-hover:opacity-80 transition-opacity">
           {title}
         </h3>
         <p className="text-gray-700 dark:text-gray-300 mb-6 flex-grow">{description}</p>
@@ -30,7 +30,7 @@ export default function ProjectCard({ title, description, link, index }: Project
           href={link}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center text-sm font-medium text-gradient-emerald-blue hover:opacity-80 transition-opacity"
+          className="inline-flex items-center text-sm font-medium text-gradient-green-dark hover:opacity-80 transition-opacity"
         >
           <Github className="mr-2 h-4 w-4" />
           View on GitHub

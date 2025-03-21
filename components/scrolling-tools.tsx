@@ -26,7 +26,7 @@ export default function ScrollingTools({ tools }: ScrollingToolsProps) {
 
   return (
     <div ref={containerRef} className="relative overflow-hidden py-10">
-      <motion.div className="flex space-x-8 py-4" style={{ translateX: xValue }}>
+      <motion.div className="flex space-x-8 py-4" style={{ translateX: `${xValue.get()}px` }}>
         {tools.concat(tools).map((tool, index) => (
           <motion.div
             key={index}
