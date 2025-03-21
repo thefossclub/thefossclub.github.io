@@ -33,10 +33,10 @@ export default function GridBackground() {
       const isDark = resolvedTheme === "dark"
       const lineColor = isDark ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.1)"
       const dotColors = [
-        isDark ? "rgba(14, 165, 233, 0.5)" : "rgba(14, 165, 233, 0.4)", // blue
-        isDark ? "rgba(16, 185, 129, 0.5)" : "rgba(16, 185, 129, 0.4)", // green
-        isDark ? "rgba(6, 182, 212, 0.5)" : "rgba(6, 182, 212, 0.4)", // cyan
-        isDark ? "rgba(20, 184, 166, 0.5)" : "rgba(20, 184, 166, 0.4)", // teal
+        isDark ? "rgba(34, 179, 79, 0.5)" : "rgba(34, 179, 79, 0.4)", // main green #22b34f
+        isDark ? "rgba(22, 163, 74, 0.5)" : "rgba(22, 163, 74, 0.4)", // darker green
+        isDark ? "rgba(74, 222, 128, 0.5)" : "rgba(74, 222, 128, 0.4)", // lighter green
+        isDark ? "rgba(14, 165, 233, 0.3)" : "rgba(14, 165, 233, 0.2)", // blue (minimal)
       ]
 
       ctx.strokeStyle = lineColor
@@ -64,7 +64,8 @@ export default function GridBackground() {
           if (Math.random() > 0.93) {
             // Only draw some dots
             const dotSize = Math.random() * 3 + 1.5
-            const colorIndex = Math.floor(Math.random() * dotColors.length)
+            // Use green colors 85% of the time, blue 15% of the time
+            const colorIndex = Math.random() > 0.85 ? 3 : Math.floor(Math.random() * 3)
 
             // Create gradient for dot
             const gradient = ctx.createRadialGradient(x, y, 0, x, y, dotSize * 2)
