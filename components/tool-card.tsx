@@ -33,10 +33,10 @@ export default function ToolCard({ name, description, icon }: ToolCardProps) {
 
   return (
     <div className="flex flex-col items-center text-center p-4">
-      <div className="w-20 h-20 rounded-full bg-gradient-to-br from-blue-500 to-green-400 shadow-lg flex items-center justify-center mb-3 border-2 border-white/20 dark:border-black/20">
+      <div className="w-20 h-20 rounded-full bg-gradient-to-br from-green-500 to-green-400 shadow-lg flex items-center justify-center mb-3 border-2 border-white/20 dark:border-black/20">
         {getIcon()}
       </div>
-      <h3 className="text-base font-bold mb-1 text-gradient-blue-green">{name}</h3>
+      <h3 className="text-base font-bold mb-1 text-gradient-green">{name}</h3>
       <p className="text-xs text-gray-600 dark:text-gray-400">{description}</p>
     </div>
   )
