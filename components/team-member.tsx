@@ -28,7 +28,7 @@ export default function TeamMember({ name, role, color, index }: TeamMemberProps
       whileHover={{ y: -5 }}
     >
       <motion.div
-        className={`relative w-16 h-16 rounded-full mb-3 ${getColor()} flex items-center justify-center overflow-hidden`}
+        className={`relative w-16 h-16 rounded-full mb-3 ${getColor()} flex items-center justify-center overflow-hidden glow-effect`}
         whileHover={{ scale: 1.05 }}
       >
         <div className="absolute inset-0 bg-black opacity-20"></div>
