@@ -14,7 +14,7 @@ interface EventCardProps {
 export default function EventCard({ title, date, description, image, index }: EventCardProps) {
   return (
     <motion.div
-      className="backdrop-blur-sm rounded-3xl overflow-hidden border border-gray-800 dark:border-gray-800 bg-white/5 dark:bg-black/5 hover:border-green-500/50 transition-all group"
+      className="backdrop-blur-sm rounded-3xl overflow-hidden border border-gray-800 dark:border-gray-800 bg-white/5 dark:bg-black/5 hover:border-green-500/50 transition-all group card-hover-effect"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
