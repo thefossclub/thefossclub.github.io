@@ -31,11 +31,11 @@ export default function GridBackground() {
 
       // Determine colors based on theme
       const isDark = resolvedTheme === "dark"
-      const lineColor = isDark ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.1)"
+      const lineColor = isDark ? "rgba(255, 255, 255, 0.07)" : "rgba(0, 0, 0, 0.07)"
       const dotColors = [
-        isDark ? "rgba(34, 179, 79, 0.5)" : "rgba(34, 179, 79, 0.4)", // main green #22b34f
-        isDark ? "rgba(22, 163, 74, 0.5)" : "rgba(22, 163, 74, 0.4)", // darker green
-        isDark ? "rgba(74, 222, 128, 0.5)" : "rgba(74, 222, 128, 0.4)", // lighter green
+        isDark ? "rgba(34, 179, 79, 0.6)" : "rgba(34, 179, 79, 0.5)", // main green #22b34f
+        isDark ? "rgba(22, 163, 74, 0.6)" : "rgba(22, 163, 74, 0.5)", // darker green
+        isDark ? "rgba(74, 222, 128, 0.6)" : "rgba(74, 222, 128, 0.5)", // lighter green
         isDark ? "rgba(14, 165, 233, 0.3)" : "rgba(14, 165, 233, 0.2)", // blue (minimal)
       ]
 
@@ -61,11 +61,11 @@ export default function GridBackground() {
       // Add dots at grid intersections with gradient effect
       for (let x = 0; x <= canvas.width; x += gridSize) {
         for (let y = 0; y <= canvas.height; y += gridSize) {
-          if (Math.random() > 0.93) {
+          if (Math.random() > 0.9) {
             // Only draw some dots
-            const dotSize = Math.random() * 3 + 1.5
-            // Use green colors 85% of the time, blue 15% of the time
-            const colorIndex = Math.random() > 0.85 ? 3 : Math.floor(Math.random() * 3)
+            const dotSize = Math.random() * 3 + 2
+            // Use green colors 90% of the time, blue 10% of the time
+            const colorIndex = Math.random() > 0.9 ? 3 : Math.floor(Math.random() * 3)
 
             // Create gradient for dot
             const gradient = ctx.createRadialGradient(x, y, 0, x, y, dotSize * 2)
@@ -76,6 +76,19 @@ export default function GridBackground() {
             ctx.arc(x, y, dotSize * 2, 0, Math.PI * 2)
             ctx.fillStyle = gradient
             ctx.fill()
+
+            // Add glow effect to some dots
+            if (Math.random() > 0.7) {
+              const glowSize = dotSize * 3
+              const glowGradient = ctx.createRadialGradient(x, y, 0, x, y, glowSize)
+              glowGradient.addColorStop(0, isDark ? "rgba(34, 179, 79, 0.3)" : "rgba(34, 179, 79, 0.2)")
+              glowGradient.addColorStop(1, "rgba(0, 0, 0, 0)")
+
+              ctx.beginPath()
+              ctx.arc(x, y, glowSize, 0, Math.PI * 2)
+              ctx.fillStyle = glowGradient
+              ctx.fill()
+            }
           }
         }
       }

@@ -21,12 +21,12 @@ export default function ScrollingTools({ tools }: ScrollingToolsProps) {
     offset: ["start end", "end start"],
   })
 
-  // Transform scrollYProgress to x position
-  const xValue = useTransform(scrollYProgress, [0, 1], [0, -500])
+  // Fix the transform style to use a string value
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-50%"])
 
   return (
     <div ref={containerRef} className="relative overflow-hidden py-10">
-      <motion.div className="flex space-x-8 py-4" style={{ translateX: `${xValue.get()}px` }}>
+      <motion.div className="flex space-x-8 py-4" style={{ x }}>
         {tools.concat(tools).map((tool, index) => (
           <motion.div
             key={index}
