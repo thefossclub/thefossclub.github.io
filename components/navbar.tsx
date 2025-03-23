@@ -139,7 +139,15 @@ export default function Navbar({ activeSection }: NavbarProps) {
                 className="p-2 rounded-full text-gray-700 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-400 hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors"
                 aria-label="Toggle theme"
               >
-                {mounted && (resolvedTheme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />)}
+                {mounted ? (
+                  resolvedTheme === "dark" ? (
+                    <Sun className="h-5 w-5" />
+                  ) : (
+                    <Moon className="h-5 w-5" />
+                  )
+                ) : (
+                  <div className="h-5 w-5" />
+                )}
               </button>
 
               <button
