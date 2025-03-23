@@ -55,6 +55,32 @@ export default function Home() {
     }
   }, [])
 
+  // Add animation observer to ensure animations work in Firefox
+  useEffect(() => {
+    const animateElements = () => {
+      const elements = document.querySelectorAll(".animate-on-scroll")
+      elements.forEach((element) => {
+        const rect = element.getBoundingClientRect()
+        const isVisible =
+          rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.8 && rect.bottom >= 0
+
+        if (isVisible) {
+          element.classList.add("visible")
+        }
+      })
+    }
+
+    // Initial check
+    animateElements()
+
+    // Add scroll event listener
+    window.addEventListener("scroll", animateElements)
+
+    return () => {
+      window.removeEventListener("scroll", animateElements)
+    }
+  }, [])
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 100
@@ -488,27 +514,11 @@ export default function Home() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Our Mentors
-          </motion.h3>
-
-          <div className="team-grid mb-16">
-            {mentors.map((member, index) => (
-              <TeamMember key={index} name={member.name} role={member.role} color={member.color} index={index} />
-            ))}
-          </div>
-
-          <motion.h3
-            className="text-2xl font-bold mb-8 text-center text-gradient-green animate-on-scroll"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
             Active Members
           </motion.h3>
 
           <div className="team-grid">
-            {activeMembers.map((member, index) => (
+            {[...mentors, ...activeMembers].map((member, index) => (
               <TeamMember key={index} name={member.name} role={member.role} color={member.color} index={index} />
             ))}
           </div>
@@ -691,26 +701,27 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 border-t border-gray-800 dark:border-gray-800">
+      <footer className="py-12 border-t border-gray-800 dark:border-gray-800 footer-gradient">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center mb-8">
-            <div className="mb-6 md:mb-0">
-              <div className="flex items-center mb-3">
-                <div className="w-10 h-10 bg-gradient-green rounded-full flex items-center justify-center mr-3">
+          <div className="flex flex-col md:flex-row justify-between items-center mb-12">
+            <div className="mb-8 md:mb-0">
+              <div className="flex items-center mb-4">
+                <div className="w-12 h-12 bg-gradient-green rounded-full flex items-center justify-center mr-4 glow-effect">
                   <span className="text-white font-bold text-sm">FC</span>
                 </div>
-                <h2 className="text-2xl font-bold">The FOSS Club</h2>
+                <h2 className="text-3xl font-bold text-gradient-green">The FOSS Club</h2>
               </div>
-              <p className="text-gray-600 dark:text-gray-400">
-                Learn, build, and collaborate with fellow open-source enthusiasts.
+              <p className="text-gray-600 dark:text-gray-400 max-w-md text-lg">
+                Learn, build, and collaborate with fellow open-source enthusiasts in a community dedicated to free and
+                open source software.
               </p>
             </div>
-            <div className="flex space-x-6">
+            <div className="flex flex-wrap justify-center gap-6">
               <a
                 href="https://github.com/thefossclub"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-green-500 dark:hover:text-green-500 transition-colors"
+                className="p-3 bg-white/10 dark:bg-black/20 rounded-full text-gray-600 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-400 hover:bg-white/20 dark:hover:bg-black/30 transition-all"
               >
                 <Github className="h-6 w-6" />
                 <span className="sr-only">GitHub</span>
@@ -719,7 +730,7 @@ export default function Home() {
                 href="https://twitter.com/thefossclub"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-green-500 dark:hover:text-green-500 transition-colors"
+                className="p-3 bg-white/10 dark:bg-black/20 rounded-full text-gray-600 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-400 hover:bg-white/20 dark:hover:bg-black/30 transition-all"
               >
                 <Twitter className="h-6 w-6" />
                 <span className="sr-only">Twitter</span>
@@ -728,7 +739,7 @@ export default function Home() {
                 href="https://linkedin.com/company/thefossclub"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-green-500 dark:hover:text-green-500 transition-colors"
+                className="p-3 bg-white/10 dark:bg-black/20 rounded-full text-gray-600 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-400 hover:bg-white/20 dark:hover:bg-black/30 transition-all"
               >
                 <Linkedin className="h-6 w-6" />
                 <span className="sr-only">LinkedIn</span>
@@ -737,7 +748,7 @@ export default function Home() {
                 href="https://instagram.com/thefossclub"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-green-500 dark:hover:text-green-500 transition-colors"
+                className="p-3 bg-white/10 dark:bg-black/20 rounded-full text-gray-600 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-400 hover:bg-white/20 dark:hover:bg-black/30 transition-all"
               >
                 <Instagram className="h-6 w-6" />
                 <span className="sr-only">Instagram</span>
@@ -745,14 +756,14 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-            <div>
-              <h3 className="text-lg font-semibold mb-4 text-green-400 dark:text-green-400">Quick Links</h3>
-              <ul className="space-y-2">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
+            <div className="backdrop-blur-sm p-6 rounded-2xl border border-gray-200/20 dark:border-gray-800/50 bg-white/5 dark:bg-black/5 card-hover-effect">
+              <h3 className="text-xl font-semibold mb-4 text-gradient-green">Quick Links</h3>
+              <ul className="space-y-3">
                 <li>
                   <Link
                     href="#home"
-                    className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-500 transition-colors"
+                    className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
                   >
                     Home
                   </Link>
@@ -760,7 +771,7 @@ export default function Home() {
                 <li>
                   <Link
                     href="#about"
-                    className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-500 transition-colors"
+                    className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
                   >
                     About
                   </Link>
@@ -768,7 +779,7 @@ export default function Home() {
                 <li>
                   <Link
                     href="#projects"
-                    className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-500 transition-colors"
+                    className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
                   >
                     Projects
                   </Link>
@@ -776,20 +787,20 @@ export default function Home() {
                 <li>
                   <Link
                     href="#events"
-                    className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-500 transition-colors"
+                    className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
                   >
                     Events
                   </Link>
                 </li>
               </ul>
             </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4 text-green-400 dark:text-green-400">Resources</h3>
-              <ul className="space-y-2">
+            <div className="backdrop-blur-sm p-6 rounded-2xl border border-gray-200/20 dark:border-gray-800/50 bg-white/5 dark:bg-black/5 card-hover-effect">
+              <h3 className="text-xl font-semibold mb-4 text-gradient-green">Resources</h3>
+              <ul className="space-y-3">
                 <li>
                   <Link
                     href="#"
-                    className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-500 transition-colors"
+                    className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
                   >
                     Blog
                   </Link>
@@ -797,7 +808,7 @@ export default function Home() {
                 <li>
                   <Link
                     href="#"
-                    className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-500 transition-colors"
+                    className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
                   >
                     Documentation
                   </Link>
@@ -806,7 +817,7 @@ export default function Home() {
                   <Link
                     href="https://github.com/thefossclub/CodeofConduct"
                     target="_blank"
-                    className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-500 transition-colors"
+                    className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
                   >
                     Code of Conduct
                   </Link>
@@ -814,21 +825,21 @@ export default function Home() {
                 <li>
                   <Link
                     href="#"
-                    className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-500 transition-colors"
+                    className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
                   >
                     Privacy Policy
                   </Link>
                 </li>
               </ul>
             </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4 text-green-400 dark:text-green-400">Contact</h3>
-              <ul className="space-y-2">
+            <div className="backdrop-blur-sm p-6 rounded-2xl border border-gray-200/20 dark:border-gray-800/50 bg-white/5 dark:bg-black/5 card-hover-effect">
+              <h3 className="text-xl font-semibold mb-4 text-gradient-green">Contact</h3>
+              <ul className="space-y-3">
                 <li>
                   <Link
                     href="https://linktr.ee/thefossclub"
                     target="_blank"
-                    className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-500 transition-colors"
+                    className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
                   >
                     LinkTree
                   </Link>
@@ -836,7 +847,7 @@ export default function Home() {
                 <li>
                   <Link
                     href="#"
-                    className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-500 transition-colors"
+                    className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
                   >
                     Email Us
                   </Link>
@@ -844,7 +855,7 @@ export default function Home() {
                 <li>
                   <Link
                     href="#"
-                    className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-500 transition-colors"
+                    className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
                   >
                     Join Discord
                   </Link>
@@ -853,8 +864,9 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="text-center pt-8 border-t border-gray-800 dark:border-gray-800">
+          <div className="text-center pt-8 border-t border-gray-800/30 dark:border-gray-800/30">
             <p className="text-gray-500">© {new Date().getFullYear()} The FOSS Club. All rights reserved.</p>
+            <p className="text-gray-500 mt-2 text-sm">Made with 💚 by open source enthusiasts</p>
           </div>
         </div>
       </footer>
