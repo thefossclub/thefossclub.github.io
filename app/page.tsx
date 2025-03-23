@@ -31,6 +31,8 @@ export default function Home() {
     resources: useRef<HTMLElement>(null),
   }
 
+  const [mounted, setMounted] = useState(false)
+
   // Add observer for animation on scroll
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -98,6 +100,10 @@ export default function Home() {
 
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  useEffect(() => {
+    setMounted(true)
   }, [])
 
   const projects = [
@@ -235,7 +241,8 @@ export default function Home() {
 
   return (
     <div
-      className={`relative min-h-screen overflow-hidden ${theme === "dark" ? "bg-black text-white" : "bg-white text-black"}`}
+      className="relative min-h-screen overflow-hidden bg-white dark:bg-black text-black dark:text-white"
+      suppressHydrationWarning
     >
       <GridBackground />
       <Navbar activeSection={activeSection} />

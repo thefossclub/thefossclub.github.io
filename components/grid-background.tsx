@@ -111,7 +111,7 @@ export default function GridBackground() {
       className="fixed inset-0 z-0"
       style={{
         pointerEvents: "none",
-        background: resolvedTheme === "dark" ? "black" : "white",
+        backgroundColor: resolvedTheme === "dark" ? "black" : "white",
       }}
     />
   )
