@@ -14,7 +14,7 @@ interface EventCardProps {
 export default function EventCard({ title, date, description, image, index }: EventCardProps) {
   return (
     <motion.div
-      className="backdrop-blur-sm rounded-3xl overflow-hidden border border-gray-800 dark:border-gray-800 bg-white/5 dark:bg-black/5 hover:border-green-500/50 transition-all group card-hover-effect"
+      className="backdrop-blur-sm rounded-3xl overflow-hidden border border-gray-800 dark:border-gray-800 bg-white/5 dark:bg-black/5 hover:border-green-500/50 transition-all group card-hover-effect shadow-xl hover:shadow-green-500/20"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -34,7 +34,7 @@ export default function EventCard({ title, date, description, image, index }: Ev
           <Calendar className="h-4 w-4 mr-2" />
           <span className="text-sm">{date}</span>
         </div>
-        <h3 className="text-2xl font-bold mb-3 group-hover:text-green-500 dark:group-hover:text-green-400 transition-colors">
+        <h3 className="text-2xl font-bold mb-3 group-hover:text-green-500 dark:group-hover:text-green-400 transition-colors text-gray-800 dark:text-gray-200 drop-shadow-sm">
           {title}
         </h3>
         <p className="text-gray-700 dark:text-gray-300">{description}</p>
