@@ -102,7 +102,7 @@ export default function HeroSphere() {
     animate()
 
     return () => {
-      
+      // Cleanup if needed
     }
   }, [theme])
 

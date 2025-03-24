@@ -51,17 +51,23 @@ export default function Navbar({ activeSection }: NavbarProps) {
 
   // Fix the navbar font color issue
   const navLinkClass = (isActive: boolean) => {
+    if (!mounted) return "text-gray-800 dark:text-gray-100"
+
     if (isActive) {
-      return "text-gradient-green font-medium"
+      return "text-green-500 font-medium"
     }
 
     // When not scrolled, use different colors based on theme
     if (!scrolled) {
-      return "text-gray-800 dark:text-gray-100 hover:text-gradient-green transition-colors"
+      return resolvedTheme === "dark"
+        ? "text-gray-100 hover:text-green-400 transition-colors"
+        : "text-gray-800 hover:text-green-500 transition-colors"
     }
 
     // When scrolled
-    return "text-gray-700 dark:text-gray-300 hover:text-gradient-green transition-colors"
+    return resolvedTheme === "dark"
+      ? "text-gray-300 hover:text-green-400 transition-colors"
+      : "text-gray-700 hover:text-green-500 transition-colors"
   }
 
   return (
@@ -84,10 +90,13 @@ export default function Navbar({ activeSection }: NavbarProps) {
         >
           <nav className="flex justify-between items-center">
             <div className="flex items-center">
-              <div className="w-10 h-10 bg-gradient-green rounded-full flex items-center justify-center mr-3">
+              <div className="w-10 h-10 bg-gradient-green rounded-full flex items-center justify-center mr-3 glow-effect-green">
                 <span className="text-white font-bold text-sm">FC</span>
               </div>
-              <Link href="#" className="text-lg font-bold text-black dark:text-white z-50">
+              <Link
+                href="#"
+                className={`text-lg font-bold ${mounted ? (resolvedTheme === "dark" ? "text-white" : "text-gray-800") : "text-gray-800 dark:text-white"} z-50`}
+              >
                 The FOSS Club
               </Link>
             </div>
@@ -99,7 +108,7 @@ export default function Navbar({ activeSection }: NavbarProps) {
                   <Link
                     href={link.href}
                     className={`text-sm font-medium transition-colors relative ${
-                      activeSection === link.name.toLowerCase() ? "text-gradient-green" : navLinkClass(false)
+                      activeSection === link.name.toLowerCase() ? "text-green-500" : navLinkClass(false)
                     }`}
                   >
                     {link.name}
@@ -117,7 +126,7 @@ export default function Navbar({ activeSection }: NavbarProps) {
                 <Link
                   href="https://opnform.com/forms/the-foss-club-registration-nst4zs"
                   target="_blank"
-                  className="px-4 py-2 bg-gradient-green text-white rounded-full text-sm font-medium hover:opacity-90 transition-opacity"
+                  className="px-4 py-2 bg-gradient-green text-white rounded-full text-sm font-medium hover:opacity-90 transition-opacity btn-glow"
                 >
                   Join
                 </Link>
@@ -125,7 +134,7 @@ export default function Navbar({ activeSection }: NavbarProps) {
               <li>
                 <Link
                   href="#login"
-                  className="px-4 py-2 bg-gradient-green-blue text-white rounded-full text-sm font-medium hover:opacity-90 transition-opacity flex items-center"
+                  className="px-4 py-2 bg-gradient-green-blue text-white rounded-full text-sm font-medium hover:opacity-90 transition-opacity flex items-center btn-glow"
                 >
                   <LogIn className="h-4 w-4 mr-1" />
                   Login
@@ -136,7 +145,7 @@ export default function Navbar({ activeSection }: NavbarProps) {
             <div className="flex items-center space-x-4 z-50">
               <button
                 onClick={toggleTheme}
-                className="p-2 rounded-full text-gray-700 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-400 hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors"
+                className="p-2 rounded-full text-gray-700 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-400 hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors btn-glow"
                 aria-label="Toggle theme"
               >
                 {mounted ? (
@@ -181,7 +190,7 @@ export default function Navbar({ activeSection }: NavbarProps) {
                           href={link.href}
                           className={`text-xl font-medium ${
                             activeSection === link.name.toLowerCase()
-                              ? "text-gradient-green"
+                              ? "text-green-500"
                               : "text-gray-700 dark:text-gray-300"
                           }`}
                           onClick={toggleMenu}
@@ -198,7 +207,7 @@ export default function Navbar({ activeSection }: NavbarProps) {
                       <Link
                         href="https://opnform.com/forms/the-foss-club-registration-nst4zs"
                         target="_blank"
-                        className="px-6 py-3 bg-gradient-green text-white rounded-full text-lg font-medium hover:opacity-90 transition-opacity"
+                        className="px-6 py-3 bg-gradient-green text-white rounded-full text-lg font-medium hover:opacity-90 transition-opacity btn-glow"
                         onClick={toggleMenu}
                       >
                         Join Now
@@ -211,7 +220,7 @@ export default function Navbar({ activeSection }: NavbarProps) {
                     >
                       <Link
                         href="#login"
-                        className="px-6 py-3 bg-gradient-green-blue text-white rounded-full text-lg font-medium hover:opacity-90 transition-opacity flex items-center"
+                        className="px-6 py-3 bg-gradient-green-blue text-white rounded-full text-lg font-medium hover:opacity-90 transition-opacity flex items-center btn-glow"
                         onClick={toggleMenu}
                       >
                         <LogIn className="h-5 w-5 mr-2" />

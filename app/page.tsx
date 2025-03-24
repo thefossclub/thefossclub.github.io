@@ -514,7 +514,7 @@ export default function Home() {
           <div className="mb-16">
             <div className="flex justify-between items-center mb-8">
               <motion.h3
-                className="text-2xl font-bold text-gradient-green animate-on-scroll drop-shadow-md"
+                className="text-2xl font-bold text-green-500 animate-on-scroll"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -524,7 +524,13 @@ export default function Home() {
               </motion.h3>
               <button
                 onClick={() => setCoreTeamExpanded(!coreTeamExpanded)}
-                className="flex items-center gap-2 px-4 py-2 bg-gradient-green text-white rounded-full text-sm font-medium hover:opacity-90 transition-all shadow-md shadow-green-500/20 hover:shadow-green-500/30"
+                className="flex items-center gap-2 px-4 py-2 bg-gradient-green text-white rounded-full text-sm font-medium hover:opacity-90 transition-all"
+                style={{
+                  boxShadow:
+                    theme === "dark"
+                      ? "0 0 15px rgba(34, 179, 79, 0.5)"
+                      : "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+                }}
               >
                 {coreTeamExpanded ? (
                   <>
@@ -540,27 +546,52 @@ export default function Home() {
               </button>
             </div>
 
-            <motion.div
-              className="team-grid"
-              initial={{ height: "auto" }}
-              animate={{ height: coreTeamExpanded ? "auto" : "0" }}
-              transition={{ duration: 0.5 }}
-            >
-              {coreTeamExpanded && (
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-                  {coreTeam.map((member, index) => (
-                    <TeamMember key={index} name={member.name} role={member.role} color={member.color} index={index} />
-                  ))}
+            {coreTeamExpanded && (
+              <div className="space-y-8">
+                {/* First row */}
+                <div className="flex flex-wrap justify-center gap-8">
+                  <TeamMember name="Ms. Eirty Telang Kapoor" role="Convenor" color="bg-green-500" index={0} />
+                  <TeamMember name="Vaibhav Pratap Singh" role="President" color="bg-yellow-500" index={1} />
+                  <TeamMember name="Suryansh Sharma" role="Vice President" color="bg-blue-500" index={2} />
+                  <TeamMember name="Sachin Singh Adhikari" role="Secretary" color="bg-green-500" index={3} />
+                  <TeamMember name="Ashwany Kumar Sharma" role="Secretary" color="bg-purple-500" index={4} />
                 </div>
-              )}
-            </motion.div>
+
+                {/* Second row */}
+                <div className="flex flex-wrap justify-center gap-8">
+                  <TeamMember name="Riyansh Varshney" role="Event Coordinator" color="bg-pink-500" index={5} />
+                  <TeamMember name="Harshvardhan" role="Event Coordinator" color="bg-blue-500" index={6} />
+                  <TeamMember name="Diksha Chauhan" role="Event Coordinator" color="bg-teal-500" index={7} />
+                  <TeamMember name="Shresth Gupta" role="Event Coordinator" color="bg-cyan-500" index={8} />
+                  <TeamMember name="Nishchal Anurag" role="PR & Outreach" color="bg-green-500" index={9} />
+                </div>
+
+                {/* Third row */}
+                <div className="flex flex-wrap justify-center gap-8">
+                  <TeamMember name="Satyam Mishra" role="PR & Outreach" color="bg-green-500" index={10} />
+                  <TeamMember name="Diti Vasisht" role="PR & Outreach" color="bg-purple-500" index={11} />
+                  <TeamMember name="Jayesh Bisht" role="PR & Outreach" color="bg-pink-500" index={12} />
+                  <TeamMember name="Arul S Bharadwaj" role="Graphic Designer" color="bg-amber-500" index={13} />
+                  <TeamMember name="Ayush Kukreja" role="Graphic Designer" color="bg-orange-500" index={14} />
+                </div>
+
+                {/* Fourth row */}
+                <div className="flex flex-wrap justify-center gap-8">
+                  <TeamMember name="Tiya Jain" role="Social Media" color="bg-blue-500" index={15} />
+                  <TeamMember name="Vanya Raman" role="Social Media" color="bg-green-500" index={16} />
+                  <TeamMember name="Srijan Ranjan" role="Social Media" color="bg-blue-500" index={17} />
+                  <TeamMember name="Vinay Chauhan" role="Video Editor" color="bg-green-500" index={18} />
+                  <TeamMember name="Gautam Kumar" role="Treasurer" color="bg-purple-500" index={19} />
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Active Members Section */}
           <div>
             <div className="flex justify-between items-center mb-8">
               <motion.h3
-                className="text-2xl font-bold text-gradient-green animate-on-scroll drop-shadow-md"
+                className="text-2xl font-bold text-green-500 animate-on-scroll"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -570,7 +601,13 @@ export default function Home() {
               </motion.h3>
               <button
                 onClick={() => setActiveMembersExpanded(!activeMembersExpanded)}
-                className="flex items-center gap-2 px-4 py-2 bg-gradient-green text-white rounded-full text-sm font-medium hover:opacity-90 transition-all shadow-md shadow-green-500/20 hover:shadow-green-500/30"
+                className="flex items-center gap-2 px-4 py-2 bg-gradient-green text-white rounded-full text-sm font-medium hover:opacity-90 transition-all"
+                style={{
+                  boxShadow:
+                    theme === "dark"
+                      ? "0 0 15px rgba(34, 179, 79, 0.5)"
+                      : "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+                }}
               >
                 {activeMembersExpanded ? (
                   <>
@@ -586,20 +623,41 @@ export default function Home() {
               </button>
             </div>
 
-            <motion.div
-              className="team-grid"
-              initial={{ height: "auto" }}
-              animate={{ height: activeMembersExpanded ? "auto" : "0" }}
-              transition={{ duration: 0.5 }}
-            >
-              {activeMembersExpanded && (
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-                  {[...mentors, ...activeMembers].map((member, index) => (
+            {activeMembersExpanded && (
+              <div className="space-y-8">
+                {/* Mentors row */}
+                <div className="flex flex-wrap justify-center gap-8">
+                  {mentors.map((member, index) => (
                     <TeamMember key={index} name={member.name} role={member.role} color={member.color} index={index} />
                   ))}
                 </div>
-              )}
-            </motion.div>
+
+                {/* Active members rows */}
+                <div className="flex flex-wrap justify-center gap-8">
+                  {activeMembers.slice(0, 6).map((member, index) => (
+                    <TeamMember
+                      key={index}
+                      name={member.name}
+                      role={member.role}
+                      color={member.color}
+                      index={index + mentors.length}
+                    />
+                  ))}
+                </div>
+
+                <div className="flex flex-wrap justify-center gap-8">
+                  {activeMembers.slice(6).map((member, index) => (
+                    <TeamMember
+                      key={index}
+                      name={member.name}
+                      role={member.role}
+                      color={member.color}
+                      index={index + mentors.length + 6}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </section>

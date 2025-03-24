@@ -2,10 +2,13 @@
 
 import { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import { useTheme } from "next-themes"
 
 export default function CursorEffect() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [isVisible, setIsVisible] = useState(false)
+  const { resolvedTheme } = useTheme()
+  const isDark = resolvedTheme === "dark"
 
   useEffect(() => {
     // Only show cursor effect on desktop
@@ -50,7 +53,7 @@ export default function CursorEffect() {
               x: -150,
               y: -150,
               scale: [1, 1.05, 1],
-              opacity: [0.15, 0.2, 0.15],
+              opacity: isDark ? [0.2, 0.3, 0.2] : [0.1, 0.15, 0.1],
             }}
             transition={{
               duration: 2,
@@ -58,7 +61,42 @@ export default function CursorEffect() {
               repeat: Number.POSITIVE_INFINITY,
             }}
           >
-            <div className="w-[300px] h-[300px] rounded-full bg-gradient-to-r from-green-500/20 to-blue-500/20 blur-3xl" />
+            <div
+              className={`w-[300px] h-[300px] rounded-full ${
+                isDark
+                  ? "bg-gradient-to-r from-green-500/30 via-green-400/20 to-blue-500/10"
+                  : "bg-gradient-to-r from-green-500/10 via-green-400/5 to-blue-500/5"
+              } blur-3xl`}
+            />
+          </motion.div>
+
+          {/* Medium glow */}
+          <motion.div
+            className="fixed pointer-events-none z-[999] hidden md:block"
+            style={{
+              left: mousePosition.x,
+              top: mousePosition.y,
+            }}
+            animate={{
+              x: -75,
+              y: -75,
+              scale: [1, 1.1, 1],
+              opacity: isDark ? [0.3, 0.4, 0.3] : [0.15, 0.2, 0.15],
+            }}
+            transition={{
+              duration: 1.5,
+              ease: "easeInOut",
+              repeat: Number.POSITIVE_INFINITY,
+              repeatType: "reverse",
+            }}
+          >
+            <div
+              className={`w-[150px] h-[150px] rounded-full ${
+                isDark
+                  ? "bg-gradient-to-r from-green-500/40 to-green-400/30"
+                  : "bg-gradient-to-r from-green-500/15 to-green-400/10"
+              } blur-2xl`}
+            />
           </motion.div>
 
           {/* Small focused dot */}
@@ -70,10 +108,10 @@ export default function CursorEffect() {
             }}
             initial={{ opacity: 0, scale: 0 }}
             animate={{
-              opacity: 0.8,
+              opacity: 1,
               scale: 1,
-              x: -4,
-              y: -4,
+              x: -3,
+              y: -3,
             }}
             exit={{ opacity: 0, scale: 0 }}
             transition={{
@@ -83,7 +121,16 @@ export default function CursorEffect() {
               mass: 0.5,
             }}
           >
-            <div className="w-2 h-2 rounded-full bg-gradient-to-r from-green-500 to-green-400 shadow-lg shadow-green-500/50" />
+            <div
+              className={`w-6 h-6 rounded-full ${
+                isDark
+                  ? "bg-gradient-to-r from-green-500 to-green-400"
+                  : "bg-gradient-to-r from-green-500/80 to-green-400/80"
+              } blur-sm`}
+              style={{
+                boxShadow: isDark ? "0 0 15px rgba(34, 197, 94, 0.7)" : "0 0 10px rgba(34, 197, 94, 0.4)",
+              }}
+            />
           </motion.div>
         </>
       )}

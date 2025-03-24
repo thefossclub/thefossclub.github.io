@@ -5,7 +5,7 @@ import { useTheme } from "next-themes"
 
 export default function GridBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const { theme, resolvedTheme } = useTheme()
+  const { resolvedTheme } = useTheme()
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -31,12 +31,15 @@ export default function GridBackground() {
 
       // Determine colors based on theme
       const isDark = resolvedTheme === "dark"
-      const lineColor = isDark ? "rgba(255, 255, 255, 0.07)" : "rgba(0, 0, 0, 0.07)"
+      const lineColor = isDark ? "rgba(255, 255, 255, 0.05)" : "rgba(0, 0, 0, 0.05)"
+
+      // Beautiful glowing dots in different colors
       const dotColors = [
-        isDark ? "rgba(34, 179, 79, 0.6)" : "rgba(34, 179, 79, 0.5)", // main green #22b34f
-        isDark ? "rgba(22, 163, 74, 0.6)" : "rgba(22, 163, 74, 0.5)", // darker green
-        isDark ? "rgba(74, 222, 128, 0.6)" : "rgba(74, 222, 128, 0.5)", // lighter green
-        isDark ? "rgba(14, 165, 233, 0.3)" : "rgba(14, 165, 233, 0.2)", // blue (minimal)
+        isDark ? "rgba(34, 197, 94, 0.7)" : "rgba(34, 197, 94, 0.3)", // green-500
+        isDark ? "rgba(16, 185, 129, 0.7)" : "rgba(16, 185, 129, 0.3)", // emerald-500
+        isDark ? "rgba(20, 184, 166, 0.7)" : "rgba(20, 184, 166, 0.3)", // teal-500
+        isDark ? "rgba(6, 182, 212, 0.5)" : "rgba(6, 182, 212, 0.2)", // cyan-500
+        isDark ? "rgba(59, 130, 246, 0.5)" : "rgba(59, 130, 246, 0.2)", // blue-500
       ]
 
       ctx.strokeStyle = lineColor
@@ -58,30 +61,34 @@ export default function GridBackground() {
         ctx.stroke()
       }
 
-      // Add dots at grid intersections with gradient effect
+      // Add beautiful glowing dots at grid intersections
       for (let x = 0; x <= canvas.width; x += gridSize) {
         for (let y = 0; y <= canvas.height; y += gridSize) {
-          if (Math.random() > 0.9) {
-            // Only draw some dots
-            const dotSize = Math.random() * 3 + 2
-            // Use green colors 90% of the time, blue 10% of the time
-            const colorIndex = Math.random() > 0.9 ? 3 : Math.floor(Math.random() * 3)
+          if (Math.random() > 0.85) {
+            // Only draw some dots (15%)
+            // Randomize dot size for more organic feel
+            const dotSize = Math.random() * 2 + 1
+            // Use green colors most of the time
+            const colorIndex =
+              Math.random() > 0.8
+                ? Math.floor(Math.random() * 2) + 3 // blue/cyan (20%)
+                : Math.floor(Math.random() * 3) // green variants (80%)
 
-            // Create gradient for dot
-            const gradient = ctx.createRadialGradient(x, y, 0, x, y, dotSize * 2)
+            // Create beautiful gradient for dot
+            const gradient = ctx.createRadialGradient(x, y, 0, x, y, dotSize * 3)
             gradient.addColorStop(0, dotColors[colorIndex])
             gradient.addColorStop(1, "rgba(0, 0, 0, 0)")
 
             ctx.beginPath()
-            ctx.arc(x, y, dotSize * 2, 0, Math.PI * 2)
+            ctx.arc(x, y, dotSize * 3, 0, Math.PI * 2)
             ctx.fillStyle = gradient
             ctx.fill()
 
-            // Add glow effect to some dots
+            // Add extra glow effect to some dots
             if (Math.random() > 0.7) {
-              const glowSize = dotSize * 3
+              const glowSize = dotSize * 6
               const glowGradient = ctx.createRadialGradient(x, y, 0, x, y, glowSize)
-              glowGradient.addColorStop(0, isDark ? "rgba(34, 179, 79, 0.3)" : "rgba(34, 179, 79, 0.2)")
+              glowGradient.addColorStop(0, isDark ? "rgba(34, 197, 94, 0.3)" : "rgba(34, 197, 94, 0.15)")
               glowGradient.addColorStop(1, "rgba(0, 0, 0, 0)")
 
               ctx.beginPath()
@@ -103,7 +110,7 @@ export default function GridBackground() {
     return () => {
       window.removeEventListener("resize", resizeCanvas)
     }
-  }, [theme, resolvedTheme])
+  }, [resolvedTheme])
 
   return (
     <canvas
