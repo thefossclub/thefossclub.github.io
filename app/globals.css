@@ -243,16 +243,16 @@
 
 /* Team grid layout */
 .team-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
   width: 100%;
-  justify-content: space-between;
 }
 
 @media (min-width: 768px) {
   .team-grid {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 2.5rem;
   }
 }
 
@@ -265,17 +265,73 @@
   box-shadow: 0 0 20px rgba(34, 179, 79, 0.4);
 }
 
+/* Enhanced glow effects */
+.glow-effect-green {
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.6), 0 0 40px rgba(34, 197, 94, 0.3);
+}
+
+.glow-effect-blue {
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.6), 0 0 40px rgba(59, 130, 246, 0.3);
+}
+
+.glow-effect-purple {
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.6), 0 0 40px rgba(168, 85, 247, 0.3);
+}
+
+.light .glow-effect-green {
+  box-shadow: 0 10px 25px -5px rgba(34, 197, 94, 0.3), 0 8px 10px -6px rgba(34, 197, 94, 0.2);
+}
+
+.light .glow-effect-blue {
+  box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.3), 0 8px 10px -6px rgba(59, 130, 246, 0.2);
+}
+
+.light .glow-effect-purple {
+  box-shadow: 0 10px 25px -5px rgba(168, 85, 247, 0.3), 0 8px 10px -6px rgba(168, 85, 247, 0.2);
+}
+
+/* Beautiful button glow effects */
+.btn-glow {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.btn-glow::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(34, 197, 94, 0.4) 0%, rgba(34, 197, 94, 0) 70%);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+}
+
+.btn-glow:hover::after {
+  opacity: 1;
+}
+
+.dark .btn-glow::after {
+  background: radial-gradient(circle, rgba(34, 197, 94, 0.6) 0%, rgba(34, 197, 94, 0) 70%);
+}
+
 .card-hover-effect {
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .card-hover-effect:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  transform: translateY(-10px) scale(1.02);
 }
 
 .dark .card-hover-effect:hover {
-  box-shadow: 0 10px 25px rgba(34, 179, 79, 0.15);
+  box-shadow: 0 20px 25px -5px rgba(34, 197, 94, 0.2), 0 10px 10px -5px rgba(34, 197, 94, 0.1);
+}
+
+.light .card-hover-effect:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
 /* Beautiful footer styles */
