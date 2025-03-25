@@ -35,11 +35,11 @@ export default function GridBackground() {
 
       // Beautiful glowing dots in different colors
       const dotColors = [
-        isDark ? "rgba(34, 197, 94, 0.7)" : "rgba(34, 197, 94, 0.3)", // green-500
-        isDark ? "rgba(16, 185, 129, 0.7)" : "rgba(16, 185, 129, 0.3)", // emerald-500
-        isDark ? "rgba(20, 184, 166, 0.7)" : "rgba(20, 184, 166, 0.3)", // teal-500
-        isDark ? "rgba(6, 182, 212, 0.5)" : "rgba(6, 182, 212, 0.2)", // cyan-500
-        isDark ? "rgba(59, 130, 246, 0.5)" : "rgba(59, 130, 246, 0.2)", // blue-500
+        isDark ? "rgba(34, 197, 94, 0.7)" : "rgba(34, 197, 94, 0.15)", // green-500 - much lighter in light mode
+        isDark ? "rgba(16, 185, 129, 0.7)" : "rgba(16, 185, 129, 0.15)", // emerald-500 - much lighter in light mode
+        isDark ? "rgba(20, 184, 166, 0.7)" : "rgba(20, 184, 166, 0.15)", // teal-500 - much lighter in light mode
+        isDark ? "rgba(6, 182, 212, 0.5)" : "rgba(6, 182, 212, 0.1)", // cyan-500 - much lighter in light mode
+        isDark ? "rgba(59, 130, 246, 0.5)" : "rgba(59, 130, 246, 0.1)", // blue-500 - much lighter in light mode
       ]
 
       ctx.strokeStyle = lineColor
@@ -88,7 +88,7 @@ export default function GridBackground() {
             if (Math.random() > 0.7) {
               const glowSize = dotSize * 6
               const glowGradient = ctx.createRadialGradient(x, y, 0, x, y, glowSize)
-              glowGradient.addColorStop(0, isDark ? "rgba(34, 197, 94, 0.3)" : "rgba(34, 197, 94, 0.15)")
+              glowGradient.addColorStop(0, isDark ? "rgba(34, 197, 94, 0.3)" : "rgba(34, 197, 94, 0.08)") // Much lighter glow in light mode
               glowGradient.addColorStop(1, "rgba(0, 0, 0, 0)")
 
               ctx.beginPath()

@@ -265,7 +265,7 @@
   box-shadow: 0 0 20px rgba(34, 179, 79, 0.4);
 }
 
-/* Enhanced glow effects */
+/* Enhanced glow effects with better contrast */
 .glow-effect-green {
   box-shadow: 0 0 20px rgba(34, 197, 94, 0.6), 0 0 40px rgba(34, 197, 94, 0.3);
 }
@@ -279,18 +279,18 @@
 }
 
 .light .glow-effect-green {
-  box-shadow: 0 10px 25px -5px rgba(34, 197, 94, 0.3), 0 8px 10px -6px rgba(34, 197, 94, 0.2);
+  box-shadow: 0 10px 25px -5px rgba(34, 197, 94, 0.2), 0 8px 10px -6px rgba(34, 197, 94, 0.1);
 }
 
 .light .glow-effect-blue {
-  box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.3), 0 8px 10px -6px rgba(59, 130, 246, 0.2);
+  box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.2), 0 8px 10px -6px rgba(59, 130, 246, 0.1);
 }
 
 .light .glow-effect-purple {
-  box-shadow: 0 10px 25px -5px rgba(168, 85, 247, 0.3), 0 8px 10px -6px rgba(168, 85, 247, 0.2);
+  box-shadow: 0 10px 25px -5px rgba(168, 85, 247, 0.2), 0 8px 10px -6px rgba(168, 85, 247, 0.1);
 }
 
-/* Beautiful button glow effects */
+/* Improved button glow effects */
 .btn-glow {
   position: relative;
   z-index: 1;
@@ -304,7 +304,7 @@
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, rgba(34, 197, 94, 0.4) 0%, rgba(34, 197, 94, 0) 70%);
+  background: radial-gradient(circle, rgba(34, 197, 94, 0.3) 0%, rgba(34, 197, 94, 0) 70%);
   opacity: 0;
   z-index: -1;
   transition: opacity 0.3s ease;
@@ -318,6 +318,7 @@
   background: radial-gradient(circle, rgba(34, 197, 94, 0.6) 0%, rgba(34, 197, 94, 0) 70%);
 }
 
+/* Improved card hover effects */
 .card-hover-effect {
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -331,7 +332,7 @@
 }
 
 .light .card-hover-effect:hover {
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.03);
 }
 
 /* Beautiful footer styles */
@@ -361,5 +362,22 @@
 
 .footer-link:hover::after {
   width: 100%;
+}
+
+/* Improved text contrast */
+.dark .text-gray-300 {
+  color: rgba(229, 231, 235, 0.9); /* Slightly brighter for better contrast */
+}
+
+.dark .text-gray-400 {
+  color: rgba(156, 163, 175, 0.95); /* Slightly brighter for better contrast */
+}
+
+.light .text-gray-600 {
+  color: rgba(75, 85, 99, 0.95); /* Slightly darker for better contrast */
+}
+
+.light .text-gray-700 {
+  color: rgba(55, 65, 81, 1); /* Slightly darker for better contrast */
 }
 
