@@ -60,32 +60,6 @@ export default function Home() {
     }
   }, [])
 
-  // Add animation observer to ensure animations work in Firefox
-  useEffect(() => {
-    const animateElements = () => {
-      const elements = document.querySelectorAll(".animate-on-scroll")
-      elements.forEach((element) => {
-        const rect = element.getBoundingClientRect()
-        const isVisible =
-          rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.8 && rect.bottom >= 0
-
-        if (isVisible) {
-          element.classList.add("visible")
-        }
-      })
-    }
-
-    // Initial check
-    animateElements()
-
-    // Add scroll event listener
-    window.addEventListener("scroll", animateElements)
-
-    return () => {
-      window.removeEventListener("scroll", animateElements)
-    }
-  }, [])
-
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 100
