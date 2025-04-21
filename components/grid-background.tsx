@@ -70,9 +70,7 @@ export default function GridBackground() {
             const dotSize = Math.random() * 2 + 1
             // Use green colors most of the time
             const colorIndex =
-              Math.random() > 0.8
-                ? Math.floor(Math.random() * 2) + 3 // blue/cyan (20%)
-                : Math.floor(Math.random() * 3) // green variants (80%)
+              Math.floor(Math.random() * 3); // Always green variants
 
             // Create beautiful gradient for dot
             const gradient = ctx.createRadialGradient(x, y, 0, x, y, dotSize * 3)

@@ -128,7 +128,9 @@ export default function CursorEffect() {
                   : "bg-gradient-to-r from-green-500/60 to-green-400/60"
               } blur-sm`}
               style={{
-                boxShadow: isDark ? "0 0 15px rgba(34, 197, 94, 0.7)" : "0 0 10px rgba(34, 197, 94, 0.25)",
+                boxShadow: isDark 
+                  ? "0 0 25px 5px rgba(34, 197, 94, 0.8), 0 0 40px 10px rgba(34, 197, 94, 0.3)" 
+                  : "0 0 15px 3px rgba(34, 197, 94, 0.35), 0 0 25px 7px rgba(34, 197, 94, 0.15)",
               }}
             />
           </motion.div>

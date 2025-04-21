@@ -247,7 +247,6 @@ export default function Home() {
   return (
     <div
       className="relative min-h-screen overflow-hidden bg-white dark:bg-black text-black dark:text-white"
-      suppressHydrationWarning
     >
       <GridBackground />
       <CursorEffect />
@@ -274,14 +273,14 @@ export default function Home() {
             <h1 className="text-4xl md:text-6xl font-bold mb-4 text-gradient-green drop-shadow-xl">
               Welcome to The FOSS Club!
             </h1>
-            <p className="text-xl md:text-2xl mb-8 text-gray-700 dark:text-gray-300 drop-shadow-md">
-              <span className="font-bold">Learn, build, and collaborate</span> with fellow open-source enthusiasts.
+            <p className="text-xl md:text-2xl mb-8 text-gray-700 dark:text-gray-200 drop-shadow-md">
+              <span className="font-semibold">Learn, build, and collaborate</span> with fellow open-source enthusiasts.
             </p>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link
                 href="https://opnform.com/forms/the-foss-club-registration-nst4zs"
                 target="_blank"
-                className="inline-flex items-center px-6 py-3 bg-gradient-green text-white rounded-full font-medium text-lg hover:opacity-90 transition-opacity shadow-lg shadow-green-500/20 hover:shadow-green-500/40"
+                className="inline-flex items-center px-6 py-3 bg-gradient-green text-white rounded-full font-medium text-lg hover:opacity-90 hover:brightness-110 transition-all shadow-lg shadow-green-500/20 hover:shadow-green-500/40"
               >
                 Join Now <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
