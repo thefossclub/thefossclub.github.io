@@ -240,11 +240,17 @@ export default function Home() {
           <motion.div
             className="md:w-1/2 mt-12 md:mt-0 relative"
             initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            animate={{
+              opacity: 1,
+              scale: 1,
+            }}
+            transition={{
+              duration: 0.8,
+              delay: 0.2,
+            }}
           >
             <div className="relative w-64 h-64 md:w-80 md:h-80 mx-auto">
-              <div className="absolute inset-0 bg-gradient-green-blue rounded-full opacity-90 shadow-2xl shadow-green-500/20"></div>
+              <div className="absolute inset-0 bg-gradient-green rounded-full opacity-90 shadow-2xl shadow-green-500/20"></div>
               <div className="absolute inset-0 flex items-center justify-center text-center p-6">
                 <h2 className="text-2xl md:text-3xl font-bold leading-tight text-white">
                   Free & Open Source and Hacker Culture at DTC
@@ -498,42 +504,16 @@ export default function Home() {
             </div>
 
             {coreTeamExpanded && (
-              <div className="space-y-8">
-                {/* First row */}
-                <div className="flex flex-wrap justify-center gap-8">
-                  <TeamMember name="Ms. Eirty Telang Kapoor" role="Convenor" color="bg-green-500" index={0} />
-                  <TeamMember name="Vaibhav Pratap Singh" role="President" color="bg-yellow-500" index={1} />
-                  <TeamMember name="Suryansh Sharma" role="Vice President" color="bg-blue-500" index={2} />
-                  <TeamMember name="Sachin Singh Adhikari" role="Secretary" color="bg-green-500" index={3} />
-                  <TeamMember name="Ashwany Kumar Sharma" role="Secretary" color="bg-purple-500" index={4} />
-                </div>
-
-                {/* Second row */}
-                <div className="flex flex-wrap justify-center gap-8">
-                  <TeamMember name="Riyansh Varshney" role="Event Coordinator" color="bg-pink-500" index={5} />
-                  <TeamMember name="Harshvardhan" role="Event Coordinator" color="bg-blue-500" index={6} />
-                  <TeamMember name="Diksha Chauhan" role="Event Coordinator" color="bg-teal-500" index={7} />
-                  <TeamMember name="Shresth Gupta" role="Event Coordinator" color="bg-cyan-500" index={8} />
-                  <TeamMember name="Nishchal Anurag" role="PR & Outreach" color="bg-green-500" index={9} />
-                </div>
-
-                {/* Third row */}
-                <div className="flex flex-wrap justify-center gap-8">
-                  <TeamMember name="Satyam Mishra" role="PR & Outreach" color="bg-green-500" index={10} />
-                  <TeamMember name="Diti Vasisht" role="PR & Outreach" color="bg-purple-500" index={11} />
-                  <TeamMember name="Jayesh Bisht" role="PR & Outreach" color="bg-pink-500" index={12} />
-                  <TeamMember name="Arul S Bharadwaj" role="Graphic Designer" color="bg-amber-500" index={13} />
-                  <TeamMember name="Ayush Kukreja" role="Graphic Designer" color="bg-orange-500" index={14} />
-                </div>
-
-                {/* Fourth row */}
-                <div className="flex flex-wrap justify-center gap-8">
-                  <TeamMember name="Tiya Jain" role="Social Media" color="bg-blue-500" index={15} />
-                  <TeamMember name="Vanya Raman" role="Social Media" color="bg-green-500" index={16} />
-                  <TeamMember name="Srijan Ranjan" role="Social Media" color="bg-blue-500" index={17} />
-                  <TeamMember name="Vinay Chauhan" role="Video Editor" color="bg-green-500" index={18} />
-                  <TeamMember name="Gautam Kumar" role="Treasurer" color="bg-purple-500" index={19} />
-                </div>
+              <div className="team-grid">
+                {coreTeam.map((member, index) => (
+                  <TeamMember
+                    key={index}
+                    name={member.name}
+                    role={member.role}
+                    color={member.color}
+                    index={index}
+                  />
+                ))}
               </div>
             )}
           </div>
@@ -663,9 +643,9 @@ export default function Home() {
               >
                 <Link
                   href="#"
-                  className="flex items-center text-lg hover:text-gradient-green transition-colors text-gray-700 dark:text-gray-300"
+                  className="flex items-center text-lg text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition-colors"
                 >
-                  <ArrowRight className="mr-2 h-5 w-5 text-green-500" />
+                  <ArrowRight className="mr-2 h-5 w-5" />
                   Getting Started with Git
                 </Link>
               </motion.li>
@@ -675,9 +655,9 @@ export default function Home() {
               >
                 <Link
                   href="#"
-                  className="flex items-center text-lg hover:text-gradient-green transition-colors text-gray-700 dark:text-gray-300"
+                  className="flex items-center text-lg text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition-colors"
                 >
-                  <ArrowRight className="mr-2 h-5 w-5 text-green-500" />
+                  <ArrowRight className="mr-2 h-5 w-5" />
                   Introduction to Linux Command Line
                 </Link>
               </motion.li>
@@ -687,9 +667,9 @@ export default function Home() {
               >
                 <Link
                   href="#"
-                  className="flex items-center text-lg hover:text-gradient-green transition-colors text-gray-700 dark:text-gray-300"
+                  className="flex items-center text-lg text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition-colors"
                 >
-                  <ArrowRight className="mr-2 h-5 w-5 text-green-500" />
+                  <ArrowRight className="mr-2 h-5 w-5" />
                   Web Development Fundamentals
                 </Link>
               </motion.li>
@@ -699,9 +679,9 @@ export default function Home() {
               >
                 <Link
                   href="#"
-                  className="flex items-center text-lg hover:text-gradient-green transition-colors text-gray-700 dark:text-gray-300"
+                  className="flex items-center text-lg text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition-colors"
                 >
-                  <ArrowRight className="mr-2 h-5 w-5 text-green-500" />
+                  <ArrowRight className="mr-2 h-5 w-5" />
                   Open Source Licensing Guide
                 </Link>
               </motion.li>
@@ -808,176 +788,187 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-12 border-t border-gray-800 dark:border-gray-800 footer-gradient">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center mb-12">
-            <div className="mb-8 md:mb-0">
-              <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-gradient-green rounded-full flex items-center justify-center mr-4 glow-effect shadow-lg shadow-green-500/30">
-                  <span className="text-white font-bold text-sm">FC</span>
+      {/* Footer - Render only when mounted */}
+      {mounted && (
+        <footer className="py-12 border-t border-gray-800 dark:border-gray-800 footer-gradient">
+          <div className="container mx-auto px-4">
+            <div className="flex flex-col md:flex-row justify-between items-center mb-12">
+              <div className="mb-8 md:mb-0">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-green rounded-full flex items-center justify-center mr-4 glow-effect shadow-lg shadow-green-500/30">
+                    <span className="text-white font-bold text-sm">FC</span>
+                  </div>
                 </div>
-                <h2 className="text-3xl font-bold text-gradient-green drop-shadow-md">The FOSS Club</h2>
+                <p className="text-gray-600 dark:text-gray-400 max-w-md text-lg">
+                  Learn, build, and collaborate with fellow open-source enthusiasts in a community dedicated to free and
+                  open source software.
+                </p>
               </div>
-              <p className="text-gray-600 dark:text-gray-400 max-w-md text-lg">
-                Learn, build, and collaborate with fellow open-source enthusiasts in a community dedicated to free and
-                open source software.
-              </p>
+              <div className="flex flex-wrap justify-center gap-6">
+                <a
+                  href="https://github.com/thefossclub"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-3 bg-white/10 dark:bg-black/20 rounded-full text-gray-600 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-400 hover:bg-white/20 dark:hover:bg-black/30 transition-all shadow-md hover:shadow-green-500/20"
+                >
+                  <Github className="h-6 w-6" />
+                  <span className="sr-only">GitHub</span>
+                </a>
+                <a
+                  href="https://twitter.com/thefossclub"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-3 bg-white/10 dark:bg-black/20 rounded-full text-gray-600 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-400 hover:bg-white/20 dark:hover:bg-black/30 transition-all shadow-md hover:shadow-green-500/20"
+                >
+                  <Twitter className="h-6 w-6" />
+                  <span className="sr-only">Twitter</span>
+                </a>
+                <a
+                  href="https://linkedin.com/company/thefossclub"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-3 bg-white/10 dark:bg-black/20 rounded-full text-gray-600 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-400 hover:bg-white/20 dark:hover:bg-black/30 transition-all shadow-md hover:shadow-green-500/20"
+                >
+                  <Linkedin className="h-6 w-6" />
+                  <span className="sr-only">LinkedIn</span>
+                </a>
+                <a
+                  href="https://instagram.com/thefossclub"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-3 bg-white/10 dark:bg-black/20 rounded-full text-gray-600 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-400 hover:bg-white/20 dark:hover:bg-black/30 transition-all shadow-md hover:shadow-green-500/20"
+                >
+                  <Instagram className="h-6 w-6" />
+                  <span className="sr-only">Instagram</span>
+                </a>
+              </div>
             </div>
-            <div className="flex flex-wrap justify-center gap-6">
-              <a
-                href="https://github.com/thefossclub"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 bg-white/10 dark:bg-black/20 rounded-full text-gray-600 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-400 hover:bg-white/20 dark:hover:bg-black/30 transition-all shadow-md hover:shadow-green-500/20"
-              >
-                <Github className="h-6 w-6" />
-                <span className="sr-only">GitHub</span>
-              </a>
-              <a
-                href="https://twitter.com/thefossclub"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 bg-white/10 dark:bg-black/20 rounded-full text-gray-600 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-400 hover:bg-white/20 dark:hover:bg-black/30 transition-all shadow-md hover:shadow-green-500/20"
-              >
-                <Twitter className="h-6 w-6" />
-                <span className="sr-only">Twitter</span>
-              </a>
-              <a
-                href="https://linkedin.com/company/thefossclub"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 bg-white/10 dark:bg-black/20 rounded-full text-gray-600 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-400 hover:bg-white/20 dark:hover:bg-black/30 transition-all shadow-md hover:shadow-green-500/20"
-              >
-                <Linkedin className="h-6 w-6" />
-                <span className="sr-only">LinkedIn</span>
-              </a>
-              <a
-                href="https://instagram.com/thefossclub"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 bg-white/10 dark:bg-black/20 rounded-full text-gray-600 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-400 hover:bg-white/20 dark:hover:bg-black/30 transition-all shadow-md hover:shadow-green-500/20"
-              >
-                <Instagram className="h-6 w-6" />
-                <span className="sr-only">Instagram</span>
-              </a>
-            </div>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
-            <div className="backdrop-blur-sm p-6 rounded-2xl border border-gray-200/20 dark:border-gray-800/50 bg-white/5 dark:bg-black/5 card-hover-effect shadow-lg hover:shadow-green-500/10">
-              <h3 className="text-xl font-semibold mb-4 text-gradient-green">Quick Links</h3>
-              <ul className="space-y-3">
-                <li>
-                  <Link
-                    href="#home"
-                    className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
-                  >
-                    Home
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#about"
-                    className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
-                  >
-                    About
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#projects"
-                    className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
-                  >
-                    Projects
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#events"
-                    className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
-                  >
-                    Events
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div className="backdrop-blur-sm p-6 rounded-2xl border border-gray-200/20 dark:border-gray-800/50 bg-white/5 dark:bg-black/5 card-hover-effect shadow-lg hover:shadow-green-500/10">
-              <h3 className="text-xl font-semibold mb-4 text-gradient-green">Resources</h3>
-              <ul className="space-y-3">
-                <li>
-                  <Link
-                    href="#"
-                    className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
-                  >
-                    Blog
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
-                  >
-                    Documentation
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="https://github.com/thefossclub/CodeofConduct"
-                    target="_blank"
-                    className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
-                  >
-                    Code of Conduct
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
-                  >
-                    Privacy Policy
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div className="backdrop-blur-sm p-6 rounded-2xl border border-gray-200/20 dark:border-gray-800/50 bg-white/5 dark:bg-black/5 card-hover-effect shadow-lg hover:shadow-green-500/10">
-              <h3 className="text-xl font-semibold mb-4 text-gradient-green">Contact</h3>
-              <ul className="space-y-3">
-                <li>
-                  <Link
-                    href="https://linktr.ee/thefossclub"
-                    target="_blank"
-                    className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
-                  >
-                    LinkTree
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
-                  >
-                    Email Us
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
-                  >
-                    Join Discord
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
+            {/* Wrap the grid in motion.div */}
+            <motion.div
+              className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-8"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }} // Slight delay after footer appears
+            >
+              {/* Quick Links Card */}
+              <div className="backdrop-blur-sm p-6 rounded-2xl border border-gray-200/20 dark:border-gray-800/50 bg-white/5 dark:bg-black/5 card-hover-effect shadow-lg hover:shadow-green-500/10">
+                <h3 className="text-xl font-semibold mb-4 text-gradient-green">Quick Links</h3>
+                <ul className="space-y-3">
+                  <li>
+                    <Link
+                      href="#home"
+                      className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
+                    >
+                      Home
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="#about"
+                      className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
+                    >
+                      About
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="#projects"
+                      className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
+                    >
+                      Projects
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="#events"
+                      className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
+                    >
+                      Events
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+              {/* Resources Card */}
+              <div className="backdrop-blur-sm p-6 rounded-2xl border border-gray-200/20 dark:border-gray-800/50 bg-white/5 dark:bg-black/5 card-hover-effect shadow-lg hover:shadow-green-500/10">
+                <h3 className="text-xl font-semibold mb-4 text-gradient-green">Resources</h3>
+                <ul className="space-y-3">
+                  <li>
+                    <Link
+                      href="#"
+                      className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
+                    >
+                      Blog
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="#"
+                      className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
+                    >
+                      Documentation
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="https://github.com/thefossclub/CodeofConduct"
+                      target="_blank"
+                      className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
+                    >
+                      Code of Conduct
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="#"
+                      className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
+                    >
+                      Privacy Policy
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+              {/* Contact Card */}
+              <div className="backdrop-blur-sm p-6 rounded-2xl border border-gray-200/20 dark:border-gray-800/50 bg-white/5 dark:bg-black/5 card-hover-effect shadow-lg hover:shadow-green-500/10">
+                <h3 className="text-xl font-semibold mb-4 text-gradient-green">Contact</h3>
+                <ul className="space-y-3">
+                  <li>
+                    <Link
+                      href="https://linktr.ee/thefossclub"
+                      target="_blank"
+                      className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
+                    >
+                      LinkTree
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="#"
+                      className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
+                    >
+                      Email Us
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="#"
+                      className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
+                    >
+                      Join Discord
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            </motion.div>
 
-          <div className="text-center pt-8 border-t border-gray-800/30 dark:border-gray-800/30">
-            <p className="text-gray-500">© {new Date().getFullYear()} The FOSS Club. All rights reserved.</p>
-            <p className="text-gray-500 mt-2 text-sm">Made with 💚 by open source enthusiasts</p>
+            <div className="text-center pt-6 border-t border-gray-800/30 dark:border-gray-800/30">
+              <p className="text-gray-500">© {new Date().getFullYear()} The FOSS Club. All rights reserved.</p>
+              <p className="text-gray-500 mt-2 text-sm">Made with 💚 by open source enthusiasts</p>
+            </div>
           </div>
-        </div>
-      </footer>
+        </footer>
+      )}
     </div>
   )
 }

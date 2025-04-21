@@ -102,7 +102,7 @@ export default function Navbar({ activeSection }: NavbarProps) {
             </div>
 
             {/* Desktop Navigation */}
-            <ul className="hidden md:flex space-x-6">
+            <ul className="hidden md:flex items-center space-x-6">
               {navLinks.map((link) => (
                 <li key={link.name}>
                   <Link
@@ -122,7 +122,7 @@ export default function Navbar({ activeSection }: NavbarProps) {
                   </Link>
                 </li>
               ))}
-              <li>
+              <li className="flex items-center space-x-4">
                 <Link
                   href="https://opnform.com/forms/the-foss-club-registration-nst4zs"
                   target="_blank"
@@ -130,8 +130,6 @@ export default function Navbar({ activeSection }: NavbarProps) {
                 >
                   Join
                 </Link>
-              </li>
-              <li>
                 <Link
                   href="#login"
                   className="px-4 py-2 bg-gradient-green-blue text-white rounded-full text-sm font-medium hover:opacity-90 transition-opacity flex items-center btn-glow"

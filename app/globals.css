@@ -96,38 +96,6 @@
   background: #22b34f;
 }
 
-/* Reveal animations */
-.reveal {
-  position: relative;
-  opacity: 0;
-  transition: all 1s ease;
-}
-
-.reveal.active {
-  opacity: 1;
-}
-
-.reveal.from-left {
-  transform: translateX(-100px);
-}
-
-.reveal.from-right {
-  transform: translateX(100px);
-}
-
-.reveal.from-left.active,
-.reveal.from-right.active {
-  transform: translateX(0);
-}
-
-.reveal.from-bottom {
-  transform: translateY(100px);
-}
-
-.reveal.from-bottom.active {
-  transform: translateY(0);
-}
-
 /* Make grid more visible */
 .grid-line {
   stroke-width: 1px !important;
@@ -136,24 +104,6 @@
 
 .dark .grid-line {
   stroke: rgba(255, 255, 255, 0.1) !important;
-}
-
-/* Slide animations */
-.slide-in-left {
-  transform: translateX(-100px);
-  opacity: 0;
-  transition: all 0.8s ease-out;
-}
-
-.slide-in-right {
-  transform: translateX(100px);
-  opacity: 0;
-  transition: all 0.8s ease-out;
-}
-
-.slide-in-active {
-  transform: translateX(0);
-  opacity: 1;
 }
 
 /* Add these gradient utility classes */
@@ -312,11 +262,13 @@
 }
 
 .dark .card-hover-effect:hover {
-  box-shadow: 0 20px 25px -5px rgba(34, 197, 94, 0.2), 0 10px 10px -5px rgba(34, 197, 94, 0.1);
+  /* box-shadow: 0 20px 25px -5px rgba(34, 197, 94, 0.2), 0 10px 10px -5px rgba(34, 197, 94, 0.1); */
+  box-shadow: 0 8px 15px rgba(22, 101, 52, 0.25), 0 3px 6px rgba(22, 101, 52, 0.2); /* Darker green, softer */
 }
 
 .light .card-hover-effect:hover {
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.03);
+  /* box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.03); */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.06), 0 3px 6px rgba(0, 0, 0, 0.04); /* Softer black */
 }
 
 /* Beautiful footer styles */
