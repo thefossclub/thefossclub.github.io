@@ -6,10 +6,10 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
+    --background: 0 0% 98%;
+    --foreground: 240 10% 10%;
+    --card: 0 0% 98%;
+    --card-foreground: 240 10% 10%;
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
     --primary: 142 68% 42%; /* Changed to #22b34f green */
@@ -201,11 +201,12 @@
 }
 
 .border-gradient-green {
-  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), var(--gradient-green);
+  background-image: var(--gradient-green);
 }
 
 .dark .border-gradient-green {
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), var(--gradient-green);
+  /* background-image: linear-gradient(to right, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), var(--gradient-green); */
+  background-image: var(--gradient-green); /* Use only the green gradient */
 }
 
 /* Enhanced grid dots */
@@ -222,26 +223,6 @@
 .grid-dot-green-dark {
   fill: rgba(22, 101, 52, 0.6);
   filter: blur(1px);
-}
-
-/* Animation classes */
-.animate-on-scroll {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-  will-change: opacity, transform;
-}
-
-.animate-on-scroll.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Firefox specific animations */
-@-moz-document url-prefix() {
-  .animate-on-scroll {
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
 }
 
 /* Team grid layout */

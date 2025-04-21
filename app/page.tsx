@@ -36,30 +36,6 @@ export default function Home() {
     resources: useRef<HTMLElement>(null),
   }
 
-  // Add observer for animation on scroll
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible")
-          }
-        })
-      },
-      { threshold: 0.1 },
-    )
-
-    document.querySelectorAll(".animate-on-scroll").forEach((el) => {
-      observer.observe(el)
-    })
-
-    return () => {
-      document.querySelectorAll(".animate-on-scroll").forEach((el) => {
-        observer.unobserve(el)
-      })
-    }
-  }, [])
-
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 100
@@ -244,7 +220,7 @@ export default function Home() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-4xl md:text-6xl font-bold mb-4 text-gradient-green drop-shadow-xl">
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 text-gradient-green">
               Welcome to The FOSS Club!
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-gray-700 dark:text-gray-200 drop-shadow-md">
@@ -270,7 +246,7 @@ export default function Home() {
             <div className="relative w-64 h-64 md:w-80 md:h-80 mx-auto">
               <div className="absolute inset-0 bg-gradient-green-blue rounded-full opacity-90 shadow-2xl shadow-green-500/20"></div>
               <div className="absolute inset-0 flex items-center justify-center text-center p-6">
-                <h2 className="text-2xl md:text-3xl font-bold leading-tight text-white drop-shadow-md">
+                <h2 className="text-2xl md:text-3xl font-bold leading-tight text-white">
                   Free & Open Source and Hacker Culture at DTC
                 </h2>
               </div>
@@ -291,7 +267,7 @@ export default function Home() {
       <section ref={sectionRefs.about} id="about" className="py-20 relative">
         <div className="container mx-auto px-4">
           <motion.h2
-            className="text-4xl font-bold mb-12 text-center text-gradient-green animate-on-scroll drop-shadow-xl"
+            className="text-4xl font-bold mb-12 text-center text-gradient-green drop-shadow-xl"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -301,7 +277,7 @@ export default function Home() {
           </motion.h2>
 
           <motion.div
-            className="max-w-4xl mx-auto backdrop-blur-sm p-8 rounded-3xl border border-gray-800 dark:border-gray-800 bg-white/5 dark:bg-black/5 animate-on-scroll shadow-xl shadow-green-500/5"
+            className="max-w-4xl mx-auto backdrop-blur-sm p-8 rounded-3xl border border-gray-800 dark:border-gray-800 bg-white/5 dark:bg-black/5 shadow-xl shadow-green-500/5"
             initial={{ opacity: 0, x: -100 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -347,7 +323,7 @@ export default function Home() {
           </motion.div>
 
           <motion.div
-            className="mt-20 animate-on-scroll"
+            className="mt-20"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -365,7 +341,7 @@ export default function Home() {
       <section ref={sectionRefs.projects} id="projects" className="py-20 relative">
         <div className="container mx-auto px-4">
           <motion.h2
-            className="text-4xl font-bold mb-12 text-center text-gradient-green animate-on-scroll drop-shadow-xl"
+            className="text-4xl font-bold mb-12 text-center text-gradient-green drop-shadow-xl"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -392,7 +368,7 @@ export default function Home() {
       <section ref={sectionRefs.events} id="events" className="py-20 relative">
         <div className="container mx-auto px-4">
           <motion.h2
-            className="text-4xl font-bold mb-12 text-center text-gradient-green animate-on-scroll drop-shadow-xl"
+            className="text-4xl font-bold mb-12 text-center text-gradient-green drop-shadow-xl"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -415,7 +391,7 @@ export default function Home() {
           </div>
 
           <motion.div
-            className="mt-16 p-8 rounded-3xl border border-green-900/50 bg-gradient-to-r from-green-900/10 to-green-900/10 dark:from-green-900/30 dark:to-green-900/30 animate-on-scroll shadow-xl shadow-green-500/10"
+            className="mt-16 p-8 rounded-3xl border border-green-900/50 bg-gradient-to-r from-green-900/10 to-green-900/10 dark:from-green-900/30 dark:to-green-900/30 shadow-xl shadow-green-500/10"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -457,7 +433,7 @@ export default function Home() {
       <section id="tools" className="py-20 relative overflow-hidden">
         <div className="container mx-auto px-4">
           <motion.h2
-            className="text-4xl font-bold mb-12 text-center text-gradient-green animate-on-scroll drop-shadow-xl"
+            className="text-4xl font-bold mb-12 text-center text-gradient-green drop-shadow-xl"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -474,7 +450,7 @@ export default function Home() {
       <section ref={sectionRefs.team} id="team" className="py-20 relative">
         <div className="container mx-auto px-4">
           <motion.h2
-            className="text-4xl font-bold mb-12 text-center text-gradient-green animate-on-scroll drop-shadow-xl"
+            className="text-4xl font-bold mb-12 text-center text-gradient-green drop-shadow-xl"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -487,7 +463,7 @@ export default function Home() {
           <div className="mb-16">
             <div className="flex justify-between items-center mb-8">
               <motion.h3
-                className="text-2xl font-bold text-green-500 animate-on-scroll"
+                className="text-2xl font-bold text-green-500"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -566,7 +542,7 @@ export default function Home() {
           <div>
             <div className="flex justify-between items-center mb-8">
               <motion.h3
-                className="text-2xl font-bold text-green-500 animate-on-scroll"
+                className="text-2xl font-bold text-green-500"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -643,7 +619,7 @@ export default function Home() {
       <section ref={sectionRefs.blog} id="blog" className="py-20 relative">
         <div className="container mx-auto px-4">
           <motion.h2
-            className="text-4xl font-bold mb-12 text-center text-gradient-green animate-on-scroll drop-shadow-xl"
+            className="text-4xl font-bold mb-12 text-center text-gradient-green drop-shadow-xl"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -664,7 +640,7 @@ export default function Home() {
       <section ref={sectionRefs.resources} id="resources" className="py-20 relative">
         <div className="container mx-auto px-4">
           <motion.h2
-            className="text-4xl font-bold mb-12 text-center text-gradient-green animate-on-scroll drop-shadow-xl"
+            className="text-4xl font-bold mb-12 text-center text-gradient-green drop-shadow-xl"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -674,7 +650,7 @@ export default function Home() {
           </motion.h2>
 
           <motion.div
-            className="max-w-4xl mx-auto backdrop-blur-sm p-8 rounded-3xl border border-gray-800 dark:border-gray-800 bg-white/5 dark:bg-black/5 animate-on-scroll shadow-xl shadow-green-500/5"
+            className="max-w-4xl mx-auto backdrop-blur-sm p-8 rounded-3xl border border-gray-800 dark:border-gray-800 bg-white/5 dark:bg-black/5 shadow-xl shadow-green-500/5"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -738,7 +714,7 @@ export default function Home() {
       <section id="faq" className="py-20 relative">
         <div className="container mx-auto px-4">
           <motion.h2
-            className="text-4xl font-bold mb-12 text-center text-gradient-green animate-on-scroll drop-shadow-xl"
+            className="text-4xl font-bold mb-12 text-center text-gradient-green drop-shadow-xl"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -748,7 +724,7 @@ export default function Home() {
           </motion.h2>
 
           <motion.div
-            className="max-w-4xl mx-auto space-y-6 animate-on-scroll"
+            className="max-w-4xl mx-auto space-y-6"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

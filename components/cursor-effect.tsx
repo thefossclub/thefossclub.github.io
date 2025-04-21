@@ -42,96 +42,33 @@ export default function CursorEffect() {
     <AnimatePresence>
       {isVisible && (
         <>
-          {/* Large subtle glow */}
+          {/* Single Soft Glow */}
           <motion.div
             className="fixed pointer-events-none z-[999] hidden md:block"
             style={{
               left: mousePosition.x,
               top: mousePosition.y,
             }}
+            initial={{ opacity: 0, scale: 0.5 }} // Start slightly smaller
             animate={{
-              x: -150,
-              y: -150,
-              scale: [1, 1.05, 1],
-              opacity: isDark ? [0.2, 0.3, 0.2] : [0.05, 0.08, 0.05], // Much lighter in light mode
-            }}
-            transition={{
-              duration: 2,
-              ease: "easeInOut",
-              repeat: Number.POSITIVE_INFINITY,
-            }}
-          >
-            <div
-              className={`w-[300px] h-[300px] rounded-full ${
-                isDark
-                  ? "bg-gradient-to-r from-green-500/20 to-green-400/10"
-                  : "bg-gradient-to-r from-green-500/4 to-green-400/2"
-              } blur-2xl`}
-            />
-          </motion.div>
-
-          {/* Medium glow */}
-          <motion.div
-            className="fixed pointer-events-none z-[999] hidden md:block"
-            style={{
-              left: mousePosition.x,
-              top: mousePosition.y,
-            }}
-            animate={{
-              x: -75,
-              y: -75,
-              scale: [1, 1.1, 1],
-              opacity: isDark ? [0.3, 0.4, 0.3] : [0.08, 0.12, 0.08], // Much lighter in light mode
-            }}
-            transition={{
-              duration: 1.5,
-              ease: "easeInOut",
-              repeat: Number.POSITIVE_INFINITY,
-              repeatType: "reverse",
-            }}
-          >
-            <div
-              className={`w-[150px] h-[150px] rounded-full ${
-                isDark
-                  ? "bg-gradient-to-r from-green-500/40 to-green-400/30"
-                  : "bg-gradient-to-r from-green-500/8 to-green-400/5"
-              } blur-xl`}
-            />
-          </motion.div>
-
-          {/* Small focused dot */}
-          <motion.div
-            className="fixed pointer-events-none z-[999] hidden md:block"
-            style={{
-              left: mousePosition.x,
-              top: mousePosition.y,
-            }}
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{
-              opacity: isDark ? 1 : 0.7, // Slightly less opaque in light mode
+              opacity: isDark ? 0.3 : 0.15, // Keep it subtle
               scale: 1,
-              x: -3,
-              y: -3,
+              x: -25, // Adjust offset for size
+              y: -25, // Adjust offset for size
             }}
             exit={{ opacity: 0, scale: 0 }}
             transition={{
-              type: "spring",
-              stiffness: 300,
-              damping: 30,
-              mass: 0.5,
+              type: "tween", // Use tween for smoother fade/scale
+              ease: "easeOut",
+              duration: 0.4, // Faster transition
             }}
           >
             <div
-              className={`w-6 h-6 rounded-full ${
+              className={`w-[50px] h-[50px] rounded-full ${
                 isDark
-                  ? "bg-gradient-to-r from-green-500 to-green-400"
-                  : "bg-gradient-to-r from-green-500/60 to-green-400/60"
-              }`}
-              style={{
-                boxShadow: isDark 
-                  ? "0 0 25px 5px rgba(34, 197, 94, 0.8), 0 0 40px 10px rgba(34, 197, 94, 0.3)" 
-                  : "0 0 15px 3px rgba(34, 197, 94, 0.35), 0 0 25px 7px rgba(34, 197, 94, 0.15)",
-              }}
+                  ? "bg-green-500/40"
+                  : "bg-green-500/10"
+              } blur-lg`} // Medium blur
             />
           </motion.div>
         </>

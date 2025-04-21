@@ -61,7 +61,7 @@ export default function Timeline({ events }: TimelineProps) {
               className={`w-16 h-16 ${theme === "dark" ? "bg-gray-900" : "bg-gray-100"} rounded-full border-2 border-gradient border-gradient-green flex items-center justify-center z-10 mb-4`}
               whileHover={{ scale: 1.1, backgroundColor: theme === "dark" ? "#166534" : "#dcfce7" }}
             >
-              <span className="text-lg font-bold text-gradient-green">{event.year}</span>
+              <span className="text-lg font-bold text-gray-800 dark:text-white">{event.year}</span>
             </motion.div>
             <div className={`text-center ${index % 2 === 0 ? "mt-4" : "mb-4 order-first"}`}>
               <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400">{event.title}</h4>
