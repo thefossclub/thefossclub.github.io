@@ -1,13 +1,15 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useTheme } from "next-themes"
 
 export default function GridBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const { resolvedTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    setMounted(true)
     const canvas = canvasRef.current
     if (!canvas) return
 
@@ -64,13 +66,11 @@ export default function GridBackground() {
       // Add beautiful glowing dots at grid intersections
       for (let x = 0; x <= canvas.width; x += gridSize) {
         for (let y = 0; y <= canvas.height; y += gridSize) {
-          if (Math.random() > 0.85) {
-            // Only draw some dots (15%)
+          if (Math.random() > 0.95) { // Reduced dot density (5%)
             // Randomize dot size for more organic feel
             const dotSize = Math.random() * 2 + 1
             // Use green colors most of the time
-            const colorIndex =
-              Math.floor(Math.random() * 3); // Always green variants
+            const colorIndex = 0; // Use only the first green color
 
             // Create beautiful gradient for dot
             const gradient = ctx.createRadialGradient(x, y, 0, x, y, dotSize * 3)
@@ -82,7 +82,8 @@ export default function GridBackground() {
             ctx.fillStyle = gradient
             ctx.fill()
 
-            // Add extra glow effect to some dots
+            // Add extra glow effect to some dots - DISABLED for performance
+            /*
             if (Math.random() > 0.7) {
               const glowSize = dotSize * 6
               const glowGradient = ctx.createRadialGradient(x, y, 0, x, y, glowSize)
@@ -94,6 +95,7 @@ export default function GridBackground() {
               ctx.fillStyle = glowGradient
               ctx.fill()
             }
+            */
           }
         }
       }
@@ -102,13 +104,13 @@ export default function GridBackground() {
     window.addEventListener("resize", resizeCanvas)
     resizeCanvas()
 
-    // Redraw grid when theme changes
+    // Redraw grid when theme changes or mounted state changes
     drawGrid()
 
     return () => {
       window.removeEventListener("resize", resizeCanvas)
     }
-  }, [resolvedTheme])
+  }, [resolvedTheme, mounted])
 
   return (
     <canvas
@@ -116,7 +118,7 @@ export default function GridBackground() {
       className="fixed inset-0 z-0"
       style={{
         pointerEvents: "none",
-        backgroundColor: resolvedTheme === "dark" ? "black" : "white",
+        backgroundColor: mounted ? (resolvedTheme === "dark" ? "black" : "white") : undefined,
       }}
     />
   )

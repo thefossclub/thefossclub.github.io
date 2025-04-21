@@ -64,9 +64,9 @@ export default function CursorEffect() {
             <div
               className={`w-[300px] h-[300px] rounded-full ${
                 isDark
-                  ? "bg-gradient-to-r from-green-500/30 via-green-400/20 to-blue-500/10"
-                  : "bg-gradient-to-r from-green-500/5 via-green-400/3 to-blue-500/3"
-              } blur-3xl`}
+                  ? "bg-gradient-to-r from-green-500/20 to-green-400/10"
+                  : "bg-gradient-to-r from-green-500/4 to-green-400/2"
+              } blur-2xl`}
             />
           </motion.div>
 
@@ -95,7 +95,7 @@ export default function CursorEffect() {
                 isDark
                   ? "bg-gradient-to-r from-green-500/40 to-green-400/30"
                   : "bg-gradient-to-r from-green-500/8 to-green-400/5"
-              } blur-2xl`}
+              } blur-xl`}
             />
           </motion.div>
 
@@ -126,7 +126,7 @@ export default function CursorEffect() {
                 isDark
                   ? "bg-gradient-to-r from-green-500 to-green-400"
                   : "bg-gradient-to-r from-green-500/60 to-green-400/60"
-              } blur-sm`}
+              }`}
               style={{
                 boxShadow: isDark 
                   ? "0 0 25px 5px rgba(34, 197, 94, 0.8), 0 0 40px 10px rgba(34, 197, 94, 0.3)" 

@@ -392,10 +392,10 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <motion.h2
             className="text-4xl font-bold mb-12 text-center text-gradient-green animate-on-scroll drop-shadow-xl"
-            initial={{ opacity: 0, x: 100 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.6 }}
           >
             Our Projects
           </motion.h2>
@@ -419,10 +419,10 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <motion.h2
             className="text-4xl font-bold mb-12 text-center text-gradient-green animate-on-scroll drop-shadow-xl"
-            initial={{ opacity: 0, x: -100 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.6 }}
           >
             Events
           </motion.h2>
@@ -501,10 +501,10 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <motion.h2
             className="text-4xl font-bold mb-12 text-center text-gradient-green animate-on-scroll drop-shadow-xl"
-            initial={{ opacity: 0, x: 100 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.6 }}
           >
             Our Team
           </motion.h2>
@@ -526,9 +526,11 @@ export default function Home() {
                 className="flex items-center gap-2 px-4 py-2 bg-gradient-green text-white rounded-full text-sm font-medium hover:opacity-90 transition-all"
                 style={{
                   boxShadow:
-                    theme === "dark"
-                      ? "0 0 15px rgba(34, 179, 79, 0.5)"
-                      : "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+                    mounted
+                      ? theme === "dark"
+                        ? "0 0 15px rgba(34, 179, 79, 0.5)"
+                        : "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)"
+                      : undefined,
                 }}
               >
                 {coreTeamExpanded ? (
@@ -603,9 +605,11 @@ export default function Home() {
                 className="flex items-center gap-2 px-4 py-2 bg-gradient-green text-white rounded-full text-sm font-medium hover:opacity-90 transition-all"
                 style={{
                   boxShadow:
-                    theme === "dark"
-                      ? "0 0 15px rgba(34, 179, 79, 0.5)"
-                      : "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+                    mounted
+                      ? theme === "dark"
+                        ? "0 0 15px rgba(34, 179, 79, 0.5)"
+                        : "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)"
+                      : undefined,
                 }}
               >
                 {activeMembersExpanded ? (

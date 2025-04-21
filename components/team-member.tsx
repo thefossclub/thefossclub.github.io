@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { useTheme } from "next-themes"
+import { useEffect, useState } from "react"
 
 interface TeamMemberProps {
   name: string
@@ -12,7 +13,12 @@ interface TeamMemberProps {
 
 export default function TeamMember({ name, role, color, index }: TeamMemberProps) {
   const { resolvedTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
   const isDark = resolvedTheme === "dark"
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   // Get initials from name
   const initials = name
@@ -45,9 +51,11 @@ export default function TeamMember({ name, role, color, index }: TeamMemberProps
         className={`relative w-16 h-16 rounded-full ${color} flex items-center justify-center overflow-hidden`}
         whileHover={{ scale: 1.1 }}
         style={{
-          boxShadow: isDark
-            ? `0 0 20px ${getGlowColor()}`
-            : `0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)`,
+          boxShadow: mounted
+            ? isDark
+              ? `0 0 20px ${getGlowColor()}`
+              : `0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)`
+            : undefined,
         }}
       >
         <span className="text-lg font-bold text-white drop-shadow-sm">{initials}</span>

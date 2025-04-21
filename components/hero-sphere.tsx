@@ -8,6 +8,10 @@ export default function HeroSphere() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const { theme } = useTheme()
 
+  const radius = 150
+  const numPoints = 500
+  const points = useRef<Array<{ x: number; y: number; z: number; size: number; speed: number; angle: number }>>([])
+
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
@@ -27,40 +31,13 @@ export default function HeroSphere() {
 
     resizeCanvas()
 
-    // Sphere parameters
-    const centerX = width / 2
-    const centerY = height / 2
-    const radius = 150
-    const numPoints = 1000
-    const points: { x: number; y: number; z: number; size: number; speed: number; angle: number }[] = []
-
-    // Generate random points on the sphere
-    for (let i = 0; i < numPoints; i++) {
-      // Random spherical coordinates
-      const theta = Math.random() * Math.PI * 2 // Azimuthal angle
-      const phi = Math.acos(2 * Math.random() - 1) // Polar angle
-
-      // Convert to Cartesian coordinates
-      const x = radius * Math.sin(phi) * Math.cos(theta)
-      const y = radius * Math.sin(phi) * Math.sin(theta)
-      const z = radius * Math.cos(phi)
-
-      points.push({
-        x,
-        y,
-        z,
-        size: Math.random() * 2 + 1,
-        speed: Math.random() * 0.01 + 0.005,
-        angle: Math.random() * Math.PI * 2,
-      })
-    }
-
     // Update the sphere with green-focused colors
     const animate = () => {
+      if (!ctx) return; // Add null check for ctx
       ctx.clearRect(0, 0, width, height)
 
       // Draw sphere with gradient colors
-      for (const point of points) {
+      for (const point of points.current) {
         // Update angle for rotation
         point.angle += point.speed
 
@@ -73,30 +50,50 @@ export default function HeroSphere() {
 
         // Project 3D point to 2D with perspective
         const scale = 400 / (400 + rotatedZ)
-        const projectedX = centerX + rotatedX * scale
-        const projectedY = centerY + rotatedY * scale
+        const projectedX = width / 2 + rotatedX * scale
+        const projectedY = height / 2 + rotatedY * scale
 
         // Calculate opacity based on z-position
         const opacity = (rotatedZ + radius) / (radius * 2)
 
         // Draw point with green-focused gradient based on position
         const greenValue = (Math.abs(rotatedX) / radius) * 255
-        const blueValue = (Math.abs(rotatedY) / radius) * 100 // Reduced blue component
+        const blueValue = 0 // Remove blue component
 
         // Draw point
         ctx.beginPath()
         ctx.arc(projectedX, projectedY, point.size * scale, 0, Math.PI * 2)
 
         if (theme === "dark") {
-          ctx.fillStyle = `rgba(${Math.min(50, greenValue)}, ${Math.min(200, greenValue)}, ${Math.min(100, blueValue)}, ${opacity * 0.8})`
+          ctx.fillStyle = `rgba(${Math.min(50, greenValue)}, ${Math.min(200, greenValue)}, ${blueValue}, ${opacity * 0.8})`
         } else {
-          ctx.fillStyle = `rgba(${Math.min(20, greenValue)}, ${Math.min(150, greenValue)}, ${Math.min(50, blueValue)}, ${opacity * 0.8})`
+          ctx.fillStyle = `rgba(${Math.min(20, greenValue)}, ${Math.min(150, greenValue)}, ${blueValue}, ${opacity * 0.8})`
         }
 
         ctx.fill()
       }
 
       requestAnimationFrame(animate)
+    }
+
+    // Initialize points only once on mount
+    if (points.current.length === 0) {
+      for (let i = 0; i < numPoints; i++) {
+        const theta = Math.random() * Math.PI * 2
+        const phi = Math.acos(2 * Math.random() - 1)
+        const x = radius * Math.sin(phi) * Math.cos(theta)
+        const y = radius * Math.sin(phi) * Math.sin(theta)
+        const z = radius * Math.cos(phi)
+
+        points.current.push({
+          x,
+          y,
+          z,
+          size: Math.random() * 2 + 1,
+          speed: Math.random() * 0.01 + 0.005,
+          angle: Math.random() * Math.PI * 2,
+        })
+      }
     }
 
     animate()
