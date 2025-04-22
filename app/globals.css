@@ -27,6 +27,9 @@
     --ring: 142 68% 42%; /* Changed to #22b34f green */
     --radius: 0.5rem;
 
+    /* Add scroll track opacity variable */
+    --scroll-track-opacity: 0.02; /* Extremely low opacity for light mode */
+
     /* Green-focused gradient variables */
     --gradient-green: linear-gradient(135deg, #22b34f 0%, #1ea844 100%);
     --gradient-green-blue: linear-gradient(135deg, #22b34f 85%, #0ea5e9 100%);
@@ -55,6 +58,9 @@
     --input: 240 3.7% 15.9%;
     --ring: 142 68% 42%; /* Changed to #22b34f green */
 
+    /* Add scroll track opacity variable */
+    --scroll-track-opacity: 0.15; /* Keep it slightly more visible for dark mode */
+
     /* Dark mode gradient variables */
     --gradient-green: linear-gradient(135deg, #22b34f 0%, #16a34a 100%);
     --gradient-green-blue: linear-gradient(135deg, #22b34f 85%, #0284c7 100%);
@@ -68,7 +74,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground text-base;
     font-family: 'Inter', sans-serif;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
@@ -302,11 +308,11 @@
 
 /* Improved text contrast */
 .dark .text-gray-300 {
-  color: rgba(229, 231, 235, 0.9); /* Slightly brighter for better contrast */
+  color: rgba(229, 231, 235, 0.9);
 }
 
 .dark .text-gray-400 {
-  color: rgba(156, 163, 175, 0.95); /* Slightly brighter for better contrast */
+  color: rgba(156, 163, 175, 1);
 }
 
 .light .text-gray-600 {

@@ -7,6 +7,7 @@ export default function GridBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const { resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
+  const dots = useRef<Array<{ x: number; y: number; size: number; colorIndex: number }>>([]);
 
   useEffect(() => {
     setMounted(true)
@@ -14,108 +15,90 @@ export default function GridBackground() {
     if (!canvas) return
 
     const ctx = canvas.getContext("2d")
-    if (!ctx) return
+    if (!ctx) return;
+
+    const gridSize = 40
+
+    const generateDots = () => {
+      dots.current = [];
+      const width = canvas.width;
+      const height = canvas.height;
+      const isDark = resolvedTheme === "dark";
+      const dotColorIndex = 0;
+
+      for (let x = 0; x <= width; x += gridSize) {
+        for (let y = 0; y <= height; y += gridSize) {
+          if (Math.random() > 0.95) {
+            const dotSize = Math.random() * 2 + 1;
+            dots.current.push({ x, y, size: dotSize, colorIndex: dotColorIndex });
+          }
+        }
+      }
+    };
 
     const resizeCanvas = () => {
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight * 3 // Make canvas taller to cover the whole page
-      drawGrid()
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight * 3;
+      generateDots();
+      drawGrid();
     }
 
     const drawGrid = () => {
       if (!ctx) return
-
       ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-      // Grid settings
-      const gridSize = 40
       const lineWidth = 1
-
-      // Determine colors based on theme
       const isDark = resolvedTheme === "dark"
       const lineColor = isDark ? "rgba(255, 255, 255, 0.05)" : "rgba(0, 0, 0, 0.05)"
-
-      // Beautiful glowing dots in different colors
       const dotColors = [
-        isDark ? "rgba(34, 197, 94, 0.7)" : "rgba(34, 197, 94, 0.15)", // green-500 - much lighter in light mode
-        isDark ? "rgba(16, 185, 129, 0.7)" : "rgba(16, 185, 129, 0.15)", // emerald-500 - much lighter in light mode
-        isDark ? "rgba(20, 184, 166, 0.7)" : "rgba(20, 184, 166, 0.15)", // teal-500 - much lighter in light mode
-        isDark ? "rgba(6, 182, 212, 0.5)" : "rgba(6, 182, 212, 0.1)", // cyan-500 - much lighter in light mode
-        isDark ? "rgba(59, 130, 246, 0.5)" : "rgba(59, 130, 246, 0.1)", // blue-500 - much lighter in light mode
+        isDark ? "rgba(34, 197, 94, 0.7)" : "rgba(34, 197, 94, 0.15)",
+        isDark ? "rgba(16, 185, 129, 0.7)" : "rgba(16, 185, 129, 0.15)",
+        isDark ? "rgba(20, 184, 166, 0.7)" : "rgba(20, 184, 166, 0.15)",
+        isDark ? "rgba(6, 182, 212, 0.5)" : "rgba(6, 182, 212, 0.1)",
+        isDark ? "rgba(59, 130, 246, 0.5)" : "rgba(59, 130, 246, 0.1)",
       ]
 
       ctx.strokeStyle = lineColor
       ctx.lineWidth = lineWidth
 
-      // Draw vertical lines
-      for (let x = 0; x <= canvas.width; x += gridSize) {
+      for (let x = 0; x <= canvas.width; x += gridSize) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke(); }
+      for (let y = 0; y <= canvas.height; y += gridSize) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke(); }
+
+      for (const dot of dots.current) {
+        const gradient = ctx.createRadialGradient(dot.x, dot.y, 0, dot.x, dot.y, dot.size * 3)
+        gradient.addColorStop(0, dotColors[dot.colorIndex])
+        gradient.addColorStop(1, "rgba(0, 0, 0, 0)")
+
         ctx.beginPath()
-        ctx.moveTo(x, 0)
-        ctx.lineTo(x, canvas.height)
-        ctx.stroke()
-      }
-
-      // Draw horizontal lines
-      for (let y = 0; y <= canvas.height; y += gridSize) {
-        ctx.beginPath()
-        ctx.moveTo(0, y)
-        ctx.lineTo(canvas.width, y)
-        ctx.stroke()
-      }
-
-      // Add beautiful glowing dots at grid intersections
-      for (let x = 0; x <= canvas.width; x += gridSize) {
-        for (let y = 0; y <= canvas.height; y += gridSize) {
-          if (Math.random() > 0.95) { // Reduced dot density (5%)
-            // Randomize dot size for more organic feel
-            const dotSize = Math.random() * 2 + 1
-            // Use green colors most of the time
-            const colorIndex = 0; // Use only the first green color
-
-            // Create beautiful gradient for dot
-            const gradient = ctx.createRadialGradient(x, y, 0, x, y, dotSize * 3)
-            gradient.addColorStop(0, dotColors[colorIndex])
-            gradient.addColorStop(1, "rgba(0, 0, 0, 0)")
-
-            ctx.beginPath()
-            ctx.arc(x, y, dotSize * 3, 0, Math.PI * 2)
-            ctx.fillStyle = gradient
-            ctx.fill()
-
-            // Add extra glow effect to some dots - DISABLED for performance
-            /*
-            if (Math.random() > 0.7) {
-              const glowSize = dotSize * 6
-              const glowGradient = ctx.createRadialGradient(x, y, 0, x, y, glowSize)
-              glowGradient.addColorStop(0, isDark ? "rgba(34, 197, 94, 0.3)" : "rgba(34, 197, 94, 0.08)") // Much lighter glow in light mode
-              glowGradient.addColorStop(1, "rgba(0, 0, 0, 0)")
-
-              ctx.beginPath()
-              ctx.arc(x, y, glowSize, 0, Math.PI * 2)
-              ctx.fillStyle = glowGradient
-              ctx.fill()
-            }
-            */
-          }
-        }
+        ctx.arc(dot.x, dot.y, dot.size * 3, 0, Math.PI * 2)
+        ctx.fillStyle = gradient
+        ctx.fill()
       }
     }
 
-    window.addEventListener("resize", resizeCanvas)
-    resizeCanvas()
+    let animationFrameId: number | null = null;
+    const animate = () => {
+      drawGrid();
+      animationFrameId = requestAnimationFrame(animate);
+    }
 
-    // Redraw grid when theme changes or mounted state changes
-    drawGrid()
+    resizeCanvas();
+    animate();
+
+    window.addEventListener("resize", resizeCanvas)
 
     return () => {
-      window.removeEventListener("resize", resizeCanvas)
+      window.removeEventListener("resize", resizeCanvas);
+      if (animationFrameId !== null) {
+        cancelAnimationFrame(animationFrameId);
+      }
     }
   }, [resolvedTheme, mounted])
 
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 z-0"
+      className="fixed inset-0 z-[-20]"
       style={{
         pointerEvents: "none",
         backgroundColor: mounted ? (resolvedTheme === "dark" ? "black" : "white") : undefined,

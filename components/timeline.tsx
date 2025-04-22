@@ -52,8 +52,8 @@ export default function Timeline({ events }: TimelineProps) {
           <motion.div
             key={index}
             className="flex flex-col items-center relative"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
           >

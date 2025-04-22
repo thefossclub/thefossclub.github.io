@@ -15,10 +15,6 @@ export default function ProjectCard({ title, description, link, index }: Project
   return (
     <motion.div
       className="backdrop-blur-sm p-6 rounded-3xl border border-gray-800 dark:border-gray-800 bg-white/5 dark:bg-black/5 hover:border-gradient hover:border-gradient-green transition-all group card-hover-effect shadow-xl hover:shadow-green-500/20"
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
       whileHover={{ y: -5 }}
     >
       <div className="h-full flex flex-col">

@@ -15,6 +15,7 @@ import Timeline from "@/components/timeline"
 import ScrollingTools from "@/components/scrolling-tools"
 import CursorEffect from "@/components/cursor-effect"
 import { useTheme } from "next-themes"
+import ScrollProgressIndicator from "@/components/scroll-progress-indicator"
 
 export default function Home() {
   const { scrollY } = useScroll()
@@ -196,17 +197,18 @@ export default function Home() {
 
   return (
     <div
-      className="relative min-h-screen overflow-hidden bg-white dark:bg-black text-black dark:text-white"
+      className="relative min-h-screen overflow-hidden text-black dark:text-white"
     >
       <GridBackground />
       <CursorEffect />
       <Navbar activeSection={activeSection} />
+      <ScrollProgressIndicator />
 
       {/* Hero Section */}
       <motion.section
         ref={sectionRefs.home}
         id="home"
-        className="relative h-screen flex items-center justify-center overflow-hidden"
+        className="relative h-screen flex items-center justify-center overflow-hidden z-10"
         style={{ opacity: heroOpacity, scale: heroScale }}
       >
         <div className="absolute inset-0 flex items-center justify-center">
@@ -214,19 +216,38 @@ export default function Home() {
         </div>
 
         <div className="container mx-auto px-4 z-10 flex flex-col md:flex-row items-center justify-between">
+          {/* Hero Text Container */}
           <motion.div
             className="md:w-1/2 text-center md:text-left"
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: {
+                  staggerChildren: 0.2, // Stagger child animations
+                  delayChildren: 0.1, // Delay start of children
+                }
+              }
+            }}
           >
-            <h1 className="text-4xl md:text-6xl font-bold mb-4 text-gradient-green">
+            <motion.h1
+              className="text-4xl md:text-6xl font-bold mb-4 text-gradient-green"
+              variants={{ hidden: { opacity: 0, x: -50 }, visible: { opacity: 1, x: 0, transition: { duration: 0.6 } } }}
+            >
               Welcome to The FOSS Club!
-            </h1>
-            <p className="text-xl md:text-2xl mb-8 text-gray-700 dark:text-gray-200 drop-shadow-md">
+            </motion.h1>
+            <motion.p
+              className="text-xl md:text-2xl mb-8 text-gray-700 dark:text-gray-200 drop-shadow-md"
+              variants={{ hidden: { opacity: 0, x: -50 }, visible: { opacity: 1, x: 0, transition: { duration: 0.6 } } }}
+            >
               <span className="font-semibold">Learn, build, and collaborate</span> with fellow open-source enthusiasts.
-            </p>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            </motion.p>
+            <motion.div
+              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5 } } }}
+              whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
+            >
               <Link
                 href="https://opnform.com/forms/the-foss-club-registration-nst4zs"
                 target="_blank"
@@ -270,12 +291,12 @@ export default function Home() {
       </motion.section>
 
       {/* About Section */}
-      <section ref={sectionRefs.about} id="about" className="py-20 relative">
+      <section ref={sectionRefs.about} id="about" className="py-20 relative z-10">
         <div className="container mx-auto px-4">
           <motion.h2
-            className="text-4xl font-bold mb-12 text-center text-gradient-green drop-shadow-xl"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            className="text-4xl font-extrabold mb-12 text-center text-gradient-green drop-shadow-xl"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
@@ -284,8 +305,8 @@ export default function Home() {
 
           <motion.div
             className="max-w-4xl mx-auto backdrop-blur-sm p-8 rounded-3xl border border-gray-800 dark:border-gray-800 bg-white/5 dark:bg-black/5 shadow-xl shadow-green-500/5"
-            initial={{ opacity: 0, x: -100 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
@@ -344,12 +365,12 @@ export default function Home() {
       </section>
 
       {/* Projects Section */}
-      <section ref={sectionRefs.projects} id="projects" className="py-20 relative">
+      <section ref={sectionRefs.projects} id="projects" className="py-20 relative z-10">
         <div className="container mx-auto px-4">
           <motion.h2
-            className="text-4xl font-bold mb-12 text-center text-gradient-green drop-shadow-xl"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            className="text-4xl font-extrabold mb-12 text-center text-gradient-green drop-shadow-xl"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
@@ -371,12 +392,12 @@ export default function Home() {
       </section>
 
       {/* Events Section */}
-      <section ref={sectionRefs.events} id="events" className="py-20 relative">
+      <section ref={sectionRefs.events} id="events" className="py-20 relative z-10">
         <div className="container mx-auto px-4">
           <motion.h2
-            className="text-4xl font-bold mb-12 text-center text-gradient-green drop-shadow-xl"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            className="text-4xl font-extrabold mb-12 text-center text-gradient-green drop-shadow-xl"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
@@ -398,8 +419,8 @@ export default function Home() {
 
           <motion.div
             className="mt-16 p-8 rounded-3xl border border-green-900/50 bg-gradient-to-r from-green-900/10 to-green-900/10 dark:from-green-900/30 dark:to-green-900/30 shadow-xl shadow-green-500/10"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
@@ -436,12 +457,12 @@ export default function Home() {
       </section>
 
       {/* Tools Section */}
-      <section id="tools" className="py-20 relative overflow-hidden">
+      <section id="tools" className="py-20 relative overflow-hidden z-10">
         <div className="container mx-auto px-4">
           <motion.h2
-            className="text-4xl font-bold mb-12 text-center text-gradient-green drop-shadow-xl"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            className="text-4xl font-extrabold mb-12 text-center text-gradient-green drop-shadow-xl"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
@@ -453,12 +474,12 @@ export default function Home() {
       </section>
 
       {/* Team Section */}
-      <section ref={sectionRefs.team} id="team" className="py-20 relative">
+      <section ref={sectionRefs.team} id="team" className="py-20 relative z-10">
         <div className="container mx-auto px-4">
           <motion.h2
-            className="text-4xl font-bold mb-12 text-center text-gradient-green drop-shadow-xl"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            className="text-4xl font-extrabold mb-12 text-center text-gradient-green drop-shadow-xl"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
@@ -470,8 +491,8 @@ export default function Home() {
             <div className="flex justify-between items-center mb-8">
               <motion.h3
                 className="text-2xl font-bold text-green-500"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
@@ -523,8 +544,8 @@ export default function Home() {
             <div className="flex justify-between items-center mb-8">
               <motion.h3
                 className="text-2xl font-bold text-green-500"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
@@ -596,12 +617,12 @@ export default function Home() {
       </section>
 
       {/* Blog Section */}
-      <section ref={sectionRefs.blog} id="blog" className="py-20 relative">
+      <section ref={sectionRefs.blog} id="blog" className="py-20 relative z-10">
         <div className="container mx-auto px-4">
           <motion.h2
-            className="text-4xl font-bold mb-12 text-center text-gradient-green drop-shadow-xl"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            className="text-4xl font-extrabold mb-12 text-center text-gradient-green drop-shadow-xl"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
@@ -617,12 +638,12 @@ export default function Home() {
       </section>
 
       {/* Resources Section */}
-      <section ref={sectionRefs.resources} id="resources" className="py-20 relative">
+      <section ref={sectionRefs.resources} id="resources" className="py-20 relative z-10">
         <div className="container mx-auto px-4">
           <motion.h2
-            className="text-4xl font-bold mb-12 text-center text-gradient-green drop-shadow-xl"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            className="text-4xl font-extrabold mb-12 text-center text-gradient-green drop-shadow-xl"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
@@ -631,8 +652,8 @@ export default function Home() {
 
           <motion.div
             className="max-w-4xl mx-auto backdrop-blur-sm p-8 rounded-3xl border border-gray-800 dark:border-gray-800 bg-white/5 dark:bg-black/5 shadow-xl shadow-green-500/5"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
@@ -691,12 +712,12 @@ export default function Home() {
       </section>
 
       {/* FAQ Section */}
-      <section id="faq" className="py-20 relative">
+      <section id="faq" className="py-20 relative z-10">
         <div className="container mx-auto px-4">
           <motion.h2
-            className="text-4xl font-bold mb-12 text-center text-gradient-green drop-shadow-xl"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            className="text-4xl font-extrabold mb-12 text-center text-gradient-green drop-shadow-xl"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
@@ -705,8 +726,8 @@ export default function Home() {
 
           <motion.div
             className="max-w-4xl mx-auto space-y-6"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
@@ -962,9 +983,21 @@ export default function Home() {
               </div>
             </motion.div>
 
-            <div className="text-center pt-6 border-t border-gray-800/30 dark:border-gray-800/30">
+            <div className="text-center pt-6 border-t border-gray-800/30 dark:border-gray-800/30 relative">
               <p className="text-gray-500">© {new Date().getFullYear()} The FOSS Club. All rights reserved.</p>
               <p className="text-gray-500 mt-2 text-sm">Made with 💚 by open source enthusiasts</p>
+
+              {/* Back to Top Button */}
+              <button
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                className="absolute right-0 bottom-0 mb-0 mr-0 md:mb-2 md:mr-2 group bg-gradient-green p-3 rounded-full text-white hover:opacity-90 transition-all shadow-lg hover:shadow-green-500/30 flex items-center justify-center"
+                aria-label="Back to top"
+              >
+                <ChevronUp className="h-5 w-5 transition-transform group-hover:-translate-y-0.5" />
+                <span className="absolute right-full mr-2 text-sm bg-gray-900 text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-300 pointer-events-none">
+                  Back to Top
+                </span>
+              </button>
             </div>
           </div>
         </footer>

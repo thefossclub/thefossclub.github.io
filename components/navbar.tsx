@@ -131,7 +131,7 @@ export default function Navbar({ activeSection }: NavbarProps) {
                   Join
                 </Link>
                 <Link
-                  href="#login"
+                  href="/login"
                   className="px-4 py-2 bg-gradient-green-blue text-white rounded-full text-sm font-medium hover:opacity-90 transition-opacity flex items-center btn-glow"
                 >
                   <LogIn className="h-4 w-4 mr-1" />
@@ -203,8 +203,7 @@ export default function Navbar({ activeSection }: NavbarProps) {
                       transition={{ duration: 0.3, delay: 0.2 }}
                     >
                       <Link
-                        href="https://opnform.com/forms/the-foss-club-registration-nst4zs"
-                        target="_blank"
+                        href="/register"
                         className="px-6 py-3 bg-gradient-green text-white rounded-full text-lg font-medium hover:opacity-90 transition-opacity btn-glow"
                         onClick={toggleMenu}
                       >
@@ -217,7 +216,7 @@ export default function Navbar({ activeSection }: NavbarProps) {
                       transition={{ duration: 0.3, delay: 0.3 }}
                     >
                       <Link
-                        href="#login"
+                        href="/login"
                         className="px-6 py-3 bg-gradient-green-blue text-white rounded-full text-lg font-medium hover:opacity-90 transition-opacity flex items-center btn-glow"
                         onClick={toggleMenu}
                       >

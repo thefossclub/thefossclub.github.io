@@ -1,23 +1,43 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { motion } from "framer-motion"
 import { useTheme } from "next-themes"
 
 export default function HeroSphere() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const { theme } = useTheme()
-
   const radius = 150
   const numPoints = 500
   const points = useRef<Array<{ x: number; y: number; z: number; size: number; speed: number; angle: number }>>([])
+  const animationFrameId = useRef<number | null>(null)
+  const isIntersecting = useRef(true)
 
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
 
+    const observer = new IntersectionObserver(([entry]) => {
+      isIntersecting.current = entry.isIntersecting
+      if (entry.isIntersecting) {
+        if (animationFrameId.current === null) {
+          animate()
+        }
+      } else {
+        if (animationFrameId.current !== null) {
+          cancelAnimationFrame(animationFrameId.current)
+          animationFrameId.current = null
+        }
+      }
+    }, { threshold: 0 })
+
+    observer.observe(canvas)
+
     const ctx = canvas.getContext("2d")
-    if (!ctx) return
+    if (!ctx) {
+      observer.unobserve(canvas)
+      return
+    }
 
     let width = 500
     let height = 500
@@ -27,40 +47,39 @@ export default function HeroSphere() {
       height = 500
       canvas.width = width
       canvas.height = height
+      if (isIntersecting.current && animationFrameId.current === null) {
+        animate()
+      } else if (!isIntersecting.current) {
+        // ctx.clearRect(0, 0, width, height)
+      }
     }
 
-    resizeCanvas()
-
-    // Update the sphere with green-focused colors
     const animate = () => {
-      if (!ctx) return; // Add null check for ctx
+      if (!isIntersecting.current) {
+        animationFrameId.current = null
+        return
+      }
+      if (!ctx) return
       ctx.clearRect(0, 0, width, height)
 
-      // Draw sphere with gradient colors
       for (const point of points.current) {
-        // Update angle for rotation
         point.angle += point.speed
 
-        // Rotate around Y-axis
         const cosA = Math.cos(point.angle)
         const sinA = Math.sin(point.angle)
         const rotatedX = point.x * cosA - point.z * sinA
         const rotatedZ = point.x * sinA + point.z * cosA
         const rotatedY = point.y
 
-        // Project 3D point to 2D with perspective
         const scale = 400 / (400 + rotatedZ)
         const projectedX = width / 2 + rotatedX * scale
         const projectedY = height / 2 + rotatedY * scale
 
-        // Calculate opacity based on z-position
         const opacity = (rotatedZ + radius) / (radius * 2)
 
-        // Draw point with green-focused gradient based on position
         const greenValue = (Math.abs(rotatedX) / radius) * 255
-        const blueValue = 0 // Remove blue component
+        const blueValue = 0
 
-        // Draw point
         ctx.beginPath()
         ctx.arc(projectedX, projectedY, point.size * scale, 0, Math.PI * 2)
 
@@ -73,10 +92,9 @@ export default function HeroSphere() {
         ctx.fill()
       }
 
-      requestAnimationFrame(animate)
+      animationFrameId.current = requestAnimationFrame(animate)
     }
 
-    // Initialize points only once on mount
     if (points.current.length === 0) {
       for (let i = 0; i < numPoints; i++) {
         const theta = Math.random() * Math.PI * 2
@@ -96,10 +114,17 @@ export default function HeroSphere() {
       }
     }
 
-    animate()
+    resizeCanvas()
+
+    if (isIntersecting.current) {
+      animate()
+    }
 
     return () => {
-      // Cleanup if needed
+      if (animationFrameId.current !== null) {
+        cancelAnimationFrame(animationFrameId.current)
+      }
+      if (canvas) observer.unobserve(canvas)
     }
   }, [theme])
 
