@@ -392,7 +392,12 @@ export default function Home() {
               and mentoring students to achieve excellence in various fields of Computer Science.
             </p>
 
-            <h3 className="text-xl sm:text-2xl font-bold mb-4 text-gradient-green-dark drop-shadow-md">Core Pillars</h3>
+            <h3
+              className="text-xl sm:text-2xl font-bold mb-4 text-gradient-green-dark drop-shadow-md"
+              style={{ transform: 'translateZ(0)' }}
+            >
+              Core Pillars
+            </h3>
             <ul className="space-y-3 md:space-y-4">
               <motion.li
                 className="p-3 md:p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green shadow-md hover:shadow-green-500/10 transition-all text-sm sm:text-base"
@@ -426,7 +431,10 @@ export default function Home() {
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <h3 className="text-2xl sm:text-3xl font-bold mb-8 text-center text-gray-800 dark:text-gray-200 drop-shadow-md">
+            <h3
+              className="text-2xl sm:text-3xl font-bold mb-8 text-center text-gray-800 dark:text-gray-200 drop-shadow-md"
+              style={{ transform: 'translateZ(0)' }}
+            >
               Our Timeline
             </h3>
             <Timeline events={timelineEvents} />
@@ -688,6 +696,7 @@ export default function Home() {
               <motion.li
                 className="p-3 md:p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green transition-all shadow-md hover:shadow-green-500/10"
                 whileHover={{ x: 10, backgroundColor: "rgba(31, 41, 55, 0.8)" }}
+                transition={{ duration: 0.05 }}
               >
                 <Link
                   href="https://github.com/thefossclub/resources#unlock-the-web-frontend--backend-secrets"
@@ -702,6 +711,7 @@ export default function Home() {
               <motion.li
                 className="p-3 md:p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green transition-all shadow-md hover:shadow-green-500/10"
                 whileHover={{ x: 10, backgroundColor: "rgba(31, 41, 55, 0.8)" }}
+                transition={{ duration: 0.05 }}
               >
                 <Link
                   href="https://github.com/thefossclub/resources#level-up-your-game-dev-journey-starts-here"
@@ -716,6 +726,7 @@ export default function Home() {
               <motion.li
                 className="p-3 md:p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green transition-all shadow-md hover:shadow-green-500/10"
                 whileHover={{ x: 10, backgroundColor: "rgba(31, 41, 55, 0.8)" }}
+                transition={{ duration: 0.05 }}
               >
                 <Link
                   href="https://github.com/thefossclub/resources#mobile-mastery-build-your-first-app"
@@ -730,6 +741,7 @@ export default function Home() {
               <motion.li
                 className="p-3 md:p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green transition-all shadow-md hover:shadow-green-500/10"
                 whileHover={{ x: 10, backgroundColor: "rgba(31, 41, 55, 0.8)" }}
+                transition={{ duration: 0.05 }}
               >
                 <Link
                   href="https://github.com/thefossclub/resources#linux-command-line--version-control"
@@ -744,6 +756,7 @@ export default function Home() {
               <motion.li
                 className="p-3 md:p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green transition-all shadow-md hover:shadow-green-500/10"
                 whileHover={{ x: 10, backgroundColor: "rgba(31, 41, 55, 0.8)" }}
+                transition={{ duration: 0.05 }}
               >
                 <Link
                   href="https://github.com/thefossclub/resources#cybersecurity--ethical-hacking"
