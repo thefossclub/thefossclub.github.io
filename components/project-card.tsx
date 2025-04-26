@@ -18,7 +18,10 @@ export default function ProjectCard({ title, description, link, index }: Project
       whileHover={{ y: -5 }}
     >
       <div className="h-full flex flex-col">
-        <h3 className="text-2xl font-bold mb-3 text-gradient-green group-hover:opacity-80 transition-opacity drop-shadow-md">
+        <h3 
+          className="text-2xl font-bold mb-3 text-gradient-green group-hover:opacity-80 transition-opacity drop-shadow-md"
+          style={{ transform: 'translateZ(0)' }}
+        >
           {title}
         </h3>
         <p className="text-gray-700 dark:text-gray-300 mb-6 flex-grow">{description}</p>

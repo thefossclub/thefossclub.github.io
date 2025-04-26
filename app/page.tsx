@@ -451,6 +451,7 @@ export default function Home() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
+            style={{ transform: 'translateZ(0)' }}
           >
             Our Projects
           </motion.h2>
@@ -496,7 +497,7 @@ export default function Home() {
           </div>
 
           <motion.div
-            className="mt-12 md:mt-16 p-6 md:p-8 rounded-3xl border border-green-900/50 bg-gradient-to-r from-green-900/10 to-green-900/10 dark:from-green-900/30 dark:to-green-900/30 shadow-xl shadow-green-500/10"
+            className="mt-12 md:mt-16 p-6 md:p-8 rounded-3xl border border-green-900/50 bg-gradient-to-r from-green-900/10 to-green-900/10 dark:from-green-900/30 dark:to-green-900/30 shadow-xl shadow-green-500/10 bg-black/10 dark:bg-black/40"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -504,7 +505,12 @@ export default function Home() {
           >
             <div className="flex flex-col md:flex-row items-center">
               <div className="md:w-1/2 mb-6 md:mb-0 md:pr-8">
-                <h3 className="text-2xl sm:text-3xl font-bold mb-4 text-gradient-green drop-shadow-md">FOSS Hack 2025</h3>
+                <h3 
+                  className="text-2xl sm:text-3xl font-bold mb-4 text-gradient-green drop-shadow-md"
+                  style={{ transform: 'translateZ(0)' }}
+                >
+                  FOSS Hack 2025
+                </h3>
                 <p className="text-base sm:text-lg mb-4 text-gray-700 dark:text-gray-300">
                   Our biggest hackathon yet! Join us for an incredible weekend of coding, collaboration, and innovation
                   in the open source world.
