@@ -48,7 +48,7 @@ export default function RegisterPage() {
 
   function onSubmit(data: RegisterValues) {
     // In a real app, this would handle registration
-    console.log(data)
+    // console.log(data) // Removed to avoid logging sensitive user inputs
     // Navigate to login page after registration
     router.push("/login")
   }
