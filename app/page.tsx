@@ -268,10 +268,39 @@ export default function Home() {
               delay: 0.2,
             }}
           >
-            <div className="relative w-64 h-64 md:w-80 md:h-80 mx-auto">
-              <div className="absolute inset-0 bg-gradient-green rounded-full opacity-90 shadow-2xl shadow-green-500/20"></div>
-              <div className="absolute inset-0 flex items-center justify-center text-center p-6">
-                <h2 className="text-2xl md:text-3xl font-bold leading-tight text-white">
+            <div className="relative w-64 h-64 md:w-80 md:h-80 mx-auto wafer-circle">
+              <div
+                className="absolute inset-0 rounded-full shadow-xl shadow-green-400/30 overflow-hidden wafer-bg"
+                style={{
+                  background: 'radial-gradient(circle, rgba(60, 200, 120, 1) 0%, rgba(25, 130, 70, 1) 100%)',
+                }}
+              >
+                {/* Static Metallic Sheen - Adjusted angle */}
+                <div className="absolute inset-0" style={{ background: 'linear-gradient(120deg, rgba(255,255,255,0.15) 0%, transparent 50%)' }}></div>
+                
+                {/* Wafer Pattern Overlay */}
+                <div
+                  className="absolute inset-0 wafer-pattern"
+                  style={{
+                    backgroundImage: `
+                      repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0, rgba(0, 0, 0, 0.4) 15px, transparent 15px, transparent 30px),
+                      repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.4) 0, rgba(0, 0, 0, 0.4) 15px, transparent 15px, transparent 30px),
+                      repeating-linear-gradient(0deg, rgba(20, 80, 45, 0.6) 0, rgba(20, 80, 45, 0.6) 1px, transparent 1px, transparent 5px),
+                      repeating-linear-gradient(90deg, rgba(20, 80, 45, 0.6) 0, rgba(20, 80, 45, 0.6) 1px, transparent 1px, transparent 5px)
+                    `,
+                    backgroundSize: '30px 30px, 30px 30px, 5px 5px, 5px 5px',
+                  }}
+                ></div>
+                 {/* Refined Edge - Subtle dark inner shadow */}
+                 <div
+                   className="absolute inset-0 rounded-full"
+                   style={{
+                     boxShadow: 'inset 0 0 10px rgba(0,0,0,0.2)'
+                   }}
+                 ></div>
+              </div>
+              <div className="absolute inset-0 flex items-center justify-center text-center p-6 z-10">
+                <h2 className="text-2xl md:text-3xl font-bold leading-tight text-white wafer-text">
                   Free & Open Source and Hacker Culture at DTC
                 </h2>
               </div>
@@ -978,6 +1007,60 @@ export default function Home() {
           </div>
         </footer>
       )}
+
+      {/* Add keyframes and styles for hover effects */}
+      <style jsx>{`
+        @keyframes sweep {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
+        }
+        @keyframes rotateGlow {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        .wafer-circle {
+          position: relative; /* Needed for pseudo-elements */
+          transition: transform 0.3s ease-out; /* Subtle scale on hover */
+        }
+        .wafer-circle:hover {
+           transform: scale(1.03); /* Slightly enlarge on hover */
+        }
+        .wafer-bg::before, .wafer-bg::after {
+          content: '';
+          position: absolute;
+          top: 0; left: 0; right: 0; bottom: 0;
+          border-radius: 50%;
+          opacity: 0;
+          pointer-events: none; /* Prevent pseudo-elements interfering */
+          transition: opacity 0.4s ease-in-out;
+        }
+        /* Sweeping Shine */
+        .wafer-bg::before {
+          background: linear-gradient(100deg, transparent 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%);
+          transform: translateX(-100%);
+          z-index: 2; /* Above pattern, below text */
+        }
+        .wafer-circle:hover .wafer-bg::before {
+          opacity: 1;
+          animation: sweep 1s ease-in-out infinite; 
+        }
+        /* Rotating Circumference Glow */
+        .wafer-bg::after {
+          background: radial-gradient(circle at center top, rgba(255, 255, 255, 0.6) 0%, transparent 40%);
+          z-index: 1; /* Below sweeping shine */
+          animation: rotateGlow 5s linear infinite paused; /* Paused initially */
+        }
+         .wafer-circle:hover .wafer-bg::after {
+           opacity: 0.6; /* Make glow visible */
+           animation-play-state: running; /* Run animation on hover */
+         }
+        .wafer-pattern {
+           opacity: 0.2; /* Further reduced pattern opacity */
+        }
+        .wafer-text {
+           text-shadow: 0 1px 4px rgba(0,0,0,0.6); /* Softened text shadow */
+        }
+      `}</style>
     </div>
   )
 }
