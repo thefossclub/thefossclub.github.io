@@ -24,7 +24,7 @@ export default function Home() {
   const [activeSection, setActiveSection] = useState("home")
   const { theme, setTheme } = useTheme()
   const [coreTeamExpanded, setCoreTeamExpanded] = useState(true)
-  const [activeMembersExpanded, setActiveMembersExpanded] = useState(false)
+  const [membersExpanded, setMembersExpanded] = useState(false)
   const [mounted, setMounted] = useState(false)
 
   const sectionRefs = {
@@ -135,8 +135,7 @@ export default function Home() {
     { name: "Gautam Kumar", role: "Treasurer", color: "bg-purple-500" },
   ]
 
-
-  const activeMembers = [
+  const members = [
     { name: "Tanmay Maheshwari", role: "Low Level", color: "bg-yellow-500" },
     { name: "Harshit Vashisht", role: "Web Dev.", color: "bg-blue-500" },
     { name: "Mayank Choubey", role: "DSA Guy", color: "bg-green-500" },
@@ -538,7 +537,7 @@ export default function Home() {
             )}
           </div>
 
-          {/* Active Members Section */}
+          {/* Members Section */}
           <div>
             <div className="flex justify-between items-center mb-8">
               <motion.h3
@@ -548,10 +547,10 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                Active Members
+                Members
               </motion.h3>
               <button
-                onClick={() => setActiveMembersExpanded(!activeMembersExpanded)}
+                onClick={() => setMembersExpanded(!membersExpanded)}
                 className="flex items-center gap-2 px-4 py-2 bg-gradient-green text-white rounded-full text-sm font-medium hover:opacity-90 transition-all"
                 style={{
                   boxShadow:
@@ -562,7 +561,7 @@ export default function Home() {
                       : undefined,
                 }}
               >
-                {activeMembersExpanded ? (
+                {membersExpanded ? (
                   <>
                     <span>Collapse</span>
                     <ChevronUp className="h-4 w-4" />
@@ -576,39 +575,17 @@ export default function Home() {
               </button>
             </div>
 
-            {activeMembersExpanded && (
-              <div className="space-y-8">
-                {/* Mentors row */}
-                <div className="flex flex-wrap justify-center gap-8">
-                  {mentors.map((member, index) => (
-                    <TeamMember key={index} name={member.name} role={member.role} color={member.color} index={index} />
-                  ))}
-                </div>
-
-                {/* Active members rows */}
-                <div className="flex flex-wrap justify-center gap-8">
-                  {activeMembers.slice(0, 6).map((member, index) => (
-                    <TeamMember
-                      key={index}
-                      name={member.name}
-                      role={member.role}
-                      color={member.color}
-                      index={index + mentors.length}
-                    />
-                  ))}
-                </div>
-
-                <div className="flex flex-wrap justify-center gap-8">
-                  {activeMembers.slice(6).map((member, index) => (
-                    <TeamMember
-                      key={index}
-                      name={member.name}
-                      role={member.role}
-                      color={member.color}
-                      index={index + mentors.length + 6}
-                    />
-                  ))}
-                </div>
+            {membersExpanded && (
+              <div className="team-grid">
+                {members.map((member, index) => (
+                  <TeamMember
+                    key={index}
+                    name={member.name}
+                    role={member.role}
+                    color={member.color}
+                    index={index}
+                  />
+                ))}
               </div>
             )}
           </div>
