@@ -29,6 +29,9 @@ jobs:
       - name: Install dependencies
         run: npm install
         
+      - name: Update date-fns compatibility
+        run: npm install date-fns@3.x
+        
       - name: Build
         run: npm run build
         
