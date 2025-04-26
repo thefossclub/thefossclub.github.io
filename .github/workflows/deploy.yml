@@ -27,10 +27,7 @@ jobs:
           node-version: 20
           
       - name: Install dependencies
-        run: npm install
-        
-      - name: Update date-fns compatibility
-        run: npm install date-fns@3.x
+        run: npm install --force
         
       - name: Build
         run: npm run build
