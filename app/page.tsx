@@ -33,7 +33,6 @@ export default function Home() {
     projects: useRef<HTMLElement>(null),
     events: useRef<HTMLElement>(null),
     team: useRef<HTMLElement>(null),
-    blog: useRef<HTMLElement>(null),
     resources: useRef<HTMLElement>(null),
   }
 
@@ -41,11 +40,13 @@ export default function Home() {
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 100
 
-      for (const section in sectionRefs) {
-        const ref = sectionRefs[section as keyof typeof sectionRefs].current
+      const sections = Object.keys(sectionRefs) as Array<keyof typeof sectionRefs>;
+
+      for (const sectionName of sections) {
+        const ref = sectionRefs[sectionName].current
         if (ref) {
           if (scrollPosition >= ref.offsetTop && scrollPosition < ref.offsetTop + ref.offsetHeight) {
-            setActiveSection(section)
+            setActiveSection(sectionName)
             break
           }
         }
@@ -154,24 +155,6 @@ export default function Home() {
     { name: "Ravpreet Maini", role: "Cloud Expert", color: "bg-green-500" },
     { name: "Shristi Pandey", role: "Researcher", color: "bg-purple-500" },
     { name: "Palak", role: "Graphics Designer", color: "bg-pink-500" },
-  ]
-
-  const blogPosts = [
-    {
-      title: "Introduction to Open Source",
-      excerpt: "Learn about the basics of open source software and its impact on the tech industry.",
-      link: "#",
-    },
-    {
-      title: "FOSS Alternatives to Popular Software",
-      excerpt: "Discover free and open source alternatives to commonly used proprietary software.",
-      link: "#",
-    },
-    {
-      title: "Contributing to Open Source Projects",
-      excerpt: "A beginner's guide to making your first contribution to an open source project.",
-      link: "#",
-    },
   ]
 
   const tools = [
@@ -681,27 +664,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Blog Section */}
-      <section ref={sectionRefs.blog} id="blog" className="py-16 md:py-20 relative z-10 px-4 sm:px-6">
-        <div className="container mx-auto">
-          <motion.h2
-            className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green drop-shadow-xl"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            Latest Blog Posts
-          </motion.h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-            {blogPosts.map((post, index) => (
-              <BlogPost key={index} title={post.title} excerpt={post.excerpt} link={post.link} index={index} />
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Resources Section */}
       <section ref={sectionRefs.resources} id="resources" className="py-16 md:py-20 relative z-10 px-4 sm:px-6">
         <div className="container mx-auto">
@@ -728,7 +690,9 @@ export default function Home() {
                 whileHover={{ x: 10, backgroundColor: "rgba(31, 41, 55, 0.8)" }}
               >
                 <Link
-                  href="#"
+                  href="https://github.com/thefossclub/resources#getting-started-with-git"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-center text-base sm:text-lg text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition-colors"
                 >
                   <ArrowRight className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
@@ -740,7 +704,9 @@ export default function Home() {
                 whileHover={{ x: 10, backgroundColor: "rgba(31, 41, 55, 0.8)" }}
               >
                 <Link
-                  href="#"
+                  href="https://github.com/thefossclub/resources#introduction-to-linux-command-line"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-center text-base sm:text-lg text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition-colors"
                 >
                   <ArrowRight className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
@@ -752,7 +718,9 @@ export default function Home() {
                 whileHover={{ x: 10, backgroundColor: "rgba(31, 41, 55, 0.8)" }}
               >
                 <Link
-                  href="#"
+                  href="https://github.com/thefossclub/resources#web-development-fundamentals"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-center text-base sm:text-lg text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition-colors"
                 >
                   <ArrowRight className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
@@ -764,7 +732,9 @@ export default function Home() {
                 whileHover={{ x: 10, backgroundColor: "rgba(31, 41, 55, 0.8)" }}
               >
                 <Link
-                  href="#"
+                  href="https://github.com/thefossclub/resources#open-source-licensing-guide"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-center text-base sm:text-lg text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition-colors"
                 >
                   <ArrowRight className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
