@@ -127,7 +127,7 @@ export default function Home() {
     { name: "Diti Vasisht", role: "PR & Outreach", color: "bg-violet-500" },
     { name: "Jayesh Bisht", role: "PR & Outreach", color: "bg-fuchsia-500" },
     { name: "Arul S Bharadwaj", role: "Graphic Designer", color: "bg-rose-500" },
-    { name: "Ayush Kukreja", role: "Graphic Designer", color: "bg-amber-500" },
+    { name: "Lovish Kukreja", role: "Graphic Designer", color: "bg-amber-500" },
     { name: "Tiya Jain", role: "Social Media", color: "bg-sky-500" },
     { name: "Vanya Raman", role: "Social Media", color: "bg-red-500" },
     { name: "Srijan Ranjan", role: "Social Media", color: "bg-blue-500" },
@@ -135,27 +135,26 @@ export default function Home() {
     { name: "Gautam Kumar", role: "Treasurer", color: "bg-purple-500" },
   ]
 
-  const mentors = [
-    { name: "Inzemam ul haq", role: "Senior", color: "bg-red-500" },
-    { name: "Kilari teja", role: "Industry Mentor", color: "bg-blue-500" },
-    { name: "Ravpreet Maini", role: "Cloud Expert", color: "bg-green-500" },
-    { name: "Shristi Pandey", role: "Researcher", color: "bg-purple-500" },
-    { name: "Palak", role: "Graphics Designer", color: "bg-pink-500" },
-  ]
 
   const activeMembers = [
-    { name: "Hilal Ahmad", role: "AI Guy", color: "bg-orange-500" },
     { name: "Tanmay Maheshwari", role: "Low Level", color: "bg-yellow-500" },
     { name: "Harshit Vashisht", role: "Web Dev.", color: "bg-blue-500" },
-    { name: "Mayank Chaubey", role: "DSA Guy", color: "bg-green-500" },
+    { name: "Mayank Choubey", role: "DSA Guy", color: "bg-green-500" },
     { name: "TSR", role: "UI/UX Designer", color: "bg-purple-500" },
     { name: "Krish", role: "Friendly Spiderman", color: "bg-pink-500" },
     { name: "Avneesh", role: "Designer", color: "bg-indigo-500" },
     { name: "Chitranjan", role: "Front-End", color: "bg-teal-500" },
+    { name: "Satyam", role: "Meme Lord", color: "bg-teal-500" },
     { name: "Abhishek Thapa", role: "Back-End", color: "bg-cyan-500" },
     { name: "Aditya Sachdeva", role: "UI/UX and Blender", color: "bg-lime-500" },
     { name: "Nitya Kapoor", role: "Cyber Security", color: "bg-emerald-500" },
     { name: "Pragya Paramita", role: "Web dev.", color: "bg-violet-500" },
+    { name: "Inzemam ul haq", role: "Senior", color: "bg-red-500" },
+    { name: "Hilal Ahmad", role: "AI Guy", color: "bg-orange-500" },
+    { name: "Kilari teja", role: "Industry Mentor", color: "bg-blue-500" },
+    { name: "Ravpreet Maini", role: "Cloud Expert", color: "bg-green-500" },
+    { name: "Shristi Pandey", role: "Researcher", color: "bg-purple-500" },
+    { name: "Palak", role: "Graphics Designer", color: "bg-pink-500" },
   ]
 
   const blogPosts = [
