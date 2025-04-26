@@ -206,17 +206,17 @@ export default function Home() {
       <motion.section
         ref={sectionRefs.home}
         id="home"
-        className="relative h-screen flex items-center justify-center overflow-hidden z-10"
+        className="relative h-screen flex items-center justify-center overflow-hidden z-10 px-4"
         style={{ opacity: heroOpacity, scale: heroScale }}
       >
-        <div className="absolute inset-0 flex items-center justify-center">
+        <div className="absolute inset-0 flex items-center justify-center hidden md:flex">
           <HeroSphere />
         </div>
 
-        <div className="container mx-auto px-4 z-10 flex flex-col md:flex-row items-center justify-between">
+        <div className="container mx-auto z-10 flex flex-col md:flex-row items-center justify-between">
           {/* Hero Text Container */}
           <motion.div
-            className="md:w-1/2 text-center md:text-left"
+            className="md:w-1/2 text-center md:text-left mb-12 md:mb-0"
             initial="hidden"
             animate="visible"
             variants={{
@@ -224,20 +224,20 @@ export default function Home() {
               visible: {
                 opacity: 1,
                 transition: {
-                  staggerChildren: 0.2, // Stagger child animations
-                  delayChildren: 0.1, // Delay start of children
+                  staggerChildren: 0.2,
+                  delayChildren: 0.1,
                 }
               }
             }}
           >
             <motion.h1
-              className="text-4xl md:text-6xl font-bold mb-4 text-gradient-green"
+              className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 text-gradient-green"
               variants={{ hidden: { opacity: 0, x: -50 }, visible: { opacity: 1, x: 0, transition: { duration: 0.6 } } }}
             >
               Welcome to The FOSS Club!
             </motion.h1>
             <motion.p
-              className="text-xl md:text-2xl mb-8 text-gray-700 dark:text-gray-200 drop-shadow-md"
+              className="text-lg sm:text-xl md:text-2xl mb-6 md:mb-8 text-gray-700 dark:text-gray-200"
               variants={{ hidden: { opacity: 0, x: -50 }, visible: { opacity: 1, x: 0, transition: { duration: 0.6 } } }}
             >
               <span className="font-semibold">Learn, build, and collaborate</span> with fellow open-source enthusiasts.
@@ -249,9 +249,9 @@ export default function Home() {
               <Link
                 href="https://opnform.com/forms/the-foss-club-registration-nst4zs"
                 target="_blank"
-                className="inline-flex items-center px-6 py-3 bg-gradient-green text-white rounded-full font-medium text-lg hover:opacity-90 hover:brightness-110 transition-all shadow-lg shadow-green-500/20 hover:shadow-green-500/40"
+                className="inline-flex items-center px-5 py-2.5 md:px-6 md:py-3 bg-gradient-green text-white rounded-full font-medium text-base md:text-lg hover:opacity-90 hover:brightness-110 transition-all shadow-lg shadow-green-500/20 hover:shadow-green-500/40"
               >
-                Join Now <ArrowRight className="ml-2 h-5 w-5" />
+                Join Now <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5" />
               </Link>
             </motion.div>
           </motion.div>
@@ -268,11 +268,69 @@ export default function Home() {
               delay: 0.2,
             }}
           >
-            <div className="relative w-64 h-64 md:w-80 md:h-80 mx-auto wafer-circle">
+            {/* Add keyframes and styles for hover effects */}
+            <style jsx>{`
+              @keyframes sweep {
+                0% { transform: translateX(-100%); }
+                100% { transform: translateX(100%); }
+              }
+              @keyframes rotateGlow {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+              }
+              .wafer-circle {
+                position: relative; /* Needed for pseudo-elements */
+                transition: transform 0.3s ease-out; /* Subtle scale on hover */
+              }
+              .wafer-circle:hover {
+                 transform: scale(1.03); /* Slightly enlarge on hover */
+              }
+              .wafer-bg::before, .wafer-bg::after {
+                content: '';
+                position: absolute;
+                top: 0; left: 0; right: 0; bottom: 0;
+                border-radius: 50%;
+                opacity: 0;
+                pointer-events: none; /* Prevent pseudo-elements interfering */
+                transition: opacity 0.4s ease-in-out;
+              }
+              /* Sweeping Shine */
+              .wafer-bg::before {
+                background: linear-gradient(100deg, transparent 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%);
+                transform: translateX(-100%);
+                z-index: 2; /* Above pattern, below text */
+              }
+              .wafer-circle:hover .wafer-bg::before {
+                opacity: 1;
+                animation: sweep 1s ease-in-out infinite; 
+              }
+              /* Rotating Circumference Glow */
+              .wafer-bg::after {
+                background: radial-gradient(circle at center top, rgba(255, 255, 255, 0.6) 0%, transparent 40%);
+                z-index: 1; /* Below sweeping shine */
+                animation: rotateGlow 5s linear infinite paused; /* Paused initially */
+              }
+               .wafer-circle:hover .wafer-bg::after {
+                 opacity: 0.6; /* Make glow visible */
+                 animation-play-state: running; /* Run animation on hover */
+               }
+              .wafer-pattern {
+                 opacity: 0.2; /* Further reduced pattern opacity */
+              }
+              .wafer-text {
+                 text-shadow: 0 1px 4px rgba(0,0,0,0.6); /* Softened text shadow */
+              }
+            `}</style>
+
+            {/* Apply class to the main container for hover targeting */}
+             {/* Restored size */}
+            <div className="relative w-64 h-64 md:w-80 md:h-80 mx-auto wafer-circle"> 
+              {/* Base background, pattern container, and pseudo-elements */}
               <div
-                className="absolute inset-0 rounded-full shadow-xl shadow-green-400/30 overflow-hidden wafer-bg"
+                className="absolute inset-0 rounded-full shadow-xl shadow-green-400/30 overflow-hidden wafer-bg" 
                 style={{
-                  background: 'radial-gradient(circle, rgba(50, 180, 110, 1) 0%, rgba(20, 115, 60, 1) 100%)',
+                  // Use #17a54b as the main highlight color
+                  background: 'radial-gradient(circle, #17a54b 0%, rgba(15, 100, 50, 1) 100%)',
                 }}
               >
                 {/* Static Metallic Sheen - Adjusted angle */}
@@ -280,7 +338,7 @@ export default function Home() {
                 
                 {/* Wafer Pattern Overlay */}
                 <div
-                  className="absolute inset-0 wafer-pattern"
+                  className="absolute inset-0 wafer-pattern" 
                   style={{
                     backgroundImage: `
                       repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0, rgba(0, 0, 0, 0.4) 15px, transparent 15px, transparent 30px),
@@ -299,8 +357,10 @@ export default function Home() {
                    }}
                  ></div>
               </div>
-              <div className="absolute inset-0 flex items-center justify-center text-center p-6 z-10">
-                <h2 className="text-2xl md:text-3xl font-bold leading-tight text-white wafer-text">
+              {/* Text container */}
+              <div className="absolute inset-0 flex items-center justify-center text-center p-6 z-10"> {/* Restored padding */}
+                 {/* Restored text size */}
+                <h2 className="text-2xl md:text-3xl font-bold leading-tight text-white wafer-text"> 
                   Free & Open Source and Hacker Culture at DTC
                 </h2>
               </div>
@@ -309,7 +369,7 @@ export default function Home() {
         </div>
 
         <motion.div
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
+          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 hidden md:block"
           animate={{ y: [0, 10, 0] }}
           transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1.5 }}
         >
@@ -318,10 +378,10 @@ export default function Home() {
       </motion.section>
 
       {/* About Section */}
-      <section ref={sectionRefs.about} id="about" className="py-20 relative z-10">
-        <div className="container mx-auto px-4">
+      <section ref={sectionRefs.about} id="about" className="py-16 md:py-20 relative z-10 px-4 sm:px-6">
+        <div className="container mx-auto">
           <motion.h2
-            className="text-4xl font-extrabold mb-12 text-center text-gradient-green drop-shadow-xl"
+            className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green drop-shadow-xl"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -331,13 +391,13 @@ export default function Home() {
           </motion.h2>
 
           <motion.div
-            className="max-w-4xl mx-auto backdrop-blur-sm p-8 rounded-3xl border border-gray-800 dark:border-gray-800 bg-white/5 dark:bg-black/5 shadow-xl shadow-green-500/5"
+            className="max-w-4xl mx-auto backdrop-blur-sm p-6 md:p-8 rounded-3xl border border-gray-800 dark:border-gray-800 bg-white/5 dark:bg-black/5 shadow-xl shadow-green-500/5"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <p className="text-lg mb-8 leading-relaxed text-gray-700 dark:text-gray-300">
+            <p className="text-base sm:text-lg mb-6 md:mb-8 leading-relaxed text-gray-700 dark:text-gray-300">
               The FOSS Club is a student community-based group in the Delhi Technical Campus for enthusiasts focused on
               contributing to
               <span className="relative mx-2 text-green-500 font-bold group">
@@ -349,27 +409,27 @@ export default function Home() {
               and mentoring students to achieve excellence in various fields of Computer Science.
             </p>
 
-            <h3 className="text-2xl font-bold mb-4 text-gradient-green-dark drop-shadow-md">Core Pillars</h3>
-            <ul className="space-y-4">
+            <h3 className="text-xl sm:text-2xl font-bold mb-4 text-gradient-green-dark drop-shadow-md">Core Pillars</h3>
+            <ul className="space-y-3 md:space-y-4">
               <motion.li
-                className="p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green shadow-md hover:shadow-green-500/10 transition-all"
+                className="p-3 md:p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green shadow-md hover:shadow-green-500/10 transition-all text-sm sm:text-base"
                 whileHover={{ x: 10 }}
               >
-                <strong className="text-gradient-green">Open Source:</strong> The FOSS Club promotes open-source
+                <strong className="text-gray-900 dark:text-white mr-1">Open Source:</strong> The FOSS Club promotes open-source
                 software, FOSS philosophy, self-hosting, Linux, and collaborative development.
               </motion.li>
               <motion.li
-                className="p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green shadow-md hover:shadow-green-500/10 transition-all"
+                className="p-3 md:p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green shadow-md hover:shadow-green-500/10 transition-all text-sm sm:text-base"
                 whileHover={{ x: 10 }}
               >
-                <strong className="text-gradient-green">Cyber Security:</strong> The FOSS Club explores ethical hacking,
+                <strong className="text-gray-900 dark:text-white mr-1">Cyber Security:</strong> The FOSS Club explores ethical hacking,
                 CTFs, reverse engineering, digital privacy, OSINT, and cybersecurity research.
               </motion.li>
               <motion.li
-                className="p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green shadow-md hover:shadow-green-500/10 transition-all"
+                className="p-3 md:p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green shadow-md hover:shadow-green-500/10 transition-all text-sm sm:text-base"
                 whileHover={{ x: 10 }}
               >
-                <strong className="text-gradient-green">Hardware:</strong> The FOSS Club will focus on self-hosted
+                <strong className="text-gray-900 dark:text-white mr-1">Hardware:</strong> The FOSS Club will focus on self-hosted
                 systems, open hardware, embedded devices, SBCs (like Raspberry Pi and RISC-V boards), firmware hacking,
                 retro computing, and all the cool hardware stuff.
               </motion.li>
@@ -377,13 +437,13 @@ export default function Home() {
           </motion.div>
 
           <motion.div
-            className="mt-20"
+            className="mt-16 md:mt-20"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <h3 className="text-3xl font-bold mb-8 text-center text-gray-800 dark:text-gray-200 drop-shadow-md">
+            <h3 className="text-2xl sm:text-3xl font-bold mb-8 text-center text-gray-800 dark:text-gray-200 drop-shadow-md">
               Our Timeline
             </h3>
             <Timeline events={timelineEvents} />
@@ -392,10 +452,10 @@ export default function Home() {
       </section>
 
       {/* Projects Section */}
-      <section ref={sectionRefs.projects} id="projects" className="py-20 relative z-10">
-        <div className="container mx-auto px-4">
+      <section ref={sectionRefs.projects} id="projects" className="py-16 md:py-20 relative z-10 px-4 sm:px-6">
+        <div className="container mx-auto">
           <motion.h2
-            className="text-4xl font-extrabold mb-12 text-center text-gradient-green drop-shadow-xl"
+            className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green drop-shadow-xl"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -404,7 +464,7 @@ export default function Home() {
             Our Projects
           </motion.h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {projects.map((project, index) => (
               <ProjectCard
                 key={index}
@@ -419,10 +479,10 @@ export default function Home() {
       </section>
 
       {/* Events Section */}
-      <section ref={sectionRefs.events} id="events" className="py-20 relative z-10">
-        <div className="container mx-auto px-4">
+      <section ref={sectionRefs.events} id="events" className="py-16 md:py-20 relative z-10 px-4 sm:px-6">
+        <div className="container mx-auto">
           <motion.h2
-            className="text-4xl font-extrabold mb-12 text-center text-gradient-green drop-shadow-xl"
+            className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green drop-shadow-xl"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -431,7 +491,7 @@ export default function Home() {
             Events
           </motion.h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
             {events.map((event, index) => (
               <EventCard
                 key={index}
@@ -445,7 +505,7 @@ export default function Home() {
           </div>
 
           <motion.div
-            className="mt-16 p-8 rounded-3xl border border-green-900/50 bg-gradient-to-r from-green-900/10 to-green-900/10 dark:from-green-900/30 dark:to-green-900/30 shadow-xl shadow-green-500/10"
+            className="mt-12 md:mt-16 p-6 md:p-8 rounded-3xl border border-green-900/50 bg-gradient-to-r from-green-900/10 to-green-900/10 dark:from-green-900/30 dark:to-green-900/30 shadow-xl shadow-green-500/10"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -453,15 +513,15 @@ export default function Home() {
           >
             <div className="flex flex-col md:flex-row items-center">
               <div className="md:w-1/2 mb-6 md:mb-0 md:pr-8">
-                <h3 className="text-3xl font-bold mb-4 text-gradient-green drop-shadow-md">FOSS Hack 2025</h3>
-                <p className="text-lg mb-4 text-gray-700 dark:text-gray-300">
+                <h3 className="text-2xl sm:text-3xl font-bold mb-4 text-gradient-green drop-shadow-md">FOSS Hack 2025</h3>
+                <p className="text-base sm:text-lg mb-4 text-gray-700 dark:text-gray-300">
                   Our biggest hackathon yet! Join us for an incredible weekend of coding, collaboration, and innovation
                   in the open source world.
                 </p>
-                <h4 className="text-xl font-semibold mb-2 text-gradient-green-light drop-shadow-sm">
+                <h4 className="text-lg sm:text-xl font-semibold mb-2 text-gradient-green-light drop-shadow-sm">
                   What's in store?
                 </h4>
-                <ul className="space-y-2 text-gray-700 dark:text-gray-300">
+                <ul className="space-y-1.5 md:space-y-2 text-sm sm:text-base text-gray-700 dark:text-gray-300">
                   <li>• Expert talks</li>
                   <li>• Intro to Random Shit</li>
                   <li>• Workshops</li>
@@ -484,10 +544,10 @@ export default function Home() {
       </section>
 
       {/* Tools Section */}
-      <section id="tools" className="py-20 relative overflow-hidden z-10">
-        <div className="container mx-auto px-4">
+      <section id="tools" className="py-16 md:py-20 relative overflow-hidden z-10 px-4 sm:px-6">
+        <div className="container mx-auto">
           <motion.h2
-            className="text-4xl font-extrabold mb-12 text-center text-gradient-green drop-shadow-xl"
+            className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green drop-shadow-xl"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -501,10 +561,10 @@ export default function Home() {
       </section>
 
       {/* Team Section */}
-      <section ref={sectionRefs.team} id="team" className="py-20 relative z-10">
-        <div className="container mx-auto px-4">
+      <section ref={sectionRefs.team} id="team" className="py-16 md:py-20 relative z-10 px-4 sm:px-6">
+        <div className="container mx-auto">
           <motion.h2
-            className="text-4xl font-extrabold mb-12 text-center text-gradient-green drop-shadow-xl"
+            className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green drop-shadow-xl"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -514,10 +574,10 @@ export default function Home() {
           </motion.h2>
 
           {/* Core Team Section */}
-          <div className="mb-16">
-            <div className="flex justify-between items-center mb-8">
+          <div className="mb-12 md:mb-16">
+            <div className="flex justify-between items-center mb-6 md:mb-8">
               <motion.h3
-                className="text-2xl font-bold text-green-500"
+                className="text-xl sm:text-2xl font-bold text-green-500"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
@@ -527,7 +587,7 @@ export default function Home() {
               </motion.h3>
               <button
                 onClick={() => setCoreTeamExpanded(!coreTeamExpanded)}
-                className="flex items-center gap-2 px-4 py-2 bg-gradient-green text-white rounded-full text-sm font-medium hover:opacity-90 transition-all"
+                className="flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-gradient-green text-white rounded-full text-xs sm:text-sm font-medium hover:opacity-90 transition-all"
                 style={{
                   boxShadow:
                     mounted
@@ -552,7 +612,7 @@ export default function Home() {
             </div>
 
             {coreTeamExpanded && (
-              <div className="team-grid">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
                 {coreTeam.map((member, index) => (
                   <TeamMember
                     key={index}
@@ -568,9 +628,9 @@ export default function Home() {
 
           {/* Members Section */}
           <div>
-            <div className="flex justify-between items-center mb-8">
+            <div className="flex justify-between items-center mb-6 md:mb-8">
               <motion.h3
-                className="text-2xl font-bold text-green-500"
+                className="text-xl sm:text-2xl font-bold text-green-500"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
@@ -580,7 +640,7 @@ export default function Home() {
               </motion.h3>
               <button
                 onClick={() => setMembersExpanded(!membersExpanded)}
-                className="flex items-center gap-2 px-4 py-2 bg-gradient-green text-white rounded-full text-sm font-medium hover:opacity-90 transition-all"
+                className="flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-gradient-green text-white rounded-full text-xs sm:text-sm font-medium hover:opacity-90 transition-all"
                 style={{
                   boxShadow:
                     mounted
@@ -605,7 +665,7 @@ export default function Home() {
             </div>
 
             {membersExpanded && (
-              <div className="team-grid">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
                 {members.map((member, index) => (
                   <TeamMember
                     key={index}
@@ -622,10 +682,10 @@ export default function Home() {
       </section>
 
       {/* Blog Section */}
-      <section ref={sectionRefs.blog} id="blog" className="py-20 relative z-10">
-        <div className="container mx-auto px-4">
+      <section ref={sectionRefs.blog} id="blog" className="py-16 md:py-20 relative z-10 px-4 sm:px-6">
+        <div className="container mx-auto">
           <motion.h2
-            className="text-4xl font-extrabold mb-12 text-center text-gradient-green drop-shadow-xl"
+            className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green drop-shadow-xl"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -634,7 +694,7 @@ export default function Home() {
             Latest Blog Posts
           </motion.h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {blogPosts.map((post, index) => (
               <BlogPost key={index} title={post.title} excerpt={post.excerpt} link={post.link} index={index} />
             ))}
@@ -643,10 +703,10 @@ export default function Home() {
       </section>
 
       {/* Resources Section */}
-      <section ref={sectionRefs.resources} id="resources" className="py-20 relative z-10">
-        <div className="container mx-auto px-4">
+      <section ref={sectionRefs.resources} id="resources" className="py-16 md:py-20 relative z-10 px-4 sm:px-6">
+        <div className="container mx-auto">
           <motion.h2
-            className="text-4xl font-extrabold mb-12 text-center text-gradient-green drop-shadow-xl"
+            className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green drop-shadow-xl"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -656,58 +716,58 @@ export default function Home() {
           </motion.h2>
 
           <motion.div
-            className="max-w-4xl mx-auto backdrop-blur-sm p-8 rounded-3xl border border-gray-800 dark:border-gray-800 bg-white/5 dark:bg-black/5 shadow-xl shadow-green-500/5"
+            className="max-w-4xl mx-auto backdrop-blur-sm p-6 md:p-8 rounded-3xl border border-gray-800 dark:border-gray-800 bg-white/5 dark:bg-black/5 shadow-xl shadow-green-500/5"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <ul className="space-y-4">
+            <ul className="space-y-3 md:space-y-4">
               <motion.li
-                className="p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green transition-all shadow-md hover:shadow-green-500/10"
+                className="p-3 md:p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green transition-all shadow-md hover:shadow-green-500/10"
                 whileHover={{ x: 10, backgroundColor: "rgba(31, 41, 55, 0.8)" }}
               >
                 <Link
                   href="#"
-                  className="flex items-center text-lg text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition-colors"
+                  className="flex items-center text-base sm:text-lg text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition-colors"
                 >
-                  <ArrowRight className="mr-2 h-5 w-5" />
+                  <ArrowRight className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                   Getting Started with Git
                 </Link>
               </motion.li>
               <motion.li
-                className="p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green transition-all shadow-md hover:shadow-green-500/10"
+                className="p-3 md:p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green transition-all shadow-md hover:shadow-green-500/10"
                 whileHover={{ x: 10, backgroundColor: "rgba(31, 41, 55, 0.8)" }}
               >
                 <Link
                   href="#"
-                  className="flex items-center text-lg text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition-colors"
+                  className="flex items-center text-base sm:text-lg text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition-colors"
                 >
-                  <ArrowRight className="mr-2 h-5 w-5" />
+                  <ArrowRight className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                   Introduction to Linux Command Line
                 </Link>
               </motion.li>
               <motion.li
-                className="p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green transition-all shadow-md hover:shadow-green-500/10"
+                className="p-3 md:p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green transition-all shadow-md hover:shadow-green-500/10"
                 whileHover={{ x: 10, backgroundColor: "rgba(31, 41, 55, 0.8)" }}
               >
                 <Link
                   href="#"
-                  className="flex items-center text-lg text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition-colors"
+                  className="flex items-center text-base sm:text-lg text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition-colors"
                 >
-                  <ArrowRight className="mr-2 h-5 w-5" />
+                  <ArrowRight className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                   Web Development Fundamentals
                 </Link>
               </motion.li>
               <motion.li
-                className="p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green transition-all shadow-md hover:shadow-green-500/10"
+                className="p-3 md:p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green transition-all shadow-md hover:shadow-green-500/10"
                 whileHover={{ x: 10, backgroundColor: "rgba(31, 41, 55, 0.8)" }}
               >
                 <Link
                   href="#"
-                  className="flex items-center text-lg text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition-colors"
+                  className="flex items-center text-base sm:text-lg text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition-colors"
                 >
-                  <ArrowRight className="mr-2 h-5 w-5" />
+                  <ArrowRight className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                   Open Source Licensing Guide
                 </Link>
               </motion.li>
@@ -717,10 +777,10 @@ export default function Home() {
       </section>
 
       {/* FAQ Section */}
-      <section id="faq" className="py-20 relative z-10">
-        <div className="container mx-auto px-4">
+      <section id="faq" className="py-16 md:py-20 relative z-10 px-4 sm:px-6">
+        <div className="container mx-auto">
           <motion.h2
-            className="text-4xl font-extrabold mb-12 text-center text-gradient-green drop-shadow-xl"
+            className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green drop-shadow-xl"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -730,7 +790,7 @@ export default function Home() {
           </motion.h2>
 
           <motion.div
-            className="max-w-4xl mx-auto space-y-6"
+            className="max-w-4xl mx-auto space-y-4 md:space-y-6"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -738,13 +798,13 @@ export default function Home() {
           >
             <div className="backdrop-blur-sm rounded-3xl overflow-hidden border border-gray-800 dark:border-gray-800 bg-white/5 dark:bg-black/5 shadow-lg hover:shadow-green-500/10 transition-all">
               <details className="group">
-                <summary className="flex items-center justify-between p-6 cursor-pointer">
-                  <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200">What is FOSS?</h3>
+                <summary className="flex items-center justify-between p-4 md:p-6 cursor-pointer">
+                  <h3 className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-gray-200">What is FOSS?</h3>
                   <span className="transition-transform duration-300 group-open:rotate-180">
                     <ArrowRight className="h-5 w-5 rotate-90 text-green-500" />
                   </span>
                 </summary>
-                <div className="p-6 pt-0 border-t border-gray-800">
+                <div className="p-4 md:p-6 pt-0 border-t border-gray-800 text-sm sm:text-base">
                   <p className="text-gray-700 dark:text-gray-300">
                     FOSS stands for Free and Open Source Software. It refers to software that is freely available for
                     use, modification, and distribution.
@@ -755,15 +815,15 @@ export default function Home() {
 
             <div className="backdrop-blur-sm rounded-3xl overflow-hidden border border-gray-800 dark:border-gray-800 bg-white/5 dark:bg-black/5 shadow-lg hover:shadow-green-500/10 transition-all">
               <details className="group">
-                <summary className="flex items-center justify-between p-6 cursor-pointer">
-                  <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200">
+                <summary className="flex items-center justify-between p-4 md:p-6 cursor-pointer">
+                  <h3 className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-gray-200">
                     How can I join the FOSS Club?
                   </h3>
                   <span className="transition-transform duration-300 group-open:rotate-180">
                     <ArrowRight className="h-5 w-5 rotate-90 text-green-500" />
                   </span>
                 </summary>
-                <div className="p-6 pt-0 border-t border-gray-800">
+                <div className="p-4 md:p-6 pt-0 border-t border-gray-800 text-sm sm:text-base">
                   <p className="text-gray-700 dark:text-gray-300">
                     You can join our club by filling out the application form in the "Join" section of our website. We
                     welcome students of all skill levels who are interested in open source software.
@@ -774,15 +834,15 @@ export default function Home() {
 
             <div className="backdrop-blur-sm rounded-3xl overflow-hidden border border-gray-800 dark:border-gray-800 bg-white/5 dark:bg-black/5 shadow-lg hover:shadow-green-500/10 transition-all">
               <details className="group">
-                <summary className="flex items-center justify-between p-6 cursor-pointer">
-                  <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200">
+                <summary className="flex items-center justify-between p-4 md:p-6 cursor-pointer">
+                  <h3 className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-gray-200">
                     Do I need programming experience to join?
                   </h3>
                   <span className="transition-transform duration-300 group-open:rotate-180">
                     <ArrowRight className="h-5 w-5 rotate-90 text-green-500" />
                   </span>
                 </summary>
-                <div className="p-6 pt-0 border-t border-gray-800">
+                <div className="p-4 md:p-6 pt-0 border-t border-gray-800 text-sm sm:text-base">
                   <p className="text-gray-700 dark:text-gray-300">
                     No, you don't need prior programming experience to join. We welcome members with diverse backgrounds
                     and skill levels. Our club provides learning opportunities for beginners as well as advanced
@@ -794,15 +854,15 @@ export default function Home() {
 
             <div className="backdrop-blur-sm rounded-3xl overflow-hidden border border-gray-800 dark:border-gray-800 bg-white/5 dark:bg-black/5 shadow-lg hover:shadow-green-500/10 transition-all">
               <details className="group">
-                <summary className="flex items-center justify-between p-6 cursor-pointer">
-                  <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200">
+                <summary className="flex items-center justify-between p-4 md:p-6 cursor-pointer">
+                  <h3 className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-gray-200">
                     How often does the club meet?
                   </h3>
                   <span className="transition-transform duration-300 group-open:rotate-180">
                     <ArrowRight className="h-5 w-5 rotate-90 text-green-500" />
                   </span>
                 </summary>
-                <div className="p-6 pt-0 border-t border-gray-800">
+                <div className="p-4 md:p-6 pt-0 border-t border-gray-800 text-sm sm:text-base">
                   <p className="text-gray-700 dark:text-gray-300">
                     We typically have weekly meetings during the academic year. The schedule is posted on our website
                     and social media channels at the beginning of each semester.
@@ -816,72 +876,71 @@ export default function Home() {
 
       {/* Footer - Render only when mounted */}
       {mounted && (
-        <footer className="py-12 border-t border-gray-800 dark:border-gray-800 footer-gradient">
-          <div className="container mx-auto px-4">
-            <div className="flex flex-col md:flex-row justify-between items-center mb-12">
-              <div className="mb-8 md:mb-0">
-                <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 bg-gradient-green rounded-full flex items-center justify-center mr-4 glow-effect shadow-lg shadow-green-500/30">
-                    <span className="text-white font-bold text-sm">FC</span>
+        <footer className="py-10 md:py-12 border-t border-gray-800 dark:border-gray-800 footer-gradient px-4 sm:px-6">
+          <div className="container mx-auto">
+            <div className="flex flex-col md:flex-row justify-between items-center mb-10 md:mb-12">
+              <div className="mb-8 md:mb-0 text-center md:text-left">
+                <div className="flex items-center justify-center md:justify-start mb-4">
+                  <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-green rounded-full flex items-center justify-center mr-3 md:mr-4 glow-effect shadow-lg shadow-green-500/30">
+                    <span className="text-white font-bold text-xs md:text-sm">FC</span>
                   </div>
+                  <h3 className="text-lg font-bold text-gray-800 dark:text-white">The FOSS Club</h3>
                 </div>
-                <p className="text-gray-600 dark:text-gray-400 max-w-md text-lg">
+                <p className="text-gray-600 dark:text-gray-400 max-w-md text-base sm:text-lg">
                   Learn, build, and collaborate with fellow open-source enthusiasts in a community dedicated to free and
                   open source software.
                 </p>
               </div>
-              <div className="flex flex-wrap justify-center gap-6">
+              <div className="flex flex-wrap justify-center gap-4 md:gap-6">
                 <a
                   href="https://github.com/thefossclub"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-3 bg-white/10 dark:bg-black/20 rounded-full text-gray-600 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-400 hover:bg-white/20 dark:hover:bg-black/30 transition-all shadow-md hover:shadow-green-500/20"
+                  className="p-2.5 md:p-3 bg-white/10 dark:bg-black/20 rounded-full text-gray-600 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-400 hover:bg-white/20 dark:hover:bg-black/30 transition-all shadow-md hover:shadow-green-500/20"
                 >
-                  <Github className="h-6 w-6" />
+                  <Github className="h-5 w-5 md:h-6 md:w-6" />
                   <span className="sr-only">GitHub</span>
                 </a>
                 <a
                   href="https://twitter.com/thefossclub"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-3 bg-white/10 dark:bg-black/20 rounded-full text-gray-600 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-400 hover:bg-white/20 dark:hover:bg-black/30 transition-all shadow-md hover:shadow-green-500/20"
+                  className="p-2.5 md:p-3 bg-white/10 dark:bg-black/20 rounded-full text-gray-600 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-400 hover:bg-white/20 dark:hover:bg-black/30 transition-all shadow-md hover:shadow-green-500/20"
                 >
-                  <Twitter className="h-6 w-6" />
+                  <Twitter className="h-5 w-5 md:h-6 md:w-6" />
                   <span className="sr-only">Twitter</span>
                 </a>
                 <a
                   href="https://linkedin.com/company/thefossclub"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-3 bg-white/10 dark:bg-black/20 rounded-full text-gray-600 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-400 hover:bg-white/20 dark:hover:bg-black/30 transition-all shadow-md hover:shadow-green-500/20"
+                  className="p-2.5 md:p-3 bg-white/10 dark:bg-black/20 rounded-full text-gray-600 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-400 hover:bg-white/20 dark:hover:bg-black/30 transition-all shadow-md hover:shadow-green-500/20"
                 >
-                  <Linkedin className="h-6 w-6" />
+                  <Linkedin className="h-5 w-5 md:h-6 md:w-6" />
                   <span className="sr-only">LinkedIn</span>
                 </a>
                 <a
                   href="https://instagram.com/thefossclub"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-3 bg-white/10 dark:bg-black/20 rounded-full text-gray-600 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-400 hover:bg-white/20 dark:hover:bg-black/30 transition-all shadow-md hover:shadow-green-500/20"
+                  className="p-2.5 md:p-3 bg-white/10 dark:bg-black/20 rounded-full text-gray-600 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-400 hover:bg-white/20 dark:hover:bg-black/30 transition-all shadow-md hover:shadow-green-500/20"
                 >
-                  <Instagram className="h-6 w-6" />
+                  <Instagram className="h-5 w-5 md:h-6 md:w-6" />
                   <span className="sr-only">Instagram</span>
                 </a>
               </div>
             </div>
 
-            {/* Wrap the grid in motion.div */}
             <motion.div
-              className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-8"
+              className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10 mb-8"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }} // Slight delay after footer appears
+              transition={{ duration: 0.6, delay: 0.1 }}
             >
-              {/* Quick Links Card */}
-              <div className="backdrop-blur-sm p-6 rounded-2xl border border-gray-200/20 dark:border-gray-800/50 bg-white/5 dark:bg-black/5 card-hover-effect shadow-lg hover:shadow-green-500/10">
-                <h3 className="text-xl font-semibold mb-4 text-gradient-green">Quick Links</h3>
-                <ul className="space-y-3">
+              <div className="backdrop-blur-sm p-5 md:p-6 rounded-2xl border border-gray-200/20 dark:border-gray-800/50 bg-white/5 dark:bg-black/5 card-hover-effect shadow-lg hover:shadow-green-500/10">
+                <h3 className="text-lg sm:text-xl font-semibold mb-3 md:mb-4 text-gradient-green">Quick Links</h3>
+                <ul className="space-y-2 md:space-y-3 text-sm sm:text-base">
                   <li>
                     <Link
                       href="#home"
@@ -916,10 +975,9 @@ export default function Home() {
                   </li>
                 </ul>
               </div>
-              {/* Resources Card */}
-              <div className="backdrop-blur-sm p-6 rounded-2xl border border-gray-200/20 dark:border-gray-800/50 bg-white/5 dark:bg-black/5 card-hover-effect shadow-lg hover:shadow-green-500/10">
-                <h3 className="text-xl font-semibold mb-4 text-gradient-green">Resources</h3>
-                <ul className="space-y-3">
+              <div className="backdrop-blur-sm p-5 md:p-6 rounded-2xl border border-gray-200/20 dark:border-gray-800/50 bg-white/5 dark:bg-black/5 card-hover-effect shadow-lg hover:shadow-green-500/10">
+                <h3 className="text-lg sm:text-xl font-semibold mb-3 md:mb-4 text-gradient-green">Resources</h3>
+                <ul className="space-y-2 md:space-y-3 text-sm sm:text-base">
                   <li>
                     <Link
                       href="#"
@@ -955,10 +1013,9 @@ export default function Home() {
                   </li>
                 </ul>
               </div>
-              {/* Contact Card */}
-              <div className="backdrop-blur-sm p-6 rounded-2xl border border-gray-200/20 dark:border-gray-800/50 bg-white/5 dark:bg-black/5 card-hover-effect shadow-lg hover:shadow-green-500/10">
-                <h3 className="text-xl font-semibold mb-4 text-gradient-green">Contact</h3>
-                <ul className="space-y-3">
+              <div className="backdrop-blur-sm p-5 md:p-6 rounded-2xl border border-gray-200/20 dark:border-gray-800/50 bg-white/5 dark:bg-black/5 card-hover-effect shadow-lg hover:shadow-green-500/10">
+                <h3 className="text-lg sm:text-xl font-semibold mb-3 md:mb-4 text-gradient-green">Contact</h3>
+                <ul className="space-y-2 md:space-y-3 text-sm sm:text-base">
                   <li>
                     <Link
                       href="https://linktr.ee/thefossclub"
@@ -989,17 +1046,16 @@ export default function Home() {
             </motion.div>
 
             <div className="text-center pt-6 border-t border-gray-800/30 dark:border-gray-800/30 relative">
-              <p className="text-gray-500">© {new Date().getFullYear()} The FOSS Club. All rights reserved.</p>
-              <p className="text-gray-500 mt-2 text-sm">Made with 💚 by open source enthusiasts</p>
+              <p className="text-gray-500 text-sm sm:text-base">© {new Date().getFullYear()} The FOSS Club. All rights reserved.</p>
+              <p className="text-gray-500 mt-1 md:mt-2 text-xs sm:text-sm">Made with 💚 by open source enthusiasts</p>
 
-              {/* Back to Top Button */}
               <button
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                className="absolute right-0 bottom-0 mb-0 mr-0 md:mb-2 md:mr-2 group bg-gradient-green p-3 rounded-full text-white hover:opacity-90 transition-all shadow-lg hover:shadow-green-500/30 flex items-center justify-center"
+                className="absolute right-0 bottom-0 mb-0 mr-0 group bg-gradient-green p-2.5 md:p-3 rounded-full text-white hover:opacity-90 transition-all shadow-lg hover:shadow-green-500/30 flex items-center justify-center"
                 aria-label="Back to top"
               >
-                <ChevronUp className="h-5 w-5 transition-transform group-hover:-translate-y-0.5" />
-                <span className="absolute right-full mr-2 text-sm bg-gray-900 text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-300 pointer-events-none">
+                <ChevronUp className="h-4 w-4 md:h-5 md:w-5 transition-transform group-hover:-translate-y-0.5" />
+                <span className="absolute right-full mr-2 text-sm bg-gray-900 text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-300 pointer-events-none hidden sm:block">
                   Back to Top
                 </span>
               </button>
@@ -1007,60 +1063,6 @@ export default function Home() {
           </div>
         </footer>
       )}
-
-      {/* Add keyframes and styles for hover effects */}
-      <style jsx>{`
-        @keyframes sweep {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(100%); }
-        }
-        @keyframes rotateGlow {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-        .wafer-circle {
-          position: relative; /* Needed for pseudo-elements */
-          transition: transform 0.3s ease-out; /* Subtle scale on hover */
-        }
-        .wafer-circle:hover {
-           transform: scale(1.03); /* Slightly enlarge on hover */
-        }
-        .wafer-bg::before, .wafer-bg::after {
-          content: '';
-          position: absolute;
-          top: 0; left: 0; right: 0; bottom: 0;
-          border-radius: 50%;
-          opacity: 0;
-          pointer-events: none; /* Prevent pseudo-elements interfering */
-          transition: opacity 0.4s ease-in-out;
-        }
-        /* Sweeping Shine */
-        .wafer-bg::before {
-          background: linear-gradient(100deg, transparent 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%);
-          transform: translateX(-100%);
-          z-index: 2; /* Above pattern, below text */
-        }
-        .wafer-circle:hover .wafer-bg::before {
-          opacity: 1;
-          animation: sweep 1s ease-in-out infinite; 
-        }
-        /* Rotating Circumference Glow */
-        .wafer-bg::after {
-          background: radial-gradient(circle at center top, rgba(255, 255, 255, 0.6) 0%, transparent 40%);
-          z-index: 1; /* Below sweeping shine */
-          animation: rotateGlow 5s linear infinite paused; /* Paused initially */
-        }
-         .wafer-circle:hover .wafer-bg::after {
-           opacity: 0.6; /* Make glow visible */
-           animation-play-state: running; /* Run animation on hover */
-         }
-        .wafer-pattern {
-           opacity: 0.2; /* Further reduced pattern opacity */
-        }
-        .wafer-text {
-           text-shadow: 0 1px 4px rgba(0,0,0,0.6); /* Softened text shadow */
-        }
-      `}</style>
     </div>
   )
 }
