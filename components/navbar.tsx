@@ -79,14 +79,14 @@ export default function Navbar({ activeSection }: NavbarProps) {
         transition={{ duration: 0.5 }}
       >
         <motion.div
-          className={`container mx-auto ${
+          className={`container mx-auto transition-all duration-300 ${
             scrolled
-              ? "bg-white/10 dark:bg-black/80 backdrop-blur-md rounded-full mx-4 px-6 py-2 border border-gray-200/20 dark:border-gray-800/50 shadow-lg"
+              ? "mx-4 px-4 py-2 shadow-lg \
+                 bg-white dark:bg-gray-950 \
+                 border-b border-gray-200 dark:border-gray-800 \
+                 md:rounded-full md:bg-white/10 md:dark:bg-black/80 md:backdrop-blur-md md:border md:border-gray-200/20 md:dark:border-gray-800/50 md:px-6"
               : "px-4"
           }`}
-          initial={{ y: scrolled ? -20 : 0, opacity: scrolled ? 0 : 1 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.3 }}
         >
           <nav className="flex justify-between items-center">
             <div className="flex items-center">

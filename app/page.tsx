@@ -272,7 +272,7 @@ export default function Home() {
               <div
                 className="absolute inset-0 rounded-full shadow-xl shadow-green-400/30 overflow-hidden wafer-bg"
                 style={{
-                  background: 'radial-gradient(circle, rgba(60, 200, 120, 1) 0%, rgba(25, 130, 70, 1) 100%)',
+                  background: 'radial-gradient(circle, rgba(50, 180, 110, 1) 0%, rgba(20, 115, 60, 1) 100%)',
                 }}
               >
                 {/* Static Metallic Sheen - Adjusted angle */}
