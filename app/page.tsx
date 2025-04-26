@@ -690,13 +690,13 @@ export default function Home() {
                 whileHover={{ x: 10, backgroundColor: "rgba(31, 41, 55, 0.8)" }}
               >
                 <Link
-                  href="https://github.com/thefossclub/resources#getting-started-with-git"
+                  href="https://github.com/thefossclub/resources#unlock-the-web-frontend--backend-secrets"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center text-base sm:text-lg text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition-colors"
+                  className="flex items-center text-base sm:text-lg text-gray-900 dark:text-white hover:text-black dark:hover:text-gray-200 transition-colors font-medium"
                 >
-                  <ArrowRight className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-                  Getting Started with Git
+                  <ArrowRight className="mr-2 h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
+                  Web Development Fundamentals (Frontend & Backend)
                 </Link>
               </motion.li>
               <motion.li
@@ -704,13 +704,13 @@ export default function Home() {
                 whileHover={{ x: 10, backgroundColor: "rgba(31, 41, 55, 0.8)" }}
               >
                 <Link
-                  href="https://github.com/thefossclub/resources#introduction-to-linux-command-line"
+                  href="https://github.com/thefossclub/resources#level-up-your-game-dev-journey-starts-here"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center text-base sm:text-lg text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition-colors"
+                  className="flex items-center text-base sm:text-lg text-gray-900 dark:text-white hover:text-black dark:hover:text-gray-200 transition-colors font-medium"
                 >
-                  <ArrowRight className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-                  Introduction to Linux Command Line
+                  <ArrowRight className="mr-2 h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
+                  Introduction to Game Development Concepts
                 </Link>
               </motion.li>
               <motion.li
@@ -718,13 +718,13 @@ export default function Home() {
                 whileHover={{ x: 10, backgroundColor: "rgba(31, 41, 55, 0.8)" }}
               >
                 <Link
-                  href="https://github.com/thefossclub/resources#web-development-fundamentals"
+                  href="https://github.com/thefossclub/resources#mobile-mastery-build-your-first-app"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center text-base sm:text-lg text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition-colors"
+                  className="flex items-center text-base sm:text-lg text-gray-900 dark:text-white hover:text-black dark:hover:text-gray-200 transition-colors font-medium"
                 >
-                  <ArrowRight className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-                  Web Development Fundamentals
+                  <ArrowRight className="mr-2 h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
+                  Mobile Application Development Resources
                 </Link>
               </motion.li>
               <motion.li
@@ -732,13 +732,27 @@ export default function Home() {
                 whileHover={{ x: 10, backgroundColor: "rgba(31, 41, 55, 0.8)" }}
               >
                 <Link
-                  href="https://github.com/thefossclub/resources#open-source-licensing-guide"
+                  href="https://github.com/thefossclub/resources#linux-command-line--version-control"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center text-base sm:text-lg text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition-colors"
+                  className="flex items-center text-base sm:text-lg text-gray-900 dark:text-white hover:text-black dark:hover:text-gray-200 transition-colors font-medium"
                 >
-                  <ArrowRight className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-                  Open Source Licensing Guide
+                  <ArrowRight className="mr-2 h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
+                  Linux, Command Line Interface, and Git Essentials
+                </Link>
+              </motion.li>
+              <motion.li
+                className="p-3 md:p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green transition-all shadow-md hover:shadow-green-500/10"
+                whileHover={{ x: 10, backgroundColor: "rgba(31, 41, 55, 0.8)" }}
+              >
+                <Link
+                  href="https://github.com/thefossclub/resources#cybersecurity--ethical-hacking"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center text-base sm:text-lg text-gray-900 dark:text-white hover:text-black dark:hover:text-gray-200 transition-colors font-medium"
+                >
+                  <ArrowRight className="mr-2 h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
+                  Cybersecurity and Ethical Hacking Principles
                 </Link>
               </motion.li>
             </ul>
