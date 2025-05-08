@@ -19,15 +19,22 @@ export default function Navbar({ activeSection }: NavbarProps) {
   useEffect(() => {
     setMounted(true)
 
+    let ticking = false
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setScrolled(true)
-      } else {
-        setScrolled(false)
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          if (window.scrollY > 50) {
+            setScrolled(true)
+          } else {
+            setScrolled(false)
+          }
+          ticking = false
+        })
+        ticking = true
       }
     }
 
-    window.addEventListener("scroll", handleScroll)
+    window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
@@ -76,6 +83,11 @@ export default function Navbar({ activeSection }: NavbarProps) {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
+        style={{ 
+          willChange: 'transform',
+          transform: 'translateZ(0)',
+          backfaceVisibility: 'hidden'
+        }}
       >
         <motion.div
           className={`container mx-auto transition-all duration-300 ${
@@ -86,6 +98,11 @@ export default function Navbar({ activeSection }: NavbarProps) {
                  md:rounded-full md:bg-white/10 md:dark:bg-black/80 md:backdrop-blur-md md:border md:border-gray-200/20 md:dark:border-gray-800/50 md:px-6"
               : "px-4"
           }`}
+          style={{ 
+            willChange: 'transform, opacity',
+            transform: 'translateZ(0)',
+            backfaceVisibility: 'hidden'
+          }}
         >
           <nav className="flex justify-between items-center">
             <div className="flex items-center">

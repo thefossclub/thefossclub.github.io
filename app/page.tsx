@@ -37,23 +37,29 @@ export default function Home() {
   }
 
   useEffect(() => {
+    let ticking = false
     const handleScroll = () => {
-      const scrollPosition = window.scrollY + 100
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrollPosition = window.scrollY + 100
+          const sections = Object.keys(sectionRefs) as Array<keyof typeof sectionRefs>
 
-      const sections = Object.keys(sectionRefs) as Array<keyof typeof sectionRefs>;
-
-      for (const sectionName of sections) {
-        const ref = sectionRefs[sectionName].current
-        if (ref) {
-          if (scrollPosition >= ref.offsetTop && scrollPosition < ref.offsetTop + ref.offsetHeight) {
-            setActiveSection(sectionName)
-            break
+          for (const sectionName of sections) {
+            const ref = sectionRefs[sectionName].current
+            if (ref) {
+              if (scrollPosition >= ref.offsetTop && scrollPosition < ref.offsetTop + ref.offsetHeight) {
+                setActiveSection(sectionName)
+                break
+              }
+            }
           }
-        }
+          ticking = false
+        })
+        ticking = true
       }
     }
 
-    window.addEventListener("scroll", handleScroll)
+    window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
@@ -190,7 +196,13 @@ export default function Home() {
         ref={sectionRefs.home}
         id="home"
         className="relative h-screen flex items-center justify-center overflow-hidden z-10 px-4"
-        style={{ opacity: heroOpacity, scale: heroScale }}
+        style={{ 
+          opacity: heroOpacity,
+          scale: heroScale,
+          willChange: 'transform, opacity',
+          transform: 'translateZ(0)',
+          backfaceVisibility: 'hidden'
+        }}
       >
         <div className="absolute inset-0 flex items-center justify-center hidden md:flex">
           <HeroSphere />
