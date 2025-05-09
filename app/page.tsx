@@ -891,12 +891,12 @@ export default function Home() {
 
       {/* Footer - Render only when mounted */}
       {mounted && (
-        <footer className="py-10 md:py-12 border-t border-gray-800 dark:border-gray-800 footer-gradient px-4 sm:px-6">
+        <footer className="py-10 md:py-12 border-t border-gray-800 dark:border-gray-800 footer-gradient px-4 sm:px-6 bg-white dark:bg-black/80 backdrop-blur-sm">
           <div className="container mx-auto">
             <div className="flex flex-col md:flex-row justify-between items-center mb-10 md:mb-12">
               <div className="mb-8 md:mb-0 text-center md:text-left">
                 <div className="flex items-center justify-center md:justify-start mb-4">
-                  <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-green rounded-full flex items-center justify-center mr-3 md:mr-4 glow-effect shadow-lg shadow-green-500/30">
+                  <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-green rounded-full flex items-center justify-center mr-3 md:mr-4 glow-effect shadow-lg shadow-green-500/20">
                     <span className="text-white font-bold text-xs md:text-sm">FC</span>
                   </div>
                   <h3 className="text-lg font-bold text-gray-800 dark:text-white">The FOSS Club</h3>
