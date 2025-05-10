@@ -84,7 +84,14 @@ export default function HeroSphere() {
         ctx.arc(projectedX, projectedY, point.size * scale, 0, Math.PI * 2)
 
         if (theme === "dark") {
-          ctx.fillStyle = `rgba(${Math.min(50, greenValue)}, ${Math.min(200, greenValue)}, ${blueValue}, ${opacity * 0.8})`
+          // Make particles near the center brighter in dark mode
+          // opacity is higher near the center (rotatedZ is higher)
+          // We'll interpolate from green to white as opacity increases
+          const centerBlend = opacity // 0 (far) to 1 (center)
+          const r = Math.round(50 + (205 * centerBlend)) // 50 to 255
+          const g = Math.round(200 + (55 * centerBlend)) // 200 to 255
+          const b = Math.round(0 + (255 * centerBlend)) // 0 to 255
+          ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${opacity * 0.8})`
         } else {
           ctx.fillStyle = `rgba(${Math.min(20, greenValue)}, ${Math.min(150, greenValue)}, ${blueValue}, ${opacity * 0.8})`
         }
