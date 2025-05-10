@@ -86,4 +86,3 @@ export default function ScrollingTools({ tools }: ScrollingToolsProps) {
     </div>
   )
 }
-
