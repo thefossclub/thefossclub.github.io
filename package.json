@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -55,7 +55,7 @@
     "react-hook-form": "^7.56.3",
     "react-resizable-panels": "^2.1.9",
     "recharts": "2.15.3",
-    "sonner": "^1.7.1",
+    "sonner": "^2.0.3",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
     "vaul": "^1.1.2",
