@@ -184,66 +184,82 @@ export default function Navbar({ activeSection }: NavbarProps) {
 
             {/* Mobile Navigation */}
             <AnimatePresence>
-              {isOpen && (
-                <motion.div
-                  className="fixed inset-0 bg-white dark:bg-black z-40 flex flex-col items-center justify-center"
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.3 }}
+            {isOpen && (
+              <motion.div
+                className="fixed inset-0 h-screen w-screen bg-white dark:bg-black z-40 flex flex-col items-center justify-center overflow-y-auto lg:hidden"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <button
+                  onClick={toggleMenu}
+                  className="absolute top-6 right-6 text-gray-700 dark:text-gray-300 text-3xl"
                 >
-                  <ul className="flex flex-col items-center space-y-6">
-                    {navLinks.map((link) => (
-                      <motion.li
-                        key={link.name}
-                        initial={{ y: 20, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ duration: 0.3, delay: 0.1 }}
-                      >
-                        <Link
-                          href={link.href}
-                          className={`text-xl font-medium ${
-                            activeSection === link.name.toLowerCase()
-                              ? "text-green-500"
-                              : "text-gray-700 dark:text-gray-300"
-                          }`}
-                          onClick={toggleMenu}
-                        >
-                          {link.name}
-                        </Link>
-                      </motion.li>
-                    ))}
+                  
+                </button>
+
+                {/* Links */}
+                <ul className="flex flex-col items-center justify-center space-y-8 w-full px-6">
+                  {navLinks.map((link) => (
                     <motion.li
+                      key={link.name}
                       initial={{ y: 20, opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}
-                      transition={{ duration: 0.3, delay: 0.2 }}
+                      transition={{ duration: 0.3 }}
+                      className="w-full text-center"
                     >
                       <Link
-                        href="/register"
-                        className="px-6 py-3 bg-gradient-green text-white rounded-full text-lg font-medium hover:opacity-90 transition-opacity btn-glow"
+                        href={link.href}
+                        className={`block py-3 text-xl font-medium ${
+                          activeSection === link.name.toLowerCase()
+                            ? "text-green-500"
+                            : "text-gray-700 dark:text-gray-300"
+                        }`}
                         onClick={toggleMenu}
                       >
-                        Join Now
+                        {link.name}
                       </Link>
                     </motion.li>
-                    <motion.li
-                      initial={{ y: 20, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      transition={{ duration: 0.3, delay: 0.3 }}
+                  ))}
+
+                  {/* Join Now Button */}
+                  <motion.li
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.3, delay: 0.1 }}
+                    className="w-full text-center"
+                  >
+                    <Link
+                      href="/register"
+                      className="block w-full max-w-xs mx-auto px-6 py-3 bg-gradient-green text-white rounded-full text-lg font-medium hover:opacity-90 transition-opacity btn-glow"
+                      onClick={toggleMenu}
                     >
-                      <Link
-                        href="/login"
-                        className="px-6 py-3 bg-gradient-green-blue text-white rounded-full text-lg font-medium hover:opacity-90 transition-opacity flex items-center btn-glow"
-                        onClick={toggleMenu}
-                      >
-                        <LogIn className="h-5 w-5 mr-2" />
-                        Login
-                      </Link>
-                    </motion.li>
-                  </ul>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                      Join Now
+                    </Link>
+                  </motion.li>
+
+                  {/* Login Button */}
+                  <motion.li
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.3, delay: 0.2 }}
+                    className="w-full text-center"
+                  >
+                    <Link
+                      href="/login"
+                      className="block w-full max-w-xs mx-auto px-6 py-3 bg-gradient-green-blue text-white rounded-full text-lg font-medium hover:opacity-90 transition-opacity flex items-center justify-center btn-glow"
+                      onClick={toggleMenu}
+                    >
+                      <LogIn className="h-5 w-5 mr-2" />
+                      Login
+                    </Link>
+                  </motion.li>
+                </ul>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
           </nav>
         </motion.div>
       </motion.header>
