@@ -48,7 +48,7 @@ export default function Dashboard() {
         }}
       >
         <div className="flex items-center space-x-3 mb-8">
-          <img src="/favicon.ico" alt="Logo" className="w-10 h-10 rounded-full shadow-lg" />
+          <img src="/logo.ico" alt="Logo" className="w-10 h-10 rounded-none shadow-lg" />
           <span className="text-2xl font-bold tracking-tight">FOSS Club</span>
         </div>
         <nav className="flex flex-col space-y-4">

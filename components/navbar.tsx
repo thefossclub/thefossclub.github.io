@@ -106,8 +106,12 @@ export default function Navbar({ activeSection }: NavbarProps) {
         >
           <nav className="flex justify-between items-center">
             <div className="flex items-center">
-              <div className="w-10 h-10 bg-gradient-green rounded-full flex items-center justify-center mr-3 glow-effect-green">
-                <span className="text-white font-bold text-sm">FC</span>
+              <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center mr-3 glow-effect-green">
+                <img
+                  src={theme === "dark" ? "/The_FOSS_Club.png" : "/The FOSS Club Logo Dark.png"}
+                  alt="FC"
+                  className="w-20 h-20 md:w-28 md:h-28 object-contain mx-auto"
+                />
               </div>
               <Link
                 href="#"
