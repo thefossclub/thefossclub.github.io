@@ -90,13 +90,13 @@ export default function Navbar({ activeSection }: NavbarProps) {
         }}
       >
         <motion.div
-          className={`container mx-auto transition-all duration-300 ${
+          className={`container mx-auto transition-all duration-300 backdrop-blur-lg ${
             scrolled
               ? "mx-4 px-4 py-2 shadow-lg \
-                 bg-white dark:bg-gray-950 \
+                 bg-white/60 dark:bg-gray-950/60 \
                  border-b border-gray-200 dark:border-gray-800 \
-                 md:rounded-full md:bg-white/10 md:dark:bg-black/80 md:backdrop-blur-md md:border md:border-gray-200/20 md:dark:border-gray-800/50 md:px-6"
-              : "px-4"
+                 md:rounded-full md:bg-white/10 md:dark:bg-black/80 md:backdrop-blur-md md:border md:border-gray-200/20 md:dark:border-gray-800/50 md:px-6 md:backdrop-blur-lg"
+              : "px-4 bg-white/40 dark:bg-gray-950/40 md:backdrop-blur-lg"
           }`}
           style={{ 
             willChange: 'transform, opacity',
@@ -104,25 +104,39 @@ export default function Navbar({ activeSection }: NavbarProps) {
             backfaceVisibility: 'hidden'
           }}
         >
-          <nav className="flex justify-between items-center">
-            <div className="flex items-center">
-              <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center mr-3 glow-effect-green">
-                <img
-                  src={theme === "dark" ? "/The_FOSS_Club.png" : "/The FOSS Club Logo Dark.png"}
-                  alt="FC"
-                  className="w-20 h-20 md:w-28 md:h-28 object-contain mx-auto"
-                />
+          <nav className="flex justify-center items-center">
+            {/* Logo and Title - left aligned */}
+            <div className="flex items-center justify-start flex-1 min-w-0">
+              {/* Logo and Title together */}
+              <div className="flex items-center space-x-3 min-w-0">
+                <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center glow-effect-green flex-shrink-0">
+                  {mounted ? (
+                    <img
+                      src={
+                        resolvedTheme === "dark"? "/The_FOSS_Club.png": "/The FOSS Club Logo Dark.png"
+                      }
+                      alt="FC"
+                      className="w-20 h-20 md:w-28 md:h-28 object-contain mx-auto"
+                    />
+                  ) : (
+                    <img
+                      src="/The FOSS Club Logo Dark.png"
+                      alt="FC"
+                      className="w-20 h-20 md:w-28 md:h-28 object-contain mx-auto"
+                    />
+                  )}
+                </div>
+                <Link
+                  href="#"
+                  className={`text-lg font-bold truncate ${mounted ? (resolvedTheme === "dark" ? "text-white" : "text-gray-800") : "text-gray-800 dark:text-white"} z-50`}
+                >
+                  The FOSS Club
+                </Link>
               </div>
-              <Link
-                href="#"
-                className={`text-lg font-bold ${mounted ? (resolvedTheme === "dark" ? "text-white" : "text-gray-800") : "text-gray-800 dark:text-white"} z-50`}
-              >
-                The FOSS Club
-              </Link>
             </div>
 
-            {/* Desktop Navigation */}
-            <ul className="hidden md:flex items-center space-x-6">
+            {/* Desktop Navigation - centered */}
+            <ul className="hidden md:flex items-center space-x-6 justify-center flex-1">
               {navLinks.map((link) => (
                 <li key={link.name}>
                   <Link
@@ -160,7 +174,8 @@ export default function Navbar({ activeSection }: NavbarProps) {
               </li>
             </ul>
 
-            <div className="flex items-center space-x-4 z-50">
+            {/* Theme toggle and mobile menu button - right aligned */}
+            <div className="flex items-center space-x-4 z-50 justify-end flex-1">
               <button
                 onClick={toggleTheme}
                 className="p-2 rounded-full text-gray-700 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-400 hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors btn-glow"
@@ -189,63 +204,81 @@ export default function Navbar({ activeSection }: NavbarProps) {
             {/* Mobile Navigation */}
             <AnimatePresence>
               {isOpen && (
-                <motion.div
-                  className="fixed inset-0 bg-white dark:bg-black z-40 flex flex-col items-center justify-center"
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <ul className="flex flex-col items-center space-y-6">
-                    {navLinks.map((link) => (
-                      <motion.li
-                        key={link.name}
-                        initial={{ y: 20, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ duration: 0.3, delay: 0.1 }}
-                      >
-                        <Link
-                          href={link.href}
-                          className={`text-xl font-medium ${
-                            activeSection === link.name.toLowerCase()
-                              ? "text-green-500"
-                              : "text-gray-700 dark:text-gray-300"
-                          }`}
-                          onClick={toggleMenu}
+                <>
+                  {/* Backdrop */}
+                  <motion.div
+                    className="fixed inset-0 bg-black/40 z-40"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    onClick={toggleMenu} // closes menu when tapped outside
+                  />
+                  {/* Menu Panel */}
+                  <motion.div
+                    className="fixed top-1/2 -translate-x-1/2 -translate-y-1/2 z-50 flex items-center justify-center"
+                    initial={{ opacity: 0, scale: 0.95, y: -20 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.95, y: -20 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <div
+                      className="relative bg-black/80 dark:bg-black/90 rounded-2xl shadow-2xl px-4 py-6 w-[90vw] max-w-xs mx-auto flex flex-col items-center backdrop-blur-xl border border-gray-200/40 dark:border-gray-800/60"
+                      style={{ maxHeight: '60vh', overflowY: 'auto' }}
+                    >
+                      <ul className="flex flex-col items-center space-y-4 mt-2 w-full">
+                        {navLinks.map((link) => (
+                          <motion.li
+                            key={link.name}
+                            initial={{ y: 20, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ duration: 0.3, delay: 0.1 }}
+                          >
+                            <Link
+                              href={link.href}
+                              className={`text-lg font-medium ${
+                                activeSection === link.name.toLowerCase()
+                                  ? "text-green-500"
+                                  : "text-gray-700 dark:text-gray-300"
+                              }`}
+                              onClick={toggleMenu}
+                            >
+                              {link.name}
+                            </Link>
+                          </motion.li>
+                        ))}
+                        <motion.li
+                          initial={{ y: 20, opacity: 0 }}
+                          animate={{ y: 0, opacity: 1 }}
+                          transition={{ duration: 0.3, delay: 0.2 }}
                         >
-                          {link.name}
-                        </Link>
-                      </motion.li>
-                    ))}
-                    <motion.li
-                      initial={{ y: 20, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      transition={{ duration: 0.3, delay: 0.2 }}
-                    >
-                      <Link
-                        href="/register"
-                        className="px-6 py-3 bg-gradient-green text-white rounded-full text-lg font-medium hover:opacity-90 transition-opacity btn-glow"
-                        onClick={toggleMenu}
-                      >
-                        Join Now
-                      </Link>
-                    </motion.li>
-                    <motion.li
-                      initial={{ y: 20, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      transition={{ duration: 0.3, delay: 0.3 }}
-                    >
-                      <Link
-                        href="/login"
-                        className="px-6 py-3 bg-gradient-green-blue text-white rounded-full text-lg font-medium hover:opacity-90 transition-opacity flex items-center btn-glow"
-                        onClick={toggleMenu}
-                      >
-                        <LogIn className="h-5 w-5 mr-2" />
-                        Login
-                      </Link>
-                    </motion.li>
-                  </ul>
-                </motion.div>
+                          <Link
+                            href="https://opnform.com/forms/the-foss-club-registration-nst4zs"
+                            target="_blank"
+                            className="px-4 py-2 bg-gradient-green text-white rounded-full text-base font-medium hover:opacity-90 transition-opacity btn-glow"
+                            onClick={toggleMenu}
+                          >
+                            Join Now
+                          </Link>
+                        </motion.li>
+                        <motion.li
+                          initial={{ y: 20, opacity: 0 }}
+                          animate={{ y: 0, opacity: 1 }}
+                          transition={{ duration: 0.3, delay: 0.3 }}
+                        >
+                          <Link
+                            href="/login"
+                            className="px-4 py-2 bg-gradient-green-blue text-white rounded-full text-base font-medium hover:opacity-90 transition-opacity flex items-center btn-glow"
+                            onClick={toggleMenu}
+                          >
+                            <LogIn className="h-5 w-5 mr-2" />
+                            Login
+                          </Link>
+                        </motion.li>
+                      </ul>
+                    </div>
+                  </motion.div>
+                </>
               )}
             </AnimatePresence>
           </nav>
@@ -254,4 +287,3 @@ export default function Navbar({ activeSection }: NavbarProps) {
     </AnimatePresence>
   )
 }
-

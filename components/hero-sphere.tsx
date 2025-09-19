@@ -8,7 +8,7 @@ export default function HeroSphere() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const { theme } = useTheme()
   const radius = 150
-  const numPoints = 500
+  const numPoints = 510
   const points = useRef<Array<{ x: number; y: number; z: number; size: number; speed: number; angle: number }>>([])
   const animationFrameId = useRef<number | null>(null)
   const isIntersecting = useRef(true)
