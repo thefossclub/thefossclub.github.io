@@ -25,6 +25,7 @@ export default function Home() {
   const { theme, setTheme } = useTheme()
   const [coreTeamExpanded, setCoreTeamExpanded] = useState(true)
   const [membersExpanded, setMembersExpanded] = useState(false)
+  const [MentorsExpanded, setMentorsExpanded] = useState(false)
   const [mounted, setMounted] = useState(false)
 
   const sectionRefs = {
@@ -118,49 +119,115 @@ export default function Home() {
       image: "/placeholder.svg?height=300&width=400",
     },
   ]
-
+  const Mentors = [
+    { name: "Vaibhav Pratap Singh", role: "CEH", color: "bg-yellow-500", link: "https://v8v88v8v88.com"  },
+    { name: "Diti Vasisht", role: "AI Engineer", color: "bg-violet-500", link: "https://diti.is-a.dev" },
+    { name: "Ashwany Kumar Sharma", role: "WEB Dev", color: "bg-purple-500", link: "https://example.com/tanmay" },
+  ]
   const coreTeam = [
     { name: "Ms. Eirty Telang Kapoor", role: "Convenor", color: "bg-orange-500" },
-    { name: "Vaibhav Pratap Singh", role: "President", color: "bg-yellow-500" },
-    { name: "Suryansh Sharma", role: "Vice President", color: "bg-blue-500" },
-    { name: "Sachin Singh Adhikari", role: "Secretary", color: "bg-green-500" },
-    { name: "Ashwany Kumar Sharma", role: "Secretary", color: "bg-purple-500" },
-    { name: "Riyansh Varshney", role: "Event Coordinator", color: "bg-pink-500" },
-    { name: "Harshvardhan", role: "Event Coordinator", color: "bg-indigo-500" },
-    { name: "Diksha Chauhan", role: "Event Coordinator", color: "bg-teal-500" },
-    { name: "Shresth Gupta", role: "Event Coordinator", color: "bg-cyan-500" },
-    { name: "Nishchal Anurag", role: "PR & Outreach", color: "bg-lime-500" },
-    { name: "Satyam Mishra", role: "PR & Outreach", color: "bg-emerald-500" },
-    { name: "Diti Vasisht", role: "PR & Outreach", color: "bg-violet-500" },
-    { name: "Jayesh Bisht", role: "PR & Outreach", color: "bg-fuchsia-500" },
-    { name: "Arul S Bharadwaj", role: "Graphic Designer", color: "bg-rose-500" },
-    { name: "Lovish Kukreja", role: "Graphic Designer", color: "bg-amber-500" },
-    { name: "Tiya Jain", role: "Social Media", color: "bg-sky-500" },
-    { name: "Vanya Raman", role: "Social Media", color: "bg-red-500" },
-    { name: "Srijan Ranjan", role: "Social Media", color: "bg-blue-500" },
-    { name: "Vinay Chauhan", role: "Video Editor", color: "bg-green-500" },
-    { name: "Gautam Kumar", role: "Treasurer", color: "bg-purple-500" },
-  ]
-
-  const members = [
-    { name: "Tanmay Maheshwari", role: "Low Level", color: "bg-yellow-500" },
-    { name: "Harshit Vashisht", role: "Web Dev.", color: "bg-blue-500" },
-    { name: "Mayank Choubey", role: "DSA Guy", color: "bg-green-500" },
-    { name: "TSR", role: "UI/UX Designer", color: "bg-purple-500" },
-    { name: "Krish", role: "Friendly Spiderman", color: "bg-pink-500" },
-    { name: "Avneesh", role: "Designer", color: "bg-indigo-500" },
-    { name: "Chitranjan", role: "Front-End", color: "bg-teal-500" },
-    { name: "Satyam", role: "Meme Lord", color: "bg-teal-500" },
-    { name: "Abhishek Thapa", role: "Back-End", color: "bg-cyan-500" },
-    { name: "Aditya Sachdeva", role: "UI/UX and Blender", color: "bg-lime-500" },
-    { name: "Nitya Kapoor", role: "Cyber Security", color: "bg-emerald-500" },
-    { name: "Pragya Paramita", role: "Web dev.", color: "bg-violet-500" },
-    { name: "Inzemam ul haq", role: "Senior", color: "bg-red-500" },
-    { name: "Hilal Ahmad", role: "AI Guy", color: "bg-orange-500" },
-    { name: "Kilari teja", role: "Industry Mentor", color: "bg-blue-500" },
-    { name: "Ravpreet Maini", role: "Cloud Expert", color: "bg-green-500" },
-    { name: "Shristi Pandey", role: "Researcher", color: "bg-purple-500" },
-    { name: "Palak", role: "Graphics Designer", color: "bg-pink-500" },
+    { 
+      name: "Tanmay Maheshwari", 
+      role: "Lead", 
+      color: "bg-yellow-500", 
+      link: "https://example.com/tanmay", 
+    },
+    { 
+      name: "Sanjam Kaur", 
+      role: "Co-Lead", 
+      color: "bg-blue-500", 
+      link: "https://example.com/sanjam", 
+    },
+    { 
+      name: "Jayesh Bisht", 
+      role: "Secretary", 
+      color: "bg-emerald-500", 
+      link: "https://deevi-conf.github.io/personal-clay-website/", 
+    },
+    { 
+      name: "Avneesh Kumar", 
+      role: "Community Manager", 
+      color: "bg-green-500", 
+      link: "https://my-website-seven-self-94.vercel.app/", 
+    },
+    { 
+      name: "Aditya Sachdeva", 
+      role: "Graphic Designer", 
+      color: "bg-sky-500", 
+      link: "https://adi-333.github.io/Portfolio-2/potfolio2/index.html", 
+    },
+    { 
+      name: "Nitya", 
+      role: "Graphic Designer", 
+      color: "bg-lime-500", 
+      link: "https://lishhgoyo.github.io/", 
+    },
+    { 
+      name: "Krish Gupta", 
+      role: "Event Manager", 
+      color: "bg-red-500",
+      link: "https://akris.is-a.dev", 
+    },
+    { 
+      name: "Bhumi Aggarwal", 
+      role: "Event Manager",
+      color: "bg-indigo-500", 
+      link: "https://bhumiaggarwal.github.io/my-website/", 
+    },
+    { 
+      name: "Aditya Singh", 
+      role: "Event Manager", 
+      color: "bg-teal-500", 
+      link: "https://example.com/adityasingh", 
+    },
+    { 
+      name: "Harshit Vashisht", 
+      role: "Event Manager", 
+      color: "bg-cyan-500", 
+      link: "https://iamhv856156.github.io/Hv_Garage/", 
+    },
+    {
+      name: "Tarun Singh", 
+      role: "Community Manager", 
+      color: "bg-violet-500", 
+      link: "https://portfolio-chi-kohl-jx955bhsg8.vercel.app/", 
+    },
+    { 
+      name: "Kartik Gupta", 
+      role: "Community Manager", 
+      color: "bg-amber-500", 
+      link: "https://kartikportfolio0105.netlify.app/", 
+    },
+    { 
+      name: "Aditya Mishra", 
+      role: "PR & Outreach", 
+      color: "bg-emerald-700", 
+      link: "https://adityamishra-github-io.vercel.app/", 
+    },
+    { 
+      name: "Anmol Upadhyay", 
+      role: "Event Manager", 
+      color: "bg-purple-500", 
+      link: "https://anmol1789-github-io.vercel.app/", 
+    },
+    { 
+      name: "Manya Yadav", 
+      role: "PR & Outreach", 
+      color: "bg-blue-700", 
+      link: "https://example.com/manya", 
+    },
+    { 
+      name: "Satyam Raj", 
+      role: "Videographer (DOP)", 
+      color: "bg-fuchsia-700", 
+      link: "https://portfolio-8pl7.vercel.app/", 
+    },
+    { 
+      name: "Ishita Kaushik", 
+      role: "Social Media Manager", 
+      color: "bg-orange-600", 
+      link: "https://example.com/ishita", 
+    },
   ]
 
   const tools = [
@@ -195,7 +262,7 @@ export default function Home() {
       <motion.section
         ref={sectionRefs.home}
         id="home"
-        className="relative h-screen flex items-center justify-center overflow-hidden z-10 px-4"
+        className="relative h-screen flex items-center justify-center overflow-hidden z-10 px-2 sm:px-4 lg:px-8"
         style={{ 
           opacity: heroOpacity,
           scale: heroScale,
@@ -208,10 +275,10 @@ export default function Home() {
           <HeroSphere />
         </div>
 
-        <div className="container mx-auto z-10 flex flex-col md:flex-row items-center justify-between">
+        <div className="container mx-auto z-10 flex flex-col md:flex-row items-center justify-between px-2 sm:px-4 lg:px-8">
           {/* Hero Text Container */}
           <motion.div
-            className="md:w-1/2 text-center md:text-left mb-12 md:mb-0"
+            className="w-full md:w-1/2 text-center md:text-left mb-8 md:mb-0 px-2 sm:px-4"
             initial="hidden"
             animate="visible"
             variants={{
@@ -226,13 +293,13 @@ export default function Home() {
             }}
           >
             <motion.h1
-              className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 text-gradient-green"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-gradient-green"
               variants={{ hidden: { opacity: 0, x: -50 }, visible: { opacity: 1, x: 0, transition: { duration: 0.6 } } }}
             >
               Welcome to The FOSS Club!
             </motion.h1>
             <motion.p
-              className="text-lg sm:text-xl md:text-2xl mb-6 md:mb-8 text-gray-700 dark:text-gray-200"
+              className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 md:mb-8 text-gray-700 dark:text-gray-200"
               variants={{ hidden: { opacity: 0, x: -50 }, visible: { opacity: 1, x: 0, transition: { duration: 0.6 } } }}
             >
               <span className="font-semibold">Learn, build, and collaborate</span> with fellow open-source enthusiasts.
@@ -252,7 +319,7 @@ export default function Home() {
           </motion.div>
 
           <motion.div
-            className="md:w-1/2 mt-12 md:mt-0 relative"
+            className="w-full md:w-1/2 mt-8 md:mt-0 relative px-2 sm:px-4"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{
               opacity: 1,
@@ -319,7 +386,7 @@ export default function Home() {
 
             {/* Apply class to the main container for hover targeting */}
              {/* Restored size */}
-            <div className="relative w-64 h-64 md:w-80 md:h-80 mx-auto wafer-circle"> 
+            <div className="relative w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 mx-auto wafer-circle"> 
               {/* Base background, pattern container, and pseudo-elements */}
               <div
                 className="absolute inset-0 rounded-full shadow-xl shadow-green-400/30 overflow-hidden wafer-bg" 
@@ -373,7 +440,7 @@ export default function Home() {
       </motion.section>
 
       {/* About Section */}
-      <section ref={sectionRefs.about} id="about" className="py-16 md:py-20 relative z-10 px-4 sm:px-6">
+      <section ref={sectionRefs.about} id="about" className="py-10 sm:py-16 md:py-20 relative z-10 px-2 sm:px-4 lg:px-8">
         <div className="container mx-auto">
           <motion.h2
             className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green drop-shadow-xl"
@@ -386,7 +453,7 @@ export default function Home() {
           </motion.h2>
 
           <motion.div
-            className="max-w-4xl mx-auto backdrop-blur-sm p-6 md:p-8 rounded-3xl border border-gray-800 dark:border-gray-800 bg-white/5 dark:bg-black/5 shadow-xl shadow-green-500/5"
+            className="max-w-full sm:max-w-4xl mx-auto backdrop-blur-sm p-4 sm:p-6 md:p-8 rounded-3xl border border-gray-800 dark:border-gray-800 bg-white/5 dark:bg-black/5 shadow-xl shadow-green-500/5"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -410,7 +477,7 @@ export default function Home() {
             >
               Core Pillars
             </h3>
-            <ul className="space-y-3 md:space-y-4">
+            <ul className="space-y-2 sm:space-y-3 md:space-y-4">
               <motion.li
                 className="p-3 md:p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green shadow-md hover:shadow-green-500/10 transition-all text-sm sm:text-base"
                 whileHover={{ x: 10 }}
@@ -437,7 +504,7 @@ export default function Home() {
           </motion.div>
 
           <motion.div
-            className="mt-16 md:mt-20"
+            className="mt-10 sm:mt-16 md:mt-20"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -455,7 +522,7 @@ export default function Home() {
       </section>
 
       {/* Projects Section */}
-      <section ref={sectionRefs.projects} id="projects" className="py-16 md:py-20 relative z-10 px-4 sm:px-6">
+      <section ref={sectionRefs.projects} id="projects" className="py-10 sm:py-16 md:py-20 relative z-10 px-2 sm:px-4 lg:px-8">
         <div className="container mx-auto">
           <motion.h2
             className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green drop-shadow-xl"
@@ -468,7 +535,7 @@ export default function Home() {
             Our Projects
           </motion.h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
             {projects.map((project, index) => (
               <ProjectCard
                 key={index}
@@ -483,7 +550,7 @@ export default function Home() {
       </section>
 
       {/* Events Section */}
-      <section ref={sectionRefs.events} id="events" className="py-16 md:py-20 relative z-10 px-4 sm:px-6">
+      <section ref={sectionRefs.events} id="events" className="py-10 sm:py-16 md:py-20 relative z-10 px-2 sm:px-4 lg:px-8">
         <div className="container mx-auto">
           <motion.h2
             className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green drop-shadow-xl"
@@ -495,7 +562,7 @@ export default function Home() {
             Events
           </motion.h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
             {events.map((event, index) => (
               <EventCard
                 key={index}
@@ -509,14 +576,14 @@ export default function Home() {
           </div>
 
           <motion.div
-            className="mt-12 md:mt-16 p-6 md:p-8 rounded-3xl border border-green-900/50 bg-gradient-to-r from-green-900/10 to-green-900/10 dark:from-green-900/30 dark:to-green-900/30 shadow-xl shadow-green-500/10 bg-black/10 dark:bg-black/40"
+            className="mt-8 sm:mt-12 md:mt-16 p-4 sm:p-6 md:p-8 rounded-3xl border border-green-900/50 bg-gradient-to-r from-green-900/10 to-green-900/10 dark:from-green-900/30 dark:to-green-900/30 shadow-xl shadow-green-500/10 bg-black/10 dark:bg-black/40"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
             <div className="flex flex-col md:flex-row items-center">
-              <div className="md:w-1/2 mb-6 md:mb-0 md:pr-8">
+              <div className="w-full md:w-1/2 mb-6 md:mb-0 md:pr-8">
                 <h3 
                   className="text-2xl sm:text-3xl font-bold mb-4 text-gradient-green drop-shadow-md"
                   style={{ transform: 'translateZ(0)' }}
@@ -540,11 +607,11 @@ export default function Home() {
                   <li>• Intro to OpenAI</li>
                 </ul>
               </div>
-              <div className="md:w-1/2">
+              <div className="w-full md:w-1/2">
                 <img
                   src="/placeholder.svg?height=400&width=500"
                   alt="FOSS Hack 2025"
-                  className="rounded-lg shadow-2xl w-full"
+                  className="rounded-lg shadow-2xl w-full h-auto max-h-64 sm:max-h-80 object-cover"
                 />
               </div>
             </div>
@@ -553,7 +620,7 @@ export default function Home() {
       </section>
 
       {/* Tools Section */}
-      <section id="tools" className="py-16 md:py-20 relative overflow-hidden z-10 px-4 sm:px-6">
+      <section id="tools" className="py-10 sm:py-16 md:py-20 relative overflow-hidden z-10 px-2 sm:px-4 lg:px-8">
         <div className="container mx-auto">
           <motion.h2
             className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green drop-shadow-xl"
@@ -570,7 +637,7 @@ export default function Home() {
       </section>
 
       {/* Team Section */}
-      <section ref={sectionRefs.team} id="team" className="py-16 md:py-20 relative z-10 px-4 sm:px-6">
+      <section ref={sectionRefs.team} id="team" className="py-10 sm:py-16 md:py-20 relative z-10 px-2 sm:px-4 lg:px-8">
         <div className="container mx-auto">
           <motion.h2
             className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green drop-shadow-xl"
@@ -582,8 +649,8 @@ export default function Home() {
             Our Team
           </motion.h2>
 
-          {/* Core Team Section */}
-          <div className="mb-12 md:mb-16">
+          {/* Mentors Section */}
+          <div className="mb-8 sm:mb-12 md:mb-16">
             <div className="flex justify-between items-center mb-6 md:mb-8">
               <motion.h3
                 className="text-xl sm:text-2xl font-bold text-green-500"
@@ -592,7 +659,69 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                Core Team
+                Mentors
+              </motion.h3>
+              <button
+                onClick={() => setMentorsExpanded(!MentorsExpanded)}
+                className="flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-gradient-green text-white rounded-full text-xs sm:text-sm font-medium hover:opacity-90 transition-all"
+                style={{
+                  boxShadow:
+                    mounted
+                      ? theme === "dark"
+                        ? "0 0 15px rgba(34, 179, 79, 0.5)"
+                        : "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)"
+                      : undefined,
+                }}
+              >
+                {MentorsExpanded ? (
+                  <>
+                    <span>Collapse</span>
+                    <ChevronUp className="h-4 w-4" />
+                  </>
+                ) : (
+                  <>
+                    <span>Expand</span>
+                    <ChevronDown className="h-4 w-4" />
+                  </>
+                )}
+              </button>
+            </div>
+
+            {MentorsExpanded && (
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-4 md:gap-6">
+                {Mentors.map((Mentors, index) => (
+                  <a
+                    key={index}
+                    href={Mentors.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block w-full h-full hover:scale-105 transition-transform"
+                    style={{ pointerEvents: "auto" }}
+                  >
+                    <TeamMember
+                      name={Mentors.name}
+                      role={Mentors.role}
+                      color={Mentors.color}
+                      index={index}
+                      // pointer-events handled by parent
+                    />
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Core Team Section */}
+          <div className="mb-8 sm:mb-12 md:mb-16">
+            <div className="flex justify-between items-center mb-6 md:mb-8">
+              <motion.h3
+                className="text-xl sm:text-2xl font-bold text-green-500"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                Core-Team
               </motion.h3>
               <button
                 onClick={() => setCoreTeamExpanded(!coreTeamExpanded)}
@@ -621,21 +750,30 @@ export default function Home() {
             </div>
 
             {coreTeamExpanded && (
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-4 md:gap-6">
                 {coreTeam.map((member, index) => (
-                  <TeamMember
+                  <a
                     key={index}
-                    name={member.name}
-                    role={member.role}
-                    color={member.color}
-                    index={index}
-                  />
+                    href={member.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block w-full h-full hover:scale-105 transition-transform"
+                    style={{ pointerEvents: "auto" }}
+                  >
+                    <TeamMember
+                      name={member.name}
+                      role={member.role}
+                      color={member.color}
+                      index={index}
+                      // pointer-events handled by parent
+                    />
+                  </a>
                 ))}
               </div>
             )}
           </div>
 
-          {/* Members Section */}
+          {/* Members Section 
           <div>
             <div className="flex justify-between items-center mb-6 md:mb-8">
               <motion.h3
@@ -686,12 +824,12 @@ export default function Home() {
                 ))}
               </div>
             )}
-          </div>
+          </div>*/}
         </div>
-      </section>
+      </section> 
 
       {/* Resources Section */}
-      <section ref={sectionRefs.resources} id="resources" className="py-16 md:py-20 relative z-10 px-4 sm:px-6">
+      <section ref={sectionRefs.resources} id="resources" className="py-10 sm:py-16 md:py-20 relative z-10 px-2 sm:px-4 lg:px-8">
         <div className="container mx-auto">
           <motion.h2
             className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green drop-shadow-xl"
@@ -704,13 +842,13 @@ export default function Home() {
           </motion.h2>
 
           <motion.div
-            className="max-w-4xl mx-auto backdrop-blur-sm p-6 md:p-8 rounded-3xl border border-gray-800 dark:border-gray-800 bg-white/5 dark:bg-black/5 shadow-xl shadow-green-500/5"
+            className="max-w-full sm:max-w-4xl mx-auto backdrop-blur-sm p-4 sm:p-6 md:p-8 rounded-3xl border border-gray-800 dark:border-gray-800 bg-white/5 dark:bg-black/5 shadow-xl shadow-green-500/5"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <ul className="space-y-3 md:space-y-4">
+            <ul className="space-y-2 sm:space-y-3 md:space-y-4">
               <motion.li
                 className="p-3 md:p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green transition-all shadow-md hover:shadow-green-500/10"
                 whileHover={{ x: 10, backgroundColor: "rgba(31, 41, 55, 0.8)" }}
@@ -792,7 +930,7 @@ export default function Home() {
       </section>
 
       {/* FAQ Section */}
-      <section id="faq" className="py-16 md:py-20 relative z-10 px-4 sm:px-6">
+      <section id="faq" className="py-10 sm:py-16 md:py-20 relative z-10 px-2 sm:px-4 lg:px-8">
         <div className="container mx-auto">
           <motion.h2
             className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green drop-shadow-xl"
@@ -805,7 +943,7 @@ export default function Home() {
           </motion.h2>
 
           <motion.div
-            className="max-w-4xl mx-auto space-y-4 md:space-y-6"
+            className="max-w-full sm:max-w-4xl mx-auto space-y-2 sm:space-y-4 md:space-y-6"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -891,22 +1029,26 @@ export default function Home() {
 
       {/* Footer - Render only when mounted */}
       {mounted && (
-        <footer className="py-10 md:py-12 border-t border-gray-800 dark:border-gray-800 footer-gradient px-4 sm:px-6 bg-white dark:bg-black/80 backdrop-blur-sm">
+        <footer className="py-8 sm:py-10 md:py-12 border-t border-gray-800 dark:border-gray-800 footer-gradient px-2 sm:px-4 lg:px-8 bg-white dark:bg-black/80 backdrop-blur-sm">
           <div className="container mx-auto">
-            <div className="flex flex-col md:flex-row justify-between items-center mb-10 md:mb-12">
-              <div className="mb-8 md:mb-0 text-center md:text-left">
+            <div className="flex flex-col md:flex-row justify-between items-center mb-8 sm:mb-10 md:mb-12">
+              <div className="mb-6 sm:mb-8 md:mb-0 text-center md:text-left">
                 <div className="flex items-center justify-center md:justify-start mb-4">
-                  <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-green rounded-full flex items-center justify-center mr-3 md:mr-4 glow-effect shadow-lg shadow-green-500/20">
-                    <span className="text-white font-bold text-xs md:text-sm">FC</span>
+                  <div className="w-10 h-10 md:w-12 md:h-12 bg-white flex items-center justify-center mr-2 sm:mr-3 md:mr-4 glow-effect shadow-lg shadow-green-500/20 rounded-full">
+                    <img
+                      src={theme === "dark" ? "/The_FOSS_Club.png" : "/The FOSS Club Logo Dark.png"}
+                      alt="FC"
+                      className="w-16 h-16 md:w-20 md:h-20 object-contain mx-auto"
+                    />
                   </div>
-                  <h3 className="text-lg font-bold text-gray-800 dark:text-white">The FOSS Club</h3>
+                  <h3 className="text-base sm:text-lg font-bold text-gray-800 dark:text-white">The FOSS Club</h3>
                 </div>
-                <p className="text-gray-600 dark:text-gray-400 max-w-md text-base sm:text-lg">
+                <p className="text-gray-600 dark:text-gray-400 max-w-xs sm:max-w-md text-sm sm:text-base md:text-lg">
                   Learn, build, and collaborate with fellow open-source enthusiasts in a community dedicated to free and
                   open source software.
                 </p>
               </div>
-              <div className="flex flex-wrap justify-center gap-4 md:gap-6">
+              <div className="flex flex-wrap justify-center gap-2 sm:gap-4 md:gap-6">
                 <a
                   href="https://github.com/thefossclub"
                   target="_blank"
@@ -945,9 +1087,8 @@ export default function Home() {
                 </a>
               </div>
             </div>
-
             <motion.div
-              className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10 mb-8"
+              className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-10 mb-6 sm:mb-8"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
@@ -1060,13 +1201,13 @@ export default function Home() {
               </div>
             </motion.div>
 
-            <div className="text-center pt-6 border-t border-gray-800/30 dark:border-gray-800/30 relative">
+            <div className="text-center pt-4 sm:pt-6 border-t border-gray-800/30 dark:border-gray-800/30 relative">
               <p className="text-gray-500 text-sm sm:text-base">© {new Date().getFullYear()} The FOSS Club. All rights reserved.</p>
               <p className="text-gray-500 mt-1 md:mt-2 text-xs sm:text-sm">Made with 💚 by open source enthusiasts</p>
 
               <button
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                className="absolute right-0 bottom-0 mb-0 mr-0 group bg-gradient-green p-2.5 md:p-3 rounded-full text-white hover:opacity-90 transition-all shadow-lg hover:shadow-green-500/30 flex items-center justify-center"
+                className="absolute right-0 bottom-0 mb-0 mr-0 group bg-gradient-green p-2 sm:p-2.5 md:p-3 rounded-full text-white hover:opacity-90 transition-all shadow-lg hover:shadow-green-500/30 flex items-center justify-center"
                 aria-label="Back to top"
               >
                 <ChevronUp className="h-4 w-4 md:h-5 md:w-5 transition-transform group-hover:-translate-y-0.5" />
