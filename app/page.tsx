@@ -92,141 +92,156 @@ export default function Home() {
 
   const events = [
     {
-      title: "Introduction to FOSS",
-      date: "December 24, 2023",
+      title: "Linux Installation & the Power of Command Line",
+      date: "February 15, 2024",
       description:
-        "Conducted an event on the basic fundamentals of FOSS and educated students about the key terms used in the world of open source.",
-      image: "/placeholder.svg?height=300&width=400",
-    },
-    {
-      title: "Introduction to Linux and CLI",
-      date: "February 14, 2024",
-      description:
-        "Get hands-on experience installing and configuring Linux distributions and basics of Command Line Interface.",
-      image: "/placeholder.svg?height=300&width=400",
+        "Hands-on workshop on Linux installation, configuration, and basic CLI commands.",
+      image: "/Linux_installation.jpeg?height=300&width=400",
     },
     {
       title: "How_To?",
-      date: "April 12, 2024",
-      description: "A conference featuring talks, workshops, and networking opportunities.",
-      image: "/placeholder.svg?height=300&width=400",
+      date: "April 15, 2024",
+      description:
+        "Conference with talks, workshops, and networking with industry experts.",
+      image: "/How_to.jpeg?height=300&width=400",
     },
     {
-      title: "FOSS Hack Delhi-NCR",
+      title: "FOSS Hack '24",
       date: "July 27, 2024",
       description:
-        "A national level FOSS hackathon conducted by the FOSS Club at the college for the whole Delhi NCR. FOSS Hack is a hackathon conducted by FOSS United each year.",
-      image: "/placeholder.svg?height=300&width=400",
+        "Hackathon for students to develop innovative tech solutions with mentorship.",
+      image: "/Hack24.jpg?height=300&width=400",
+    },
+    {
+      title: "Incepta (Introductory Event)",
+      date: "October 14, 2024",
+      description:
+        "Introductory event for first-year students on open source, AI, and entrepreneurship.",
+      image: "/incepta.jpeg?height=300&width=400",
+    },
+    {
+      title: "Capture The Flag (CTF – Technovate)",
+      date: "October 24, 2024",
+      description:
+        "Competitive cybersecurity event with challenges to test students’ skills.",
+      image: "/Technovate.jpeg?height=300&width=400",
+    },
+    {
+      title: "FOSS Hack '25",
+      date: "February 22-23, 2025",
+      description:
+        "National-level hybrid hackathon for innovative open-source solutions.",
+      image: "/Hack25.jpg?height=300&width=400",
     },
   ]
   const Mentors = [
-    { name: "Vaibhav Pratap Singh", role: "CEH", color: "bg-yellow-500", link: "https://v8v88v8v88.com"  },
-    { name: "Diti Vasisht", role: "AI Engineer", color: "bg-violet-500", link: "https://diti.is-a.dev" },
+    { name: "Vaibhav Pratap Singh", role: "CEH", color: "bg-yellow-500", link: "https://v8v88v8v88.com" },
+    { name: "Diti Vasisht", role: "AI/ML specialist", color: "bg-violet-500", link: "https://diti.is-a.dev" },
     { name: "Ashwany Kumar Sharma", role: "WEB Dev", color: "bg-purple-500", link: "https://example.com/tanmay" },
   ]
   const coreTeam = [
     { name: "Ms. Eirty Telang Kapoor", role: "Convenor", color: "bg-orange-500" },
-    { 
-      name: "Tanmay Maheshwari", 
-      role: "Lead", 
-      color: "bg-yellow-500", 
-      link: "https://example.com/tanmay", 
-    },
-    { 
-      name: "Sanjam Kaur", 
-      role: "Co-Lead", 
-      color: "bg-blue-500", 
-      link: "https://example.com/sanjam", 
-    },
-    { 
-      name: "Jayesh Bisht", 
-      role: "Secretary", 
-      color: "bg-emerald-500", 
-      link: "https://deevi-conf.github.io/personal-clay-website/", 
-    },
-    { 
-      name: "Avneesh Kumar", 
-      role: "Community Manager", 
-      color: "bg-green-500", 
-      link: "https://my-website-seven-self-94.vercel.app/", 
-    },
-    { 
-      name: "Aditya Sachdeva", 
-      role: "Graphic Designer", 
-      color: "bg-sky-500", 
-      link: "https://adi-333.github.io/Portfolio-2/potfolio2/index.html", 
-    },
-    { 
-      name: "Nitya", 
-      role: "Graphic Designer", 
-      color: "bg-lime-500", 
-      link: "https://lishhgoyo.github.io/", 
-    },
-    { 
-      name: "Krish Gupta", 
-      role: "Event Manager", 
-      color: "bg-red-500",
-      link: "https://akris.is-a.dev", 
-    },
-    { 
-      name: "Bhumi Aggarwal", 
-      role: "Event Manager",
-      color: "bg-indigo-500", 
-      link: "https://bhumiaggarwal.github.io/my-website/", 
-    },
-    { 
-      name: "Aditya Singh", 
-      role: "Event Manager", 
-      color: "bg-teal-500", 
-      link: "https://example.com/adityasingh", 
-    },
-    { 
-      name: "Harshit Vashisht", 
-      role: "Event Manager", 
-      color: "bg-cyan-500", 
-      link: "https://iamhv856156.github.io/Hv_Garage/", 
+    {
+      name: "Tanmay Maheshwari",
+      role: "Lead",
+      color: "bg-yellow-500",
+      link: "https://lilsuperuser.github.io/",
     },
     {
-      name: "Tarun Singh", 
-      role: "Community Manager", 
-      color: "bg-violet-500", 
-      link: "https://portfolio-chi-kohl-jx955bhsg8.vercel.app/", 
+      name: "Sanjam Kaur",
+      role: "Co-Lead",
+      color: "bg-blue-500",
+      link: "https://example.com/sanjam",
     },
-    { 
-      name: "Kartik Gupta", 
-      role: "Community Manager", 
-      color: "bg-amber-500", 
-      link: "https://kartikportfolio0105.netlify.app/", 
+    {
+      name: "Jayesh Bisht",
+      role: "Secretary",
+      color: "bg-emerald-500",
+      link: "https://deevi-conf.github.io/personal-clay-website/",
     },
-    { 
-      name: "Aditya Mishra", 
-      role: "PR & Outreach", 
-      color: "bg-emerald-700", 
-      link: "https://adityamishra-github-io.vercel.app/", 
+    {
+      name: "Avneesh Kumar",
+      role: "Community Manager",
+      color: "bg-green-500",
+      link: "https://my-website-seven-self-94.vercel.app/",
     },
-    { 
-      name: "Anmol Upadhyay", 
-      role: "Event Manager", 
-      color: "bg-purple-500", 
-      link: "https://anmol1789-github-io.vercel.app/", 
+    {
+      name: "Aditya Sachdeva",
+      role: "Graphic Designer",
+      color: "bg-sky-500",
+      link: "https://adi-333.github.io/Portfolio-2/potfolio2/index.html",
     },
-    { 
-      name: "Manya Yadav", 
-      role: "PR & Outreach", 
-      color: "bg-blue-700", 
-      link: "https://example.com/manya", 
+    {
+      name: "Nitya",
+      role: "Graphic Designer",
+      color: "bg-lime-500",
+      link: "https://lishhgoyo.github.io/",
     },
-    { 
-      name: "Satyam Raj", 
-      role: "Videographer (DOP)", 
-      color: "bg-fuchsia-700", 
-      link: "https://portfolio-8pl7.vercel.app/", 
+    {
+      name: "Krish Gupta",
+      role: "Event Manager",
+      color: "bg-red-500",
+      link: "https://akris.is-a.dev",
     },
-    { 
-      name: "Ishita Kaushik", 
-      role: "Social Media Manager", 
-      color: "bg-orange-600", 
-      link: "https://example.com/ishita", 
+    {
+      name: "Bhumi Aggarwal",
+      role: "Event Manager",
+      color: "bg-indigo-500",
+      link: "https://bhumiaggarwal.github.io/my-website/",
+    },
+    {
+      name: "Aditya Singh",
+      role: "Event Manager",
+      color: "bg-teal-500",
+      link: "https://example.com/adityasingh",
+    },
+    {
+      name: "Harshit Vashisht",
+      role: "Event Manager",
+      color: "bg-cyan-500",
+      link: "https://iamhv856156.github.io/Hv_Garage/",
+    },
+    {
+      name: "Tarun Singh",
+      role: "Community Manager",
+      color: "bg-violet-500",
+      link: "https://portfolio-chi-kohl-jx955bhsg8.vercel.app/",
+    },
+    {
+      name: "Kartik Gupta",
+      role: "Community Manager",
+      color: "bg-amber-500",
+      link: "https://kartikportfolio0105.netlify.app/",
+    },
+    {
+      name: "Aditya Mishra",
+      role: "PR & Outreach",
+      color: "bg-emerald-700",
+      link: "https://adityamishra-github-io.vercel.app/",
+    },
+    {
+      name: "Anmol Upadhyay",
+      role: "Event Manager",
+      color: "bg-purple-500",
+      link: "https://anmol1789-github-io.vercel.app/",
+    },
+    {
+      name: "Manya Yadav",
+      role: "PR & Outreach",
+      color: "bg-blue-700",
+      link: "https://manya921.github.io/manyaport/",
+    },
+    {
+      name: "Satyam Raj",
+      role: "Videographer (DOP)",
+      color: "bg-fuchsia-700",
+      link: "https://portfolio-8pl7.vercel.app/",
+    },
+    {
+      name: "Ishita Kaushik",
+      role: "Social Media Manager",
+      color: "bg-orange-600",
+      link: "https://cyber-portfolio-bytes.lovable.app/",
     },
   ]
 
@@ -263,7 +278,7 @@ export default function Home() {
         ref={sectionRefs.home}
         id="home"
         className="relative h-screen flex items-center justify-center overflow-hidden z-10 px-2 sm:px-4 lg:px-8"
-        style={{ 
+        style={{
           opacity: heroOpacity,
           scale: heroScale,
           willChange: 'transform, opacity',
@@ -385,11 +400,11 @@ export default function Home() {
             `}</style>
 
             {/* Apply class to the main container for hover targeting */}
-             {/* Restored size */}
-            <div className="relative w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 mx-auto wafer-circle"> 
+            {/* Restored size */}
+            <div className="relative w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 mx-auto wafer-circle">
               {/* Base background, pattern container, and pseudo-elements */}
               <div
-                className="absolute inset-0 rounded-full shadow-xl shadow-green-400/30 overflow-hidden wafer-bg" 
+                className="absolute inset-0 rounded-full shadow-xl shadow-green-400/30 overflow-hidden wafer-bg"
                 style={{
                   // Use #17a54b as the main highlight color
                   background: 'radial-gradient(circle, #17a54b 0%, rgba(15, 100, 50, 1) 100%)',
@@ -397,10 +412,10 @@ export default function Home() {
               >
                 {/* Static Metallic Sheen - Adjusted angle */}
                 <div className="absolute inset-0" style={{ background: 'linear-gradient(120deg, rgba(255,255,255,0.15) 0%, transparent 50%)' }}></div>
-                
+
                 {/* Wafer Pattern Overlay */}
                 <div
-                  className="absolute inset-0 wafer-pattern" 
+                  className="absolute inset-0 wafer-pattern"
                   style={{
                     backgroundImage: `
                       repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0, rgba(0, 0, 0, 0.4) 15px, transparent 15px, transparent 30px),
@@ -411,18 +426,18 @@ export default function Home() {
                     backgroundSize: '30px 30px, 30px 30px, 5px 5px, 5px 5px',
                   }}
                 ></div>
-                 {/* Refined Edge - Subtle dark inner shadow */}
-                 <div
-                   className="absolute inset-0 rounded-full"
-                   style={{
-                     boxShadow: 'inset 0 0 10px rgba(0,0,0,0.2)'
-                   }}
-                 ></div>
+                {/* Refined Edge - Subtle dark inner shadow */}
+                <div
+                  className="absolute inset-0 rounded-full"
+                  style={{
+                    boxShadow: 'inset 0 0 10px rgba(0,0,0,0.2)'
+                  }}
+                ></div>
               </div>
               {/* Text container */}
               <div className="absolute inset-0 flex items-center justify-center text-center p-6 z-10"> {/* Restored padding */}
-                 {/* Restored text size */}
-                <h2 className="text-2xl md:text-3xl font-bold leading-tight text-white wafer-text"> 
+                {/* Restored text size */}
+                <h2 className="text-2xl md:text-3xl font-bold leading-tight text-white wafer-text">
                   Free & Open Source and Hacker Culture at DTC
                 </h2>
               </div>
@@ -576,42 +591,53 @@ export default function Home() {
           </div>
 
           <motion.div
-            className="mt-8 sm:mt-12 md:mt-16 p-4 sm:p-6 md:p-8 rounded-3xl border border-green-900/50 bg-gradient-to-r from-green-900/10 to-green-900/10 dark:from-green-900/30 dark:to-green-900/30 shadow-xl shadow-green-500/10 bg-black/10 dark:bg-black/40"
+            className="mt-8 sm:mt-12 md:mt-16 p-4 sm:p-6 md:p-8 rounded-3xl border border-green-900/50 bg-gradient-to-r from-green-900/10 to-green-900/30 dark:from-green-900/30 dark:to-green-900/50 shadow-xl shadow-green-500/10"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <div className="flex flex-col md:flex-row items-center">
-              <div className="w-full md:w-1/2 mb-6 md:mb-0 md:pr-8">
-                <h3 
-                  className="text-2xl sm:text-3xl font-bold mb-4 text-gradient-green drop-shadow-md"
-                  style={{ transform: 'translateZ(0)' }}
-                >
-                  FOSS Hack 2025
+            <div className="flex flex-col items-center text-center gap-6">
+              <h1 className="text-2xl sm:text-3xl font-bold mb-2 text-gradient-green ">
+                Upcoming Event
+              </h1>
+            </div>
+            <div className="flex flex-col md:flex-row items-center gap-8">
+              <div className="w-full md:w-1/2">
+                <h3 className="text-xl sm:text-2xl font-bold mb-2 text-gradient-green drop-shadow-md">
+                  SecureCon
                 </h3>
+                <div className="mb-4 flex flex-wrap gap-4 text-gray-600 dark:text-gray-400 text-sm sm:text-base">
+                  <span className="inline-flex items-center gap-1">
+                    <svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                    Oct 8, 2025
+                  </span>
+                  <span className="inline-flex items-center gap-1">
+                    <svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M17 20h5V4a2 2 0 00-2-2H4a2 2 0 00-2 2v16h5"/></svg>
+                    Offline
+                  </span>
+                </div>
                 <p className="text-base sm:text-lg mb-4 text-gray-700 dark:text-gray-300">
-                  Our biggest hackathon yet! Join us for an incredible weekend of coding, collaboration, and innovation
-                  in the open source world.
+                  A chill, hands-on cybersec session where we’ll dive into the basics of networking protocols, play around with nmap, and explore brute force and WPScan in action.
                 </p>
                 <h4 className="text-lg sm:text-xl font-semibold mb-2 text-gradient-green-light drop-shadow-sm">
                   What's in store?
                 </h4>
-                <ul className="space-y-1.5 md:space-y-2 text-sm sm:text-base text-gray-700 dark:text-gray-300">
+                <ul className="space-y-1.5 md:space-y-2 text-sm sm:text-base text-gray-700 dark:text-gray-300 pl-2">
                   <li>• Expert talks</li>
-                  <li>• Intro to Random Shit</li>
-                  <li>• Workshops</li>
-                  <li>• Networking</li>
-                  <li>• Intro to Git</li>
-                  <li>• Lightning Rounds</li>
-                  <li>• Intro to OpenAI</li>
+                  <li>• Networking basics: TCP, UDP, ICMP, SSH, Telnet</li>
+                  <li>• Brute force attack demos</li>
+                  <li>• Hands-on labs</li>
+                  <li>• Scanning & mapping with nmap</li>
+                  <li>• Password cracking</li>
+                  <li>• SQL injection</li>
                 </ul>
               </div>
-              <div className="w-full md:w-1/2">
+              <div className="w-full md:w-1/2 flex justify-center">
                 <img
-                  src="/placeholder.svg?height=400&width=500"
-                  alt="FOSS Hack 2025"
-                  className="rounded-lg shadow-2xl w-full h-auto max-h-64 sm:max-h-80 object-cover"
+                  src="/SecureCon.jpeg"
+                  alt="SecureCon"
+                  className="rounded-xl shadow-2xl w-full max-w-md h-auto max-h-64 sm:max-h-80 object-cover border border-green-900/30"
                 />
               </div>
             </div>
@@ -703,7 +729,7 @@ export default function Home() {
                       role={Mentors.role}
                       color={Mentors.color}
                       index={index}
-                      // pointer-events handled by parent
+                    // pointer-events handled by parent
                     />
                   </a>
                 ))}
@@ -765,7 +791,7 @@ export default function Home() {
                       role={member.role}
                       color={member.color}
                       index={index}
-                      // pointer-events handled by parent
+                    // pointer-events handled by parent
                     />
                   </a>
                 ))}
@@ -826,7 +852,7 @@ export default function Home() {
             )}
           </div>*/}
         </div>
-      </section> 
+      </section>
 
       {/* Resources Section */}
       <section ref={sectionRefs.resources} id="resources" className="py-10 sm:py-16 md:py-20 relative z-10 px-2 sm:px-4 lg:px-8">
