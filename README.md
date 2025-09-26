@@ -56,6 +56,37 @@ To develop this website locally:
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
+## 🔧 Backend API (Optional)
+
+This project includes an optional NestJS backend API for modular content delivery, located in the `backend/` directory.
+
+### Backend Features
+- RESTful APIs for content management
+- Modular architecture with NestJS
+- Type-based content organization
+- CORS support for frontend integration
+
+### Running the Backend
+
+1. Navigate to the backend directory
+   ```bash
+   cd backend
+   ```
+
+2. Install backend dependencies
+   ```bash
+   npm install
+   ```
+
+3. Start the backend server
+   ```bash
+   npm run start:dev
+   ```
+
+4. The backend API will be available at [http://localhost:3001](http://localhost:3001)
+
+For detailed backend documentation, see [backend/README.md](./backend/README.md)
+
 ## 📄 License
 
 This project is open source. 
