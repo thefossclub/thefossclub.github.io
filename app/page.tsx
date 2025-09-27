@@ -92,6 +92,13 @@ export default function Home() {
 
   const events = [
     {
+      title: "Introduction to FOSS",
+      date: "December 24, 2023",
+      description:
+        "Conducted an event on the basic fundamentals of FOSS and educated students about the key terms used in the world of open source.",
+      image: "/placeholder.svg?height=300&width=400",
+    },
+    {
       title: "Linux Installation & the Power of Command Line",
       date: "February 15, 2024",
       description:
@@ -618,7 +625,7 @@ export default function Home() {
                   </span>
                 </div>
                 <p className="text-base sm:text-lg mb-4 text-gray-700 dark:text-gray-300">
-                  A chill, hands-on cybersec session where we’ll dive into the basics of networking protocols, play around with nmap, and explore brute force and WPScan in action.
+                  A Hands-on Cybersecurity session where we’ll dive into the basics of networking protocols, play around with nmap and explore brute force and WPScan in action.
                 </p>
                 <h4 className="text-lg sm:text-xl font-semibold mb-2 text-gradient-green-light drop-shadow-sm">
                   What's in store?
@@ -627,7 +634,6 @@ export default function Home() {
                   <li>• Expert talks</li>
                   <li>• Networking basics: TCP, UDP, ICMP, SSH, Telnet</li>
                   <li>• Brute force attack demos</li>
-                  <li>• Hands-on labs</li>
                   <li>• Scanning & mapping with nmap</li>
                   <li>• Password cracking</li>
                   <li>• SQL injection</li>
@@ -1060,9 +1066,9 @@ export default function Home() {
             <div className="flex flex-col md:flex-row justify-between items-center mb-8 sm:mb-10 md:mb-12">
               <div className="mb-6 sm:mb-8 md:mb-0 text-center md:text-left">
                 <div className="flex items-center justify-center md:justify-start mb-4">
-                  <div className="w-10 h-10 md:w-12 md:h-12 bg-white flex items-center justify-center mr-2 sm:mr-3 md:mr-4 glow-effect shadow-lg shadow-green-500/20 rounded-full">
+                  <div className="w-10 h-10 md:w-12 md:h-12 bg-white flex items-center justify-center mr-2 sm:mr-3 md:mr-4 glow-effect shadow-lg shadow-green-500/20 ">
                     <img
-                      src={theme === "dark" ? "/The_FOSS_Club.png" : "/The FOSS Club Logo Dark.png"}
+                      src="/LogoFOSS.png"
                       alt="FC"
                       className="w-16 h-16 md:w-20 md:h-20 object-contain mx-auto"
                     />
