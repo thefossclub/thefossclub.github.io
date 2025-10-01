@@ -7,6 +7,7 @@ import { z } from "zod"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Eye, EyeOff, ArrowLeft, LogIn } from "lucide-react"
+import { useTheme } from "next-themes"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -24,6 +25,7 @@ type LoginValues = z.infer<typeof loginSchema>
 export default function LoginPage() {
   const router = useRouter()
   const [showPassword, setShowPassword] = useState(false)
+  const { theme } = useTheme()
   
   const form = useForm<LoginValues>({
     resolver: zodResolver(loginSchema),
@@ -60,8 +62,12 @@ export default function LoginPage() {
         <Card className="mx-auto w-full max-w-md border-none shadow-xl card-hover-effect">
           <CardHeader className="space-y-1">
             <div className="flex justify-center mb-4">
-              <div className="w-12 h-12 bg-gradient-green rounded-full flex items-center justify-center glow-effect shadow-lg shadow-green-500/30">
-                <span className="text-white font-bold text-sm">FC</span>
+              <div className="w-12 h-12 flex items-center justify-center glow-effect shadow-lg shadow-green-500/30">
+                <img
+                  src="/LogoFOSS.png"
+                  alt="FC"
+                  className="w-20 h-20 md:w-28 md:h-28 object-contain mx-auto"
+                />
               </div>
             </div>
             <CardTitle className="text-2xl font-bold text-center">Welcome back</CardTitle>
@@ -162,4 +168,4 @@ export default function LoginPage() {
       </div>
     </div>
   )
-} 
+}
