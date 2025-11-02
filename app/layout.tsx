@@ -14,14 +14,18 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
+      <head>
+        <title>The FOSS Club</title>
+        <meta name="description" content="Learn, build, and collaborate with fellow open-source enthusiasts in a community dedicated to free and open source software." />
+        <link rel="icon" href="/FOSS.ico" />
+      </head>
       <body className="min-h-screen bg-background font-sans antialiased">
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
           enableSystem={false}
           disableTransitionOnChange
-          suppressHydrationWarning
         >
           {children}
         </ThemeProvider>
