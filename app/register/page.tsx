@@ -75,7 +75,7 @@ export default function RegisterPage() {
         <Card className="mx-auto w-full max-w-md border-none shadow-xl card-hover-effect">
           <CardHeader className="space-y-1">
             <div className="flex justify-center mb-4">
-              <div className="w-12 h-12 bg-white flex items-center justify-center glow-effect shadow-lg shadow-green-500/30">
+              <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center glow-effect shadow-lg shadow-green-500/30">
                 <img
                   src="/LogoFOSS.png"
                   alt="FC"

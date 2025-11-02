@@ -109,7 +109,7 @@ export default function Navbar({ activeSection }: NavbarProps) {
             <div className="flex items-center justify-start flex-1 min-w-0">
               {/* Logo and Title together */}
               <div className="flex items-center space-x-3 min-w-0">
-                <div className="w-10 h-10 bg-white flex items-center justify-center glow-effect-green flex-shrink-0">
+                <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center glow-effect-green flex-shrink-0">
                   {mounted ? (
                     <img
                       src="/LogoFOSS.png"
