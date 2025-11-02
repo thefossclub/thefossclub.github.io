@@ -100,13 +100,6 @@ export default function Home() {
       image: "/placeholder.svg?height=300&width=400",
     },
     {
-      title: "Introduction to FOSS",
-      date: "December 24, 2023",
-      description:
-        "Conducted an event on the basic fundamentals of FOSS and educated students about the key terms used in the world of open source.",
-      image: "/placeholder.svg?height=300&width=400",
-    },
-    {
       title: "Linux Installation & the Power of Command Line",
       date: "February 15, 2024",
       description:
