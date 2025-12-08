@@ -89,6 +89,12 @@ export default function Home() {
         "Face Recognition code which detects faces on live cameras implemented using OpenCV and DLib in Python and C++.",
       link: "https://github.com/thefossclub/face-recognition",
     },
+    {
+      title: "SafePath",
+      description:
+        "SafePath is an intelligent navigation platform helps users choose safer routes instead of just faster ones.",
+      link: "https://github.com/thefossclub/SafePath",
+    },
   ]
 
   const events = [
@@ -219,14 +225,8 @@ export default function Home() {
       link: "https://iamhv856156.github.io/Hv_Garage/",
     },
     {
-      name: "Tarun Singh",
-      role: "Community Manager",
-      color: "bg-violet-500",
-      link: "https://portfolio-chi-kohl-jx955bhsg8.vercel.app/",
-    },
-    {
       name: "Kartik Gupta",
-      role: "Community Manager",
+      role: "PR & Outreach",
       color: "bg-amber-500",
       link: "https://kartikportfolio0105.netlify.app/",
     },
