@@ -1,6 +1,5 @@
 "use client"
 
-import { motion } from "framer-motion"
 import { useTheme } from "next-themes"
 import { useEffect, useState } from "react"
 
@@ -40,16 +39,9 @@ export default function TeamMember({ name, role, color, index }: TeamMemberProps
   }
 
   return (
-    <motion.div
-      className="flex flex-col items-center text-center"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.05 }}
-    >
-      <motion.div
-        className={`relative w-16 h-16 rounded-full ${color} flex items-center justify-center overflow-hidden`}
-        whileHover={{ scale: 1.1 }}
+    <div className="flex flex-col items-center text-center">
+      <div
+        className={`relative w-16 h-16 rounded-full ${color} flex items-center justify-center overflow-hidden transition-transform hover:scale-110`}
         style={{
           boxShadow: mounted
             ? isDark
@@ -59,10 +51,9 @@ export default function TeamMember({ name, role, color, index }: TeamMemberProps
         }}
       >
         <span className="text-lg font-bold text-white drop-shadow-sm">{initials}</span>
-      </motion.div>
+      </div>
       <h3 className="text-sm font-semibold mt-2 text-gray-800 dark:text-gray-200">{name}</h3>
       <p className="text-xs text-gray-600 dark:text-gray-400">{role}</p>
-    </motion.div>
+    </div>
   )
 }
-

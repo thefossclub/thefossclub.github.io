@@ -1,7 +1,7 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
-import { motion, useScroll, useTransform } from "framer-motion"
+import { useEffect, useRef, useState, useCallback } from "react"
+import { motion } from "framer-motion"
 import Link from "next/link"
 import { ArrowRight, Github, Instagram, Linkedin, Twitter, ChevronDown, ChevronUp } from "lucide-react"
 import { FaDiscord } from "react-icons/fa"
@@ -14,14 +14,11 @@ import GridBackground from "@/components/grid-background"
 import HeroSphere from "@/components/hero-sphere"
 import Timeline from "@/components/timeline"
 import ScrollingTools from "@/components/scrolling-tools"
-import CursorEffect from "@/components/cursor-effect"
 import { useTheme } from "next-themes"
 import ScrollProgressIndicator from "@/components/scroll-progress-indicator"
 
 export default function Home() {
-  const { scrollY } = useScroll()
-  const heroOpacity = useTransform(scrollY, [0, 300], [1, 0])
-  const heroScale = useTransform(scrollY, [0, 300], [1, 0.9])
+  const heroRef = useRef<HTMLElement>(null)
   const [activeSection, setActiveSection] = useState("home")
   const { theme, setTheme } = useTheme()
   const [coreTeamExpanded, setCoreTeamExpanded] = useState(true)
@@ -38,31 +35,50 @@ export default function Home() {
     resources: useRef<HTMLElement>(null),
   }
 
+  // Optimized scroll handler that works with Lenis
   useEffect(() => {
-    let ticking = false
     const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const scrollPosition = window.scrollY + 100
-          const sections = Object.keys(sectionRefs) as Array<keyof typeof sectionRefs>
+      const scrollY = window.scrollY
+      const scrollPosition = scrollY + 100
+      const sections = Object.keys(sectionRefs) as Array<keyof typeof sectionRefs>
 
-          for (const sectionName of sections) {
-            const ref = sectionRefs[sectionName].current
-            if (ref) {
-              if (scrollPosition >= ref.offsetTop && scrollPosition < ref.offsetTop + ref.offsetHeight) {
-                setActiveSection(sectionName)
-                break
-              }
-            }
+      // Update active section
+      for (const sectionName of sections) {
+        const ref = sectionRefs[sectionName].current
+        if (ref) {
+          if (scrollPosition >= ref.offsetTop && scrollPosition < ref.offsetTop + ref.offsetHeight) {
+            setActiveSection(sectionName)
+            break
           }
-          ticking = false
-        })
-        ticking = true
+        }
+      }
+
+      // Hero parallax effect - direct DOM manipulation for performance
+      if (heroRef.current) {
+        const opacity = Math.max(0, 1 - scrollY / 300)
+        const scale = Math.max(0.9, 1 - scrollY / 3000)
+        heroRef.current.style.opacity = String(opacity)
+        heroRef.current.style.transform = `scale(${scale}) translateZ(0)`
       }
     }
 
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    return () => window.removeEventListener("scroll", handleScroll)
+    // Use Lenis scroll event if available
+    // @ts-expect-error - lenis is added to window
+    const lenis = window.lenis
+    
+    if (lenis) {
+      lenis.on('scroll', handleScroll)
+    } else {
+      window.addEventListener("scroll", handleScroll, { passive: true })
+    }
+
+    return () => {
+      if (lenis) {
+        lenis.off('scroll', handleScroll)
+      } else {
+        window.removeEventListener("scroll", handleScroll)
+      }
+    }
   }, [])
 
   useEffect(() => {
@@ -286,21 +302,20 @@ export default function Home() {
       className="relative min-h-screen overflow-hidden text-black dark:text-white"
     >
       <GridBackground />
-      <CursorEffect />
       <Navbar activeSection={activeSection} />
       <ScrollProgressIndicator />
 
       {/* Hero Section */}
-      <motion.section
-        ref={sectionRefs.home}
+      <section
+        ref={(el) => {
+          sectionRefs.home.current = el
+          // @ts-expect-error - assigning to ref
+          heroRef.current = el
+        }}
         id="home"
-        className="relative h-screen flex items-center justify-center overflow-hidden z-10 px-2 sm:px-4 lg:px-8"
+        className="relative h-screen flex items-center justify-center overflow-hidden z-10 px-2 sm:px-4 lg:px-8 will-change-[transform,opacity]"
         style={{
-          opacity: heroOpacity,
-          scale: heroScale,
-          willChange: 'transform, opacity',
-          transform: 'translateZ(0)',
-          backfaceVisibility: 'hidden'
+          backfaceVisibility: 'hidden',
         }}
       >
         <div className="absolute inset-0 flex items-center justify-center hidden md:flex">
@@ -462,35 +477,21 @@ export default function Home() {
           </motion.div>
         </div>
 
-        <motion.div
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 hidden md:block"
-          animate={{ y: [0, 10, 0] }}
-          transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1.5 }}
+        <div
+          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 hidden md:block animate-bounce"
         >
           <ArrowRight className="h-8 w-8 rotate-90 text-green-500 drop-shadow-md" />
-        </motion.div>
-      </motion.section>
+        </div>
+      </section>
 
       {/* About Section */}
       <section ref={sectionRefs.about} id="about" className="py-10 sm:py-16 md:py-20 relative z-10 px-2 sm:px-4 lg:px-8">
         <div className="container mx-auto">
-          <motion.h2
-            className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green drop-shadow-xl"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
+          <h2 className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green">
             About Us
-          </motion.h2>
+          </h2>
 
-          <motion.div
-            className="max-w-full sm:max-w-4xl mx-auto backdrop-blur-sm p-4 sm:p-6 md:p-8 rounded-3xl border border-gray-800 dark:border-gray-800 bg-white/5 dark:bg-black/5 shadow-xl shadow-green-500/5"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
+          <div className="max-w-full sm:max-w-4xl mx-auto backdrop-blur-sm p-4 sm:p-6 md:p-8 rounded-3xl border border-gray-800 dark:border-gray-800 bg-white/5 dark:bg-black/5 shadow-xl shadow-green-500/5">
             <p className="text-base sm:text-lg mb-6 md:mb-8 leading-relaxed text-gray-700 dark:text-gray-300">
               The FOSS Club is a student community-based group in the Delhi Technical Campus for enthusiasts focused on
               contributing to
@@ -503,69 +504,41 @@ export default function Home() {
               and mentoring students to achieve excellence in various fields of Computer Science.
             </p>
 
-            <h3
-              className="text-xl sm:text-2xl font-bold mb-4 text-gradient-green-dark drop-shadow-md"
-              style={{ transform: 'translateZ(0)' }}
-            >
+            <h3 className="text-xl sm:text-2xl font-bold mb-4 text-gradient-green-dark">
               Core Pillars
             </h3>
             <ul className="space-y-2 sm:space-y-3 md:space-y-4">
-              <motion.li
-                className="p-3 md:p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green shadow-md hover:shadow-green-500/10 transition-all text-sm sm:text-base"
-                whileHover={{ x: 10 }}
-              >
+              <li className="p-3 md:p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green shadow-md hover:shadow-green-500/10 hover:translate-x-2 transition-all text-sm sm:text-base">
                 <strong className="text-gray-900 dark:text-white mr-1">Open Source:</strong> The FOSS Club promotes open-source
                 software, FOSS philosophy, self-hosting, Linux, and collaborative development.
-              </motion.li>
-              <motion.li
-                className="p-3 md:p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green shadow-md hover:shadow-green-500/10 transition-all text-sm sm:text-base"
-                whileHover={{ x: 10 }}
-              >
+              </li>
+              <li className="p-3 md:p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green shadow-md hover:shadow-green-500/10 hover:translate-x-2 transition-all text-sm sm:text-base">
                 <strong className="text-gray-900 dark:text-white mr-1">Cyber Security:</strong> The FOSS Club explores ethical hacking,
                 CTFs, reverse engineering, digital privacy, OSINT, and cybersecurity research.
-              </motion.li>
-              <motion.li
-                className="p-3 md:p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green shadow-md hover:shadow-green-500/10 transition-all text-sm sm:text-base"
-                whileHover={{ x: 10 }}
-              >
+              </li>
+              <li className="p-3 md:p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green shadow-md hover:shadow-green-500/10 hover:translate-x-2 transition-all text-sm sm:text-base">
                 <strong className="text-gray-900 dark:text-white mr-1">Hardware:</strong> The FOSS Club will focus on self-hosted
                 systems, open hardware, embedded devices, SBCs (like Raspberry Pi and RISC-V boards), firmware hacking,
                 retro computing, and all the cool hardware stuff.
-              </motion.li>
+              </li>
             </ul>
-          </motion.div>
+          </div>
 
-          <motion.div
-            className="mt-10 sm:mt-16 md:mt-20"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            <h3
-              className="text-2xl sm:text-3xl font-bold mb-8 text-center text-gray-800 dark:text-gray-200 drop-shadow-md"
-              style={{ transform: 'translateZ(0)' }}
-            >
+          <div className="mt-10 sm:mt-16 md:mt-20">
+            <h3 className="text-2xl sm:text-3xl font-bold mb-8 text-center text-gray-800 dark:text-gray-200 drop-shadow-md">
               Our Timeline
             </h3>
             <Timeline events={timelineEvents} />
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Projects Section */}
       <section ref={sectionRefs.projects} id="projects" className="py-10 sm:py-16 md:py-20 relative z-10 px-2 sm:px-4 lg:px-8">
         <div className="container mx-auto">
-          <motion.h2
-            className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green drop-shadow-xl"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            style={{ transform: 'translateZ(0)' }}
-          >
+          <h2 className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green">
             Our Projects
-          </motion.h2>
+          </h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
             {projects.map((project, index) => (
@@ -584,15 +557,9 @@ export default function Home() {
       {/* Events Section */}
       <section ref={sectionRefs.events} id="events" className="py-10 sm:py-16 md:py-20 relative z-10 px-2 sm:px-4 lg:px-8">
         <div className="container mx-auto">
-          <motion.h2
-            className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green drop-shadow-xl"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
+          <h2 className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green">
             Events
-          </motion.h2>
+          </h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
             {events.map((event, index) => (
@@ -665,15 +632,9 @@ export default function Home() {
       {/* Tools Section */}
       <section id="tools" className="py-10 sm:py-16 md:py-20 relative overflow-hidden z-10 px-2 sm:px-4 lg:px-8">
         <div className="container mx-auto">
-          <motion.h2
-            className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green drop-shadow-xl"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
+          <h2 className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green">
             Open Source Tools We Love
-          </motion.h2>
+          </h2>
 
           <ScrollingTools tools={tools} />
         </div>
@@ -682,28 +643,16 @@ export default function Home() {
       {/* Team Section */}
       <section ref={sectionRefs.team} id="team" className="py-10 sm:py-16 md:py-20 relative z-10 px-2 sm:px-4 lg:px-8">
         <div className="container mx-auto">
-          <motion.h2
-            className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green drop-shadow-xl"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
+          <h2 className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green">
             Our Team
-          </motion.h2>
+          </h2>
 
           {/* Mentors Section */}
           <div className="mb-8 sm:mb-12 md:mb-16">
             <div className="flex justify-between items-center mb-6 md:mb-8">
-              <motion.h3
-                className="text-xl sm:text-2xl font-bold text-green-500"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-              >
+              <h3 className="text-xl sm:text-2xl font-bold text-green-500">
                 Mentors
-              </motion.h3>
+              </h3>
               <button
                 onClick={() => setMentorsExpanded(!MentorsExpanded)}
                 className="flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-gradient-green text-white rounded-full text-xs sm:text-sm font-medium hover:opacity-90 transition-all"
@@ -757,15 +706,9 @@ export default function Home() {
           {/* Core Team Section */}
           <div className="mb-8 sm:mb-12 md:mb-16">
             <div className="flex justify-between items-center mb-6 md:mb-8">
-              <motion.h3
-                className="text-xl sm:text-2xl font-bold text-green-500"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-              >
+              <h3 className="text-xl sm:text-2xl font-bold text-green-500">
                 Core-Team
-              </motion.h3>
+              </h3>
               <button
                 onClick={() => setCoreTeamExpanded(!coreTeamExpanded)}
                 className="flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-gradient-green text-white rounded-full text-xs sm:text-sm font-medium hover:opacity-90 transition-all"
@@ -874,29 +817,13 @@ export default function Home() {
       {/* Resources Section */}
       <section ref={sectionRefs.resources} id="resources" className="py-10 sm:py-16 md:py-20 relative z-10 px-2 sm:px-4 lg:px-8">
         <div className="container mx-auto">
-          <motion.h2
-            className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green drop-shadow-xl"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
+          <h2 className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green">
             Resources
-          </motion.h2>
+          </h2>
 
-          <motion.div
-            className="max-w-full sm:max-w-4xl mx-auto backdrop-blur-sm p-4 sm:p-6 md:p-8 rounded-3xl border border-gray-800 dark:border-gray-800 bg-white/5 dark:bg-black/5 shadow-xl shadow-green-500/5"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
+          <div className="max-w-full sm:max-w-4xl mx-auto backdrop-blur-sm p-4 sm:p-6 md:p-8 rounded-3xl border border-gray-800 dark:border-gray-800 bg-white/5 dark:bg-black/5 shadow-xl shadow-green-500/5">
             <ul className="space-y-2 sm:space-y-3 md:space-y-4">
-              <motion.li
-                className="p-3 md:p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green transition-all shadow-md hover:shadow-green-500/10"
-                whileHover={{ x: 10, backgroundColor: "rgba(31, 41, 55, 0.8)" }}
-                transition={{ duration: 0.05 }}
-              >
+              <li className="p-3 md:p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green transition-all shadow-md hover:shadow-green-500/10 hover:translate-x-2 hover:bg-gray-800/80">
                 <Link
                   href="https://github.com/thefossclub/resources#unlock-the-web-frontend--backend-secrets"
                   target="_blank"
@@ -906,12 +833,8 @@ export default function Home() {
                   <ArrowRight className="mr-2 h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
                   Web Development Fundamentals (Frontend & Backend)
                 </Link>
-              </motion.li>
-              <motion.li
-                className="p-3 md:p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green transition-all shadow-md hover:shadow-green-500/10"
-                whileHover={{ x: 10, backgroundColor: "rgba(31, 41, 55, 0.8)" }}
-                transition={{ duration: 0.05 }}
-              >
+              </li>
+              <li className="p-3 md:p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green transition-all shadow-md hover:shadow-green-500/10 hover:translate-x-2 hover:bg-gray-800/80">
                 <Link
                   href="https://github.com/thefossclub/resources#level-up-your-game-dev-journey-starts-here"
                   target="_blank"
@@ -921,12 +844,8 @@ export default function Home() {
                   <ArrowRight className="mr-2 h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
                   Introduction to Game Development Concepts
                 </Link>
-              </motion.li>
-              <motion.li
-                className="p-3 md:p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green transition-all shadow-md hover:shadow-green-500/10"
-                whileHover={{ x: 10, backgroundColor: "rgba(31, 41, 55, 0.8)" }}
-                transition={{ duration: 0.05 }}
-              >
+              </li>
+              <li className="p-3 md:p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green transition-all shadow-md hover:shadow-green-500/10 hover:translate-x-2 hover:bg-gray-800/80">
                 <Link
                   href="https://github.com/thefossclub/resources#mobile-mastery-build-your-first-app"
                   target="_blank"
@@ -936,12 +855,8 @@ export default function Home() {
                   <ArrowRight className="mr-2 h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
                   Mobile Application Development Resources
                 </Link>
-              </motion.li>
-              <motion.li
-                className="p-3 md:p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green transition-all shadow-md hover:shadow-green-500/10"
-                whileHover={{ x: 10, backgroundColor: "rgba(31, 41, 55, 0.8)" }}
-                transition={{ duration: 0.05 }}
-              >
+              </li>
+              <li className="p-3 md:p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green transition-all shadow-md hover:shadow-green-500/10 hover:translate-x-2 hover:bg-gray-800/80">
                 <Link
                   href="https://github.com/thefossclub/resources#linux-command-line--version-control"
                   target="_blank"
@@ -951,12 +866,8 @@ export default function Home() {
                   <ArrowRight className="mr-2 h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
                   Linux, Command Line Interface, and Git Essentials
                 </Link>
-              </motion.li>
-              <motion.li
-                className="p-3 md:p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green transition-all shadow-md hover:shadow-green-500/10"
-                whileHover={{ x: 10, backgroundColor: "rgba(31, 41, 55, 0.8)" }}
-                transition={{ duration: 0.05 }}
-              >
+              </li>
+              <li className="p-3 md:p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green transition-all shadow-md hover:shadow-green-500/10 hover:translate-x-2 hover:bg-gray-800/80">
                 <Link
                   href="https://github.com/thefossclub/resources#cybersecurity--ethical-hacking"
                   target="_blank"
@@ -966,32 +877,20 @@ export default function Home() {
                   <ArrowRight className="mr-2 h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
                   Cybersecurity and Ethical Hacking Principles
                 </Link>
-              </motion.li>
+              </li>
             </ul>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* FAQ Section */}
       <section id="faq" className="py-10 sm:py-16 md:py-20 relative z-10 px-2 sm:px-4 lg:px-8">
         <div className="container mx-auto">
-          <motion.h2
-            className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green drop-shadow-xl"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
+          <h2 className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green">
             Frequently Asked Questions
-          </motion.h2>
+          </h2>
 
-          <motion.div
-            className="max-w-full sm:max-w-4xl mx-auto space-y-2 sm:space-y-4 md:space-y-6"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
+          <div className="max-w-full sm:max-w-4xl mx-auto space-y-2 sm:space-y-4 md:space-y-6">
             <div className="backdrop-blur-sm rounded-3xl overflow-hidden border border-gray-800 dark:border-gray-800 bg-white/5 dark:bg-black/5 shadow-lg hover:shadow-green-500/10 transition-all">
               <details className="group">
                 <summary className="flex items-center justify-between p-4 md:p-6 cursor-pointer">
@@ -1066,7 +965,7 @@ export default function Home() {
                 </div>
               </details>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -1139,13 +1038,7 @@ export default function Home() {
                 </a>
               </div>
             </div>
-            <motion.div
-              className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-10 mb-6 sm:mb-8"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-            >
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-10 mb-6 sm:mb-8">
               <div className="backdrop-blur-sm p-5 md:p-6 rounded-2xl border border-gray-200/20 dark:border-gray-800/50 bg-white/5 dark:bg-black/5 card-hover-effect shadow-lg hover:shadow-green-500/10">
                 <h3 className="text-lg sm:text-xl font-semibold mb-3 md:mb-4 text-gradient-green">Quick Links</h3>
                 <ul className="space-y-2 md:space-y-3 text-sm sm:text-base">
@@ -1251,14 +1144,23 @@ export default function Home() {
                   </li>
                 </ul>
               </div>
-            </motion.div>
+            </div>
 
             <div className="text-center pt-4 sm:pt-6 border-t border-gray-800/30 dark:border-gray-800/30 relative">
               <p className="text-gray-500 text-sm sm:text-base">© {new Date().getFullYear()} The FOSS Club. All rights reserved.</p>
               <p className="text-gray-500 mt-1 md:mt-2 text-xs sm:text-sm">Made with 💚 by open source enthusiasts</p>
 
               <button
-                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                onClick={() => {
+                  // Use Lenis smooth scroll if available, fallback to native
+                  // @ts-expect-error - lenis is added to window by SmoothScroll component
+                  if (window.lenis) {
+                    // @ts-expect-error - lenis is added to window by SmoothScroll component
+                    window.lenis.scrollTo(0, { duration: 1.5 })
+                  } else {
+                    window.scrollTo({ top: 0, behavior: 'smooth' })
+                  }
+                }}
                 className="absolute right-0 bottom-0 mb-0 mr-0 group bg-gradient-green p-2 sm:p-2.5 md:p-3 rounded-full text-white hover:opacity-90 transition-all shadow-lg hover:shadow-green-500/30 flex items-center justify-center"
                 aria-label="Back to top"
               >

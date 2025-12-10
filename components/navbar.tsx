@@ -92,11 +92,8 @@ export default function Navbar({ activeSection }: NavbarProps) {
         <motion.div
           className={`container mx-auto transition-all duration-300 backdrop-blur-lg ${
             scrolled
-              ? "mx-4 px-4 py-2 shadow-lg \
-                 bg-white/60 dark:bg-gray-950/60 \
-                 border-b border-gray-200 dark:border-gray-800 \
-                 md:rounded-full md:bg-white/10 md:dark:bg-black/80 md:backdrop-blur-md md:border md:border-gray-200/20 md:dark:border-gray-800/50 md:px-6 md:backdrop-blur-lg"
-              : "px-4 bg-white/40 dark:bg-gray-950/40 md:backdrop-blur-lg"
+              ? "mx-4 px-4 py-2 shadow-lg rounded-full bg-white/80 dark:bg-black/80 backdrop-blur-md border border-gray-200/30 dark:border-gray-800/50"
+              : "px-4 bg-white/40 dark:bg-gray-950/40"
           }`}
           style={{ 
             willChange: 'transform, opacity',

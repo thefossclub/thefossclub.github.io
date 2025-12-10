@@ -1,85 +1,58 @@
 "use client"
 
-import { motion, useScroll, useTransform } from "framer-motion"
-import { useRef, useEffect, useState } from "react"
+import { useEffect, useRef } from "react"
 
 export default function ScrollProgressIndicator() {
-  const { scrollYProgress } = useScroll({
-    offset: ["start start", "end end"]
-  });
-  const pathRef = useRef<SVGPathElement>(null);
-  const [pathLength, setPathLength] = useState(0);
+  const progressRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (pathRef.current) {
-      const newPathLength = pathRef.current.getTotalLength();
-      setPathLength(newPathLength);
+    const progressBar = progressRef.current
+    if (!progressBar) return
+
+    let ticking = false
+
+    const updateProgress = () => {
+      if (ticking) return
+      ticking = true
+
+      requestAnimationFrame(() => {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight
+        const progress = docHeight > 0 ? Math.min((scrollTop / docHeight) * 100, 100) : 0
+
+        progressBar.style.width = `${progress}%`
+        ticking = false
+      })
     }
-  }, [pathRef]);
 
-  const strokeDashoffset = useTransform(
-    scrollYProgress,
-    [0, 0.999], // Using 0.999 instead of 1 to ensure complete fill
-    [pathLength, 0]
-  );
+    // Use Lenis if available
+    // @ts-expect-error - lenis is added to window
+    const lenis = window.lenis
 
-  // New transform for SVG container opacity
-  const svgOpacity = useTransform(
-    scrollYProgress,
-    [0, 0.01], // Fade in quickly within the first 1% of scroll
-    [0, 1]      // Opacity from 0 to 1
-  );
+    if (lenis) {
+      lenis.on("scroll", updateProgress)
+    } else {
+      window.addEventListener("scroll", updateProgress, { passive: true })
+    }
 
-  // Create a simple curve path
-  const pathData = "M -500 50 C 0 25, 1000 75, 2500 50";
+    updateProgress()
+
+    return () => {
+      if (lenis) {
+        lenis.off("scroll", updateProgress)
+      } else {
+        window.removeEventListener("scroll", updateProgress)
+      }
+    }
+  }, [])
 
   return (
-    <motion.svg
-      className="fixed top-0 left-0 w-full h-screen z-[-10] hidden md:block pointer-events-none overflow-visible"
-      // Expanded viewBox for horizontal movement
-      viewBox="-500 0 3000 100"
-      preserveAspectRatio="none"
-      style={{ opacity: svgOpacity }}
-    >
-      {/* Background path */}
-      <path
-        ref={pathRef}
-        d={pathData}
-        fill="none"
-        stroke="rgba(200, 200, 200, 0.01)"
-        strokeWidth={0.5}
-        className="dark:stroke-[rgba(110,110,110,0.05)]"
+    <div className="fixed top-0 left-0 right-0 h-[2px] z-[9999] bg-transparent pointer-events-none">
+      <div
+        ref={progressRef}
+        className="h-full bg-gradient-to-r from-green-500 via-green-400 to-emerald-500 transition-[width] duration-75 ease-out"
+        style={{ width: "0%" }}
       />
-      {/* Animated path */}
-      {pathLength > 0 && (
-        <motion.path
-          d={pathData}
-          fill="none"
-          strokeWidth="1.5"
-          stroke="url(#progressGradient)"
-          strokeLinecap="round"
-          filter="url(#blurFilter)"
-          style={{
-            strokeDasharray: pathLength,
-            strokeDashoffset: strokeDashoffset
-          }}
-        />
-      )}
-      {/* Gradient & Filter Definitions */}
-      <defs>
-        <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="#22b34f" stopOpacity="0.5" />
-          <stop offset="50%" stopColor="#4ade80" stopOpacity="0.7" />
-          <stop offset="100%" stopColor="#15803d" stopOpacity="0.5" />
-        </linearGradient>
-        <filter id="blurFilter" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="1.5" />
-          <feColorMatrix type="matrix" values="1 0 0 0 0
-                                               0 1 0 0 0.1
-                                               0 0 1 0 0
-                                               0 0 0 0.5 0"/>
-        </filter>
-      </defs>
-    </motion.svg>
-  );
-} 
+    </div>
+  )
+}
