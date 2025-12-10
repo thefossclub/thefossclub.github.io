@@ -95,11 +95,6 @@ export default function Home() {
       link: "https://github.com/thefossclub/Passvyn",
     },
     {
-      title: "LinkFree",
-      description: "A free and open source alternative to LinkTree.",
-      link: "https://github.com/thefossclub/LinkFree",
-    },
-    {
       title: "face-recognition",
       description:
         "Face Recognition code which detects faces on live cameras implemented using OpenCV and DLib in Python and C++.",
