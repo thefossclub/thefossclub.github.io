@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 import Link from "next/link"
 import { ArrowRight, Github, Instagram, Linkedin, Twitter, ChevronDown, ChevronUp } from "lucide-react"
+import { FaDiscord } from "react-icons/fa"
 import Navbar from "@/components/navbar"
 import ProjectCard from "@/components/project-card"
 import EventCard from "@/components/event-card"
@@ -88,6 +89,12 @@ export default function Home() {
         "Face Recognition code which detects faces on live cameras implemented using OpenCV and DLib in Python and C++.",
       link: "https://github.com/thefossclub/face-recognition",
     },
+    {
+      title: "SafePath",
+      description:
+        "SafePath is an intelligent navigation platform helps users choose safer routes instead of just faster ones.",
+      link: "https://github.com/thefossclub/SafePath",
+    },
   ]
 
   const events = [
@@ -140,12 +147,21 @@ export default function Home() {
         "National-level hybrid hackathon for innovative open-source solutions.",
       image: "/Hack25.jpg?height=300&width=400",
     },
+    {
+      title: "SecureCon",
+      date: "October 8, 2025",
+      description:
+        " A Cybersecurity Event having an Speaker session and Hands-on covering Port-Scanning, SQLinjection and Brute-Force.",
+      image: "/SecureCon.jpg?height=300&width=400",
+    },
   ]
+
   const Mentors = [
     { name: "Vaibhav Pratap Singh", role: "CEH", color: "bg-yellow-500", link: "https://v8v88v8v88.com" },
     { name: "Diti Vasisht", role: "AI/ML specialist", color: "bg-violet-500", link: "https://diti.is-a.dev" },
-    { name: "Ashwany Kumar Sharma", role: "WEB Dev", color: "bg-purple-500", link: "https://example.com/tanmay" },
+    { name: "Ashwany Kumar Sharma", role: "WEB Dev", color: "bg-purple-500", link: "https://ashwanyksharma.github.io/" },
   ]
+  
   const coreTeam = [
     { name: "Ms. Eirty Telang Kapoor", role: "Convenor", color: "bg-orange-500" },
     {
@@ -158,7 +174,7 @@ export default function Home() {
       name: "Sanjam Kaur",
       role: "Co-Lead",
       color: "bg-blue-500",
-      link: "https://example.com/sanjam",
+      link: "https://sanjammkaurr.github.io/",
     },
     {
       name: "Jayesh Bisht",
@@ -179,7 +195,7 @@ export default function Home() {
       link: "https://adi-333.github.io/Portfolio-2/potfolio2/index.html",
     },
     {
-      name: "Nitya",
+      name: "Nitya Kapoor",
       role: "Graphic Designer",
       color: "bg-lime-500",
       link: "https://lishhgoyo.github.io/",
@@ -209,14 +225,8 @@ export default function Home() {
       link: "https://iamhv856156.github.io/Hv_Garage/",
     },
     {
-      name: "Tarun Singh",
-      role: "Community Manager",
-      color: "bg-violet-500",
-      link: "https://portfolio-chi-kohl-jx955bhsg8.vercel.app/",
-    },
-    {
       name: "Kartik Gupta",
-      role: "Community Manager",
+      role: "PR & Outreach",
       color: "bg-amber-500",
       link: "https://kartikportfolio0105.netlify.app/",
     },
@@ -597,7 +607,7 @@ export default function Home() {
             ))}
           </div>
 
-          <motion.div
+          {/*<motion.div
             className="mt-8 sm:mt-12 md:mt-16 p-4 sm:p-6 md:p-8 rounded-3xl border border-green-900/50 bg-gradient-to-r from-green-900/10 to-green-900/30 dark:from-green-900/30 dark:to-green-900/50 shadow-xl shadow-green-500/10"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -626,6 +636,7 @@ export default function Home() {
                 </div>
                 <p className="text-base sm:text-lg mb-4 text-gray-700 dark:text-gray-300">
                   A Hands-on Cybersecurity session where we’ll dive into the basics of networking protocols, play around with nmap and explore brute force and WPScan in action.
+                  A Hands-on Cybersecurity session where we’ll dive into the basics of networking protocols, play around with nmap and explore brute force and WPScan in action.
                 </p>
                 <h4 className="text-lg sm:text-xl font-semibold mb-2 text-gradient-green-light drop-shadow-sm">
                   What's in store?
@@ -647,7 +658,7 @@ export default function Home() {
                 />
               </div>
             </div>
-          </motion.div>
+          </motion.div>*/}
         </div>
       </section>
 
@@ -1091,6 +1102,15 @@ export default function Home() {
                   <span className="sr-only">GitHub</span>
                 </a>
                 <a
+                  href="https://discord.gg/D5g5Tke4BW"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2.5 md:p-3 bg-white/10 dark:bg-black/20 rounded-full text-gray-600 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-400 hover:bg-white/20 dark:hover:bg-black/30 transition-all shadow-md hover:shadow-green-500/20"
+                >
+                  <FaDiscord className="h-5 w-5 md:h-6 md:w-6" />
+                  <span className="sr-only">Discord</span>
+                </a>
+                <a
                   href="https://twitter.com/thefossclub"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -1223,7 +1243,7 @@ export default function Home() {
                   </li>
                   <li>
                     <Link
-                      href="#"
+                      href="https://discord.gg/D5g5Tke4BW"
                       className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
                     >
                       Join Discord
@@ -1254,4 +1274,3 @@ export default function Home() {
     </div>
   )
 }
-
