@@ -12,14 +12,22 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
   const lenisRef = useRef<Lenis | null>(null)
 
   useEffect(() => {
+    // Check for reduced motion preference
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    
+    if (prefersReducedMotion) {
+      // Skip Lenis for users who prefer reduced motion
+      return
+    }
+
     // Initialize Lenis with optimized settings for performance
     const lenis = new Lenis({
-      duration: 1.0, // Slightly faster for snappier feel
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Exponential easing
+      duration: 0.8, // Faster for better performance
+      easing: (t) => 1 - Math.pow(1 - t, 3), // Simpler cubic easing
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
-      wheelMultiplier: 0.8, // Slightly reduced for less intense scrolling
+      wheelMultiplier: 1,
       touchMultiplier: 1.5,
       infinite: false,
       autoResize: true,
@@ -31,7 +39,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     // @ts-expect-error - adding to window for global access
     window.lenis = lenis
 
-    // Use a single RAF loop - more efficient
+    // Use a single RAF loop
     let rafId: number
     function raf(time: number) {
       lenis.raf(time)
@@ -52,7 +60,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
           if (targetElement) {
             lenis.scrollTo(targetElement, {
               offset: 0,
-              duration: 1.2,
+              duration: 0.8,
             })
           }
         }

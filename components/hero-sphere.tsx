@@ -8,7 +8,7 @@ export default function HeroSphere() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const { theme } = useTheme()
   const radius = 150
-  const numPoints = 510
+  const numPoints = 300 // Reduced for better performance
   const points = useRef<Array<{ x: number; y: number; z: number; size: number; speed: number; angle: number }>>([])
   const animationFrameId = useRef<number | null>(null)
   const isIntersecting = useRef(true)
@@ -91,9 +91,9 @@ export default function HeroSphere() {
           const r = Math.round(50 + (205 * centerBlend)) // 50 to 255
           const g = Math.round(200 + (55 * centerBlend)) // 200 to 255
           const b = Math.round(0 + (255 * centerBlend)) // 0 to 255
-          ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${opacity * 0.8})`
+          ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${opacity * 1})`
         } else {
-          ctx.fillStyle = `rgba(${Math.min(20, greenValue)}, ${Math.min(150, greenValue)}, ${blueValue}, ${opacity * 0.8})`
+          ctx.fillStyle = `rgba(${Math.min(30, greenValue)}, ${Math.min(180, greenValue)}, ${blueValue}, ${opacity * 1})`
         }
 
         ctx.fill()
@@ -115,7 +115,8 @@ export default function HeroSphere() {
           y,
           z,
           size: Math.random() * 2 + 1,
-          speed: Math.random() * 0.01 + 0.005,
+          // Balanced speed: not too slow, not too fast (frame-based)
+          speed: Math.random() * 0.016 + 0.010,
           angle: Math.random() * Math.PI * 2,
         })
       }
@@ -142,7 +143,7 @@ export default function HeroSphere() {
       transition={{ duration: 1 }}
       className="relative"
     >
-      <canvas ref={canvasRef} width={500} height={500} className="opacity-70" />
+      <canvas ref={canvasRef} width={500} height={500} className="opacity-90" />
     </motion.div>
   )
 }

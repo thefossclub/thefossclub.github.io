@@ -1,8 +1,50 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Tailwind v4 entrypoint */
+@import "tailwindcss";
+
+/* Tailwind v4 theme configuration */
+@theme {
+  /* Custom semantic colors */
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  
+  /* Border radius */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  
+  /* Gray color palette for proper text contrast */
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+  --color-gray-950: #030712;
+}
 
 @layer base {
   :root {
@@ -71,7 +113,7 @@
 
 @layer base {
   * {
-    @apply border-border;
+    border-color: hsl(var(--border));
   }
   
   html {
@@ -82,7 +124,8 @@
   }
   
   body {
-    @apply bg-background text-foreground text-base;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
     font-family: 'Inter', sans-serif;
     font-feature-settings: "rlig" 1, "calt" 1;
     /* Prevent layout thrashing */
@@ -133,7 +176,7 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--background);
+  background: hsl(var(--background));
 }
 
 ::-webkit-scrollbar-thumb {
@@ -380,20 +423,5 @@
   width: 100%;
 }
 
-/* Improved text contrast */
-.dark .text-gray-300 {
-  color: rgba(229, 231, 235, 0.9);
-}
-
-.dark .text-gray-400 {
-  color: rgba(156, 163, 175, 1);
-}
-
-.light .text-gray-600 {
-  color: rgba(75, 85, 99, 0.95); /* Slightly darker for better contrast */
-}
-
-.light .text-gray-700 {
-  color: rgba(55, 65, 81, 1); /* Slightly darker for better contrast */
-}
+/* Text contrast improvements - using theme-defined gray colors */
 

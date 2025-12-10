@@ -13,25 +13,30 @@ interface NavbarProps {
 export default function Navbar({ activeSection }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const { theme, setTheme, resolvedTheme } = useTheme()
+  const { setTheme, resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
+
+  const isDark = mounted && resolvedTheme === "dark"
 
   useEffect(() => {
     setMounted(true)
 
     let ticking = false
+    let lastScrolled = false
+    
     const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          if (window.scrollY > 50) {
-            setScrolled(true)
-          } else {
-            setScrolled(false)
-          }
-          ticking = false
-        })
-        ticking = true
-      }
+      if (ticking) return
+      ticking = true
+      
+      window.requestAnimationFrame(() => {
+        const shouldBeScrolled = window.scrollY > 50
+        // Only update state if value changed
+        if (shouldBeScrolled !== lastScrolled) {
+          lastScrolled = shouldBeScrolled
+          setScrolled(shouldBeScrolled)
+        }
+        ticking = false
+      })
     }
 
     window.addEventListener("scroll", handleScroll, { passive: true })
@@ -55,25 +60,27 @@ export default function Navbar({ activeSection }: NavbarProps) {
     { name: "Resources", href: "#resources" },
   ]
 
-  // Fix the navbar font color issue
-  const navLinkClass = (isActive: boolean) => {
-    if (!mounted) return "text-gray-800 dark:text-gray-100"
-
-    if (isActive) {
-      return "text-green-500 font-medium"
+  // Get navbar background based on scroll and theme
+  const getNavbarBg = () => {
+    if (scrolled) {
+      return isDark 
+        ? "bg-black/90 border-gray-800" 
+        : "bg-white border-gray-200 shadow-md"
     }
+    return isDark 
+      ? "bg-gray-950/40" 
+      : "bg-white/80"
+  }
 
-    // When not scrolled, use different colors based on theme
-    if (!scrolled) {
-      return resolvedTheme === "dark"
-        ? "text-gray-100 hover:text-green-400 transition-colors"
-        : "text-gray-800 hover:text-green-500 transition-colors"
-    }
+  // Get text color based on theme
+  const getTextColor = (isActive: boolean) => {
+    if (isActive) return "text-green-500"
+    return isDark ? "text-white" : "text-gray-900"
+  }
 
-    // When scrolled
-    return resolvedTheme === "dark"
-      ? "text-gray-300 hover:text-green-400 transition-colors"
-      : "text-gray-700 hover:text-green-500 transition-colors"
+  // Get hover text color
+  const getHoverClass = () => {
+    return "hover:text-green-500 transition-colors"
   }
 
   return (
@@ -90,10 +97,10 @@ export default function Navbar({ activeSection }: NavbarProps) {
         }}
       >
         <motion.div
-          className={`container mx-auto transition-all duration-300 backdrop-blur-lg ${
+          className={`container mx-auto transition-all duration-300 ${
             scrolled
-              ? "mx-4 px-4 py-2 shadow-lg rounded-full bg-white/80 dark:bg-black/80 backdrop-blur-md border border-gray-200/30 dark:border-gray-800/50"
-              : "px-4 bg-white/40 dark:bg-gray-950/40"
+              ? `mx-4 px-4 py-2 rounded-full border ${getNavbarBg()}`
+              : `px-4 ${getNavbarBg()}`
           }`}
           style={{ 
             willChange: 'transform, opacity',
@@ -104,26 +111,17 @@ export default function Navbar({ activeSection }: NavbarProps) {
           <nav className="flex justify-center items-center">
             {/* Logo and Title - left aligned */}
             <div className="flex items-center justify-start flex-1 min-w-0">
-              {/* Logo and Title together */}
               <div className="flex items-center space-x-3 min-w-0">
                 <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center glow-effect-green flex-shrink-0">
-                  {mounted ? (
-                    <img
-                      src="/LogoFOSS.png"
-                      alt="FC"
-                      className="w-20 h-20 md:w-28 md:h-28 object-contain mx-auto"
-                    />
-                  ) : (
-                    <img
-                      src="/LogoFOSS.png"
-                      alt="FC"
-                      className="w-20 h-20 md:w-28 md:h-28 object-contain mx-auto"
-                    />
-                  )}
+                  <img
+                    src="/LogoFOSS.png"
+                    alt="FC"
+                    className="w-20 h-20 md:w-28 md:h-28 object-contain mx-auto"
+                  />
                 </div>
                 <Link
                   href="#"
-                  className={`text-lg font-bold truncate ${mounted ? (resolvedTheme === "dark" ? "text-white" : "text-gray-800") : "text-gray-800 dark:text-white"} z-50`}
+                  className={`text-lg font-bold truncate z-50 ${isDark ? "text-white" : "text-gray-900"}`}
                 >
                   The FOSS Club
                 </Link>
@@ -136,9 +134,7 @@ export default function Navbar({ activeSection }: NavbarProps) {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className={`text-sm font-medium transition-colors relative ${
-                      activeSection === link.name.toLowerCase() ? "text-green-500" : navLinkClass(false)
-                    }`}
+                    className={`text-sm font-medium transition-colors relative ${getTextColor(activeSection === link.name.toLowerCase())} ${getHoverClass()}`}
                   >
                     {link.name}
                     {activeSection === link.name.toLowerCase() && (
@@ -173,11 +169,15 @@ export default function Navbar({ activeSection }: NavbarProps) {
             <div className="flex items-center space-x-4 z-50 justify-end flex-1">
               <button
                 onClick={toggleTheme}
-                className="p-2 rounded-full text-gray-700 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-400 hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors btn-glow"
+                className={`p-2 rounded-full transition-colors btn-glow ${
+                  isDark 
+                    ? "text-gray-300 hover:text-green-400 hover:bg-gray-800" 
+                    : "text-gray-700 hover:text-green-500 hover:bg-gray-100"
+                }`}
                 aria-label="Toggle theme"
               >
                 {mounted ? (
-                  resolvedTheme === "dark" ? (
+                  isDark ? (
                     <Sun className="h-5 w-5" />
                   ) : (
                     <Moon className="h-5 w-5" />
@@ -189,7 +189,11 @@ export default function Navbar({ activeSection }: NavbarProps) {
 
               <button
                 onClick={toggleMenu}
-                className="md:hidden p-2 rounded-full text-gray-700 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-400 hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors"
+                className={`md:hidden p-2 rounded-full transition-colors ${
+                  isDark 
+                    ? "text-gray-300 hover:text-green-400 hover:bg-gray-800" 
+                    : "text-gray-700 hover:text-green-500 hover:bg-gray-100"
+                }`}
                 aria-label="Toggle menu"
               >
                 {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -207,7 +211,7 @@ export default function Navbar({ activeSection }: NavbarProps) {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.2 }}
-                    onClick={toggleMenu} // closes menu when tapped outside
+                    onClick={toggleMenu}
                   />
                   {/* Menu Panel */}
                   <motion.div
@@ -218,7 +222,11 @@ export default function Navbar({ activeSection }: NavbarProps) {
                     transition={{ duration: 0.3 }}
                   >
                     <div
-                      className="relative bg-black/80 dark:bg-black/90 rounded-2xl shadow-2xl px-4 py-6 w-[90vw] max-w-xs mx-auto flex flex-col items-center backdrop-blur-xl border border-gray-200/40 dark:border-gray-800/60"
+                      className={`relative rounded-2xl shadow-2xl px-4 py-6 w-[90vw] max-w-xs mx-auto flex flex-col items-center backdrop-blur-xl border ${
+                        isDark 
+                          ? "bg-gray-900/95 border-gray-800" 
+                          : "bg-white border-gray-200"
+                      }`}
                       style={{ maxHeight: '60vh', overflowY: 'auto' }}
                     >
                       <ul className="flex flex-col items-center space-y-4 mt-2 w-full">
@@ -231,11 +239,7 @@ export default function Navbar({ activeSection }: NavbarProps) {
                           >
                             <Link
                               href={link.href}
-                              className={`text-lg font-medium ${
-                                activeSection === link.name.toLowerCase()
-                                  ? "text-green-500"
-                                  : "text-gray-700 dark:text-gray-300"
-                              }`}
+                              className={`text-lg font-medium ${getTextColor(activeSection === link.name.toLowerCase())} ${getHoverClass()}`}
                               onClick={toggleMenu}
                             >
                               {link.name}

@@ -52,8 +52,8 @@ export default function TeamMember({ name, role, color, index }: TeamMemberProps
       >
         <span className="text-lg font-bold text-white drop-shadow-sm">{initials}</span>
       </div>
-      <h3 className="text-sm font-semibold mt-2 text-gray-800 dark:text-gray-200">{name}</h3>
-      <p className="text-xs text-gray-600 dark:text-gray-400">{role}</p>
+      <h3 className="text-sm font-semibold mt-2 text-foreground">{name}</h3>
+      <p className="text-xs text-muted-foreground">{role}</p>
     </div>
   )
 }

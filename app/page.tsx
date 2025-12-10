@@ -36,30 +36,45 @@ export default function Home() {
   }
 
   // Optimized scroll handler that works with Lenis
+  const currentSectionRef = useRef(activeSection)
+  
   useEffect(() => {
+    let ticking = false
+    
     const handleScroll = () => {
-      const scrollY = window.scrollY
-      const scrollPosition = scrollY + 100
-      const sections = Object.keys(sectionRefs) as Array<keyof typeof sectionRefs>
+      if (ticking) return
+      ticking = true
+      
+      requestAnimationFrame(() => {
+        const scrollY = window.scrollY
+        const scrollPosition = scrollY + 100
+        const sections = Object.keys(sectionRefs) as Array<keyof typeof sectionRefs>
 
-      // Update active section
-      for (const sectionName of sections) {
-        const ref = sectionRefs[sectionName].current
-        if (ref) {
-          if (scrollPosition >= ref.offsetTop && scrollPosition < ref.offsetTop + ref.offsetHeight) {
-            setActiveSection(sectionName)
-            break
+        // Update active section - only if changed
+        for (const sectionName of sections) {
+          const ref = sectionRefs[sectionName].current
+          if (ref) {
+            if (scrollPosition >= ref.offsetTop && scrollPosition < ref.offsetTop + ref.offsetHeight) {
+              // Only update state if section actually changed
+              if (currentSectionRef.current !== sectionName) {
+                currentSectionRef.current = sectionName
+                setActiveSection(sectionName)
+              }
+              break
+            }
           }
         }
-      }
 
-      // Hero parallax effect - direct DOM manipulation for performance
-      if (heroRef.current) {
-        const opacity = Math.max(0, 1 - scrollY / 300)
-        const scale = Math.max(0.9, 1 - scrollY / 3000)
-        heroRef.current.style.opacity = String(opacity)
-        heroRef.current.style.transform = `scale(${scale}) translateZ(0)`
-      }
+        // Hero parallax effect - direct DOM manipulation for performance
+        if (heroRef.current) {
+          const opacity = Math.max(0, 1 - scrollY / 300)
+          const scale = Math.max(0.9, 1 - scrollY / 3000)
+          heroRef.current.style.opacity = String(opacity)
+          heroRef.current.style.transform = `scale(${scale}) translateZ(0)`
+        }
+        
+        ticking = false
+      })
     }
 
     // Use Lenis scroll event if available
@@ -304,7 +319,6 @@ export default function Home() {
       <section
         ref={(el) => {
           sectionRefs.home.current = el
-          // @ts-expect-error - assigning to ref
           heroRef.current = el
         }}
         id="home"
@@ -341,7 +355,7 @@ export default function Home() {
               Welcome to The FOSS Club!
             </motion.h1>
             <motion.p
-              className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 md:mb-8 text-gray-700 dark:text-gray-200"
+              className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 md:mb-8 text-foreground"
               variants={{ hidden: { opacity: 0, x: -50 }, visible: { opacity: 1, x: 0, transition: { duration: 0.6 } } }}
             >
               <span className="font-semibold">Learn, build, and collaborate</span> with fellow open-source enthusiasts.
@@ -486,10 +500,18 @@ export default function Home() {
             About Us
           </h2>
 
-          <div className="max-w-full sm:max-w-4xl mx-auto backdrop-blur-sm p-4 sm:p-6 md:p-8 rounded-3xl border border-gray-800 dark:border-gray-800 bg-white/5 dark:bg-black/5 shadow-xl shadow-green-500/5">
-            <p className="text-base sm:text-lg mb-6 md:mb-8 leading-relaxed text-gray-700 dark:text-gray-300">
-              The FOSS Club is a student community-based group in the Delhi Technical Campus for enthusiasts focused on
-              contributing to
+          <div className="max-w-full sm:max-w-4xl mx-auto p-4 sm:p-6 md:p-8 rounded-3xl border border-border bg-card shadow-lg">
+            <p className="text-base sm:text-lg mb-6 md:mb-8 leading-relaxed text-foreground">
+              The FOSS Club is a student community-based group in the{" "}
+              <a
+                href="https://delhitechnicalcampus.ac.in"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-green-600 dark:text-green-400 hover:underline font-semibold"
+              >
+                Delhi Technical Campus
+              </a>{" "}
+              for enthusiasts focused on contributing to
               <span className="relative mx-2 text-green-500 font-bold group">
                 Free and Open Source Software
                 <span className="absolute opacity-0 group-hover:opacity-100 bg-gray-900 dark:bg-gray-900 text-xs text-white p-2 rounded -bottom-8 left-0 transition-opacity duration-300 shadow-lg">
@@ -502,17 +524,17 @@ export default function Home() {
             <h3 className="text-xl sm:text-2xl font-bold mb-4 text-gradient-green-dark">
               Core Pillars
             </h3>
-            <ul className="space-y-2 sm:space-y-3 md:space-y-4">
-              <li className="p-3 md:p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green shadow-md hover:shadow-green-500/10 hover:translate-x-2 transition-all text-sm sm:text-base">
-                <strong className="text-gray-900 dark:text-white mr-1">Open Source:</strong> The FOSS Club promotes open-source
+            <ul className="space-y-2 sm:space-y-3 md:space-y-4 text-foreground">
+              <li className="p-3 md:p-4 bg-primary/10 rounded-2xl border-gradient border-gradient-green shadow-md hover:shadow-green-500/10 hover:translate-x-2 transition-all text-sm sm:text-base">
+                <strong className="text-foreground mr-1">Open Source:</strong> The FOSS Club promotes open-source
                 software, FOSS philosophy, self-hosting, Linux, and collaborative development.
               </li>
-              <li className="p-3 md:p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green shadow-md hover:shadow-green-500/10 hover:translate-x-2 transition-all text-sm sm:text-base">
-                <strong className="text-gray-900 dark:text-white mr-1">Cyber Security:</strong> The FOSS Club explores ethical hacking,
+              <li className="p-3 md:p-4 bg-primary/10 rounded-2xl border-gradient border-gradient-green shadow-md hover:shadow-green-500/10 hover:translate-x-2 transition-all text-sm sm:text-base">
+                <strong className="text-foreground mr-1">Cyber Security:</strong> The FOSS Club explores ethical hacking,
                 CTFs, reverse engineering, digital privacy, OSINT, and cybersecurity research.
               </li>
-              <li className="p-3 md:p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green shadow-md hover:shadow-green-500/10 hover:translate-x-2 transition-all text-sm sm:text-base">
-                <strong className="text-gray-900 dark:text-white mr-1">Hardware:</strong> The FOSS Club will focus on self-hosted
+              <li className="p-3 md:p-4 bg-primary/10 rounded-2xl border-gradient border-gradient-green shadow-md hover:shadow-green-500/10 hover:translate-x-2 transition-all text-sm sm:text-base">
+                <strong className="text-foreground mr-1">Hardware:</strong> The FOSS Club will focus on self-hosted
                 systems, open hardware, embedded devices, SBCs (like Raspberry Pi and RISC-V boards), firmware hacking,
                 retro computing, and all the cool hardware stuff.
               </li>
@@ -520,7 +542,7 @@ export default function Home() {
           </div>
 
           <div className="mt-10 sm:mt-16 md:mt-20">
-            <h3 className="text-2xl sm:text-3xl font-bold mb-8 text-center text-gray-800 dark:text-gray-200 drop-shadow-md">
+            <h3 className="text-2xl sm:text-3xl font-bold mb-8 text-center text-foreground drop-shadow-md">
               Our Timeline
             </h3>
             <Timeline events={timelineEvents} />
@@ -816,58 +838,58 @@ export default function Home() {
             Resources
           </h2>
 
-          <div className="max-w-full sm:max-w-4xl mx-auto backdrop-blur-sm p-4 sm:p-6 md:p-8 rounded-3xl border border-gray-800 dark:border-gray-800 bg-white/5 dark:bg-black/5 shadow-xl shadow-green-500/5">
+          <div className="max-w-full sm:max-w-4xl mx-auto p-4 sm:p-6 md:p-8 rounded-3xl border border-border bg-card shadow-lg">
             <ul className="space-y-2 sm:space-y-3 md:space-y-4">
-              <li className="p-3 md:p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green transition-all shadow-md hover:shadow-green-500/10 hover:translate-x-2 hover:bg-gray-800/80">
+              <li className="p-3 md:p-4 bg-primary/10 rounded-2xl transition-all shadow-sm hover:shadow-md hover:translate-x-1">
                 <Link
                   href="https://github.com/thefossclub/resources#unlock-the-web-frontend--backend-secrets"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center text-base sm:text-lg text-gray-900 dark:text-white hover:text-black dark:hover:text-gray-200 transition-colors font-medium"
+                  className="flex items-center text-base sm:text-lg text-foreground hover:text-primary transition-colors font-medium"
                 >
                   <ArrowRight className="mr-2 h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
                   Web Development Fundamentals (Frontend & Backend)
                 </Link>
               </li>
-              <li className="p-3 md:p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green transition-all shadow-md hover:shadow-green-500/10 hover:translate-x-2 hover:bg-gray-800/80">
+              <li className="p-3 md:p-4 bg-primary/10 rounded-2xl transition-all shadow-sm hover:shadow-md hover:translate-x-1">
                 <Link
                   href="https://github.com/thefossclub/resources#level-up-your-game-dev-journey-starts-here"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center text-base sm:text-lg text-gray-900 dark:text-white hover:text-black dark:hover:text-gray-200 transition-colors font-medium"
+                  className="flex items-center text-base sm:text-lg text-foreground hover:text-primary transition-colors font-medium"
                 >
                   <ArrowRight className="mr-2 h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
                   Introduction to Game Development Concepts
                 </Link>
               </li>
-              <li className="p-3 md:p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green transition-all shadow-md hover:shadow-green-500/10 hover:translate-x-2 hover:bg-gray-800/80">
+              <li className="p-3 md:p-4 bg-primary/10 rounded-2xl transition-all shadow-sm hover:shadow-md hover:translate-x-1">
                 <Link
                   href="https://github.com/thefossclub/resources#mobile-mastery-build-your-first-app"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center text-base sm:text-lg text-gray-900 dark:text-white hover:text-black dark:hover:text-gray-200 transition-colors font-medium"
+                  className="flex items-center text-base sm:text-lg text-foreground hover:text-primary transition-colors font-medium"
                 >
                   <ArrowRight className="mr-2 h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
                   Mobile Application Development Resources
                 </Link>
               </li>
-              <li className="p-3 md:p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green transition-all shadow-md hover:shadow-green-500/10 hover:translate-x-2 hover:bg-gray-800/80">
+              <li className="p-3 md:p-4 bg-primary/10 rounded-2xl transition-all shadow-sm hover:shadow-md hover:translate-x-1">
                 <Link
                   href="https://github.com/thefossclub/resources#linux-command-line--version-control"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center text-base sm:text-lg text-gray-900 dark:text-white hover:text-black dark:hover:text-gray-200 transition-colors font-medium"
+                  className="flex items-center text-base sm:text-lg text-foreground hover:text-primary transition-colors font-medium"
                 >
                   <ArrowRight className="mr-2 h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
                   Linux, Command Line Interface, and Git Essentials
                 </Link>
               </li>
-              <li className="p-3 md:p-4 bg-gray-900/10 dark:bg-gray-900/50 rounded-2xl border-gradient border-gradient-green transition-all shadow-md hover:shadow-green-500/10 hover:translate-x-2 hover:bg-gray-800/80">
+              <li className="p-3 md:p-4 bg-primary/10 rounded-2xl transition-all shadow-sm hover:shadow-md hover:translate-x-1">
                 <Link
                   href="https://github.com/thefossclub/resources#cybersecurity--ethical-hacking"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center text-base sm:text-lg text-gray-900 dark:text-white hover:text-black dark:hover:text-gray-200 transition-colors font-medium"
+                  className="flex items-center text-base sm:text-lg text-foreground hover:text-primary transition-colors font-medium"
                 >
                   <ArrowRight className="mr-2 h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
                   Cybersecurity and Ethical Hacking Principles
@@ -886,16 +908,16 @@ export default function Home() {
           </h2>
 
           <div className="max-w-full sm:max-w-4xl mx-auto space-y-2 sm:space-y-4 md:space-y-6">
-            <div className="backdrop-blur-sm rounded-3xl overflow-hidden border border-gray-800 dark:border-gray-800 bg-white/5 dark:bg-black/5 shadow-lg hover:shadow-green-500/10 transition-all">
+            <div className="rounded-3xl overflow-hidden border border-border bg-card shadow-md transition-all">
               <details className="group">
                 <summary className="flex items-center justify-between p-4 md:p-6 cursor-pointer">
-                  <h3 className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-gray-200">What is FOSS?</h3>
+                  <h3 className="text-lg sm:text-xl font-semibold text-foreground">What is FOSS?</h3>
                   <span className="transition-transform duration-300 group-open:rotate-180">
                     <ArrowRight className="h-5 w-5 rotate-90 text-green-500" />
                   </span>
                 </summary>
-                <div className="p-4 md:p-6 pt-0 border-t border-gray-800 text-sm sm:text-base">
-                  <p className="text-gray-700 dark:text-gray-300">
+                <div className="p-4 md:p-6 pt-0 border-t border-border text-sm sm:text-base">
+                  <p className="text-muted-foreground">
                     FOSS stands for Free and Open Source Software. It refers to software that is freely available for
                     use, modification, and distribution.
                   </p>
@@ -903,18 +925,18 @@ export default function Home() {
               </details>
             </div>
 
-            <div className="backdrop-blur-sm rounded-3xl overflow-hidden border border-gray-800 dark:border-gray-800 bg-white/5 dark:bg-black/5 shadow-lg hover:shadow-green-500/10 transition-all">
+            <div className="rounded-3xl overflow-hidden border border-border bg-card shadow-md transition-all">
               <details className="group">
                 <summary className="flex items-center justify-between p-4 md:p-6 cursor-pointer">
-                  <h3 className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-gray-200">
+                  <h3 className="text-lg sm:text-xl font-semibold text-foreground">
                     How can I join the FOSS Club?
                   </h3>
                   <span className="transition-transform duration-300 group-open:rotate-180">
                     <ArrowRight className="h-5 w-5 rotate-90 text-green-500" />
                   </span>
                 </summary>
-                <div className="p-4 md:p-6 pt-0 border-t border-gray-800 text-sm sm:text-base">
-                  <p className="text-gray-700 dark:text-gray-300">
+                <div className="p-4 md:p-6 pt-0 border-t border-border text-sm sm:text-base">
+                  <p className="text-muted-foreground">
                     You can join our club by filling out the application form in the "Join" section of our website. We
                     welcome students of all skill levels who are interested in open source software.
                   </p>
@@ -922,18 +944,18 @@ export default function Home() {
               </details>
             </div>
 
-            <div className="backdrop-blur-sm rounded-3xl overflow-hidden border border-gray-800 dark:border-gray-800 bg-white/5 dark:bg-black/5 shadow-lg hover:shadow-green-500/10 transition-all">
+            <div className="rounded-3xl overflow-hidden border border-border bg-card shadow-md transition-all">
               <details className="group">
                 <summary className="flex items-center justify-between p-4 md:p-6 cursor-pointer">
-                  <h3 className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-gray-200">
+                  <h3 className="text-lg sm:text-xl font-semibold text-foreground">
                     Do I need programming experience to join?
                   </h3>
                   <span className="transition-transform duration-300 group-open:rotate-180">
                     <ArrowRight className="h-5 w-5 rotate-90 text-green-500" />
                   </span>
                 </summary>
-                <div className="p-4 md:p-6 pt-0 border-t border-gray-800 text-sm sm:text-base">
-                  <p className="text-gray-700 dark:text-gray-300">
+                <div className="p-4 md:p-6 pt-0 border-t border-border text-sm sm:text-base">
+                  <p className="text-muted-foreground">
                     No, you don't need prior programming experience to join. We welcome members with diverse backgrounds
                     and skill levels. Our club provides learning opportunities for beginners as well as advanced
                     developers.
@@ -942,18 +964,18 @@ export default function Home() {
               </details>
             </div>
 
-            <div className="backdrop-blur-sm rounded-3xl overflow-hidden border border-gray-800 dark:border-gray-800 bg-white/5 dark:bg-black/5 shadow-lg hover:shadow-green-500/10 transition-all">
+            <div className="rounded-3xl overflow-hidden border border-border bg-card shadow-md transition-all">
               <details className="group">
                 <summary className="flex items-center justify-between p-4 md:p-6 cursor-pointer">
-                  <h3 className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-gray-200">
+                  <h3 className="text-lg sm:text-xl font-semibold text-foreground">
                     How often does the club meet?
                   </h3>
                   <span className="transition-transform duration-300 group-open:rotate-180">
                     <ArrowRight className="h-5 w-5 rotate-90 text-green-500" />
                   </span>
                 </summary>
-                <div className="p-4 md:p-6 pt-0 border-t border-gray-800 text-sm sm:text-base">
-                  <p className="text-gray-700 dark:text-gray-300">
+                <div className="p-4 md:p-6 pt-0 border-t border-border text-sm sm:text-base">
+                  <p className="text-muted-foreground">
                     We typically have weekly meetings during the academic year. The schedule is posted on our website
                     and social media channels at the beginning of each semester.
                   </p>
@@ -966,7 +988,7 @@ export default function Home() {
 
       {/* Footer - Render only when mounted */}
       {mounted && (
-        <footer className="py-8 sm:py-10 md:py-12 border-t border-gray-800 dark:border-gray-800 footer-gradient px-2 sm:px-4 lg:px-8 bg-white dark:bg-black/80 backdrop-blur-sm">
+        <footer className="py-8 sm:py-10 md:py-12 border-t border-border px-2 sm:px-4 lg:px-8 bg-background">
           <div className="container mx-auto">
             <div className="flex flex-col md:flex-row justify-between items-center mb-8 sm:mb-10 md:mb-12">
               <div className="mb-6 sm:mb-8 md:mb-0 text-center md:text-left">
@@ -978,9 +1000,9 @@ export default function Home() {
                       className="w-16 h-16 md:w-20 md:h-20 object-contain mx-auto"
                     />
                   </div>
-                  <h3 className="text-base sm:text-lg font-bold text-gray-800 dark:text-white">The FOSS Club</h3>
+                  <h3 className="text-base sm:text-lg font-bold text-foreground">The FOSS Club</h3>
                 </div>
-                <p className="text-gray-600 dark:text-gray-400 max-w-xs sm:max-w-md text-sm sm:text-base md:text-lg">
+                <p className="text-muted-foreground max-w-xs sm:max-w-md text-sm sm:text-base md:text-lg">
                   Learn, build, and collaborate with fellow open-source enthusiasts in a community dedicated to free and
                   open source software.
                 </p>
@@ -990,7 +1012,7 @@ export default function Home() {
                   href="https://github.com/thefossclub"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2.5 md:p-3 bg-white/10 dark:bg-black/20 rounded-full text-gray-600 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-400 hover:bg-white/20 dark:hover:bg-black/30 transition-all shadow-md hover:shadow-green-500/20"
+                  className="p-2.5 md:p-3 bg-muted rounded-full text-muted-foreground hover:text-green-500 dark:hover:text-green-400 hover:bg-muted/80 transition-all shadow-md hover:shadow-green-500/20"
                 >
                   <Github className="h-5 w-5 md:h-6 md:w-6" />
                   <span className="sr-only">GitHub</span>
@@ -999,7 +1021,7 @@ export default function Home() {
                   href="https://discord.gg/D5g5Tke4BW"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2.5 md:p-3 bg-white/10 dark:bg-black/20 rounded-full text-gray-600 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-400 hover:bg-white/20 dark:hover:bg-black/30 transition-all shadow-md hover:shadow-green-500/20"
+                  className="p-2.5 md:p-3 bg-muted rounded-full text-muted-foreground hover:text-green-500 dark:hover:text-green-400 hover:bg-muted/80 transition-all shadow-md hover:shadow-green-500/20"
                 >
                   <FaDiscord className="h-5 w-5 md:h-6 md:w-6" />
                   <span className="sr-only">Discord</span>
@@ -1008,7 +1030,7 @@ export default function Home() {
                   href="https://twitter.com/thefossclub"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2.5 md:p-3 bg-white/10 dark:bg-black/20 rounded-full text-gray-600 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-400 hover:bg-white/20 dark:hover:bg-black/30 transition-all shadow-md hover:shadow-green-500/20"
+                  className="p-2.5 md:p-3 bg-muted rounded-full text-muted-foreground hover:text-green-500 dark:hover:text-green-400 hover:bg-muted/80 transition-all shadow-md hover:shadow-green-500/20"
                 >
                   <Twitter className="h-5 w-5 md:h-6 md:w-6" />
                   <span className="sr-only">Twitter</span>
@@ -1017,7 +1039,7 @@ export default function Home() {
                   href="https://linkedin.com/company/thefossclub"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2.5 md:p-3 bg-white/10 dark:bg-black/20 rounded-full text-gray-600 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-400 hover:bg-white/20 dark:hover:bg-black/30 transition-all shadow-md hover:shadow-green-500/20"
+                  className="p-2.5 md:p-3 bg-muted rounded-full text-muted-foreground hover:text-green-500 dark:hover:text-green-400 hover:bg-muted/80 transition-all shadow-md hover:shadow-green-500/20"
                 >
                   <Linkedin className="h-5 w-5 md:h-6 md:w-6" />
                   <span className="sr-only">LinkedIn</span>
@@ -1026,7 +1048,7 @@ export default function Home() {
                   href="https://instagram.com/thefossclub"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2.5 md:p-3 bg-white/10 dark:bg-black/20 rounded-full text-gray-600 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-400 hover:bg-white/20 dark:hover:bg-black/30 transition-all shadow-md hover:shadow-green-500/20"
+                  className="p-2.5 md:p-3 bg-muted rounded-full text-muted-foreground hover:text-green-500 dark:hover:text-green-400 hover:bg-muted/80 transition-all shadow-md hover:shadow-green-500/20"
                 >
                   <Instagram className="h-5 w-5 md:h-6 md:w-6" />
                   <span className="sr-only">Instagram</span>
@@ -1034,13 +1056,13 @@ export default function Home() {
               </div>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-10 mb-6 sm:mb-8">
-              <div className="backdrop-blur-sm p-5 md:p-6 rounded-2xl border border-gray-200/20 dark:border-gray-800/50 bg-white/5 dark:bg-black/5 card-hover-effect shadow-lg hover:shadow-green-500/10">
+              <div className="p-5 md:p-6 rounded-2xl border border-border bg-card shadow-md">
                 <h3 className="text-lg sm:text-xl font-semibold mb-3 md:mb-4 text-gradient-green">Quick Links</h3>
                 <ul className="space-y-2 md:space-y-3 text-sm sm:text-base">
                   <li>
                     <Link
                       href="#home"
-                      className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
+                      className="text-muted-foreground hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
                     >
                       Home
                     </Link>
@@ -1048,7 +1070,7 @@ export default function Home() {
                   <li>
                     <Link
                       href="#about"
-                      className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
+                      className="text-muted-foreground hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
                     >
                       About
                     </Link>
@@ -1056,7 +1078,7 @@ export default function Home() {
                   <li>
                     <Link
                       href="#projects"
-                      className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
+                      className="text-muted-foreground hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
                     >
                       Projects
                     </Link>
@@ -1064,20 +1086,20 @@ export default function Home() {
                   <li>
                     <Link
                       href="#events"
-                      className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
+                      className="text-muted-foreground hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
                     >
                       Events
                     </Link>
                   </li>
                 </ul>
               </div>
-              <div className="backdrop-blur-sm p-5 md:p-6 rounded-2xl border border-gray-200/20 dark:border-gray-800/50 bg-white/5 dark:bg-black/5 card-hover-effect shadow-lg hover:shadow-green-500/10">
+              <div className="p-5 md:p-6 rounded-2xl border border-border bg-card shadow-md">
                 <h3 className="text-lg sm:text-xl font-semibold mb-3 md:mb-4 text-gradient-green">Resources</h3>
                 <ul className="space-y-2 md:space-y-3 text-sm sm:text-base">
                   <li>
                     <Link
                       href="#"
-                      className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
+                      className="text-muted-foreground hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
                     >
                       Blog
                     </Link>
@@ -1085,7 +1107,7 @@ export default function Home() {
                   <li>
                     <Link
                       href="#"
-                      className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
+                      className="text-muted-foreground hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
                     >
                       Documentation
                     </Link>
@@ -1094,7 +1116,7 @@ export default function Home() {
                     <Link
                       href="https://github.com/thefossclub/CodeofConduct"
                       target="_blank"
-                      className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
+                      className="text-muted-foreground hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
                     >
                       Code of Conduct
                     </Link>
@@ -1102,21 +1124,21 @@ export default function Home() {
                   <li>
                     <Link
                       href="#"
-                      className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
+                      className="text-muted-foreground hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
                     >
                       Privacy Policy
                     </Link>
                   </li>
                 </ul>
               </div>
-              <div className="backdrop-blur-sm p-5 md:p-6 rounded-2xl border border-gray-200/20 dark:border-gray-800/50 bg-white/5 dark:bg-black/5 card-hover-effect shadow-lg hover:shadow-green-500/10">
+              <div className="p-5 md:p-6 rounded-2xl border border-border bg-card shadow-md">
                 <h3 className="text-lg sm:text-xl font-semibold mb-3 md:mb-4 text-gradient-green">Contact</h3>
                 <ul className="space-y-2 md:space-y-3 text-sm sm:text-base">
                   <li>
                     <Link
                       href="https://linktr.ee/thefossclub"
                       target="_blank"
-                      className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
+                      className="text-muted-foreground hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
                     >
                       LinkTree
                     </Link>
@@ -1124,7 +1146,7 @@ export default function Home() {
                   <li>
                     <Link
                       href="#"
-                      className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
+                      className="text-muted-foreground hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
                     >
                       Email Us
                     </Link>
@@ -1132,7 +1154,7 @@ export default function Home() {
                   <li>
                     <Link
                       href="https://discord.gg/D5g5Tke4BW"
-                      className="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
+                      className="text-muted-foreground hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
                     >
                       Join Discord
                     </Link>
@@ -1141,9 +1163,9 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="text-center pt-4 sm:pt-6 border-t border-gray-800/30 dark:border-gray-800/30 relative">
-              <p className="text-gray-500 text-sm sm:text-base">© {new Date().getFullYear()} The FOSS Club. All rights reserved.</p>
-              <p className="text-gray-500 mt-1 md:mt-2 text-xs sm:text-sm">Made with 💚 by open source enthusiasts</p>
+            <div className="text-center pt-4 sm:pt-6 border-t border-border relative">
+              <p className="text-muted-foreground text-sm sm:text-base">© {new Date().getFullYear()} The FOSS Club. All rights reserved.</p>
+              <p className="text-muted-foreground mt-1 md:mt-2 text-xs sm:text-sm">Made with 💚 by open source enthusiasts</p>
 
               <button
                 onClick={() => {

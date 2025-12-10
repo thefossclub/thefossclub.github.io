@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useEffect } from "react"
+import { useRef, useEffect, useCallback } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import ToolCard from "./tool-card"
 
@@ -14,10 +14,14 @@ interface ScrollingToolsProps {
   tools: Tool[]
 }
 
+// Smoother easing function (easeOutExpo - more buttery smooth)
+const easeOutExpo = (t: number) => t === 1 ? 1 : 1 - Math.pow(2, -10 * t)
+
 export default function ScrollingTools({ tools }: ScrollingToolsProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const scrollContentRef = useRef<HTMLDivElement>(null)
   const motionDivRef = useRef<HTMLDivElement>(null)
+  const animationRef = useRef<number | null>(null)
 
   useEffect(() => {
     const container = containerRef.current
@@ -25,9 +29,11 @@ export default function ScrollingTools({ tools }: ScrollingToolsProps) {
     if (!container || !motionDiv) return
 
     let ticking = false
+    let isVisible = false
 
     const handleScroll = () => {
-      if (ticking) return
+      // Skip if not visible or already processing
+      if (!isVisible || ticking) return
       ticking = true
       
       requestAnimationFrame(() => {
@@ -49,6 +55,16 @@ export default function ScrollingTools({ tools }: ScrollingToolsProps) {
       })
     }
 
+    // Only animate when visible in viewport
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting
+        if (isVisible) handleScroll()
+      },
+      { threshold: 0, rootMargin: '100px' }
+    )
+    observer.observe(container)
+
     // Use Lenis scroll event if available, fallback to native
     // @ts-expect-error - lenis is added to window
     const lenis = window.lenis
@@ -63,23 +79,62 @@ export default function ScrollingTools({ tools }: ScrollingToolsProps) {
     handleScroll()
 
     return () => {
+      observer.disconnect()
       if (lenis) {
         lenis.off('scroll', handleScroll)
       } else {
         window.removeEventListener('scroll', handleScroll)
       }
+      // Cleanup button scroll animation
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current)
+      }
     }
   }, [])
 
-  const handleButtonScroll = (direction: "left" | "right") => {
-    if (scrollContentRef.current) {
-      const scrollAmount = scrollContentRef.current.offsetWidth / 2
-      scrollContentRef.current.scrollBy({
-        left: direction === "left" ? -scrollAmount : scrollAmount,
-        behavior: "smooth",
-      })
+  // Smooth scroll animation with buttery easing
+  const smoothScrollTo = useCallback((element: HTMLElement, targetScrollLeft: number, duration: number = 1200) => {
+    // Cancel any existing animation
+    if (animationRef.current) {
+      cancelAnimationFrame(animationRef.current)
     }
-  }
+
+    const startScrollLeft = element.scrollLeft
+    const distance = targetScrollLeft - startScrollLeft
+    const startTime = performance.now()
+
+    const animate = (currentTime: number) => {
+      const elapsed = currentTime - startTime
+      const progress = Math.min(elapsed / duration, 1)
+      const easedProgress = easeOutExpo(progress)
+
+      element.scrollLeft = startScrollLeft + distance * easedProgress
+
+      if (progress < 1) {
+        animationRef.current = requestAnimationFrame(animate)
+      } else {
+        animationRef.current = null
+      }
+    }
+
+    animationRef.current = requestAnimationFrame(animate)
+  }, [])
+
+  const handleButtonScroll = useCallback((direction: "left" | "right") => {
+    if (scrollContentRef.current) {
+      const element = scrollContentRef.current
+      const scrollAmount = element.offsetWidth / 2
+      const targetScrollLeft = direction === "left" 
+        ? element.scrollLeft - scrollAmount 
+        : element.scrollLeft + scrollAmount
+      
+      // Clamp to valid scroll range
+      const maxScroll = element.scrollWidth - element.clientWidth
+      const clampedTarget = Math.max(0, Math.min(maxScroll, targetScrollLeft))
+      
+      smoothScrollTo(element, clampedTarget, 1200)
+    }
+  }, [smoothScrollTo])
 
   return (
     <div ref={containerRef} className="relative overflow-hidden py-10 group">

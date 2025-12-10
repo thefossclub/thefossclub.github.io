@@ -37,7 +37,7 @@ export default function ToolCard({ name, description, icon }: ToolCardProps) {
         {getIcon()}
       </div>
       <h3 className="text-base font-bold mb-1 text-gradient-green">{name}</h3>
-      <p className="text-xs text-gray-600 dark:text-gray-400">{description}</p>
+      <p className="text-xs text-muted-foreground">{description}</p>
     </div>
   )
 }
