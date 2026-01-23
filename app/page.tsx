@@ -174,11 +174,25 @@ export default function Home() {
       image: "/Hack25.jpg?height=300&width=400",
     },
     {
+      title: "Lumexis: Interactive session on Git & Open-Source Alternatives",
+      date: "September 2, 2025",
+      description:
+        "A hands-on session where you’ll install Linux, learn how it works, and understand why so many developers swear by it.",
+      image: "/lumexis.jpg?=300&width=400",
+    },
+    {
       title: "SecureCon",
       date: "October 8, 2025",
       description:
         " A Cybersecurity Event having an Speaker session and Hands-on covering Port-Scanning, SQLinjection and Brute-Force.",
       image: "/SecureCon.jpg?height=300&width=400",
+    },
+    {
+      title: "Unlocking TUX: Linux Installation Party",
+      date: "October 15, 2025",
+      description:
+        "A hands-on session where you’ll install Linux, learn how it works, and understand why so many developers swear by it.",
+      image: "/Unlocking-TUX-Linux-Installation-Party.jpg?=300&width=400",
     },
   ]
 
