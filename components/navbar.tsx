@@ -58,6 +58,7 @@ export default function Navbar({ activeSection }: NavbarProps) {
     { name: "Events", href: "#events" },
     { name: "Team", href: "#team" },
     { name: "Resources", href: "#resources" },
+    { name: "FOSSHack2026", href: "/fosshack" },
   ]
 
   // Get navbar background based on scroll and theme
