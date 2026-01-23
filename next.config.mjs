@@ -5,11 +5,10 @@ try {
   // ignore error
 }
 
+const isDev = process.env.NODE_ENV === 'development'
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -21,7 +20,7 @@ const nextConfig = {
     parallelServerBuildTraces: true,
     parallelServerCompiles: true,
   },
-  output: 'export', // already added
+  ...(isDev ? {} : { output: 'export' }),
 }
 
 mergeConfig(nextConfig, userConfig)

@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+@theme {
+    --color-background: rgb(10 10 15);
+    --color-foreground: rgb(245 245 255);
+    --color-muted: rgb(140 140 160);
+    --color-accent-green: rgb(64 255 140);
+    --color-accent-cyan: rgb(0 255 255);
+    --color-accent-purple: rgb(180 100 255);
+    --color-accent-pink: rgb(255 80 200);
+}
+
+:root {
+    --background: 10 10 15;
+    --foreground: 245 245 255;
+    --muted: 140 140 160;
+    --accent-green: 64 255 140;
+    --accent-cyan: 0 255 255;
+    --accent-purple: 180 100 255;
+    --accent-pink: 255 80 200;
+    --card-rgb: 20 20 30;
+    --blur-strength: 80px;
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --background: 250 250 255;
+        --foreground: 20 20 30;
+        --muted: 100 100 120;
+        --card-rgb: 255 255 255 / 0.75;
+    }
+
+    body {
+        background-color: rgb(var(--background));
+        background-image:
+            radial-gradient(1200px 600px at 10% 10%, rgba(var(--accent-purple), 0.10), transparent 60%),
+            radial-gradient(900px 500px at 90% 25%, rgba(var(--accent-cyan), 0.08), transparent 55%),
+            radial-gradient(800px 450px at 50% 100%, rgba(var(--accent-green), 0.06), transparent 55%),
+            linear-gradient(180deg, rgba(0, 0, 0, 0.03), transparent 40%);
+    }
+}
+
+html.theme-light {
+    --background: 250 250 255 !important;
+    --foreground: 20 20 30 !important;
+    --muted: 100 100 120 !important;
+    --card-rgb: 255 255 255 / 0.75 !important;
+}
+
+html.theme-light body {
+    background-color: rgb(var(--background)) !important;
+    background-image:
+        radial-gradient(1200px 600px at 10% 10%, rgba(var(--accent-purple), 0.10), transparent 60%),
+        radial-gradient(900px 500px at 90% 25%, rgba(var(--accent-cyan), 0.08), transparent 55%),
+        radial-gradient(800px 450px at 50% 100%, rgba(var(--accent-green), 0.06), transparent 55%),
+        linear-gradient(180deg, rgba(0, 0, 0, 0.03), transparent 40%) !important;
+    color: rgb(var(--foreground)) !important;
+}
+
+body {
+    color: rgb(var(--foreground));
+    background-color: rgb(var(--background));
+    background-image:
+        radial-gradient(1200px 600px at 10% 10%, rgba(var(--accent-purple), 0.15), transparent 60%),
+        radial-gradient(900px 500px at 90% 25%, rgba(var(--accent-cyan), 0.10), transparent 55%),
+        radial-gradient(800px 450px at 50% 100%, rgba(var(--accent-green), 0.08), transparent 55%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 40%);
+    overflow-x: hidden;
+    letter-spacing: -0.02em;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+::selection {
+    background-color: rgba(var(--accent-cyan), 0.25);
+}
+
+.prose {
+    max-width: none;
+}
+
+* {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.glass {
+    background: rgba(var(--card-rgb), 0.25);
+    backdrop-filter: blur(var(--blur-strength));
+    -webkit-backdrop-filter: blur(var(--blur-strength));
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}

@@ -2,7 +2,8 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: ["main"]
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
@@ -20,22 +21,38 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
-      - name: Setup Node
-        uses: actions/setup-node@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          node-version: 20
-          
-      - name: Install dependencies
-        run: npm install --force
-        
-      - name: Build
-        run: npm run build
-        
+          bun-version: latest
+
+      - name: Install main site dependencies
+        run: bun install
+
+      - name: Build main site
+        run: bun run build
+
+      - name: Install fosshack dependencies
+        working-directory: ./fosshack
+        run: bun install
+
+      - name: Build fosshack site
+        working-directory: ./fosshack
+        run: NODE_ENV=production bun run build
+
+      - name: Copy fosshack to main site output
+        run: |
+          mkdir -p out/fosshack
+          cp -r fosshack/out/* out/fosshack/
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./out
+          path: './out'
 
   deploy:
     environment:
@@ -46,4 +63,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4 
+        uses: actions/deploy-pages@v4

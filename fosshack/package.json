@@ -1,0 +1,37 @@
+{
+  "name": "foss-hack-2025",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "export": "next build",
+    "deploy": "bun run export && rm -rf ../public/fosshack && cp -r out ../public/fosshack",
+    "clean": "rm -rf .next out"
+  },
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.1.18",
+    "all": "^0.0.0",
+    "framer-motion": "^12.29.0",
+    "list": "^2.0.19",
+    "lucide-react": "^0.563.0",
+    "next": "^16.1.4",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "react-intersection-observer": "^9.16.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.3",
+    "@types/node": "^25.0.10",
+    "@types/react": "^19.2.9",
+    "@types/react-dom": "^19.2.3",
+    "autoprefixer": "^10.4.23",
+    "eslint": "^9.39.2",
+    "eslint-config-next": "^16.1.4",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.18",
+    "typescript": "^5.9.3"
+  }
+}
