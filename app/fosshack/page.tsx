@@ -94,16 +94,23 @@ interface Sponsor {
 
 const SponsorTier = ({
   title,
+  amount,
   sponsors,
   bgColor,
 }: {
   title: string;
+  amount: number;
   sponsors: Sponsor[];
   bgColor: string;
 }) => (
   <div className={`${bgColor} rounded-xl p-6 mb-8`}>
     <h3 className="text-2xl font-semibold mb-4 text-foreground">
       {title} Sponsors
+      {amount > 0 && (
+        <span className="text-sm font-normal ml-2 text-foreground/70">
+          ${amount}
+        </span>
+      )}
     </h3>
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
       {sponsors.map((sponsor, index) => (
@@ -587,18 +594,21 @@ export default function Home() {
           >
             <SponsorTier
               title="Platinum"
+              amount={440}
               sponsors={[]}
               bgColor="bg-gradient-to-br from-cyan-200/30 via-cyan-300/20 to-transparent backdrop-blur-sm border border-gray-400/30"
             />
 
             <SponsorTier
               title="Gold"
+              amount={220}
               sponsors={[]}
               bgColor="bg-gradient-to-br from-yellow-500/25 via-yellow-400/15 to-transparent backdrop-blur-sm border border-yellow-400/30"
             />
 
             <SponsorTier
               title="Silver"
+              amount={110}
               sponsors={[]}
               bgColor="bg-gradient-to-br from-gray-400/25 via-gray-300/15 to-transparent backdrop-blur-sm border border-gray-400/30"
             />
