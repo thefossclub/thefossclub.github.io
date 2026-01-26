@@ -25,7 +25,9 @@ import { CountdownTimer } from "@/components/fosshack/countdown-timer";
 
 const DynamicGeometricShapes = dynamic(
   () =>
-    import("@/components/fosshack/geometric-shapes").then((mod) => mod.GeometricShapes),
+    import("@/components/fosshack/geometric-shapes").then(
+      (mod) => mod.GeometricShapes,
+    ),
   {
     ssr: false,
   },
@@ -92,17 +94,26 @@ interface Sponsor {
 
 const SponsorTier = ({
   title,
+  amount,
   sponsors,
   bgColor,
 }: {
   title: string;
+  amount: number;
   sponsors: Sponsor[];
   bgColor: string;
 }) => (
   <div className={`${bgColor} rounded-xl p-6 mb-8`}>
-    <h3 className="text-2xl font-semibold mb-4 text-foreground">
-      {title} Sponsors
-    </h3>
+    <div className="mb-2 flex flex-col items-center justify-center text-center">
+      <h3 className="text-2xl font-semibold text-foreground flex items-baseline gap-2">
+        <span>{title} Sponsors</span>
+        {amount > 0 && (
+          <span className="text-sm font-normal text-foreground/70">
+            ${amount}
+          </span>
+        )}
+      </h3>
+    </div>
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
       {sponsors.map((sponsor, index) => (
         <motion.div
@@ -110,15 +121,17 @@ const SponsorTier = ({
           className="bg-background/80 p-4 rounded-xl flex items-center justify-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 * index, duration: 0.8 }}
+          transition={{ delay: 0.1 * index, duration: 0.6 }}
         >
-          <Image
-            src={sponsor.logo}
-            width={160}
-            height={80}
-            alt={`${title} Sponsor ${sponsor.name}`}
-            className="max-w-full h-auto"
-          />
+          <div className="h-16 w-full flex items-center justify-center">
+            <Image
+              src={sponsor.logo}
+              width={160}
+              height={80}
+              alt={`${title} Sponsor ${sponsor.name}`}
+              className="max-h-full w-auto object-contain"
+            />
+          </div>
         </motion.div>
       ))}
     </div>
@@ -220,7 +233,8 @@ export default function Home() {
     };
   }, []);
 
-  const toggleTheme = () => setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+  const toggleTheme = () =>
+    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
 
   return (
     <div className="bg-background text-foreground text-lg relative overflow-hidden">
@@ -279,7 +293,7 @@ export default function Home() {
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           aria-label="Scroll to top"
-          className={`fixed bottom-10 right-6 z-30 flex h-11 w-11 items-center justify-center rounded-full backdrop-blur-md transition-all 
+          className={`fixed bottom-10 right-6 z-30 flex h-11 w-11 items-center justify-center rounded-full backdrop-blur-md transition-all
             ${
               theme === "light"
                 ? "bg-white text-[#141414] border border-black/10 shadow-lg shadow-black/30 hover:shadow-black/45"
@@ -337,9 +351,7 @@ export default function Home() {
               <span className="absolute inset-0 rounded-full bg-white" />
               <span className="absolute inset-0 rounded-full bg-gradient-to-r from-[var(--accent-green)]/60 via-white to-[var(--accent-cyan)]/60 opacity-90 group-hover:opacity-100 transition-opacity duration-300" />
               <span className="absolute inset-0 rounded-full blur-lg bg-[var(--accent-cyan)]/25 opacity-60 group-hover:opacity-90 transition-opacity duration-300" />
-              <span
-                className="absolute inset-0 rounded-full border border-[rgba(var(--accent-green),0.6)]"
-              />
+              <span className="absolute inset-0 rounded-full border border-[rgba(var(--accent-green),0.6)]" />
               <span className="relative flex items-center gap-3">
                 Register Now
                 <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
@@ -347,6 +359,35 @@ export default function Home() {
             </Link>
             <div className="mt-24 sm:mt-28 md:mt-32 max-w-4xl mx-auto w-full">
               <CountdownTimer />
+            </div>
+            <div className="mt-6 flex justify-center">
+              <div className="flex items-center gap-2 rounded-full bg-white/5 px-7 py-3.5 backdrop-blur border border-white/10 text-lg text-neutral-300">
+                <Image
+                  src="/fosshack/favicon.ico"
+                  alt="FOSS Hack logo"
+                  width={30}
+                  height={30}
+                  className="opacity-90"
+                />
+
+                <a
+                  href="/FOSS HACK 2026-Brochure.pdf"
+                  target="_blank"
+                  className="font-medium hover:text-white transition-colors"
+                >
+                  View FOSS Hack 2026 Brochure
+                </a>
+
+                <span className="text-neutral-500">•</span>
+
+                <a
+                  href="/FOSS HACK 2026-Brochure.pdf"
+                  download
+                  className="hover:text-white transition-colors"
+                >
+                  Download
+                </a>
+              </div>
             </div>
           </motion.div>
         </div>
@@ -506,7 +547,9 @@ export default function Home() {
                     >
                       <link.icon
                         className={`h-5 w-5 ${
-                          theme === "light" ? "text-[var(--accent-purple)]" : "text-[var(--accent-cyan)]"
+                          theme === "light"
+                            ? "text-[var(--accent-purple)]"
+                            : "text-[var(--accent-cyan)]"
                         }`}
                       />
                     </div>
@@ -520,7 +563,9 @@ export default function Home() {
                       </h3>
                       <p
                         className={`text-sm md:text-base ${
-                          theme === "light" ? "text-foreground/70" : "text-white/70"
+                          theme === "light"
+                            ? "text-foreground/70"
+                            : "text-white/70"
                         }`}
                       >
                         {link.desc}
@@ -553,18 +598,21 @@ export default function Home() {
           >
             <SponsorTier
               title="Platinum"
+              amount={440}
               sponsors={[]}
               bgColor="bg-gradient-to-br from-cyan-200/30 via-cyan-300/20 to-transparent backdrop-blur-sm border border-gray-400/30"
             />
 
             <SponsorTier
               title="Gold"
+              amount={220}
               sponsors={[]}
               bgColor="bg-gradient-to-br from-yellow-500/25 via-yellow-400/15 to-transparent backdrop-blur-sm border border-yellow-400/30"
             />
 
             <SponsorTier
               title="Silver"
+              amount={110}
               sponsors={[]}
               bgColor="bg-gradient-to-br from-gray-400/25 via-gray-300/15 to-transparent backdrop-blur-sm border border-gray-400/30"
             />
