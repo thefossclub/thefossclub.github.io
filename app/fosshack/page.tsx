@@ -104,10 +104,10 @@ const SponsorTier = ({
   bgColor: string;
 }) => (
   <div className={`${bgColor} rounded-xl p-6 mb-8`}>
-    <h3 className="text-2xl font-semibold mb-4 text-foreground">
+    <h3 className="text-2xl font-semibold mb-4 text-foreground flex">
       {title} Sponsors
       {amount > 0 && (
-        <span className="text-sm font-normal ml-2 text-foreground/70">
+        <span className="text-sm font-normal ml-auto text-foreground/70">
           ${amount}
         </span>
       )}
