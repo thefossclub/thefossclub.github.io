@@ -104,14 +104,16 @@ const SponsorTier = ({
   bgColor: string;
 }) => (
   <div className={`${bgColor} rounded-xl p-6 mb-8`}>
-    <h3 className="text-2xl font-semibold mb-4 text-foreground flex">
-      {title} Sponsors
-      {amount > 0 && (
-        <span className="text-sm font-normal ml-auto text-foreground/70">
-          ${amount}
-        </span>
-      )}
-    </h3>
+    <div className="mb-2 flex flex-col items-center justify-center text-center">
+      <h3 className="text-2xl font-semibold text-foreground flex items-baseline gap-2">
+        <span>{title} Sponsors</span>
+        {amount > 0 && (
+          <span className="text-sm font-normal text-foreground/70">
+            ${amount}
+          </span>
+        )}
+      </h3>
+    </div>
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
       {sponsors.map((sponsor, index) => (
         <motion.div
@@ -119,15 +121,17 @@ const SponsorTier = ({
           className="bg-background/80 p-4 rounded-xl flex items-center justify-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 * index, duration: 0.8 }}
+          transition={{ delay: 0.1 * index, duration: 0.6 }}
         >
-          <Image
-            src={sponsor.logo}
-            width={160}
-            height={80}
-            alt={`${title} Sponsor ${sponsor.name}`}
-            className="max-w-full h-auto"
-          />
+          <div className="h-16 w-full flex items-center justify-center">
+            <Image
+              src={sponsor.logo}
+              width={160}
+              height={80}
+              alt={`${title} Sponsor ${sponsor.name}`}
+              className="max-h-full w-auto object-contain"
+            />
+          </div>
         </motion.div>
       ))}
     </div>
