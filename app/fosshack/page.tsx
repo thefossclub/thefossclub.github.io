@@ -472,7 +472,7 @@ export default function Home() {
               {
                 title: "WhatsApp Group",
                 desc: "Access our WhatsApp group",
-                url: "https://chat.whatsapp.com/JSGCKlaB4YSDJkEDg6ImSL",
+                url: "https://chat.whatsapp.com/L7aLMwXSE19KO70PfWHPbn",
                 icon: PhoneCall,
               },
               {
