@@ -1032,7 +1032,7 @@ export default function Home() {
                   <span className="sr-only">GitHub</span>
                 </a>
                 <a
-                  href="https://discord.gg/D5g5Tke4BW"
+                  href="https://discord.gg/BgHwhRZg3r"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2.5 md:p-3 bg-muted rounded-full text-muted-foreground hover:text-green-500 dark:hover:text-green-400 hover:bg-muted/80 transition-all shadow-md hover:shadow-green-500/20"
@@ -1167,7 +1167,7 @@ export default function Home() {
                   </li>
                   <li>
                     <Link
-                      href="https://discord.gg/D5g5Tke4BW"
+                      href="https://discord.gg/BgHwhRZg3r"
                       className="text-muted-foreground hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
                     >
                       Join Discord

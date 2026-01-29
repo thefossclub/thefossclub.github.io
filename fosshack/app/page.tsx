@@ -464,7 +464,7 @@ export default function Home() {
               {
                 title: "Discord Server",
                 desc: "Join our community for discussions",
-                url: "https://discord.gg/Dxwx99RJKH",
+                url: "https://discord.gg/BgHwhRZg3r",
                 icon: MessageCircle,
               },
               {
@@ -476,7 +476,7 @@ export default function Home() {
               {
                 title: "WhatsApp Group",
                 desc: "Access our WhatsApp group",
-                url: "https://chat.whatsapp.com/JSGCKlaB4YSDJkEDg6ImSL",
+                url: "https://chat.whatsapp.com/L7aLMwXSE19KO70PfWHPbn",
                 icon: PhoneCall,
               },
               {

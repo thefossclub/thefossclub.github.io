@@ -474,7 +474,7 @@ export default function Home() {
               If you are being harassed, notice that someone else is being
               harassed, or come across a violation of the code of conduct,
               please contact a volunteer/organiser immediately. Participants can
-              call <b>+91 9354424599</b> or email{" "}
+              mail us at{" "}
               <a href="mailto:fossclub@proton.me" className="underline">
                 fossclub@proton.me
               </a>{" "}
@@ -501,7 +501,7 @@ export default function Home() {
               {
                 title: "Discord Server",
                 desc: "Join our community for discussions",
-                url: "https://discord.gg/Dxwx99RJKH",
+                url: "https://discord.gg/BgHwhRZg3r",
                 icon: MessageCircle,
               },
               {
@@ -513,7 +513,7 @@ export default function Home() {
               {
                 title: "WhatsApp Group",
                 desc: "Access our WhatsApp group",
-                url: "https://chat.whatsapp.com/JSGCKlaB4YSDJkEDg6ImSL",
+                url: "https://chat.whatsapp.com/L7aLMwXSE19KO70PfWHPbn",
                 icon: PhoneCall,
               },
               {
