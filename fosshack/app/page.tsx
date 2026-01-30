@@ -438,8 +438,8 @@ export default function Home() {
               harassed, or come across a violation of the code of conduct,
               please contact a volunteer/organiser immediately. Participants can
               call <b>+91 9354424599</b> or email{" "}
-              <a href="mailto:fossclub@proton.me" className="underline">
-                fossclub@proton.me
+              <a href="mailto:contact@thefossclub.org" className="underline">
+                contact@thefossclub.org
               </a>{" "}
               for any reports or queries. All reporters will remain anonymous.
             </p>
