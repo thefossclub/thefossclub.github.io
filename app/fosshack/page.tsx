@@ -91,8 +91,59 @@ const AnimatedTitle = ({ children }: { children: React.ReactNode }) => {
 interface Sponsor {
   name: string;
   logo: string;
+  url: string;
 }
 
+const OurSponsorsCard = ({
+  title,
+  sponsors,
+}: {
+  title: string;
+  sponsors: Sponsor[];
+}) => {
+  return (
+    <div className="bg-gradient-to-br from-muted/40 to-background border border-border rounded-2xl p-8 shadow-sm">
+      {/* Title */}
+      <div className="text-center mb-10">
+        <h2 className="text-3xl font-semibold text-foreground">{title}</h2>
+      </div>
+
+      {/* Sponsors Grid */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8">
+        {sponsors.map((sponsor, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.1 * index, duration: 0.5 }}
+            className="group"
+          >
+            <Link
+              href={sponsor.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-background rounded-xl p-6 flex items-center justify-center
+                         border border-border hover:border-primary
+                         transition-all duration-300 hover:shadow-lg"
+            >
+              <div className="h-16 w-full flex items-center justify-center">
+                <Image
+                  src={sponsor.logo}
+                  alt={sponsor.name}
+                  width={160}
+                  height={80}
+                  className="object-contain max-h-full w-auto
+                             grayscale group-hover:grayscale-0
+                             transition duration-300"
+                />
+              </div>
+            </Link>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+};
 const SponsorTier = ({
   title,
   amount,
@@ -138,6 +189,19 @@ const SponsorTier = ({
     </div>
   </div>
 );
+const digitalSponsors = [
+  {
+    name: "Gen.xyz",
+    logo: "/Sponsor/xyz-logo-color.png",
+    url: "https://gen.xyz/",
+  },
+  {
+    name: "Code Crafters",
+    logo: "/Sponsor/CodeCrafters.io full logo (White text).png",
+    url: "https://codecrafters.io/",
+  },
+];
+
 const WhySponsorUs = () => (
   <div className="space-y-8 text-foreground/90 text-lg md:text-xl leading-relaxed max-w-4xl mx-auto">
     <p className="text-2xl font-medium text-center mb-10">
@@ -364,7 +428,7 @@ export default function Home() {
             <div className="mt-6 flex justify-center">
               <div className="flex items-center gap-2 rounded-full bg-white/5 px-7 py-3.5 backdrop-blur border border-white/10 text-lg text-neutral-300">
                 <Image
-                  src="/fosshack/favicon.ico"
+                  src="/fosshack/favi.ico"
                   alt="FOSS Hack logo"
                   width={30}
                   height={30}
@@ -621,9 +685,29 @@ export default function Home() {
         </div>
       </Section>
 
-      <Section id="sponsors">
+      <Section id="our-sponsors">
         <div className="max-w-5xl mx-auto relative z-10">
           <AnimatedTitle>Our Sponsors</AnimatedTitle>
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              delay: 0.2,
+              duration: 1,
+              ease: [0.6, -0.05, 0.01, 0.99],
+            }}
+          >
+            <OurSponsorsCard
+              title="Digital Sponsors"
+              sponsors={digitalSponsors}
+            />
+          </motion.div>
+        </div>
+      </Section>
+
+      <Section id="sponsors">
+        <div className="max-w-5xl mx-auto relative z-10">
+          <AnimatedTitle>Sponsorship Tier</AnimatedTitle>
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
