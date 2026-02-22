@@ -464,6 +464,16 @@ export default function Home() {
                 <span className="text-foreground">•</span> {rule}
               </motion.p>
             ))}
+            <div className="pt-4">
+              <a
+                href="https://fossunited.org/fosshack/rules"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-foreground font-semibold underline hover:opacity-80 transition"
+              >
+                Read Full Rules →
+              </a>
+            </div>
           </motion.div>
         </div>
       </Section>
