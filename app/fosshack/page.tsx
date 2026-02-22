@@ -364,7 +364,7 @@ export default function Home() {
             <div className="mt-6 flex justify-center">
               <div className="flex items-center gap-2 rounded-full bg-white/5 px-7 py-3.5 backdrop-blur border border-white/10 text-lg text-neutral-300">
                 <Image
-                  src="/fosshack/favicon.ico"
+                  src="/fosshack/favi.ico"
                   alt="FOSS Hack logo"
                   width={30}
                   height={30}
