@@ -23,6 +23,7 @@ import Image from "next/image";
 import { LocalhostSection } from "@/components/fosshack/localhost-section";
 import { CountdownTimer } from "@/components/fosshack/countdown-timer";
 import Timeline from "@/components/fosshack/timeline";
+import Community from "@/components/fosshack/community";
 
 const DynamicGeometricShapes = dynamic(
   () =>
@@ -687,6 +688,10 @@ export default function Home() {
             .
           </div>
         </div>
+      </Section>
+
+      <Section id="Community">
+        <Community />
       </Section>
 
       <Section id="team">
