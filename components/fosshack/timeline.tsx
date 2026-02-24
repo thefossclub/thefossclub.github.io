@@ -8,9 +8,9 @@ const timeline = [
 
   {
     title: "Registration Closing",
-    date: "Online, 20th February",
+    date: "Online, 28th February",
     time: "11:59 PM",
-    eventDate: "2026-02-20T23:59:00",
+    eventDate: "2026-02-28T23:59:00",
   },
 
   {
