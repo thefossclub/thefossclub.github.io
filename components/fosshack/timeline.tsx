@@ -24,7 +24,7 @@ const timeline = [
     title: "Session",
     date: "Online, Every Saturday",
     time: "Mentors Session & Workshop",
-    eventDate: "2026-07-03T00:00:00",
+    eventDate: "2026-03-07T00:00:00",
   },
 
   {
@@ -65,30 +65,40 @@ export default function Timeline() {
       const eventTimes = timeline.map((item) =>
         new Date(item.eventDate!).getTime(),
       );
+      const sorted = [...eventTimes].sort((a, b) => a - b);
 
-      const firstDate = eventTimes[0];
-      const lastDate = eventTimes[eventTimes.length - 1];
+      const totalSegments = sorted.length - 1;
 
-      let progress = (now - firstDate) / (lastDate - firstDate);
+      let progress = 0;
+      let currentIndex: number | null = null;
 
-      if (progress < 0) progress = 0;
-      if (progress > 1) progress = 1;
+      if (now < sorted[0]) {
+        progress = 0;
+        currentIndex = null;
+      } else if (now >= sorted[sorted.length - 1]) {
+        progress = 1;
+        currentIndex = sorted.length - 1;
+      } else {
+        for (let i = 0; i < sorted.length - 1; i++) {
+          if (now >= sorted[i] && now < sorted[i + 1]) {
+            const segmentProgress =
+              (now - sorted[i]) / (sorted[i + 1] - sorted[i]);
+
+            progress = (i + segmentProgress) / totalSegments;
+            currentIndex = i;
+            break;
+          }
+        }
+      }
 
       desktopLine.set({ scaleX: 0 });
 
       desktopLine.start({
         scaleX: progress,
-        transition: { duration: 2, ease: "easeOut" },
+        transition: { duration: 1.5, ease: "easeOut" },
       });
-      let current = null;
 
-      for (let i = 0; i < eventTimes.length; i++) {
-        if (now >= eventTimes[i]) {
-          current = i;
-        }
-      }
-
-      setActiveIndex(current);
+      setActiveIndex(currentIndex);
     };
 
     const observer = new IntersectionObserver(
