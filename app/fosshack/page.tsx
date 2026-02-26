@@ -23,6 +23,7 @@ import Image from "next/image";
 import { LocalhostSection } from "@/components/fosshack/localhost-section";
 import { CountdownTimer } from "@/components/fosshack/countdown-timer";
 import Timeline from "@/components/fosshack/timeline";
+import Community from "@/components/fosshack/community";
 
 const DynamicGeometricShapes = dynamic(
   () =>
@@ -364,7 +365,7 @@ export default function Home() {
             <div className="mt-6 flex justify-center">
               <div className="flex items-center gap-2 rounded-full bg-white/5 px-7 py-3.5 backdrop-blur border border-white/10 text-lg text-neutral-300">
                 <Image
-                  src="/fosshack/favicon.ico"
+                  src="/fosshack/favi.ico"
                   alt="FOSS Hack logo"
                   width={30}
                   height={30}
@@ -687,6 +688,10 @@ export default function Home() {
             .
           </div>
         </div>
+      </Section>
+
+      <Section id="Community">
+        <Community />
       </Section>
 
       <Section id="team">
