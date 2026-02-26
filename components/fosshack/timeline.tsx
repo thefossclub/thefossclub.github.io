@@ -170,7 +170,7 @@ export default function Timeline() {
                       )}
                       <p
                         className={`text-xl font-medium mb-1 transition-all duration-500 ${
-                          index <= activeIndex! ? "text-white" : "text-white/40"
+                          index <= activeIndex! ? "text-white" : "text-white/60"
                         }`}
                       >
                         {item.title}
@@ -203,7 +203,7 @@ export default function Timeline() {
                     >
                       <p
                         className={`text-xl font-medium mb-1 transition-all duration-500 ${
-                          index <= activeIndex! ? "text-white" : "text-white/40"
+                          index <= activeIndex! ? "text-white" : "text-white/60"
                         }`}
                       >
                         {item.title}
