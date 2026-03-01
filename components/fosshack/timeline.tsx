@@ -15,16 +15,30 @@ const timeline = [
 
   {
     title: "Orientation",
-    date: "Offline, 2nd March",
-    time: "12:30 PM – 4:30 PM",
-    eventDate: "2026-03-02T12:30:00",
+    date: "Online, 2nd March",
+    time: "06:00 PM – 7:30 PM",
+    eventDate: "2026-03-02T18:00:00",
   },
 
   {
-    title: "Session",
-    date: "Online, Every Saturday",
+    title: "Speaker Session",
+    date: "Online, 7th March",
     time: "Mentors Session & Workshop",
     eventDate: "2026-03-07T00:00:00",
+  },
+
+  {
+    title: "1st Meetup + OSM Week Begins",
+    date: "Offline, 16th March",
+    time: "Time will be announced soon",
+    eventDate: "2026-03-16T00:00:00",
+  },
+
+  {
+    title: "Speaker Session + OSM Week Ends",
+    date: "Online, 22nd March",
+    time: "Mentors Session & Closing Workshop",
+    eventDate: "2026-03-22T00:00:00",
   },
 
   {
@@ -61,31 +75,33 @@ export default function Timeline() {
 
     const start = () => {
       const now = new Date().getTime();
-
-      const eventTimes = timeline.map((item) =>
-        new Date(item.eventDate!).getTime(),
-      );
-      const sorted = [...eventTimes].sort((a, b) => a - b);
+      const sorted = timeline
+        .map((item, index) => ({
+          time: new Date(item.eventDate!).getTime(),
+          originalIndex: index,
+        }))
+        .sort((a, b) => a.time - b.time);
 
       const totalSegments = sorted.length - 1;
 
       let progress = 0;
       let currentIndex: number | null = null;
 
-      if (now < sorted[0]) {
+      if (now < sorted[0].time) {
         progress = 0;
         currentIndex = null;
-      } else if (now >= sorted[sorted.length - 1]) {
+      } else if (now >= sorted[sorted.length - 1].time) {
         progress = 1;
-        currentIndex = sorted.length - 1;
+        currentIndex = sorted[sorted.length - 1].originalIndex;
       } else {
         for (let i = 0; i < sorted.length - 1; i++) {
-          if (now >= sorted[i] && now < sorted[i + 1]) {
+          if (now >= sorted[i].time && now < sorted[i + 1].time) {
             const segmentProgress =
-              (now - sorted[i]) / (sorted[i + 1] - sorted[i]);
+              (now - sorted[i].time) / (sorted[i + 1].time - sorted[i].time);
 
             progress = (i + segmentProgress) / totalSegments;
-            currentIndex = i;
+
+            currentIndex = sorted[i].originalIndex;
             break;
           }
         }
