@@ -118,7 +118,7 @@ export default function Community() {
   ];
 
   const smallCommunities: Community[] = [
-    { name: "USAR", logo: "/fosshack/Usar.jpeg" },
+    { name: "FOSS USAR", logo: "/fosshack/Usar.jpeg" },
     { name: "AIR", logo: "/fosshack/AiR.jpeg" },
     { name: "ECell", logo: "/fosshack/ecell.jpeg" },
     { name: "IEEE", logo: "/fosshack/ieee.jpeg" },
