@@ -185,7 +185,7 @@ export default function Timeline() {
                         </p>
                       )}
                       <p
-                        className={`text-xl font-medium mb-1 transition-all duration-500 ${
+                        className={`text-lg font-medium mb-1 transition-all duration-500 ${
                           index <= activeIndex! ? "text-white" : "text-white/60"
                         }`}
                       >
@@ -218,7 +218,7 @@ export default function Timeline() {
                       transition={{ duration: 0.7, delay: index * 0.08 }}
                     >
                       <p
-                        className={`text-xl font-medium mb-1 transition-all duration-500 ${
+                        className={`text-lg font-medium mb-1 transition-all duration-500 ${
                           index <= activeIndex! ? "text-white" : "text-white/60"
                         }`}
                       >
