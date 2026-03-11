@@ -295,12 +295,7 @@ export default function Home() {
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           aria-label="Scroll to top"
-          className={`fixed bottom-10 right-6 z-30 flex h-11 w-11 items-center justify-center rounded-full backdrop-blur-md transition-all
-            ${
-              theme === "light"
-                ? "bg-white text-[#141414] border border-black/10 shadow-lg shadow-black/30 hover:shadow-black/45"
-                : "bg-white/18 text-white border border-white/25 shadow-[0_0_12px_rgba(0,0,0,0.4)] hover:bg-white/24"
-            }`}
+          className="fixed bottom-10 right-6 z-30 flex h-11 w-11 items-center justify-center rounded-full backdrop-blur-md transition-all bg-background/80 text-foreground border border-foreground/20 shadow-lg hover:bg-background"
         >
           <ArrowUp className="h-4 w-4" />
         </button>
@@ -363,7 +358,7 @@ export default function Home() {
               <CountdownTimer />
             </div>
             <div className="mt-6 flex justify-center">
-              <div className="flex items-center gap-2 rounded-full bg-white/5 px-7 py-3.5 backdrop-blur border border-white/10 text-lg text-neutral-300">
+              <div className="flex items-center gap-2 rounded-full bg-foreground/5 px-7 py-3.5 backdrop-blur border border-foreground/10 text-lg text-foreground/60">
                 <Image
                   src="/fosshack/favi.ico"
                   alt="FOSS Hack logo"
@@ -375,17 +370,15 @@ export default function Home() {
                 <a
                   href="/FOSS HACK 2026-Brochure.pdf"
                   target="_blank"
-                  className="font-medium hover:text-white transition-colors"
+                  className="font-medium hover:text-foreground transition-colors"
                 >
                   View FOSS Hack 2026 Brochure
                 </a>
-
-                <span className="text-neutral-500">•</span>
-
+                <span className="text-foreground/30">•</span>
                 <a
                   href="/FOSS HACK 2026-Brochure.pdf"
                   download
-                  className="hover:text-white transition-colors"
+                  className="hover:text-foreground transition-colors"
                 >
                   Download
                 </a>
@@ -581,50 +574,22 @@ export default function Home() {
                 <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-[var(--accent-cyan)]/18 via-[var(--accent-purple)]/14 to-[var(--accent-green)]/10 opacity-0 blur-xl group-hover/link:opacity-100 transition-opacity duration-500" />
                 <Link
                   href={link.url}
-                  className={`relative flex items-center justify-between gap-4 p-6 rounded-2xl transition-colors duration-300 border ${
-                    theme === "light"
-                      ? "bg-white text-foreground border-black/10 hover:border-black/20 shadow-sm"
-                      : "bg-black/40 text-white border-foreground/10 hover:border-foreground/30 hover:bg-black/55"
-                  }`}
+                  className="relative flex items-center justify-between gap-4 p-6 rounded-2xl transition-colors duration-300 border bg-background/60 text-foreground border-foreground/10 hover:border-foreground/30 hover:bg-background/80"
                 >
                   <div className="flex items-center gap-4">
-                    <div
-                      className={`flex h-11 w-11 items-center justify-center rounded-2xl ${
-                        theme === "light" ? "bg-black/5" : "bg-white/10"
-                      }`}
-                    >
-                      <link.icon
-                        className={`h-5 w-5 ${
-                          theme === "light"
-                            ? "text-[var(--accent-purple)]"
-                            : "text-[var(--accent-cyan)]"
-                        }`}
-                      />
+                    <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-foreground/8">
+                      <link.icon className="h-5 w-5 text-[var(--accent-cyan)]" />
                     </div>
                     <div>
-                      <h3
-                        className={`text-xl font-semibold ${
-                          theme === "light" ? "text-foreground" : "text-white"
-                        }`}
-                      >
+                      <h3 className="text-xl font-semibold text-foreground">
                         {link.title}
                       </h3>
-                      <p
-                        className={`text-sm md:text-base ${
-                          theme === "light"
-                            ? "text-foreground/70"
-                            : "text-white/70"
-                        }`}
-                      >
+                      <p className="text-sm md:text-base text-foreground/60">
                         {link.desc}
                       </p>
                     </div>
                   </div>
-                  <ArrowRight
-                    className={`h-5 w-5 flex-shrink-0 transition-transform duration-300 group-hover/link:translate-x-1 ${
-                      theme === "light" ? "text-foreground/60" : "text-white/60"
-                    }`}
-                  />
+                  <ArrowRight className="h-5 w-5 flex-shrink-0 text-foreground/50 transition-transform duration-300 group-hover/link:translate-x-1" />
                 </Link>
               </motion.div>
             ))}
@@ -648,7 +613,7 @@ export default function Home() {
               title="Platinum"
               amount={275}
               sponsors={[]}
-              bgColor="bg-gradient-to-br from-cyan-200/30 via-cyan-300/20 to-transparent backdrop-blur-sm border border-gray-400/30"
+              bgColor="bg-gradient-to-br from-cyan-200/30 via-cyan-300/20 to-transparent backdrop-blur-sm border border-foreground/20"
             />
 
             <SponsorTier
@@ -662,7 +627,7 @@ export default function Home() {
               title="Silver"
               amount={110}
               sponsors={[]}
-              bgColor="bg-gradient-to-br from-gray-400/25 via-gray-300/15 to-transparent backdrop-blur-sm border border-gray-400/30"
+              bgColor="bg-gradient-to-br from-foreground/10 via-foreground/5 to-transparent backdrop-blur-sm border border-foreground/20"
             />
           </motion.div>
         </div>
@@ -749,32 +714,16 @@ export default function Home() {
                 transition={{ delay: 0.1 * i, duration: 0.8 }}
               >
                 <motion.div
-                  className={`w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-4 rounded-full flex items-center justify-center ${
-                    theme === "light" ? "bg-black/5" : "bg-[#141414]/5"
-                  }`}
+                  className="w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-4 rounded-full flex items-center justify-center bg-foreground/8"
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <Users
-                    className={`w-8 h-8 sm:w-10 sm:h-10 ${
-                      theme === "light" ? "text-foreground" : "text-white"
-                    }`}
-                  />
+                  <Users className="w-8 h-8 sm:w-10 sm:h-10 text-foreground" />
                 </motion.div>
-                <h3
-                  className={`text-lg sm:text-xl font-medium mb-1 ${
-                    theme === "light" ? "text-foreground" : "text-white"
-                  }`}
-                >
+                <h3 className="text-lg sm:text-xl font-medium mb-1 text-foreground">
                   {member.name}
                 </h3>
-                <p
-                  className={`text-sm ${
-                    theme === "light" ? "text-foreground/70" : "text-white/60"
-                  }`}
-                >
-                  {member.title}
-                </p>
+                <p className="text-sm text-foreground/60">{member.title}</p>
               </motion.div>
             ))}
           </motion.div>

@@ -21,38 +21,35 @@
     --card-rgb: 20 20 30;
     --blur-strength: 80px;
 }
-
-@media (prefers-color-scheme: light) {
-    :root {
-        --background: 250 250 255;
-        --foreground: 20 20 30;
-        --muted: 100 100 120;
-        --card-rgb: 255 255 255 / 0.75;
-    }
-
-    body {
-        background-color: rgb(var(--background));
-        background-image:
-            radial-gradient(1200px 600px at 10% 10%, rgba(var(--accent-purple), 0.10), transparent 60%),
-            radial-gradient(900px 500px at 90% 25%, rgba(var(--accent-cyan), 0.08), transparent 55%),
-            radial-gradient(800px 450px at 50% 100%, rgba(var(--accent-green), 0.06), transparent 55%),
-            linear-gradient(180deg, rgba(0, 0, 0, 0.03), transparent 40%);
-    }
-}
-
 html.theme-light {
-    --background: 250 250 255 !important;
-    --foreground: 20 20 30 !important;
-    --muted: 100 100 120 !important;
-    --card-rgb: 255 255 255 / 0.75 !important;
+    --background: 250 250 255;
+    --foreground: 20 20 30;
+    --muted: 100 100 120;
+    --card-rgb: 255 255 255;
+
+    --color-background: rgb(250 250 255);
+    --color-foreground: rgb(20 20 30);
+    --color-muted: rgb(100 100 120);
 }
 
 html.theme-light body {
     background-color: rgb(var(--background)) !important;
     background-image:
-        radial-gradient(1200px 600px at 10% 10%, rgba(var(--accent-purple), 0.10), transparent 60%),
-        radial-gradient(900px 500px at 90% 25%, rgba(var(--accent-cyan), 0.08), transparent 55%),
-        radial-gradient(800px 450px at 50% 100%, rgba(var(--accent-green), 0.06), transparent 55%),
+        radial-gradient(
+            1200px 600px at 10% 10%,
+            rgba(var(--accent-purple), 0.1),
+            transparent 60%
+        ),
+        radial-gradient(
+            900px 500px at 90% 25%,
+            rgba(var(--accent-cyan), 0.08),
+            transparent 55%
+        ),
+        radial-gradient(
+            800px 450px at 50% 100%,
+            rgba(var(--accent-green), 0.06),
+            transparent 55%
+        ),
         linear-gradient(180deg, rgba(0, 0, 0, 0.03), transparent 40%) !important;
     color: rgb(var(--foreground)) !important;
 }
@@ -61,9 +58,21 @@ body {
     color: rgb(var(--foreground));
     background-color: rgb(var(--background));
     background-image:
-        radial-gradient(1200px 600px at 10% 10%, rgba(var(--accent-purple), 0.15), transparent 60%),
-        radial-gradient(900px 500px at 90% 25%, rgba(var(--accent-cyan), 0.10), transparent 55%),
-        radial-gradient(800px 450px at 50% 100%, rgba(var(--accent-green), 0.08), transparent 55%),
+        radial-gradient(
+            1200px 600px at 10% 10%,
+            rgba(var(--accent-purple), 0.15),
+            transparent 60%
+        ),
+        radial-gradient(
+            900px 500px at 90% 25%,
+            rgba(var(--accent-cyan), 0.1),
+            transparent 55%
+        ),
+        radial-gradient(
+            800px 450px at 50% 100%,
+            rgba(var(--accent-green), 0.08),
+            transparent 55%
+        ),
         linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 40%);
     overflow-x: hidden;
     letter-spacing: -0.02em;
@@ -91,4 +100,14 @@ html {
     backdrop-filter: blur(var(--blur-strength));
     -webkit-backdrop-filter: blur(var(--blur-strength));
     border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.bg-foreground\/8 {
+    background-color: rgb(var(--foreground) / 0.08);
+}
+.bg-foreground\/18 {
+    background-color: rgb(var(--foreground) / 0.18);
+}
+.bg-background\/85 {
+    background-color: rgb(var(--background) / 0.85);
 }

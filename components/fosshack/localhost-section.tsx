@@ -4,7 +4,6 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { MapPin, X } from "lucide-react";
-
 export function LocalhostSection() {
   const [isEnlarged, setIsEnlarged] = useState(false);
 
@@ -19,14 +18,18 @@ export function LocalhostSection() {
         >
           <div className="flex items-center gap-3 mb-4">
             <MapPin className="w-8 h-8 text-foreground" />
-            <h2 className="text-5xl font-bold text-foreground">Localhost: Delhi</h2>
+            <h2 className="text-5xl font-bold text-foreground">
+              Localhost: Delhi
+            </h2>
           </div>
           <div className="space-y-4">
-            <p className="text-2xl font-semibold text-foreground">Delhi Technical Campus</p>
+            <p className="text-2xl font-semibold text-foreground">
+              Delhi Technical Campus
+            </p>
             <p className="text-xl leading-relaxed text-foreground/80">
               Join us at our vibrant venue where innovation meets collaboration.
               Located in the heart of Greater Noida, Localhost provides the
-              perfect save environment for hackers to create, collaborate, and
+              perfect safe environment for hackers to create, collaborate, and
               innovate.
             </p>
             <motion.a
@@ -50,10 +53,7 @@ export function LocalhostSection() {
         >
           <div className="absolute inset-0 z-0">
             <motion.div
-              animate={{
-                scale: [1, 1.15, 1],
-                rotate: [0, 3, -3, 0],
-              }}
+              animate={{ scale: [1, 1.15, 1], rotate: [0, 3, -3, 0] }}
               transition={{
                 duration: 8,
                 repeat: Number.POSITIVE_INFINITY,
@@ -81,17 +81,13 @@ export function LocalhostSection() {
                 alt="Delhi Technical Campus - Localhost Venue"
                 fill
                 className="object-cover"
-                style={{
-                  filter: "contrast(1.1) brightness(1.1)",
-                }}
+                style={{ filter: "contrast(1.1) brightness(1.1)" }}
               />
             </div>
           </motion.div>
 
           <motion.div
-            animate={{
-              y: [0, 10, 0],
-            }}
+            animate={{ y: [0, 10, 0] }}
             transition={{
               duration: 4,
               repeat: Number.POSITIVE_INFINITY,
@@ -100,9 +96,7 @@ export function LocalhostSection() {
             className="absolute -bottom-8 -right-8 w-24 h-24 bg-gradient-to-br from-green-400/20 to-cyan-500/20 rounded-full blur-2xl"
           />
           <motion.div
-            animate={{
-              y: [0, -10, 0],
-            }}
+            animate={{ y: [0, -10, 0] }}
             transition={{
               duration: 3,
               repeat: Number.POSITIVE_INFINITY,
@@ -119,7 +113,7 @@ export function LocalhostSection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-8"
+            className="fixed inset-0 bg-background/85 backdrop-blur-sm z-50 flex items-center justify-center p-8"
             onClick={() => setIsEnlarged(false)}
           >
             <motion.div
@@ -135,10 +129,9 @@ export function LocalhostSection() {
                 fill
                 className="object-cover rounded-lg"
               />
-
               <button
                 onClick={() => setIsEnlarged(false)}
-                className="absolute top-4 right-4 text-white bg-black/50 p-2 rounded-full hover:bg-black/70 transition-colors"
+                className="absolute top-4 right-4 text-foreground bg-background/60 p-2 rounded-full hover:bg-background/80 transition-colors border border-foreground/20"
               >
                 <X className="w-6 h-6" />
               </button>
