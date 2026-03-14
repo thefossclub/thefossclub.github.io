@@ -97,17 +97,19 @@ interface Sponsor {
 const SponsorTier = ({
   title,
   amount,
+  theme,
   sponsors,
   bgColor,
 }: {
   title: string;
   amount: number;
+  theme: "dark" | "light";
   sponsors: Sponsor[];
   bgColor: string;
 }) => (
   <div className={`${bgColor} rounded-2xl p-10 mb-10 max-w-3xl mx-auto`}>
     <div className="mb-2 flex flex-col items-center justify-center text-center">
-      <h3 className="text-2xl font-semibold text-foreground flex items-baseline gap-2">
+      <h3 className="text-4xl font-semibold text-foreground flex items-baseline gap-2">
         <span>{title} Sponsors</span>
         {amount > 0 && (
           <span className="text-sm font-normal text-foreground/70">
@@ -116,22 +118,23 @@ const SponsorTier = ({
         )}
       </h3>
     </div>
-    <div className="grid grid-cols-[repeat(auto-fit,minmax(140px,1fr))] gap-6 place-items-center">
+    <div className="flex justify-center items-center gap-8">
       {sponsors.map((sponsor, index) => (
         <motion.div
           key={index}
-          className="bg-background/80 p-8 rounded-xl flex items-center justify-center min-h-[140px]"
+          className={`p-5 rounded-2xl flex items-center justify-center min-h-[100px]
+          ${theme === "dark" ? "bg-white" : "bg-transparent"}`}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 * index, duration: 0.6 }}
         >
-          <div className="h-16 w-full flex items-center justify-center">
+          <div className="w-full h-full flex items-center justify-center">
             <Image
               src={sponsor.logo}
               width={320}
               height={160}
               alt={`${title} Sponsor ${sponsor.name}`}
-              className="max-h-24 w-auto object-contain"
+              className="max-h-[100px] w-auto object-contain"
             />
           </div>
         </motion.div>
@@ -626,8 +629,9 @@ export default function Home() {
             <SponsorTier
               title="Gold"
               amount={""}
+              theme={theme}
               sponsors={[{ name: "TomTom", logo: "/fosshack/TomTom.png" }]}
-              bgColor="bg-gradient-to-br from-yellow-500/25 via-yellow-400/15 to-transparent backdrop-blur-sm border border-yellow-400/30"
+              bgColor="transparent"
             />
 
             {/*<SponsorTier
@@ -636,6 +640,17 @@ export default function Home() {
               sponsors={[]}
               bgColor="bg-gradient-to-br from-foreground/10 via-foreground/5 to-transparent backdrop-blur-sm border border-foreground/20"
             />*/}
+            <SponsorTier
+              title="Digital"
+              amount={""}
+              theme={theme}
+              sponsors={[
+                { name: "XYZ", logo: "/fosshack/XYZ.png" },
+                { name: "CodeCrafters", logo: "/fosshack/CodeCrafters.png" },
+                { name: "Maxflex", logo: "/fosshack/Maxflex.png" },
+              ]}
+              bgColor="transparent"
+            />
           </motion.div>
         </div>
       </Section>
