@@ -82,7 +82,7 @@ const AnimatedTitle = ({ children }: { children: React.ReactNode }) => {
       initial={{ opacity: 0, y: 50 }}
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
       transition={{ duration: 1, ease: [0.6, -0.05, 0.01, 0.99] }}
-      className="text-5xl font-bold mb-12 text-foreground"
+      className="text-5xl font-bold mb-12 text-foreground text-center"
     >
       {children}
     </motion.h2>
