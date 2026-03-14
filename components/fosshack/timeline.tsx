@@ -26,7 +26,7 @@ const timeline = [
   {
     title: "1st Meetup + OSM Week Begins",
     date: "Offline, 16th March",
-    time: "Time will be announced soon",
+    time: "12:30 PM - 4:30 PM",
     eventDate: "2026-03-16T00:00:00",
   },
   {
