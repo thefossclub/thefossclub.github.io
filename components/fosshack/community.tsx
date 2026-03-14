@@ -34,11 +34,7 @@ const Section = ({
   children: React.ReactNode;
   id: string;
 }) => {
-  const [ref, inView] = useInView({
-    triggerOnce: false,
-    threshold: 0.2,
-  });
-
+  const [ref, inView] = useInView({ triggerOnce: false, threshold: 0.2 });
   return (
     <motion.section
       id={id}
@@ -54,11 +50,7 @@ const Section = ({
 };
 
 const AnimatedTitle = ({ children }: { children: React.ReactNode }) => {
-  const [ref, inView] = useInView({
-    triggerOnce: false,
-    threshold: 0.5,
-  });
-
+  const [ref, inView] = useInView({ triggerOnce: false, threshold: 0.5 });
   return (
     <motion.h2
       ref={ref}
@@ -84,16 +76,17 @@ interface CommunityCardProps {
 
 const CommunityCard = ({ community, size }: CommunityCardProps) => {
   const isLarge = size === "large";
-
   return (
     <motion.div
-      className={`bg-background/80 p-${isLarge ? "6" : "4"} rounded-xl flex flex-col items-center justify-center`}
+      className={`bg-background/80 rounded-xl flex flex-col items-center justify-center border border-foreground/10 ${
+        isLarge ? "p-6" : "p-4"
+      }`}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
     >
       <div
-        className={`h-${isLarge ? "32" : "20"} w-full flex items-center justify-center`}
+        className={`w-full flex items-center justify-center ${isLarge ? "h-32" : "h-20"}`}
       >
         <Image
           src={community.logo}
@@ -111,7 +104,6 @@ const CommunityCard = ({ community, size }: CommunityCardProps) => {
 };
 
 export default function Community() {
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
   const largeCommunities: Community[] = [
     { name: "PyDelhi", logo: "/fosshack/pydelhi_community_logo.jpg" },
     { name: "Django India", logo: "/fosshack/djangoi.jpeg" },
@@ -125,97 +117,32 @@ export default function Community() {
     { name: "ASC", logo: "/fosshack/asc.jpeg" },
   ];
 
-  useEffect(() => {
-    const root = document.documentElement;
-    if (theme === "light") {
-      root.classList.add("theme-light");
-    } else {
-      root.classList.remove("theme-light");
-    }
-  }, [theme]);
-
-  const toggleTheme = () =>
-    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
-
   return (
-    <div className="bg-background text-foreground text-lg relative overflow-hidden">
-      <div className="fixed right-6 top-6 z-30">
-        <button
-          onClick={toggleTheme}
-          aria-label="Toggle theme"
-          className={`group inline-flex items-center rounded-full px-2 py-1 backdrop-blur-md transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-cyan)]/60 focus-visible:ring-offset-2 border border-[rgba(var(--accent-green),0.6)] ${
-            theme === "light"
-              ? "bg-white text-[#141414] shadow-md shadow-black/15 hover:shadow-black/25 focus-visible:ring-offset-white"
-              : "bg-white/18 text-white shadow-[0_0_12px_rgba(0,0,0,0.4)] hover:bg-white/24 focus-visible:ring-offset-black"
-          }`}
+    <Section id="community">
+      <div className="max-w-5xl mx-auto relative z-10">
+        <AnimatedTitle>Community Partners</AnimatedTitle>
+        <motion.div
+          className="space-y-12"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            delay: 0.2,
+            duration: 1,
+            ease: [0.6, -0.05, 0.01, 0.99],
+          }}
         >
-          <span
-            className={`relative flex h-6 w-10 items-center rounded-full p-1 transition-all ${
-              theme === "light"
-                ? "bg-black/8 group-hover:bg-black/12"
-                : "bg-black/35 group-hover:bg-black/45"
-            }`}
-          >
-            <span
-              className={`flex h-4 w-4 items-center justify-center rounded-full shadow-sm transition-transform duration-300 ${
-                theme === "light" ? "bg-white" : "bg-black/70"
-              } ${theme === "light" ? "translate-x-4" : "translate-x-0"}`}
-            >
-              {theme === "light" ? (
-                <Sun className="h-3.5 w-3.5 text-[#141414]" />
-              ) : (
-                <Moon className="h-3.5 w-3.5 text-white" />
-              )}
-            </span>
-          </span>
-        </button>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {largeCommunities.map((community, index) => (
+              <CommunityCard key={index} community={community} size="large" />
+            ))}
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6">
+            {smallCommunities.map((community, index) => (
+              <CommunityCard key={index} community={community} size="small" />
+            ))}
+          </div>
+        </motion.div>
       </div>
-      <BlurElement
-        className={`bg-[var(--accent-green)]/40 w-[800px] h-[800px] -top-[400px] -left-[300px] ${
-          theme === "light" ? "opacity-[0.28]" : "opacity-[0.15]"
-        }`}
-      />
-      <BlurElement
-        className={`bg-[var(--accent-cyan)]/40 w-[600px] h-[600px] top-[30%] -right-[200px] ${
-          theme === "light" ? "opacity-[0.26]" : "opacity-[0.15]"
-        }`}
-      />
-      <BlurElement
-        className={`bg-[var(--accent-green)]/40 w-[700px] h-[700px] bottom-0 left-1/2 -translate-x-1/2 ${
-          theme === "light" ? "opacity-[0.24]" : "opacity-[0.15]"
-        }`}
-      />
-
-      <Suspense fallback={<div>Loading...</div>}>
-        <DynamicGeometricShapes />
-      </Suspense>
-
-      <Section id="community">
-        <div className="max-w-5xl mx-auto relative z-10">
-          <AnimatedTitle>Community Partners</AnimatedTitle>
-          <motion.div
-            className="space-y-12"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              delay: 0.2,
-              duration: 1,
-              ease: [0.6, -0.05, 0.01, 0.99],
-            }}
-          >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {largeCommunities.map((community, index) => (
-                <CommunityCard key={index} community={community} size="large" />
-              ))}
-            </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6">
-              {smallCommunities.map((community, index) => (
-                <CommunityCard key={index} community={community} size="small" />
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </Section>
-    </div>
+    </Section>
   );
 }
