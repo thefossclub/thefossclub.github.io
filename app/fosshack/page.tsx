@@ -92,6 +92,7 @@ const AnimatedTitle = ({ children }: { children: React.ReactNode }) => {
 interface Sponsor {
   name: string;
   logo: string;
+  url: string;
 }
 
 const SponsorTier = ({
@@ -120,24 +121,32 @@ const SponsorTier = ({
     </div>
     <div className="flex justify-center items-center gap-8">
       {sponsors.map((sponsor, index) => (
-        <motion.div
+        <Link
           key={index}
-          className={`p-5 rounded-2xl flex items-center justify-center min-h-[100px]
-          ${theme === "dark" ? "bg-white" : "bg-transparent"}`}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 * index, duration: 0.6 }}
+          href={sponsor.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Visit ${sponsor.name}`}
         >
-          <div className="w-full h-full flex items-center justify-center">
-            <Image
-              src={sponsor.logo}
-              width={320}
-              height={160}
-              alt={`${title} Sponsor ${sponsor.name}`}
-              className="max-h-[100px] w-auto object-contain"
-            />
-          </div>
-        </motion.div>
+          <motion.div
+            key={index}
+            className={`p-5 rounded-2xl flex items-center justify-center min-h-[100px]
+          ${theme === "dark" ? "bg-white" : "bg-transparent"}`}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 * index, duration: 0.6 }}
+          >
+            <div className="w-full h-full flex items-center justify-center">
+              <Image
+                src={sponsor.logo}
+                width={320}
+                height={160}
+                alt={`${title} Sponsor ${sponsor.name}`}
+                className="max-h-[100px] w-auto object-contain"
+              />
+            </div>
+          </motion.div>
+        </Link>
       ))}
     </div>
   </div>
@@ -630,7 +639,13 @@ export default function Home() {
               title="Gold"
               amount={""}
               theme={theme}
-              sponsors={[{ name: "TomTom", logo: "/fosshack/TomTom.png" }]}
+              sponsors={[
+                {
+                  name: "TomTom",
+                  logo: "/fosshack/TomTom.png",
+                  url: "https://tomtom.com",
+                },
+              ]}
               bgColor="transparent"
             />
 
@@ -645,9 +660,21 @@ export default function Home() {
               amount={""}
               theme={theme}
               sponsors={[
-                { name: "XYZ", logo: "/fosshack/XYZ.png" },
-                { name: "CodeCrafters", logo: "/fosshack/CodeCrafters.png" },
-                { name: "Maxflex", logo: "/fosshack/Maxflex.png" },
+                {
+                  name: "XYZ",
+                  logo: "/fosshack/XYZ.png",
+                  url: "https://nic.xyz",
+                },
+                {
+                  name: "CodeCrafters",
+                  logo: "/fosshack/CodeCrafters.png",
+                  url: "https://codecrafters.io",
+                },
+                {
+                  name: "Maxflex",
+                  logo: "/fosshack/Maxflex.png",
+                  url: "",
+                },
               ]}
               bgColor="transparent"
             />
