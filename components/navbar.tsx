@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { motion, AnimatePresence } from "framer-motion"
+import { m, AnimatePresence } from "framer-motion"
 import { Menu, X, Moon, Sun, LogIn } from "lucide-react"
 import { useTheme } from "next-themes"
 
@@ -87,7 +87,7 @@ export default function Navbar({ activeSection }: NavbarProps) {
   return (
     <>
       <AnimatePresence>
-        <motion.header
+        <m.header
           className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "py-2" : "py-3"}`}
           initial={{ y: -100 }}
           animate={{ y: 0 }}
@@ -98,7 +98,7 @@ export default function Navbar({ activeSection }: NavbarProps) {
             backfaceVisibility: 'hidden'
           }}
         >
-          <motion.div
+          <m.div
             className={`container mx-auto transition-all duration-300 ${
               scrolled
                 ? `mx-4 px-4 py-2 rounded-full border ${getNavbarBg()}`
@@ -140,7 +140,7 @@ export default function Navbar({ activeSection }: NavbarProps) {
                     >
                       {link.name}
                       {activeSection === link.name.toLowerCase() && (
-                        <motion.span
+                        <m.span
                           className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-green"
                           layoutId="navbar-indicator"
                           transition={{ type: "spring", duration: 0.6 }}
@@ -203,8 +203,8 @@ export default function Navbar({ activeSection }: NavbarProps) {
               </div>
 
             </nav>
-          </motion.div>
-        </motion.header>
+          </m.div>
+        </m.header>
       </AnimatePresence>
 
       {/* Mobile Navigation - Outside header to avoid transform issues */}
@@ -212,7 +212,7 @@ export default function Navbar({ activeSection }: NavbarProps) {
         {isOpen && (
           <>
             {/* Backdrop */}
-            <motion.div
+            <m.div
               className="fixed inset-0 bg-black/60 z-[100] backdrop-blur-sm md:hidden"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -221,7 +221,7 @@ export default function Navbar({ activeSection }: NavbarProps) {
               onClick={toggleMenu}
             />
             {/* Menu Panel */}
-            <motion.div
+            <m.div
               className="fixed top-0 left-0 right-0 bottom-0 z-[101] flex items-center justify-center p-6 md:hidden"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -250,7 +250,7 @@ export default function Navbar({ activeSection }: NavbarProps) {
 
                 <ul className="flex flex-col items-center space-y-5 mt-4 w-full">
                   {navLinks.map((link, index) => (
-                    <motion.li
+                    <m.li
                       key={link.name}
                       initial={{ y: 20, opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}
@@ -263,10 +263,10 @@ export default function Navbar({ activeSection }: NavbarProps) {
                       >
                         {link.name}
                       </Link>
-                    </motion.li>
+                    </m.li>
                   ))}
                   <div className="pt-4 flex flex-col gap-3 w-full items-center">
-                    <motion.div
+                    <m.div
                       initial={{ y: 20, opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}
                       transition={{ duration: 0.3, delay: 0.3 }}
@@ -279,8 +279,8 @@ export default function Navbar({ activeSection }: NavbarProps) {
                       >
                         Join Now
                       </Link>
-                    </motion.div>
-                    <motion.div
+                    </m.div>
+                    <m.div
                       initial={{ y: 20, opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}
                       transition={{ duration: 0.3, delay: 0.35 }}
@@ -293,11 +293,11 @@ export default function Navbar({ activeSection }: NavbarProps) {
                         <LogIn className="h-5 w-5 mr-2" />
                         Login
                       </Link>
-                    </motion.div>
+                    </m.div>
                   </div>
                 </ul>
               </div>
-            </motion.div>
+            </m.div>
           </>
         )}
       </AnimatePresence>

@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { motion } from "framer-motion"
+import { m } from "framer-motion"
 import { useTheme } from "next-themes"
 
 export default function HeroSphere() {
@@ -137,14 +137,14 @@ export default function HeroSphere() {
   }, [theme])
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 1 }}
       className="relative"
     >
       <canvas ref={canvasRef} width={500} height={500} className="opacity-90" />
-    </motion.div>
+    </m.div>
   )
 }
 

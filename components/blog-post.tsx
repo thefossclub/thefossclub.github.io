@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { m } from "framer-motion"
 import { ArrowRight } from "lucide-react"
 import Link from "next/link"
 
@@ -13,7 +13,7 @@ interface BlogPostProps {
 
 export default function BlogPost({ title, excerpt, link, index }: BlogPostProps) {
   return (
-    <motion.article
+    <m.article
       className="p-6 rounded-3xl border border-border bg-card transition-all group h-full flex flex-col shadow-lg hover:shadow-xl"
       whileHover={{ y: -5 }}
     >
@@ -28,7 +28,7 @@ export default function BlogPost({ title, excerpt, link, index }: BlogPostProps)
         Read More
         <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
       </Link>
-    </motion.article>
+    </m.article>
   )
 }
 

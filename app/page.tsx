@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState, useCallback } from "react"
-import { motion } from "framer-motion"
+import { LazyMotion, domAnimation, m } from "framer-motion"
 import Link from "next/link"
 import { ArrowRight, Github, Instagram, Linkedin, Twitter, ChevronDown, ChevronUp } from "lucide-react"
 import { FaDiscord } from "react-icons/fa"
@@ -16,7 +16,8 @@ import Timeline from "@/components/timeline"
 import ScrollingTools from "@/components/scrolling-tools"
 import { useTheme } from "next-themes"
 import ScrollProgressIndicator from "@/components/scroll-progress-indicator"
-import UpcomingEventCard from "@/components/upcoming-event-card"
+import ScrollIndicator from "@/components/scroll-indicator"
+// import UpcomingEventCard from "@/components/upcoming-event-card"
 
 export default function Home() {
   const heroRef = useRef<HTMLElement>(null)
@@ -36,63 +37,61 @@ export default function Home() {
     resources: useRef<HTMLElement>(null),
   }
 
-  // Optimized scroll handler that works with Lenis
   const currentSectionRef = useRef(activeSection)
-  
+
+  useEffect(() => {
+    const entries = Object.entries(sectionRefs) as [string, React.RefObject<HTMLElement | null>][]
+    const observers: IntersectionObserver[] = []
+
+    for (const [name, ref] of entries) {
+      if (!ref.current) continue
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting && currentSectionRef.current !== name) {
+            currentSectionRef.current = name
+            setActiveSection(name)
+          }
+        },
+        { rootMargin: "-40% 0px -55% 0px" }
+      )
+      observer.observe(ref.current)
+      observers.push(observer)
+    }
+
+    return () => observers.forEach((o) => o.disconnect())
+  }, [])
+
   useEffect(() => {
     let ticking = false
-    
-    const handleScroll = () => {
+
+    const handleParallax = () => {
       if (ticking) return
       ticking = true
-      
       requestAnimationFrame(() => {
         const scrollY = window.scrollY
-        const scrollPosition = scrollY + 100
-        const sections = Object.keys(sectionRefs) as Array<keyof typeof sectionRefs>
-
-        // Update active section - only if changed
-        for (const sectionName of sections) {
-          const ref = sectionRefs[sectionName].current
-          if (ref) {
-            if (scrollPosition >= ref.offsetTop && scrollPosition < ref.offsetTop + ref.offsetHeight) {
-              // Only update state if section actually changed
-              if (currentSectionRef.current !== sectionName) {
-                currentSectionRef.current = sectionName
-                setActiveSection(sectionName)
-              }
-              break
-            }
-          }
-        }
-
-        // Hero parallax effect - direct DOM manipulation for performance
         if (heroRef.current) {
           const opacity = Math.max(0, 1 - scrollY / 300)
           const scale = Math.max(0.9, 1 - scrollY / 3000)
           heroRef.current.style.opacity = String(opacity)
           heroRef.current.style.transform = `scale(${scale}) translateZ(0)`
         }
-        
         ticking = false
       })
     }
 
-    // Use Lenis scroll event if available
     // @ts-expect-error - lenis is added to window
     const lenis = window.lenis
-    
     if (lenis) {
-      lenis.on('scroll', handleScroll)
+      lenis.on("scroll", handleParallax)
     } else {
-      window.addEventListener("scroll", handleScroll, { passive: true })
+      window.addEventListener("scroll", handleParallax, { passive: true })
     }
 
     return () => {
       if (lenis) {
-        lenis.off('scroll', handleScroll)
+        lenis.off("scroll", handleParallax)
       } else {
-        window.removeEventListener("scroll", handleScroll)
+        window.removeEventListener("scroll", handleParallax)
       }
     }
   }, [])
@@ -195,8 +194,16 @@ export default function Home() {
         "A hands-on session where you’ll install Linux, learn how it works, and understand why so many developers swear by it.",
       image: "/Unlocking-TUX-Linux-Installation-Party.jpg?=300&width=400",
     },
+    {
+      title: "FOSS Hack 2026",
+      date: "March 1-31, 2026",
+      description:
+        "A month-long hackathon focused on innovation and open-source development in India’s biggest FOSS hackathon. Build a new project, contribute to existing work, learn from mentors, and connect with the community.",
+      image: "/fosshack2026-banner.png",
+    },
   ]
 
+  /*
     const upcomingEvents = [
     {
       title: "FOSS Hack 2026",
@@ -213,7 +220,7 @@ export default function Home() {
       buttonText: "Register Now"
     },
   ]
-
+  */
 
   const Mentors = [
     { name: "Vaibhav Pratap Singh", role: "CEH", color: "bg-yellow-500", link: "https://v8v88v8v88.com" },
@@ -323,13 +330,17 @@ export default function Home() {
 
   const tools = [
     { name: "Git", description: "Distributed version control system", icon: "git-branch" },
-    { name: "Linux", description: "Open source operating system", icon: "terminal" },
-    { name: "VS Code", description: "Free source-code editor", icon: "code" },
-    { name: "PostgreSQL", description: "Open source relational database", icon: "database" },
-    { name: "Docker", description: "Containerization platform", icon: "box" },
-    { name: "Kubernetes", description: "Container orchestration", icon: "layers" },
-    { name: "Node.js", description: "JavaScript runtime", icon: "server" },
-    { name: "Python", description: "Programming language", icon: "code-2" },
+    { name: "Linux", description: "Open-source operating system and ecosystem", icon: "terminal" },
+    { name: "Neovim", description: "Modern, extensible text editor built for power users", icon: "terminal" },
+    { name: "Podman", description: "Rootless container engine for FOSS-friendly workflows", icon: "box" },
+    { name: "Kubernetes", description: "Container orchestration for production workloads", icon: "layers" },
+    { name: "PostgreSQL", description: "Advanced open-source relational database", icon: "database" },
+    { name: "Redis", description: "In-memory datastore and message broker", icon: "database" },
+    { name: "Nginx", description: "High-performance web server and reverse proxy", icon: "server" },
+    { name: "Terraform", description: "Infrastructure as Code for repeatable deployments", icon: "layers" },
+    { name: "Ansible", description: "Agentless automation and configuration management", icon: "server" },
+    { name: "Prometheus", description: "Monitoring and alerting toolkit for systems", icon: "server" },
+    { name: "Grafana", description: "Dashboards and observability visualizations", icon: "server" },
   ]
 
   const timelineEvents = [
@@ -341,6 +352,7 @@ export default function Home() {
   ]
 
   return (
+    <LazyMotion features={domAnimation} strict>
     <div
       className="relative min-h-screen overflow-hidden text-black dark:text-white"
     >
@@ -366,7 +378,7 @@ export default function Home() {
 
         <div className="container mx-auto z-10 flex flex-col md:flex-row items-center justify-between px-2 sm:px-4 lg:px-8">
           {/* Hero Text Container */}
-          <motion.div
+          <m.div
             className="w-full md:w-1/2 text-center md:text-left mb-8 md:mb-0 px-2 sm:px-4"
             initial="hidden"
             animate="visible"
@@ -381,19 +393,19 @@ export default function Home() {
               }
             }}
           >
-            <motion.h1
+            <m.h1
               className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-gradient-green"
               variants={{ hidden: { opacity: 0, x: -50 }, visible: { opacity: 1, x: 0, transition: { duration: 0.6 } } }}
             >
               Welcome to The FOSS Club!
-            </motion.h1>
-            <motion.p
+            </m.h1>
+            <m.p
               className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 md:mb-8 text-foreground"
               variants={{ hidden: { opacity: 0, x: -50 }, visible: { opacity: 1, x: 0, transition: { duration: 0.6 } } }}
             >
               <span className="font-semibold">Learn, build, and collaborate</span> with fellow open-source enthusiasts.
-            </motion.p>
-            <motion.div
+            </m.p>
+            <m.div
               variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5 } } }}
               whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
             >
@@ -404,10 +416,10 @@ export default function Home() {
               >
                 Join Now <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5" />
               </Link>
-            </motion.div>
-          </motion.div>
+            </m.div>
+          </m.div>
 
-          <motion.div
+          <m.div
             className="w-full md:w-1/2 mt-8 md:mt-0 relative px-2 sm:px-4"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{
@@ -516,13 +528,11 @@ export default function Home() {
                 </h2>
               </div>
             </div>
-          </motion.div>
+          </m.div>
         </div>
 
-        <div
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 hidden md:block animate-bounce"
-        >
-          <ArrowRight className="h-8 w-8 rotate-90 text-green-500 drop-shadow-md" />
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2">
+          <ScrollIndicator targetSection="about" preset="default" color="#FFFFFF" />
         </div>
       </section>
 
@@ -604,7 +614,7 @@ export default function Home() {
         </div>
       </section>
 
-        {/* Upcoming Events Section */}
+        {/* Upcoming Events Section — disabled for now
         <section className="py-10 sm:py-16 md:py-20 relative z-10 px-2 sm:px-4 lg:px-8">
           <div className="container mx-auto">
             <div className="text-center mb-10 md:mb-12">
@@ -628,6 +638,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+        */}
 
       {/* Events Section */}
       <section ref={sectionRefs.events} id="events" className="py-10 sm:py-16 md:py-20 relative z-10 px-2 sm:px-4 lg:px-8">
@@ -636,7 +647,7 @@ export default function Home() {
             Events Concluded
           </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
             {events.map((event, index) => (
               <EventCard
                 key={index}
@@ -649,7 +660,7 @@ export default function Home() {
             ))}
           </div>
 
-          {/*<motion.div
+          {/*<m.div
             className="mt-8 sm:mt-12 md:mt-16 p-4 sm:p-6 md:p-8 rounded-3xl border border-green-900/50 bg-gradient-to-r from-green-900/10 to-green-900/30 dark:from-green-900/30 dark:to-green-900/50 shadow-xl shadow-green-500/10"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -700,7 +711,7 @@ export default function Home() {
                 />
               </div>
             </div>
-          </motion.div>*/}
+          </m.div>*/}
         </div>
       </section>
 
@@ -837,7 +848,7 @@ export default function Home() {
           {/* Members Section 
           <div>
             <div className="flex justify-between items-center mb-6 md:mb-8">
-              <motion.h3
+              <m.h3
                 className="text-xl sm:text-2xl font-bold text-green-500"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
@@ -845,7 +856,7 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
                 Members
-              </motion.h3>
+              </m.h3>
               <button
                 onClick={() => setMembersExpanded(!membersExpanded)}
                 className="flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-gradient-green text-white rounded-full text-xs sm:text-sm font-medium hover:opacity-90 transition-all"
@@ -1249,5 +1260,6 @@ export default function Home() {
         </footer>
       )}
     </div>
+    </LazyMotion>
   )
 }

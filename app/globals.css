@@ -117,7 +117,6 @@
   }
   
   html {
-    /* GPU acceleration for smoother scrolling */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
@@ -128,8 +127,11 @@
     color: hsl(var(--foreground));
     font-family: 'Inter', sans-serif;
     font-feature-settings: "rlig" 1, "calt" 1;
-    /* Prevent layout thrashing */
     overflow-x: hidden;
+  }
+
+  section {
+    contain: content;
   }
 
   /* Lenis smooth scroll - don't use native smooth scroll */
