@@ -36,6 +36,7 @@ export default function Home() {
     events: useRef<HTMLElement>(null),
     team: useRef<HTMLElement>(null),
     resources: useRef<HTMLElement>(null),
+    contact: useRef<HTMLElement>(null)
   }
 
   const currentSectionRef = useRef(activeSection)
@@ -1045,6 +1046,30 @@ export default function Home() {
           </div>
         </div>
       </section>      
+
+           {/* contact */}
+      <section ref={sectionRefs.contact} id="contact" className="py-10 sm:py-16 md:py-20 relative z-10 px-2 sm:px-4 lg:px-8">
+        <div className="container mx-auto">
+          <h2 className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green">
+            Get in Touch
+          </h2>
+          <div className="mx-auto max-w-4xl p-6 sm:p-8 md:p-10 rounded-3xl border border-border bg-card/70 backdrop-blur-md shadow-xl hover:shadow-2xl transition-all duration-300">
+            <p className="text-base sm:text-lg md:text-xl leading-relaxed text-center text-foreground">
+              Have questions, ideas, or just want to collaborate?
+              <br className="hidden sm:block" />
+              Reach out via social media or drop us an email at
+            </p>
+            <div className="mt-6 flex justify-center">
+              <a
+                href="mailto:contact@thefossclub.org"
+                className="px-6 py-2 rounded-full bg-green-500 text-black font-semibold hover:bg-green-400 transition-all duration-200 shadow-md hover:scale-105"
+              >
+                contact@thefossclub.org
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Footer - Render only when mounted */}
       {mounted && (
