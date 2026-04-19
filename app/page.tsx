@@ -36,7 +36,6 @@ export default function Home() {
     events: useRef<HTMLElement>(null),
     team: useRef<HTMLElement>(null),
     resources: useRef<HTMLElement>(null),
-    contact: useRef<HTMLElement>(null)
   }
 
   const currentSectionRef = useRef(activeSection)
@@ -1045,106 +1044,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
-
-      {/* contact */}
-      <section ref={sectionRefs.contact} id="contact" className="py-10 sm:py-16 md:py-20 relative z-10 px-2 sm:px-4 lg:px-8">
-        <div className="container mx-auto">
-          <h2 className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green">
-            Get in Touch
-          </h2>
-
-          <div className="max-w-full sm:max-w-4xl mx-auto p-4 sm:p-6 md:p-8 rounded-3xl border border-border bg-card shadow-lg">
-            <p className="text-base sm:text-lg mb-6 md:mb-8 leading-relaxed text-foreground text-left font-bold">
-              Have questions or want to collaborate? Reach out via social media or email us at {" "}
-              <a
-                href="mailto:contact@thefossclub.org"
-                className="text-green-500 hover:text-green-600 dark:hover:text-green-400"
-              >
-                contact@thefossclub.org
-              </a>
-            </p>
-
-            <h3 className="text-xl sm:text-2xl font-bold mb-4 text-gradient-green text-center">
-              Follow Us
-            </h3>
-            <div className="flex flex-wrap justify-center gap-4 md:gap-5">
-                <a
-                  href="https://chat.whatsapp.com/DvgeodmqhyMBwOvlJqlixu"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2.5 md:p-3 bg-muted rounded-full text-muted-foreground hover:text-green-500 dark:hover:text-green-400 hover:bg-muted/80 transition-all shadow-md hover:shadow-green-500/20"
-                >
-                  <FaWhatsapp className="h-5 w-5 md:h-6 md:w-6" />
-                  <span className="sr-only">Whatsapp</span>
-                </a>
-                <a
-                  href="https://github.com/thefossclub"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2.5 md:p-3 bg-muted rounded-full text-muted-foreground hover:text-green-500 dark:hover:text-green-400 hover:bg-muted/80 transition-all shadow-md hover:shadow-green-500/20"
-                >
-                  <Github className="h-5 w-5 md:h-6 md:w-6" />
-                  <span className="sr-only">GitHub</span>
-                </a>
-                <a
-                  href="https://discord.gg/BgHwhRZg3r"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2.5 md:p-3 bg-muted rounded-full text-muted-foreground hover:text-green-500 dark:hover:text-green-400 hover:bg-muted/80 transition-all shadow-md hover:shadow-green-500/20"
-                >
-                  <FaDiscord className="h-5 w-5 md:h-6 md:w-6" />
-                  <span className="sr-only">Discord</span>
-                </a>
-                <a
-                  href="https://twitter.com/thefossclub"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2.5 md:p-3 bg-muted rounded-full text-muted-foreground hover:text-green-500 dark:hover:text-green-400 hover:bg-muted/80 transition-all shadow-md hover:shadow-green-500/20"
-                >
-                  <Twitter className="h-5 w-5 md:h-6 md:w-6" />
-                  <span className="sr-only">Twitter</span>
-                </a>
-                <a
-                  href="https://linkedin.com/company/thefossclub"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2.5 md:p-3 bg-muted rounded-full text-muted-foreground hover:text-green-500 dark:hover:text-green-400 hover:bg-muted/80 transition-all shadow-md hover:shadow-green-500/20"
-                >
-                  <Linkedin className="h-5 w-5 md:h-6 md:w-6" />
-                  <span className="sr-only">LinkedIn</span>
-                </a>
-                <a
-                  href="https://instagram.com/thefossclub"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2.5 md:p-3 bg-muted rounded-full text-muted-foreground hover:text-green-500 dark:hover:text-green-400 hover:bg-muted/80 transition-all shadow-md hover:shadow-green-500/20"
-                >
-                  <Instagram className="h-5 w-5 md:h-6 md:w-6" />
-                  <span className="sr-only">Instagram</span>
-                </a>          
-                <a
-                  href="https://matrix.to/#/#thefossclub:matrix.org"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2.5 md:p-3 bg-muted rounded-full text-muted-foreground hover:text-green-500 dark:hover:text-green-400 hover:bg-muted/80 transition-all shadow-md hover:shadow-green-500/20"
-                >
-                  <PiMatrixLogoFill className="h-5 w-5 md:h-6 md:w-6" />
-                  <span className="sr-only">Matrix</span>
-                </a>   
-                <a
-                  href="https://mas.to/@thefossclub"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2.5 md:p-3 bg-muted rounded-full text-muted-foreground hover:text-green-500 dark:hover:text-green-400 hover:bg-muted/80 transition-all shadow-md hover:shadow-green-500/20"
-                >
-                  <FaMastodon className="h-5 w-5 md:h-6 md:w-6" />
-                  <span className="sr-only">Mastodon</span>
-                </a>   
-            </div>
-          </div>
-        </div>
-      </section>
+      </section>      
 
       {/* Footer - Render only when mounted */}
       {mounted && (
@@ -1213,6 +1113,24 @@ export default function Home() {
                   <Instagram className="h-5 w-5 md:h-6 md:w-6" />
                   <span className="sr-only">Instagram</span>
                 </a>
+                <a
+                  href="https://matrix.to/#/#thefossclub:matrix.org"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2.5 md:p-3 bg-muted rounded-full text-muted-foreground hover:text-green-500 dark:hover:text-green-400 hover:bg-muted/80 transition-all shadow-md hover:shadow-green-500/20"
+                >
+                  <PiMatrixLogoFill className="h-5 w-5 md:h-6 md:w-6" />
+                  <span className="sr-only">Matrix</span>
+                </a>   
+                <a
+                  href="https://mas.to/@thefossclub"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2.5 md:p-3 bg-muted rounded-full text-muted-foreground hover:text-green-500 dark:hover:text-green-400 hover:bg-muted/80 transition-all shadow-md hover:shadow-green-500/20"
+                >
+                  <FaMastodon className="h-5 w-5 md:h-6 md:w-6" />
+                  <span className="sr-only">Mastodon</span>
+                </a>   
               </div>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-10 mb-6 sm:mb-8">
