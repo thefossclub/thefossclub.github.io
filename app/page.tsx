@@ -3,13 +3,14 @@
 import { useEffect, useRef, useState, useCallback } from "react"
 import { LazyMotion, domAnimation, m } from "framer-motion"
 import Link from "next/link"
-import { ArrowRight, Github, Instagram, Linkedin, Twitter, ChevronDown, ChevronUp } from "lucide-react"
-import { FaDiscord } from "react-icons/fa"
+import { ArrowRight, Github, Instagram, Linkedin, Twitter, ChevronDown, ChevronUp} from "lucide-react"
+import { FaDiscord, FaWhatsapp, FaMastodon } from "react-icons/fa"
+import { PiMatrixLogoFill } from "react-icons/pi";
 import Navbar from "@/components/navbar"
 import ProjectCard from "@/components/project-card"
 import EventCard from "@/components/event-card"
 import TeamMember from "@/components/team-member"
-import BlogPost from "@/components/blog-post"
+// import BlogPost from "@/components/blog-post"
 import GridBackground from "@/components/grid-background"
 import HeroSphere from "@/components/hero-sphere"
 import Timeline from "@/components/timeline"
@@ -35,6 +36,7 @@ export default function Home() {
     events: useRef<HTMLElement>(null),
     team: useRef<HTMLElement>(null),
     resources: useRef<HTMLElement>(null),
+    contact: useRef<HTMLElement>(null)
   }
 
   const currentSectionRef = useRef(activeSection)
@@ -121,6 +123,12 @@ export default function Home() {
         "SafePath is an intelligent navigation platform helps users choose safer routes instead of just faster ones.",
       link: "https://github.com/thefossclub/SafePath",
     },
+    {
+      title: "Securecon-Bruteforce",
+      description:
+        "About: Site used in SecureCon for BruteForce Hands-On Challenge",
+      link: "https://github.com/thefossclub/Securecon-Bruteforce",
+    },
   ]
 
   const events = [
@@ -129,7 +137,7 @@ export default function Home() {
       date: "December 24, 2023",
       description:
         "Conducted an event on the basic fundamentals of FOSS and educated students about the key terms used in the world of open source.",
-      image: "/placeholder.svg?height=300&width=400",
+      image: "/FOSS_Introduction.png?height=300&width=400",
     },
     {
       title: "Linux Installation & the Power of Command Line",
@@ -199,33 +207,15 @@ export default function Home() {
       date: "March 1-31, 2026",
       description:
         "A month-long hackathon focused on innovation and open-source development in India’s biggest FOSS hackathon. Build a new project, contribute to existing work, learn from mentors, and connect with the community.",
-      image: "/fosshack2026-banner.png",
+      image: "fosshack/FOSSHack2026.png?height=300&width=400",
     },
   ]
-
-  /*
-    const upcomingEvents = [
-    {
-      title: "FOSS Hack 2026",
-      date: "March 1-31, 2026",
-      description: (
-      <>
-        Join us for an entire month of innovation, and open-source development in <strong> India's Biggest FOSS Hackathon</strong>.
-        <br/>
-        Build an amazing FOSS project or contribute to pre-existing ones, learn from mentors, and connect with the FOSS community!
-      </>
-    ),
-    image: "/fosshack2026-banner.png",
-      link: "/fosshack",
-      buttonText: "Register Now"
-    },
-  ]
-  */
 
   const Mentors = [
     { name: "Vaibhav Pratap Singh", role: "CEH", color: "bg-yellow-500", link: "https://v8v88v8v88.com" },
     { name: "Diti Vasisht", role: "AI/ML specialist", color: "bg-violet-500", link: "https://diti.is-a.dev" },
-    { name: "Ashwany Kumar Sharma", role: "WEB Dev", color: "bg-purple-500", link: "https://ashwanyksharma.github.io/" },
+    { name: "Satyam Mishra", role: "Java Developer", color: "bg-teal-500", link: "https://github.com/satyyam11" },
+    { name: "Ashwany Kumar Sharma", role: "WEB Dev", color: "bg-purple-500", link: "https://github.com/ashwanyksharma" },
   ]
   
   const coreTeam = [
@@ -252,7 +242,7 @@ export default function Home() {
       name: "Avneesh Kumar",
       role: "Community Manager",
       color: "bg-green-500",
-      link: "https://my-website-seven-self-94.vercel.app/",
+      link: "https://abneeeees.github.io/",
     },
     {
       name: "Aditya Sachdeva",
@@ -282,7 +272,7 @@ export default function Home() {
       name: "Aditya Singh",
       role: "Event Manager",
       color: "bg-teal-500",
-      link: "https://example.com/adityasingh",
+      link: "#",
     },
     {
       name: "Harshit Vashisht",
@@ -349,6 +339,8 @@ export default function Home() {
     { year: "2024", title: "Conducted 7+ Major Events" },
     { year: "2025", title: "Organized 2 (36 Hours) FOSS Hacks" },
     { year: "2025", title: "Joined FOSS United" },
+    { year: "2025", title: "Conducted 6+ Major Events and OCC" },
+    { year: "2026", title: "Organized FOSS Hack 2026 Month‑Long" },
   ]
 
   return (
@@ -410,7 +402,7 @@ export default function Home() {
               whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
             >
               <Link
-                href="https://opnform.com/forms/the-foss-club-registration-nst4zs"
+                href="https://chat.whatsapp.com/DvgeodmqhyMBwOvlJqlixu"
                 target="_blank"
                 className="inline-flex items-center px-5 py-2.5 md:px-6 md:py-3 bg-gradient-green text-white rounded-full font-medium text-base md:text-lg hover:opacity-90 hover:brightness-110 transition-all shadow-lg shadow-green-500/20 hover:shadow-green-500/40"
               >
@@ -1053,6 +1045,30 @@ export default function Home() {
             </div>
           </div>
         </div>
+      </section>      
+
+           {/* contact */}
+      <section ref={sectionRefs.contact} id="contact" className="py-10 sm:py-16 md:py-20 relative z-10 px-2 sm:px-4 lg:px-8">
+        <div className="container mx-auto">
+          <h2 className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green">
+            Get in Touch
+          </h2>
+          <div className="mx-auto max-w-4xl p-6 sm:p-8 md:p-10 rounded-3xl border border-border bg-card/70 backdrop-blur-md shadow-xl hover:shadow-2xl transition-all duration-300">
+            <p className="text-base sm:text-lg md:text-xl leading-relaxed text-center text-foreground">
+              Have questions, ideas, or just want to collaborate?
+              <br className="hidden sm:block" />
+              Reach out via social media or drop us an email at
+            </p>
+            <div className="mt-6 flex justify-center">
+              <a
+                href="mailto:contact@thefossclub.org"
+                className="px-6 py-2 rounded-full bg-green-500 text-black font-semibold hover:bg-green-400 transition-all duration-200 shadow-md hover:scale-105"
+              >
+                contact@thefossclub.org
+              </a>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* Footer - Render only when mounted */}
@@ -1122,6 +1138,24 @@ export default function Home() {
                   <Instagram className="h-5 w-5 md:h-6 md:w-6" />
                   <span className="sr-only">Instagram</span>
                 </a>
+                <a
+                  href="https://matrix.to/#/#thefossclub:matrix.org"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2.5 md:p-3 bg-muted rounded-full text-muted-foreground hover:text-green-500 dark:hover:text-green-400 hover:bg-muted/80 transition-all shadow-md hover:shadow-green-500/20"
+                >
+                  <PiMatrixLogoFill className="h-5 w-5 md:h-6 md:w-6" />
+                  <span className="sr-only">Matrix</span>
+                </a>   
+                <a
+                  href="https://mas.to/@thefossclub"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2.5 md:p-3 bg-muted rounded-full text-muted-foreground hover:text-green-500 dark:hover:text-green-400 hover:bg-muted/80 transition-all shadow-md hover:shadow-green-500/20"
+                >
+                  <FaMastodon className="h-5 w-5 md:h-6 md:w-6" />
+                  <span className="sr-only">Mastodon</span>
+                </a>   
               </div>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-10 mb-6 sm:mb-8">
@@ -1163,24 +1197,8 @@ export default function Home() {
                 </ul>
               </div>
               <div className="p-5 md:p-6 rounded-2xl border border-border bg-card shadow-md">
-                <h3 className="text-lg sm:text-xl font-semibold mb-3 md:mb-4 text-gradient-green">Resources</h3>
+                <h3 className="text-lg sm:text-xl font-semibold mb-3 md:mb-4 text-gradient-green">Organization</h3>
                 <ul className="space-y-2 md:space-y-3 text-sm sm:text-base">
-                  <li>
-                    <Link
-                      href="#"
-                      className="text-muted-foreground hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
-                    >
-                      Blog
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="#"
-                      className="text-muted-foreground hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
-                    >
-                      Documentation
-                    </Link>
-                  </li>
                   <li>
                     <Link
                       href="https://github.com/thefossclub/CodeofConduct"
@@ -1192,10 +1210,26 @@ export default function Home() {
                   </li>
                   <li>
                     <Link
-                      href="#"
+                      href="https://github.com/thefossclub/Branding"
                       className="text-muted-foreground hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
                     >
-                      Privacy Policy
+                      Branding
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="https://github.com/thefossclub/whitepaper"
+                      className="text-muted-foreground hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
+                    >
+                      whitepaper
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="https://github.com/thefossclub/Resources"
+                      className="text-muted-foreground hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
+                    >
+                      Resources
                     </Link>
                   </li>
                 </ul>
@@ -1214,7 +1248,7 @@ export default function Home() {
                   </li>
                   <li>
                     <Link
-                      href="#"
+                      href="mailto:contact@thefossclub.org"
                       className="text-muted-foreground hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
                     >
                       Email Us
