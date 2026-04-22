@@ -58,4 +58,4 @@ To develop this website locally:
 
 ## 📄 License
 
-This project is open source. 
+This project is open source under GPL V2.0
