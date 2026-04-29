@@ -137,7 +137,7 @@ export default function Home() {
       date: "December 24, 2023",
       description:
         "Conducted an event on the basic fundamentals of FOSS and educated students about the key terms used in the world of open source.",
-      image: "/FOSS_Introduction.png?height=300&width=400",
+      image: "/FOSS_Introduction.webp?height=300&width=400",
     },
     {
       title: "Linux Installation & the Power of Command Line",
@@ -207,7 +207,7 @@ export default function Home() {
       date: "March 1-31, 2026",
       description:
         "A month-long hackathon focused on innovation and open-source development in India’s biggest FOSS hackathon. Build a new project, contribute to existing work, learn from mentors, and connect with the community.",
-      image: "fosshack/FOSSHack2026.png?height=300&width=400",
+      image: "fosshack/FOSSHack2026.webp?height=300&width=400",
     },
   ]
 
@@ -1080,7 +1080,7 @@ export default function Home() {
                 <div className="flex items-center justify-center md:justify-start mb-4">
                   <div className="w-10 h-10 md:w-12 md:h-12 bg-white flex items-center justify-center mr-2 sm:mr-3 md:mr-4 glow-effect shadow-lg shadow-green-500/20 ">
                     <img
-                      src="/LogoFOSS.png"
+                      src="/LogoFOSS.webp"
                       alt="FC"
                       className="w-16 h-16 md:w-20 md:h-20 object-contain mx-auto"
                     />
