@@ -77,7 +77,7 @@ export function LocalhostSection() {
             <div className="pointer-events-none absolute -inset-2 rounded-2xl bg-gradient-to-br from-[var(--accent-green)]/20 via-[var(--accent-cyan)]/18 to-transparent blur-xl opacity-80" />
             <div className="relative aspect-square w-full">
               <Image
-                src="/dtc.JPG"
+                src="/dtc.webp"
                 alt="Delhi Technical Campus - Localhost Venue"
                 fill
                 className="object-cover"
@@ -124,7 +124,7 @@ export function LocalhostSection() {
               onClick={(e) => e.stopPropagation()}
             >
               <Image
-                src="/dtc.JPG"
+                src="/dtc.webp"
                 alt="Delhi Technical Campus - Localhost Venue"
                 fill
                 className="object-cover rounded-lg"

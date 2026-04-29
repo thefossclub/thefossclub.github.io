@@ -137,77 +137,77 @@ export default function Home() {
       date: "December 24, 2023",
       description:
         "Conducted an event on the basic fundamentals of FOSS and educated students about the key terms used in the world of open source.",
-      image: "/FOSS_Introduction.png?height=300&width=400",
+      image: "/FOSS_Introduction.webp?height=300&width=400",
     },
     {
       title: "Linux Installation & the Power of Command Line",
       date: "February 15, 2024",
       description:
         "Hands-on workshop on Linux installation, configuration, and basic CLI commands.",
-      image: "/Linux_installation.jpeg?height=300&width=400",
+      image: "/Linux_installation.webp?height=300&width=400",
     },
     {
       title: "How_To?",
       date: "April 15, 2024",
       description:
         "Conference with talks, workshops, and networking with industry experts.",
-      image: "/How_to.jpeg?height=300&width=400",
+      image: "/How_to.webp?height=300&width=400",
     },
     {
       title: "FOSS Hack '24",
       date: "July 27, 2024",
       description:
         "Hackathon for students to develop innovative tech solutions with mentorship.",
-      image: "/Hack24.jpg?height=300&width=400",
+      image: "/Hack24.webp?height=300&width=400",
     },
     {
       title: "Incepta (Introductory Event)",
       date: "October 14, 2024",
       description:
         "Introductory event for first-year students on open source, AI, and entrepreneurship.",
-      image: "/incepta.jpeg?height=300&width=400",
+      image: "/incepta.webp?height=300&width=400",
     },
     {
       title: "Capture The Flag (CTF – Technovate)",
       date: "October 24, 2024",
       description:
         "Competitive cybersecurity event with challenges to test students’ skills.",
-      image: "/Technovate.jpeg?height=300&width=400",
+      image: "/Technovate.webp?height=300&width=400",
     },
     {
       title: "FOSS Hack '25",
       date: "February 22-23, 2025",
       description:
         "National-level hybrid hackathon for innovative open-source solutions.",
-      image: "/Hack25.jpg?height=300&width=400",
+      image: "/Hack25.webp?height=300&width=400",
     },
     {
       title: "Lumexis: Interactive session on Git & Open-Source Alternatives",
       date: "September 2, 2025",
       description:
         "A hands-on session where you’ll install Linux, learn how it works, and understand why so many developers swear by it.",
-      image: "/lumexis.jpg?=300&width=400",
+      image: "/lumexis.webp?=300&width=400",
     },
     {
       title: "SecureCon",
       date: "October 8, 2025",
       description:
         " A Cybersecurity Event having an Speaker session and Hands-on covering Port-Scanning, SQLinjection and Brute-Force.",
-      image: "/SecureCon.jpg?height=300&width=400",
+      image: "/SecureCon.webp?height=300&width=400",
     },
     {
       title: "Unlocking TUX: Linux Installation Party",
       date: "October 15, 2025",
       description:
         "A hands-on session where you’ll install Linux, learn how it works, and understand why so many developers swear by it.",
-      image: "/Unlocking-TUX-Linux-Installation-Party.jpg?=300&width=400",
+      image: "/Unlocking-TUX-Linux-Installation-Party.webp?=300&width=400",
     },
     {
       title: "FOSS Hack 2026",
       date: "March 1-31, 2026",
       description:
         "A month-long hackathon focused on innovation and open-source development in India’s biggest FOSS hackathon. Build a new project, contribute to existing work, learn from mentors, and connect with the community.",
-      image: "fosshack/FOSSHack2026.png?height=300&width=400",
+      image: "fosshack/FOSSHack2026.webp?height=300&width=400",
     },
   ]
 
@@ -697,7 +697,7 @@ export default function Home() {
               </div>
               <div className="w-full md:w-1/2 flex justify-center">
                 <img
-                  src="/SecureCon.jpeg"
+                  src="/SecureCon.webp"
                   alt="SecureCon"
                   className="rounded-xl shadow-2xl w-full max-w-md h-auto max-h-64 sm:max-h-80 object-cover border border-green-900/30"
                 />
@@ -1080,7 +1080,7 @@ export default function Home() {
                 <div className="flex items-center justify-center md:justify-start mb-4">
                   <div className="w-10 h-10 md:w-12 md:h-12 bg-white flex items-center justify-center mr-2 sm:mr-3 md:mr-4 glow-effect shadow-lg shadow-green-500/20 ">
                     <img
-                      src="/LogoFOSS.png"
+                      src="/LogoFOSS.webp"
                       alt="FC"
                       className="w-16 h-16 md:w-20 md:h-20 object-contain mx-auto"
                     />
