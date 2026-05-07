@@ -116,7 +116,7 @@ export default function Navbar({ activeSection }: NavbarProps) {
                 <div className="flex items-center space-x-3 min-w-0">
                   <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center glow-effect-green flex-shrink-0">
                     <img
-                      src="/LogoFOSS.png"
+                      src="/LogoFOSS.webp"
                       alt="FC"
                       className="w-20 h-20 md:w-28 md:h-28 object-contain mx-auto"
                     />

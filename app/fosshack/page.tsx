@@ -642,7 +642,7 @@ export default function Home() {
               sponsors={[
                 {
                   name: "TomTom",
-                  logo: "/fosshack/TomTom.png",
+                  logo: "/fosshack/TomTom.webp",
                   url: "https://tomtom.com",
                 },
               ]}
@@ -662,17 +662,17 @@ export default function Home() {
               sponsors={[
                 {
                   name: "XYZ",
-                  logo: "/fosshack/XYZ.png",
+                  logo: "/fosshack/XYZ.webp",
                   url: "https://nic.xyz",
                 },
                 {
                   name: "CodeCrafters",
-                  logo: "/fosshack/CodeCrafters.png",
+                  logo: "/fosshack/CodeCrafters.webp",
                   url: "https://codecrafters.io",
                 },
                 {
                   name: "Maxflex",
-                  logo: "/fosshack/Maxflex.png",
+                  logo: "/fosshack/Maxflex.webp",
                   url: "",
                 },
               ]}
