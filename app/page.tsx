@@ -35,6 +35,7 @@ export default function Home() {
     about: useRef<HTMLElement>(null),
     projects: useRef<HTMLElement>(null),
     events: useRef<HTMLElement>(null),
+    occ: useRef<HTMLElement>(null),
     team: useRef<HTMLElement>(null),
     resources: useRef<HTMLElement>(null),
     contact: useRef<HTMLElement>(null)
