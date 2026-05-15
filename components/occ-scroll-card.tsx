@@ -19,42 +19,42 @@ const defaultOccCards: OCCCardItem[] = [
     title: "AI | AI Slop | ML | Linux | AI in Gamedev",
     date: "18 January, 2026",
     speakers: "Tooshar Bharadwaj, Karan Veer Singh, Prakahar Sharma",
-    image: "occ/occ-3.png",
+    image: "occ/occ-3.webp",
   },
   {
     id: "occ-2",
     title: "From Play to Profession:Game Dev, GPUs, and Growth",
     date: "26 October, 2025",
     speakers: "Sanjay Saji, Jayesh Bisht",
-    image: "occ/occ-2.png",
+    image: "occ/occ-2.webp",
   },
   {
     id: "occ-1",
     title: "Getting Familiar with Open Source & Terminal",
     date: "04 September, 2025",
     speakers: "Tanmay Maheshwari, Avneesh Kumar, Bhumi Aggarwal",
-    image: "occ/occ-1.png",
+    image: "occ/occ-1.webp",
   },
   {
     id: "occ-5",
     title: "Operating System",
     date: "12 January, 2025",
     speakers: "Vaibhav Pratap Singh, Jayesh Bisht",
-    image: "occ/occ-5.png",
+    image: "occ/occ-5.webp",
   },
   {
     id: "occ-4",
     title: "UI/UX",
     date: "11 May, 2025",
     speakers: "Naman Chandok, Jaseemuddin Naseem",
-    image: "occ/occ-4.png",
+    image: "occ/occ-4.webp",
   },
   {
     id: "occ-6",
     title: "Cloud Computing",
     date: "10 November, 2024",
     speakers: "Teja, Inzemam, Ravpreet Singh Maini",
-    image: "occ/occ-6.png",
+    image: "occ/occ-6.webp",
   }
 ]
 
@@ -111,7 +111,7 @@ export default function OCCScrollCard({ cards = defaultOccCards }: OCCScrollCard
           type="button"
           aria-label="Scroll cards left"
           onClick={() => scrollCards("left")}
-          className="absolute -left-3 top-1/2 z-40 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-card/90 text-foreground shadow-md backdrop-blur-sm transition hover:border-green-500 hover:text-green-500 sm:-left-5"
+          className="absolute -left-3 top-1/2 z-40 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-card/90 text-foreground shadow-md backdrop-blur-sm transition hover:text-green-500 sm:-left-5"
         >
           <FaAngleLeft className="h-4 w-4" />
         </button>
@@ -122,7 +122,7 @@ export default function OCCScrollCard({ cards = defaultOccCards }: OCCScrollCard
           type="button"
           aria-label="Scroll cards right"
           onClick={() => scrollCards("right")}
-          className="absolute -right-3 top-1/2 z-40 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-card/90 text-foreground shadow-md backdrop-blur-sm transition hover:border-green-500 hover:text-green-500 sm:-right-5"
+          className="absolute -right-3 top-1/2 z-40 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-card/90 text-foreground shadow-md backdrop-blur-sm transition hover:text-green-500 sm:-right-5"
         >
           <FaAngleRight className="h-4 w-4" />
         </button>
@@ -140,7 +140,7 @@ export default function OCCScrollCard({ cards = defaultOccCards }: OCCScrollCard
         {cards.map((card, index) => (
           <m.article
             key={card.id}
-            className="group min-w-[290px] max-w-[290px] flex-shrink-0 snap-start overflow-hidden rounded-3xl border border-border bg-card shadow-md shadow-black/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-green-500/20 md:min-w-[330px] md:max-w-[330px]"
+            className="group min-w-[290px] max-w-[290px] flex-shrink-0 snap-start overflow-hidden rounded-3xl border border-border bg-card shadow-md shadow-black/10 transition-all duration-300 hover:-translate-y-1 md:min-w-[330px] md:max-w-[330px]"
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2 }}
@@ -152,7 +152,7 @@ export default function OCCScrollCard({ cards = defaultOccCards }: OCCScrollCard
                 alt={card.title}
                 className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent group-hover:translate-y-full group-hover:transition-transform group-hover:duration-900 group-hover:opacity-0" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-black/0 to-transparent group-hover:translate-y-full group-hover:transition-transform group-hover:duration-900 group-hover:opacity-0" />
             </div>
 
             <div className="space-y-3 p-4 md:p-5">
