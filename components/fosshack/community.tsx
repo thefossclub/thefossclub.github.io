@@ -105,16 +105,16 @@ const CommunityCard = ({ community, size }: CommunityCardProps) => {
 
 export default function Community() {
   const largeCommunities: Community[] = [
-    { name: "PyDelhi", logo: "/fosshack/pydelhi_community_logo.jpg" },
-    { name: "Django India", logo: "/fosshack/djangoi.jpeg" },
+    { name: "PyDelhi", logo: "/fosshack/pydelhi_community_logo.webp" },
+    { name: "Django India", logo: "/fosshack/djangoi.webp" },
   ];
 
   const smallCommunities: Community[] = [
-    { name: "FOSS USAR", logo: "/fosshack/Usar.jpeg" },
-    { name: "AIR", logo: "/fosshack/AiR.jpeg" },
-    { name: "ECell", logo: "/fosshack/ecell.jpeg" },
-    { name: "IEEE", logo: "/fosshack/ieee.jpeg" },
-    { name: "ASC", logo: "/fosshack/asc.jpeg" },
+    { name: "FOSS USAR", logo: "/fosshack/Usar.webp" },
+    { name: "AIR", logo: "/fosshack/AiR.webp" },
+    { name: "ECell", logo: "/fosshack/ecell.webp" },
+    { name: "IEEE", logo: "/fosshack/ieee.webp" },
+    { name: "ASC", logo: "/fosshack/asc.webp" },
   ];
 
   return (

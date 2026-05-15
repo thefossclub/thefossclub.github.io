@@ -64,7 +64,7 @@ export default function LoginPage() {
             <div className="flex justify-center mb-4">
               <div className="w-12 h-12 flex items-center justify-center glow-effect shadow-lg shadow-green-500/30">
                 <img
-                  src="/LogoFOSS.png"
+                  src="/LogoFOSS.webp"
                   alt="FC"
                   className="w-20 h-20 md:w-28 md:h-28 object-contain mx-auto"
                 />
