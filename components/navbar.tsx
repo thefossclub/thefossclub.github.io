@@ -56,6 +56,7 @@ export default function Navbar({ activeSection }: NavbarProps) {
     { name: "About", href: "#about" },
     { name: "Projects", href: "#projects" },
     { name: "Events", href: "#events" },
+    { name: "OCC", href: "#occ" },
     { name: "Team", href: "#team" },
     { name: "Resources", href: "#resources" },
     { name: "Contact", href: "#contact"}

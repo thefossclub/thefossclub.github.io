@@ -18,6 +18,7 @@ import ScrollingTools from "@/components/scrolling-tools"
 import { useTheme } from "next-themes"
 import ScrollProgressIndicator from "@/components/scroll-progress-indicator"
 import ScrollIndicator from "@/components/scroll-indicator"
+import OCCScrollCard from "@/components/occ-scroll-card"
 // import UpcomingEventCard from "@/components/upcoming-event-card"
 
 export default function Home() {
@@ -34,6 +35,7 @@ export default function Home() {
     about: useRef<HTMLElement>(null),
     projects: useRef<HTMLElement>(null),
     events: useRef<HTMLElement>(null),
+    occ: useRef<HTMLElement>(null),
     team: useRef<HTMLElement>(null),
     resources: useRef<HTMLElement>(null),
     contact: useRef<HTMLElement>(null)
@@ -705,7 +707,20 @@ export default function Home() {
             </div>
           </m.div>*/}
         </div>
-      </section>
+        </section>
+        
+        <section ref={sectionRefs.occ} id="occ" className="py-10 sm:py-16 md:py-20 relative overflow-hidden z-10 px-2 sm:px-4 lg:px-8">
+          <div>
+            <h2 className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green">
+              Open Community Calls
+            </h2>
+                        
+            <div className="container mx-auto">
+              <OCCScrollCard />
+            </div>
+            
+          </div>
+        </section>
 
       {/* Tools Section */}
       <section id="tools" className="py-10 sm:py-16 md:py-20 relative overflow-hidden z-10 px-2 sm:px-4 lg:px-8">
