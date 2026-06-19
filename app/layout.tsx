@@ -3,6 +3,7 @@ import "./globals.css"
 import type { Metadata } from "next"
 import { ThemeProvider } from "@/components/theme-provider"
 import SmoothScroll from "@/components/smooth-scroll"
+import InteractiveBackground from "@/components/ui/interactivebackground";
 
 export const metadata: Metadata = {
   title: "The FOSS Club",
@@ -27,6 +28,7 @@ export default function RootLayout({
         <link rel="icon" href="/FOSS.ico" />
       </head>
       <body className="min-h-screen bg-background font-sans antialiased">
+        <InteractiveBackground />
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
