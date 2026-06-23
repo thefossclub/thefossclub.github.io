@@ -13,7 +13,7 @@ interface Star {
   twinkleSpeed: number
 }
 
-const STAR_COUNT = 500
+const STAR_COUNT = 700
 const REPULSION_RADIUS = 50
 const REPULSION_FORCE = 1.2
 const FRICTION = 0.76
