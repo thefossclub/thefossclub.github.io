@@ -34,7 +34,7 @@ export default function GridBackground() {
       }
     }
 
-    const drawDots = (width: number, height: number) => {
+/*    const drawDots = (width: number, height: number) => {
       if (!ctx) return
       ctx.clearRect(0, 0, width, height)
       const isDark = resolvedTheme === "dark"
@@ -48,13 +48,13 @@ export default function GridBackground() {
         ctx.fill()
       }
     }
-
+*/   
     const resizeCanvas = () => {
       const rect = container.getBoundingClientRect()
       canvas.width = Math.round(rect.width)
       canvas.height = Math.round(rect.height)
       generateDots(canvas.width, canvas.height)
-      drawDots(canvas.width, canvas.height)
+      /*drawDots(canvas.width, canvas.height)*/
     }
 
     resizeCanvas()

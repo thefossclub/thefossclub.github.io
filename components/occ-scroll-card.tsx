@@ -18,7 +18,7 @@ const defaultOccCards: OCCCardItem[] = [
     id: "occ-3",
     title: "AI | AI Slop | ML | Linux | AI in Gamedev",
     date: "18 January, 2026",
-    speakers: "Tooshar Bharadwaj, Karan Veer Singh, Prakahar Sharma",
+    speakers: "Tooshar Bhardwaj, Karan Veer Singh, Prakahar Sharma",
     image: "occ/occ-3.webp",
   },
   {

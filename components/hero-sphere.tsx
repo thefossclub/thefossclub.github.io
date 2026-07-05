@@ -61,7 +61,13 @@ export default function HeroSphere() {
       }
       if (!ctx) return
       ctx.clearRect(0, 0, width, height)
-
+      const glow = ctx.createRadialGradient(width / 2, height / 2, 0,
+          width / 2, height / 2, radius * 1.6)
+      glow.addColorStop(0, "rgba(34,197,94,0.35)")
+      glow.addColorStop(0.5, "rgba(34,197,94,0.12)")
+      glow.addColorStop(1, "rgba(34,197,94,0)")
+      ctx.fillStyle = glow
+      ctx.fillRect(0, 0, width, height)
       for (const point of points.current) {
         point.angle += point.speed
 
@@ -143,8 +149,7 @@ export default function HeroSphere() {
       transition={{ duration: 1 }}
       className="relative"
     >
-      <canvas ref={canvasRef} width={500} height={500} className="opacity-90" />
+    <canvas ref={canvasRef} width={500} height={500} className="opacity-90" />
     </m.div>
   )
 }
-
