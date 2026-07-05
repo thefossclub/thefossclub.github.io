@@ -5,6 +5,7 @@ import Link from "next/link"
 import { m, AnimatePresence } from "framer-motion"
 import { Menu, X, Moon, Sun, LogIn } from "lucide-react"
 import { useTheme } from "next-themes"
+import { useLenis } from "lenis/react"
 
 interface NavbarProps {
   activeSection: string
@@ -20,28 +21,14 @@ export default function Navbar({ activeSection }: NavbarProps) {
 
   useEffect(() => {
     setMounted(true)
-
-    let ticking = false
-    let lastScrolled = false
-    
-    const handleScroll = () => {
-      if (ticking) return
-      ticking = true
-      
-      window.requestAnimationFrame(() => {
-        const shouldBeScrolled = window.scrollY > 50
-        // Only update state if value changed
-        if (shouldBeScrolled !== lastScrolled) {
-          lastScrolled = shouldBeScrolled
-          setScrolled(shouldBeScrolled)
-        }
-        ticking = false
-      })
-    }
-
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
+  useLenis((lenis) => {
+    const shouldBeScrolled = lenis.scroll > 50
+    if (shouldBeScrolled !== scrolled) {
+      setScrolled(shouldBeScrolled)
+    }
+  })
 
   const toggleMenu = () => {
     setIsOpen(!isOpen)
@@ -119,7 +106,7 @@ export default function Navbar({ activeSection }: NavbarProps) {
                     <img
                       src="/LogoFOSS.webp"
                       alt="FC"
-                      className="w-20 h-20 md:w-28 md:h-28 object-contain mx-auto"
+                      className="w-8 h-8 object-contain"
                     />
                   </div>
                   <Link

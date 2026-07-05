@@ -2,6 +2,7 @@
 
 import { m, useAnimationControls } from "framer-motion"
 import { useEffect } from "react"
+import { useLenis } from "lenis/react"
 
 interface ScrollIndicatorProps {
   targetSection?: string
@@ -15,6 +16,7 @@ export default function ScrollIndicator({
   color = "#FFFFFF",
 }: ScrollIndicatorProps) {
   const dotControls = useAnimationControls()
+  const lenis = useLenis()
 
   useEffect(() => {
     if (preset === "default") {
@@ -32,7 +34,13 @@ export default function ScrollIndicator({
 
   const handleClick = () => {
     const el = document.getElementById(targetSection)
-    if (el) el.scrollIntoView({ behavior: "smooth" })
+    if (el) {
+      if (lenis) {
+        lenis.scrollTo(el)
+      } else {
+        el.scrollIntoView({ behavior: "smooth" })
+      }
+    }
   }
 
   if (preset === "chevrons") {

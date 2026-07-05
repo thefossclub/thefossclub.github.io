@@ -3,9 +3,10 @@
 import { useEffect, useRef, useState, useCallback } from "react"
 import { LazyMotion, domAnimation, m } from "framer-motion"
 import Link from "next/link"
-import { ArrowRight, Github, Instagram, Linkedin, Twitter, ChevronDown, ChevronUp} from "lucide-react"
-import { FaDiscord, FaWhatsapp, FaMastodon } from "react-icons/fa"
+import { ArrowRight, ChevronDown, ChevronUp } from "lucide-react"
+import { FaDiscord, FaWhatsapp, FaMastodon, FaGithub, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa"
 import { PiMatrixLogoFill } from "react-icons/pi";
+import { useLenis } from "lenis/react"
 import Navbar from "@/components/navbar"
 import ProjectCard from "@/components/project-card"
 import EventCard from "@/components/event-card"
@@ -65,40 +66,15 @@ export default function Home() {
     return () => observers.forEach((o) => o.disconnect())
   }, [])
 
-  useEffect(() => {
-    let ticking = false
-
-    const handleParallax = () => {
-      if (ticking) return
-      ticking = true
-      requestAnimationFrame(() => {
-        const scrollY = window.scrollY
-        if (heroRef.current) {
-          const opacity = Math.max(0, 1 - scrollY / 300)
-          const scale = Math.max(0.9, 1 - scrollY / 3000)
-          heroRef.current.style.opacity = String(opacity)
-          heroRef.current.style.transform = `scale(${scale}) translateZ(0)`
-        }
-        ticking = false
-      })
+  useLenis((lenis) => {
+    if (heroRef.current) {
+      const scrollY = lenis.scroll
+      const opacity = Math.max(0, 1 - scrollY / 300)
+      const scale = Math.max(0.9, 1 - scrollY / 3000)
+      heroRef.current.style.opacity = String(opacity)
+      heroRef.current.style.transform = `scale(${scale}) translateZ(0)`
     }
-
-    // @ts-expect-error - lenis is added to window
-    const lenis = window.lenis
-    if (lenis) {
-      lenis.on("scroll", handleParallax)
-    } else {
-      window.addEventListener("scroll", handleParallax, { passive: true })
-    }
-
-    return () => {
-      if (lenis) {
-        lenis.off("scroll", handleParallax)
-      } else {
-        window.removeEventListener("scroll", handleParallax)
-      }
-    }
-  }, [])
+  })
 
   useEffect(() => {
     setMounted(true)
@@ -1114,7 +1090,7 @@ export default function Home() {
                   rel="noopener noreferrer"
                   className="p-2.5 md:p-3 bg-muted rounded-full text-muted-foreground hover:text-green-500 dark:hover:text-green-400 hover:bg-muted/80 transition-all shadow-md hover:shadow-green-500/20"
                 >
-                  <Github className="h-5 w-5 md:h-6 md:w-6" />
+                  <FaGithub className="h-5 w-5 md:h-6 md:w-6" />
                   <span className="sr-only">GitHub</span>
                 </a>
                 <a
@@ -1132,7 +1108,7 @@ export default function Home() {
                   rel="noopener noreferrer"
                   className="p-2.5 md:p-3 bg-muted rounded-full text-muted-foreground hover:text-green-500 dark:hover:text-green-400 hover:bg-muted/80 transition-all shadow-md hover:shadow-green-500/20"
                 >
-                  <Twitter className="h-5 w-5 md:h-6 md:w-6" />
+                  <FaTwitter className="h-5 w-5 md:h-6 md:w-6" />
                   <span className="sr-only">Twitter</span>
                 </a>
                 <a
@@ -1141,7 +1117,7 @@ export default function Home() {
                   rel="noopener noreferrer"
                   className="p-2.5 md:p-3 bg-muted rounded-full text-muted-foreground hover:text-green-500 dark:hover:text-green-400 hover:bg-muted/80 transition-all shadow-md hover:shadow-green-500/20"
                 >
-                  <Linkedin className="h-5 w-5 md:h-6 md:w-6" />
+                  <FaLinkedin className="h-5 w-5 md:h-6 md:w-6" />
                   <span className="sr-only">LinkedIn</span>
                 </a>
                 <a
@@ -1150,7 +1126,7 @@ export default function Home() {
                   rel="noopener noreferrer"
                   className="p-2.5 md:p-3 bg-muted rounded-full text-muted-foreground hover:text-green-500 dark:hover:text-green-400 hover:bg-muted/80 transition-all shadow-md hover:shadow-green-500/20"
                 >
-                  <Instagram className="h-5 w-5 md:h-6 md:w-6" />
+                  <FaInstagram className="h-5 w-5 md:h-6 md:w-6" />
                   <span className="sr-only">Instagram</span>
                 </a>
                 <a

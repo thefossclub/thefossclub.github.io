@@ -128,14 +128,10 @@ export default function OCCScrollCard({ cards = defaultOccCards }: OCCScrollCard
         </button>
       )}
 
-      <m.div
+      <div
         ref={scrollRef}
         onScroll={checkScroll}
         className="flex snap-x gap-5 overflow-x-scroll py-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
-        initial={{ opacity: 0, y: 2 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.1 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
       >
         {cards.map((card, index) => (
           <m.article
@@ -152,7 +148,7 @@ export default function OCCScrollCard({ cards = defaultOccCards }: OCCScrollCard
                 alt={card.title}
                 className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-black/0 to-transparent group-hover:translate-y-full group-hover:transition-transform group-hover:duration-900 group-hover:opacity-0" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/0 to-transparent transition-opacity duration-300 group-hover:opacity-0" />
             </div>
 
             <div className="space-y-3 p-4 md:p-5">
@@ -170,7 +166,7 @@ export default function OCCScrollCard({ cards = defaultOccCards }: OCCScrollCard
             </div>
           </m.article>
         ))}
-      </m.div>
+      </div>
     </div>
   )
 }

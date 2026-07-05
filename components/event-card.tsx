@@ -13,23 +13,13 @@ interface EventCardProps {
 export default function EventCard({ title, date, description, image }: EventCardProps) {
   return (
     <div
-      className="rounded-3xl overflow-hidden border border-border bg-card group shadow-lg hover:shadow-xl will-change-transform"
-      style={{ 
-        transform: 'translateZ(0)',
-        transition: 'box-shadow 0.3s ease'
-      }}
+      className="rounded-3xl overflow-hidden border border-border bg-card group shadow-lg hover:shadow-xl transition-shadow duration-300"
     >
       <div className="relative h-48 overflow-hidden">
         <img
           src={image || "/placeholder.svg"}
           alt={title}
-          className="w-full h-full object-cover will-change-transform"
-          style={{
-            transform: 'translateZ(0)',
-            transition: 'transform 0.5s ease'
-          }}
-          onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1) translateZ(0)'}
-          onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1) translateZ(0)'}
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           loading="lazy"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent pointer-events-none"></div>

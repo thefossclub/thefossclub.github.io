@@ -17,6 +17,7 @@ import {
   Sun,
   Users,
 } from "lucide-react";
+import { useLenis } from "lenis/react";
 import { Suspense } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
@@ -240,17 +241,11 @@ export default function Home() {
     }
   }, [theme]);
 
-  useEffect(() => {
-    const onScroll = () => {
-      setShowScrollTop(window.scrollY > 400);
-    };
 
-    window.addEventListener("scroll", onScroll);
 
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-    };
-  }, []);
+  useLenis((lenis) => {
+    setShowScrollTop(lenis.scroll > 400);
+  });
 
   const toggleTheme = () =>
     setTheme((prev) => (prev === "dark" ? "light" : "dark"));

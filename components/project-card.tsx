@@ -1,6 +1,6 @@
 "use client"
 
-import { Github } from "lucide-react"
+import { FaGithub } from "react-icons/fa"
 import Link from "next/link"
 
 interface ProjectCardProps {
@@ -28,7 +28,7 @@ export default function ProjectCard({ title, description, link, index }: Project
           rel="noopener noreferrer"
           className="inline-flex items-center text-sm font-medium text-gradient-green-dark hover:opacity-80 transition-opacity"
         >
-          <Github className="mr-2 h-4 w-4" />
+          <FaGithub className="mr-2 h-4 w-4" />
           View on GitHub
           <span className="ml-1 transition-transform duration-300 group-hover:translate-x-1">→</span>
         </Link>

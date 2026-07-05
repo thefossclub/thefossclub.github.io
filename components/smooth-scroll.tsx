@@ -1,58 +1,30 @@
 "use client"
 
-import { useEffect, useRef, createContext, useContext } from "react"
-import Lenis from "lenis"
+import { ReactLenis, useLenis } from "lenis/react"
+import { useEffect } from "react"
 
-// Create context to access Lenis instance from anywhere
-const LenisContext = createContext<Lenis | null>(null)
-
-export const useLenis = () => useContext(LenisContext)
-
-export default function SmoothScroll({ children }: { children: React.ReactNode }) {
-  const lenisRef = useRef<Lenis | null>(null)
+// A subcomponent to expose the lenis instance globally for compatibility
+function GlobalLenisExposer() {
+  const lenis = useLenis()
 
   useEffect(() => {
-    // Check for reduced motion preference
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    
-    if (prefersReducedMotion) {
-      // Skip Lenis for users who prefer reduced motion
-      return
+    if (lenis) {
+      // @ts-expect-error - adding to window for global access
+      window.lenis = lenis
+      return () => {
+        // @ts-expect-error - cleanup window property
+        delete window.lenis
+      }
     }
+  }, [lenis])
 
-    // Initialize Lenis with optimized settings for performance
-    const lenis = new Lenis({
-      duration: 0.6,
-      easing: (t) => 1 - Math.pow(1 - t, 4),
-      orientation: "vertical",
-      gestureOrientation: "vertical",
-      smoothWheel: true,
-      wheelMultiplier: 1.4,
-      touchMultiplier: 1.8,
-      infinite: false,
-      autoResize: true,
-    })
-
-    lenisRef.current = lenis
-
-    // Make lenis globally accessible
-    // @ts-expect-error - adding to window for global access
-    window.lenis = lenis
-
-    // Use a single RAF loop
-    let rafId: number
-    function raf(time: number) {
-      lenis.raf(time)
-      rafId = requestAnimationFrame(raf)
-    }
-    rafId = requestAnimationFrame(raf)
-
+  useEffect(() => {
     // Handle anchor link clicks for smooth scrolling to sections
     const handleAnchorClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement
       const anchor = target.closest('a[href^="#"]')
       
-      if (anchor) {
+      if (anchor && lenis) {
         const href = anchor.getAttribute("href")
         if (href && href.startsWith("#")) {
           e.preventDefault()
@@ -68,21 +40,36 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     }
 
     document.addEventListener("click", handleAnchorClick)
-
-    // Cleanup
     return () => {
-      cancelAnimationFrame(rafId)
       document.removeEventListener("click", handleAnchorClick)
-      // @ts-expect-error - cleaning up window property
-      delete window.lenis
-      lenis.destroy()
     }
-  }, [])
+  }, [lenis])
 
-  return (
-    <LenisContext.Provider value={lenisRef.current}>
-      {children}
-    </LenisContext.Provider>
-  )
+  return null
 }
 
+export default function SmoothScroll({ children }: { children: React.ReactNode }) {
+  // Check for reduced motion preference
+  const prefersReducedMotion = typeof window !== "undefined" 
+    && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  if (prefersReducedMotion) {
+    return <>{children}</>
+  }
+
+  return (
+    <ReactLenis
+      root
+      options={{
+        duration: 0.6,
+        easing: (t) => 1 - Math.pow(1 - t, 4),
+        smoothWheel: true,
+        wheelMultiplier: 1.4,
+        touchMultiplier: 1.8,
+      }}
+    >
+      <GlobalLenisExposer />
+      {children}
+    </ReactLenis>
+  )
+}
