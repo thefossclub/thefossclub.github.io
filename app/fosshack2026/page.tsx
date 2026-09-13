@@ -590,7 +590,6 @@ export default function Home() {
                 className="group relative inline-flex items-center gap-3 px-9 py-4 text-lg font-semibold rounded-full overflow-hidden text-background transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(var(--accent-green),0.6)] focus-visible:ring-offset-2"
               >
                 <span className="absolute inset-0 rounded-full bg-foreground" />
-                <span className="absolute inset-0 rounded-full border-3 border-[#22b34f]" />
                 <span className="relative flex items-center gap-3">
                   <Camera className="w-5 h-5" />
                   View Highlights
