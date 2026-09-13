@@ -464,15 +464,21 @@ const volunteers = [
     { name: "Sejal Madaan", title: "Photographer"},
     { name: "Prakhar Sharma", title: "Campus Ambassador, Graphic Designer, Management, Decoration, Photographer, OS Contributor"},
     { name: "Tooshar Bhardwaj", title: "OS Contributor, Content Writer, Management"},
-    { name: "Shivani Kumari Mishra", title: "Anchor"},
-    { name: "Aanya", title: "Discipline"},
-    { name: "Tripta Taneja", title: "Discipline"},
-    { name: "Priyal", title: "Discipline"},
-    { name: "Krishna", title: "Discipline"},
+    { name: "Shivani Kumari Mishra", title: "Anchor, Discipline, Decoration"},
+    { name: "Aanya", title: "Discipline, Decoration"},
+    { name: "Tripta Taneja", title: "Discipline, Decoration"},
+    { name: "Priyal", title: "Discipline, Decoration"},
+    { name: "Krishna", title: "Discipline, Decoration"},
     { name: "Dishant", title: "Discipline"},
-    { name: "Sohendrajeet", title: "Discipline"},
+    { name: "Sohendrajeet", title: "Discipline, Decoration"},
     { name: "Utkarsh Gupta", title: "Photographer"},
     { name: "Vanshika", title: "Photographer"},
+    { name: "Harsh Thakur", title: "Decoration"},
+    { name: "Aashita", title: "Decoration"},
+    { name: "Sangam", title: "Decoration"},
+    { name: "Lucky", title: "Decoration"},
+    { name: "Rachna", title: "Decoration"},
+    { name: "Rohini", title: "Decoration"},
 ]
 
 export default function Home() {
@@ -565,7 +571,7 @@ export default function Home() {
                 <span>March 1-31, 2026</span>
               </div>
               <div className="hidden sm:block text-2xl">•</div>
-              <div className="flex items-center gap-3">
+              <div className="flex items-start gap-3">
                 <MapPin className="w-6 h-6 text-foreground" />
                 <span>Delhi Technical Campus, Greater Noida</span>
               </div>
