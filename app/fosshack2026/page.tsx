@@ -431,7 +431,33 @@ const galleryImages = [
 const sponsors = [
   { name: "TomTom", logo: "/fosshack/TomTom.webp", url: "https://tomtom.com" },
   { name: "XYZ", logo: "/fosshack/XYZ.webp", url: "https://nic.xyz" },
+  { name: "Maxflex", logo: "/fosshack/Maxflex.webp", url: "" },
 ];
+
+function SponsorLogo({
+  sponsor,
+  delay,
+}: {
+  sponsor: (typeof sponsors)[number];
+  delay: number;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay, duration: 0.6 }}
+      className="relative h-[70px] w-full max-w-[200px]"
+    >
+      <Image
+        src={sponsor.logo}
+        fill
+        sizes="200px"
+        alt={sponsor.name}
+        className="object-contain"
+      />
+    </motion.div>
+  );
+}
 
 const communities = [
   { name: "PyDelhi", logo: "/fosshack/pydelhi_community_logo.webp" },
@@ -1084,29 +1110,24 @@ export default function Home() {
             transition={{ delay: 0.1, duration: 0.8 }}
           >
             {sponsors.map((sponsor, index) => (
-              <Link
+              <div
                 key={index}
-                href={sponsor.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`Visit ${sponsor.name}`}
                 className="rounded-2xl border border-foreground/10 bg-white p-4 flex items-center justify-center min-h-[90px] w-[calc(50%-12px)] md:w-[calc(25%-18px)]"
               >
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 * index, duration: 0.6 }}
-                  className="relative h-[70px] w-full max-w-[200px]"
-                >
-                  <Image
-                    src={sponsor.logo}
-                    fill
-                    sizes="200px"
-                    alt={sponsor.name}
-                    className="object-contain"
-                  />
-                </motion.div>
-              </Link>
+                {sponsor.url ? (
+                  <Link
+                    href={sponsor.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Visit ${sponsor.name}`}
+                    className="contents"
+                  >
+                    <SponsorLogo sponsor={sponsor} delay={0.1 * index} />
+                  </Link>
+                ) : (
+                  <SponsorLogo sponsor={sponsor} delay={0.1 * index} />
+                )}
+              </div>
             ))}
           </motion.div>
 
