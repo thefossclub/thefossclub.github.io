@@ -538,7 +538,7 @@ export default function Home() {
             transition={{ duration: 1, ease: [0.6, -0.05, 0.01, 0.99] }}
           >
             <motion.h1
-              className="text-5xl sm:text-8xl font-bold text-foreground"
+              className="text-4xl sm:text-8xl font-bold text-foreground"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.2, ease: [0.6, -0.05, 0.01, 0.99] }}
@@ -554,7 +554,7 @@ export default function Home() {
               That&apos;s a Wrap!
             </motion.p>
             <motion.div
-              className="flex flex-col sm:flex-row items-center justify-center gap-6 text-xl text-foreground/60"
+              className="flex flex-col sm:flex-row items-center justify-center gap-6 text-base sm:text-xl text-foreground/60"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 1 }}
@@ -570,7 +570,7 @@ export default function Home() {
               </div>
             </motion.div>
             <motion.p
-              className="max-w-3xl mx-auto text-2xl leading-relaxed text-foreground/70"
+              className="max-w-3xl mx-auto text-lg sm:text-2xl leading-relaxed text-foreground/70"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 1 }}
