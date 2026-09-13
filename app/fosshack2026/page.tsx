@@ -9,6 +9,7 @@ import {
   ArrowLeft,
   ArrowUp,
   ArrowRight,
+  ArrowDown,
   Calendar,
   Camera,
   Link2,
@@ -768,8 +769,8 @@ export default function Home() {
                   onClick={() => setShowAllGallery(true)}
                   className="pointer-events-auto mb-10 flex items-center gap-2 rounded-full border border-foreground/30 px-8 py-3.5 text-base font-semibold text-white bg-black/40 backdrop-blur transition-colors duration-300 hover:border-foreground/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(var(--accent-light-green),0.6)]"
                 >
-                  Show More Photos
-                  <ArrowRight className="h-4 w-4 transition-transform duration-300" />
+                  Show More
+                  <ArrowDown className="h-4 w-4 transition-transform duration-300" />
                 </button>
               </motion.div>
             )}
@@ -783,7 +784,7 @@ export default function Home() {
                 className="mx-auto mt-10 flex items-center gap-2 rounded-full border border-foreground/30 px-8 py-3.5 text-base font-semibold text-foreground transition-colors duration-300 hover:border-foreground/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(var(--accent-light-green),0.6)]"
               >
                 Show Less
-                <ArrowRight className="h-4 w-4 rotate-90 transition-transform duration-300" />
+                <ArrowUp className="h-4 w-4 transition-transform duration-300" />
               </motion.button>
             )}
           </div>
