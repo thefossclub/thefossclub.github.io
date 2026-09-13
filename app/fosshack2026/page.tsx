@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useTheme } from "next-themes";
 import { motion, useMotionValue, useSpring, type MotionProps } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Link from "next/link";
@@ -482,21 +483,12 @@ const volunteers = [
 ]
 
 export default function Home() {
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const { theme, setTheme } = useTheme();
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [activeImage, setActiveImage] = useState<number | null>(null);
   const [showAllGallery, setShowAllGallery] = useState(false);
   const [winnersApi, setWinnersApi] = useState<CarouselApi>(null);
   const [activeWinner, setActiveWinner] = useState(0);
-
-  useEffect(() => {
-    const root = document.documentElement;
-    if (theme === "light") {
-      root.classList.add("theme-light");
-    } else {
-      root.classList.remove("theme-light");
-    }
-  }, [theme]);
 
   useEffect(() => {
     if (!winnersApi) return;
@@ -516,11 +508,11 @@ export default function Home() {
   });
 
   const toggleTheme = () =>
-    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+    setTheme(theme === "light" ? "dark" : "light");
 
   return (
     <div className="bg-background text-foreground text-lg relative overflow-hidden">
-      <Fosshack2026Navbar theme={theme} onToggleTheme={toggleTheme} />
+      <Fosshack2026Navbar theme={theme ?? "dark"} onToggleTheme={toggleTheme} />
 
       <Suspense fallback={<div>Loading...</div>}>
         <DynamicGeometricShapes />
