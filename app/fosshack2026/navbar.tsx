@@ -33,13 +33,11 @@ export default function Fosshack2026Navbar({
           className="group flex min-w-0 items-center gap-3"
           aria-label="Back to The FOSS Club homepage"
         >
-          <span className="flex flex-shrink-0 items-center justify-center rounded-full border border-foreground/15 bg-foreground/8 p-1">
-            <img
-              src="/LogoFOSS.webp"
-              alt="FC"
-              className="h-7 w-7 object-contain"
-            />
-          </span>
+          <img
+            src="/LogoFOSS.webp"
+            alt="FC"
+            className="h-7 w-7 object-contain"
+          />
           <span className="truncate text-base font-bold text-foreground">
             The FOSS Club
           </span>
