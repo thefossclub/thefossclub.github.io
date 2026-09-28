@@ -22,6 +22,13 @@ export type OCCCardItem = {
 
 const defaultOccCards: OCCCardItem[] = [
   {
+    id: "occ-7",
+    title: "Linux for Devs | Unmasking the OS",
+    date: "27 September, 2026",
+    speakers: "Suryansh Sharma, Ritesh Kumar Rana",
+    image: "/occ/occ-7.webp",
+  },
+  {
     id: "occ-3",
     title: "AI | AI Slop | ML | Linux | AI in Gamedev",
     date: "18 January, 2026",
