@@ -451,9 +451,9 @@ export default function Home() {
         </div>
         </section>
         
-        <section ref={sectionRefs.occ} id="occ" className="py-10 sm:py-16 md:py-20 relative overflow-hidden z-10 px-2 sm:px-4 lg:px-8">
+        <section ref={sectionRefs.occ} id="occ" className="py-6 sm:py-16 md:py-20 relative overflow-hidden z-10 px-2 sm:px-4 lg:px-8">
           <div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green">
+            <h2 className="text-2xl sm:text-4xl font-extrabold mb-6 sm:mb-10 md:mb-12 text-center text-gradient-green">
               Open Community Calls
             </h2>
                         
