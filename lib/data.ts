@@ -103,6 +103,13 @@ export const events = [
     image: "fosshack/FOSSHack2026.webp?height=300&width=400",
     link: "/fosshack2026",
   },
+  {
+    title: "The COMMIT Theory",
+    date: "September 19, 2026",
+    description:
+      "An introductory session where participants participated in an interactive discussion about Git, Github, OSM, Linux, AI and starting open-source contributions, making first repository and contributing to the community in a meaningful way",
+    image: "/the-commit-theory.webp",
+  },
 ];
 
 export const Mentors = [
