@@ -139,11 +139,10 @@ export default function Navbar({ activeSection }: NavbarProps) {
                 ))}
                 <li className="flex items-center space-x-4">
                   <Link
-                    href="/fosshack2026"
-                    target="_blank"
+                    href="/fosshack"
                     className="px-4 py-2 bg-gradient-green text-white rounded-full text-sm font-medium hover:opacity-90 transition-opacity btn-glow whitespace-nowrap"
                   >
-                    FOSSHack2026
+                    FOSS Hack Archive
                   </Link>
                   {/* <Link
                     href="/login"
@@ -260,12 +259,11 @@ export default function Navbar({ activeSection }: NavbarProps) {
                       transition={{ duration: 0.3, delay: 0.3 }}
                     >
                       <Link
-                        href="/fosshack2026"
-                        target="_blank"
+                        href="/fosshack"
                         className="px-6 py-2.5 bg-gradient-green text-white rounded-full text-base font-medium hover:opacity-90 transition-opacity inline-block"
                         onClick={toggleMenu}
                       >
-                        FOSSHack2026
+                        FOSS Hack Archive
                       </Link>
                     </m.div>
                     <m.div
