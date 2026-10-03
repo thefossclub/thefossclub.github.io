@@ -1,5 +1,4 @@
 import "./globals.css";
-import FosshackArchiveNavbar from "@/components/fosshack/archive-navbar";
 
 export const metadata = {
   title: "FOSS Hack Archive | The FOSS Club",
@@ -11,8 +10,5 @@ export default function FosshackLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <>
-    <FosshackArchiveNavbar />
-    {children}
-  </>;
+  return <>{children}</>;
 }

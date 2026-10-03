@@ -2,10 +2,12 @@ import Image from "next/image"
 import Link from "next/link"
 import { ArrowDownRight, ArrowRight, CalendarDays } from "lucide-react"
 import { fosshackEditions } from "@/lib/fosshack-data"
+import FosshackArchiveNavbar from "@/components/fosshack/archive-navbar"
 
 export default function FosshackArchivePage() {
   return (
     <main className="relative min-h-screen overflow-hidden px-5 pb-20 pt-32 text-foreground sm:px-8">
+      <FosshackArchiveNavbar />
       <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[680px] bg-[radial-gradient(ellipse_at_50%_0%,rgba(var(--accent-light-green),0.15),transparent_65%)]" />
       <section className="mx-auto max-w-6xl">
         <div className="max-w-4xl">
