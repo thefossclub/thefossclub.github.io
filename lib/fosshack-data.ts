@@ -10,7 +10,31 @@ export interface FosshackEdition {
   timeline?: { date: string; title: string }[]
   localhosts?: { name: string; venue: string; url?: string }[]
   links?: { label: string; url: string }[]
+  gallery?: {
+    title: string
+    description: string
+    photos: { src: string; alt: string; caption: string; sourceUrl?: string }[]
+  }
 }
+
+const fosshack2026GalleryPhotos = [
+  { src: "/fosshack2026/register.webp", alt: "Registrations", caption: "Registrations" },
+  { src: "/fosshack2026/register2.webp", alt: "Photo Booth", caption: "Photo Booth" },
+  { src: "/fosshack2026/register3.webp", alt: "Photo Booth", caption: "Photo Booth" },
+  { src: "/fosshack2026/register4.webp", alt: "Registrations", caption: "Registrations" },
+  { src: "/fosshack2026/cake.webp", alt: "Event photograph", caption: "Event photograph" },
+  { src: "/fosshack2026/lab2.webp", alt: "Event photograph", caption: "Event photograph" },
+  { src: "/fosshack2026/lab3.webp", alt: "Event photograph", caption: "Event photograph" },
+  { src: "/fosshack2026/lab4.webp", alt: "Event photograph", caption: "Event photograph" },
+  { src: "/fosshack2026/scribble.webp", alt: "Event photograph", caption: "Event photograph" },
+  { src: "/fosshack2026/cake2.webp", alt: "Cake Cutting and Celebration", caption: "Cake Cutting and Celebration" },
+  { src: "/fosshack2026/jamming2.webp", alt: "Jamming session", caption: "Jamming session" },
+  { src: "/fosshack2026/jamming3.webp", alt: "Jamming session", caption: "Jamming session" },
+  { src: "/fosshack2026/food.webp", alt: "Food and breaks", caption: "Food and breaks" },
+  { src: "/fosshack2026/food2.webp", alt: "Food and refreshments", caption: "Food and refreshments" },
+  { src: "/fosshack2026/icards.webp", alt: "Event ID cards", caption: "Event ID cards" },
+  { src: "/fosshack2026/jamming.webp", alt: "Jamming session", caption: "Jamming session" },
+]
 
 export const fosshackEditions: FosshackEdition[] = [
   {
@@ -39,6 +63,11 @@ export const fosshackEditions: FosshackEdition[] = [
         url: "https://forum.fossunited.org/t/foss-hack-localhost-dtc-greater-noida/3258",
       },
     ],
+    gallery: {
+      title: "FOSS Hack 2024 gallery",
+      description: "Using FOSS Hack 2026 archive photos until photos from the 2024 edition are added.",
+      photos: fosshack2026GalleryPhotos,
+    },
     links: [
       { label: "Official event page", url: "https://fossunited.org/fosshack/2024" },
       { label: "Project submissions", url: "https://fossunited.org/hack/fosshack24/projects/all" },
@@ -74,6 +103,11 @@ export const fosshackEditions: FosshackEdition[] = [
         url: "https://fossunited.org/hack/fosshack25/host/delhi",
       },
     ],
+    gallery: {
+      title: "FOSS Hack 2025 gallery",
+      description: "Using FOSS Hack 2026 archive photos until photos from the 2025 edition are added.",
+      photos: fosshack2026GalleryPhotos,
+    },
     links: [
       { label: "Official event page", url: "https://fossunited.org/fosshack/2025" },
       { label: "Hackathon home", url: "https://fossunited.org/hack/fosshack25" },

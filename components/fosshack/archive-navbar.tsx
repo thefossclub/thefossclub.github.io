@@ -7,6 +7,13 @@ import { Menu, Moon, Sun, X } from "lucide-react"
 import { useTheme } from "next-themes"
 
 const editions = [2024, 2025, 2026]
+const editionSections = [
+  { label: "Overview", href: "#overview" },
+  { label: "Timeline", href: "#timeline" },
+  { label: "Gallery", href: "#gallery" },
+  { label: "Localhost", href: "#localhost" },
+  { label: "Links", href: "#links" },
+]
 
 export default function FosshackArchiveNavbar() {
   const [open, setOpen] = useState(false)
@@ -17,6 +24,7 @@ export default function FosshackArchiveNavbar() {
   useEffect(() => setMounted(true), [])
 
   const activeYear = pathname.match(/^\/fosshack\/(2024|2025|2026)\/?$/)?.[1]
+  const onEditionPage = Boolean(activeYear)
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5">
@@ -28,6 +36,16 @@ export default function FosshackArchiveNavbar() {
           <Link href="/" className="truncate text-xs font-bold text-foreground sm:text-sm">The FOSS Club</Link>
           <Link href="/fosshack" className="hidden truncate border-l border-foreground/15 pl-3 text-sm font-semibold text-foreground sm:block">FOSS Hack</Link>
         </div>
+
+        {onEditionPage && (
+          <div className="hidden items-center gap-3 lg:flex">
+            {editionSections.map((section) => (
+              <Link key={section.href} href={section.href} className="text-xs font-medium text-foreground/60 transition hover:text-accent-light-green xl:text-sm">
+                {section.label}
+              </Link>
+            ))}
+          </div>
+        )}
 
         <div className="flex min-w-0 items-center gap-1 sm:gap-2">
           <Link href="/fosshack" className={`hidden rounded-full px-3 py-2 text-sm font-medium transition sm:block ${!activeYear ? "bg-accent-light-green/15 text-accent-light-green" : "text-foreground/65 hover:text-foreground"}`}>
@@ -58,16 +76,22 @@ export default function FosshackArchiveNavbar() {
             onClick={() => setOpen((value) => !value)}
             aria-label={open ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={open}
-            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-foreground/70 transition hover:bg-foreground/8 hover:text-foreground sm:hidden"
+            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-foreground/70 transition hover:bg-foreground/8 hover:text-foreground lg:hidden"
           >
             {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
           </button>
         </div>
       </nav>
       {open && (
-        <div className="mx-auto mt-2 max-w-6xl rounded-2xl border border-foreground/10 bg-background/95 p-3 shadow-xl backdrop-blur-xl sm:hidden">
+        <div className="mx-auto mt-2 max-w-6xl rounded-2xl border border-foreground/10 bg-background/95 p-3 shadow-xl backdrop-blur-xl lg:hidden">
           <Link href="/" onClick={() => setOpen(false)} className="block rounded-xl px-4 py-3 text-sm font-medium text-foreground/75 hover:bg-foreground/8">The FOSS Club home</Link>
           <Link href="/fosshack" onClick={() => setOpen(false)} className="block rounded-xl px-4 py-3 text-sm font-medium text-foreground/75 hover:bg-foreground/8">FOSS Hack archive</Link>
+          {onEditionPage && editionSections.map((section) => (
+            <Link key={section.href} href={section.href} onClick={() => setOpen(false)} className="block rounded-xl px-4 py-3 text-sm font-medium text-foreground/75 hover:bg-foreground/8 hover:text-accent-light-green">
+              {section.label}
+            </Link>
+          ))}
+          {onEditionPage && <div className="my-2 border-t border-foreground/10" />}
           {editions.map((year) => (
             <Link key={year} href={`/fosshack/${year}`} onClick={() => setOpen(false)} className={`block rounded-xl px-4 py-3 text-sm font-medium ${activeYear === String(year) ? "text-accent-light-green" : "text-foreground/75 hover:bg-foreground/8"}`}>
               FOSS Hack {year}
