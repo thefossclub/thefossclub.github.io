@@ -88,6 +88,7 @@ export default async function FosshackYearPage({
                   alt={`FOSS Hack ${edition.year}`}
                   fill
                   priority
+                  fetchPriority="high"
                   sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover"
                 />
