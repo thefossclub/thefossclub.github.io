@@ -16,7 +16,7 @@ export default function FosshackArchiveNavbar() {
 
   useEffect(() => setMounted(true), [])
 
-  const activeYear = pathname.match(/^\/fosshack\/(2024|2025|2026)$/)?.[1]
+  const activeYear = pathname.match(/^\/fosshack\/(2024|2025|2026)\/?$/)?.[1]
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5">
