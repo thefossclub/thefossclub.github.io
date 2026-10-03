@@ -68,7 +68,7 @@ export default async function FosshackYearPage({
                   <div className="flex items-center gap-3 rounded-2xl border border-accent-light-green/20 bg-accent-light-green/8 px-4 py-2.5 sm:px-5 sm:py-3.5">
                     <Trophy className="h-5 w-5 text-accent-light-green" />
                     <div>
-                      <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-foreground/45">Prize pool</p>
+                      <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-foreground/55">Prize pool</p>
                       <p className="font-bold text-foreground">{edition.prizePool}</p>
                     </div>
                   </div>
@@ -102,7 +102,7 @@ export default async function FosshackYearPage({
                   <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent-light-green">The numbers</p>
                   <h2 className="mt-2 text-3xl font-bold sm:text-4xl">Event at a glance</h2>
                 </div>
-                <span className="hidden text-sm text-foreground/40 sm:block">FOSS Hack {edition.year}</span>
+                <span className="hidden text-sm text-foreground/55 sm:block">FOSS Hack {edition.year}</span>
               </div>
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                 {edition.stats.map((stat, index) => {
@@ -205,7 +205,7 @@ export default async function FosshackYearPage({
             </section>
           )}
 
-          <footer className="mt-20 flex flex-col justify-between gap-4 border-t border-foreground/10 pt-6 text-sm text-foreground/45 sm:flex-row sm:items-center">
+          <footer className="mt-20 flex flex-col justify-between gap-4 border-t border-foreground/10 pt-6 text-sm text-foreground/55 sm:flex-row sm:items-center">
             <span>FOSS Hack {edition.year} - The FOSS Club archive</span>
             <Link href="/fosshack" className="inline-flex items-center gap-2 font-medium hover:text-foreground">
               Back to all editions <ArrowRight className="h-4 w-4" />

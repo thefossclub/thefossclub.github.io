@@ -73,7 +73,7 @@ export default function FosshackArchivePage() {
           ))}
         </div>
       </section>
-      <footer className="mx-auto mt-20 max-w-6xl border-t border-foreground/10 pt-6 text-sm text-foreground/45">
+      <footer className="mx-auto mt-20 max-w-6xl border-t border-foreground/10 pt-6 text-sm text-foreground/55">
         <div className="flex flex-col justify-between gap-3 sm:flex-row">
           <span>FOSS Hack archive by The FOSS Club</span>
           <Link href="/" className="hover:text-foreground">The FOSS Club home</Link>
