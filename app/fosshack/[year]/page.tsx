@@ -12,7 +12,7 @@ import {
 } from "lucide-react"
 import FosshackArchiveNavbar from "@/components/fosshack/archive-navbar"
 import EditionGallery from "@/components/fosshack/edition-gallery"
-import Fosshack2026Recap from "@/app/fosshack2026/page"
+import Fosshack2026RecapLazy from "@/components/fosshack/fosshack-2026-recap-lazy"
 import { fosshackEditions, getFosshackEdition } from "@/lib/fosshack-data"
 
 export function generateStaticParams() {
@@ -30,7 +30,7 @@ export default async function FosshackYearPage({
   const edition = getFosshackEdition(Number(year))
 
   if (!edition) notFound()
-  if (edition.year === 2026) return <Fosshack2026Recap />
+  if (edition.year === 2026) return <Fosshack2026RecapLazy />
 
   return (
     <>
