@@ -13,7 +13,7 @@ export default function FosshackArchivePage() {
         <div className="max-w-4xl">
           <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-foreground/10 bg-background/50 px-4 py-2 text-sm text-foreground/65 backdrop-blur">
             <span className="h-2 w-2 rounded-full bg-accent-light-green shadow-[0_0_12px_rgba(var(--accent-light-green),0.8)]" />
-            The FOSS Club event archive
+            The FOSS Hack Archive
           </p>
           <h1 className="text-6xl font-bold tracking-tight sm:text-8xl">
             FOSS Hack<span className="text-accent-light-green">.</span>
