@@ -101,7 +101,7 @@ export const events = [
     description:
       "A month-long hackathon focused on innovation and open-source development in India's biggest FOSS hackathon. Build a new project, contribute to existing work, learn from mentors, and connect with the community.",
     image: "fosshack/FOSSHack2026.webp?height=300&width=400",
-    link: "/fosshack2026",
+    link: "/fosshack",
   },
   {
     title: "The COMMIT Theory",
