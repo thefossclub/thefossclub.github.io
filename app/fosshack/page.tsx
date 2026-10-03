@@ -9,11 +9,11 @@ export default function FosshackArchivePage() {
     <main className="relative min-h-screen overflow-hidden px-5 pb-20 pt-32 text-foreground sm:px-8">
       <FosshackArchiveNavbar />
       <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[680px] bg-[radial-gradient(ellipse_at_50%_0%,rgba(var(--accent-light-green),0.15),transparent_65%)]" />
-      <section className="mx-auto flex min-h-[calc(100svh-8rem)] max-w-6xl items-center">
+      <section className="mx-auto flex min-h-[calc(100svh-8rem)] max-w-6xl -translate-y-16 items-center">
         <div className="max-w-4xl">
           <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-foreground/10 bg-background/50 px-4 py-2 text-sm text-foreground/65 backdrop-blur">
             <span className="h-2 w-2 rounded-full bg-accent-light-green shadow-[0_0_12px_rgba(var(--accent-light-green),0.8)]" />
-            The FOSS Hack Archive
+            FOSS Hack Archive
           </p>
           <h1 className="text-6xl font-bold tracking-tight sm:text-8xl">
             FOSS Hack<span className="text-accent-light-green">.</span>
