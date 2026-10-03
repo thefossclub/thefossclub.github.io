@@ -1,9 +1,16 @@
 import type React from "react"
 import "./globals.css"
 import type { Metadata } from "next"
+import { Inter } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
 import SmoothScroll from "@/components/smooth-scroll"
 import InteractiveBackground from "@/components/ui/interactivebackground";
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+})
 
 export const metadata: Metadata = {
   title: "The FOSS Club",
@@ -18,7 +25,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className="dark"
+      className={`${inter.variable} dark`}
       style={{ colorScheme: "dark" }}
       suppressHydrationWarning
       data-scroll-behavior="smooth"

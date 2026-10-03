@@ -1,10 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
-
 /* Tailwind v4 entrypoint */
 @import "tailwindcss";
 
 /* Tailwind v4 theme configuration */
 @theme {
+  /* Self-hosted Inter variable font (next/font) */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
   /* Custom semantic colors */
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
@@ -125,7 +126,7 @@
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
     font-feature-settings: "rlig" 1, "calt" 1;
     overflow-x: hidden;
   }
