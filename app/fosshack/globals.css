@@ -6,7 +6,6 @@
     --color-muted: rgb(140 140 160);
     --color-accent-green: rgb(64 255 140);
     --color-accent-light-green: rgb(74 222 128);
-    --color-accent-cyan: rgb(0 255 255);
     --color-accent-purple: rgb(180 100 255);
     --color-accent-pink: rgb(255 80 200);
 }
@@ -17,7 +16,6 @@
     --muted: 140 140 160;
     --accent-green: 64 255 140;
     --accent-light-green: 74 222 128;
-    --accent-cyan: 0 255 255;
     --accent-purple: 180 100 255;
     --accent-pink: 255 80 200;
     --card-rgb: 20 20 30;
@@ -42,46 +40,14 @@ html.light {
 html.theme-light body,
 html.light body {
     background-color: rgb(var(--background)) !important;
-    background-image:
-        radial-gradient(
-            1200px 600px at 10% 10%,
-            rgba(var(--accent-purple), 0.1),
-            transparent 60%
-        ),
-        radial-gradient(
-            900px 500px at 90% 25%,
-            rgba(var(--accent-cyan), 0.08),
-            transparent 55%
-        ),
-        radial-gradient(
-            800px 450px at 50% 100%,
-            rgba(var(--accent-green), 0.06),
-            transparent 55%
-        ),
-        linear-gradient(180deg, rgba(0, 0, 0, 0.03), transparent 40%) !important;
+    background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.03), transparent 40%) !important;
     color: rgb(var(--foreground)) !important;
 }
 
 body {
     color: rgb(var(--foreground));
     background-color: rgb(var(--background));
-    background-image:
-        radial-gradient(
-            1200px 600px at 10% 10%,
-            rgba(var(--accent-purple), 0.15),
-            transparent 60%
-        ),
-        radial-gradient(
-            900px 500px at 90% 25%,
-            rgba(var(--accent-cyan), 0.1),
-            transparent 55%
-        ),
-        radial-gradient(
-            800px 450px at 50% 100%,
-            rgba(var(--accent-green), 0.08),
-            transparent 55%
-        ),
-        linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 40%);
+    background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 40%);
     overflow-x: hidden;
     letter-spacing: -0.02em;
 }
@@ -161,5 +127,11 @@ html.light ::-webkit-scrollbar-thumb:hover {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
+    }
+}
+
+@media (max-width: 360px) {
+    .archive-brand-name {
+        display: none;
     }
 }

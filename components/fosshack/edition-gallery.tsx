@@ -103,7 +103,7 @@ export default function EditionGallery({
       <div className="mb-8 flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
         <div>
           <p className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-accent-light-green">
-            <Camera className="h-4 w-4" /> FOSS Hack {year} photos
+            <Camera className="h-4 w-4" /> FOSSHACK {year} photos
           </p>
           <h2 className="text-3xl font-bold sm:text-5xl">Photo gallery</h2>
           <p className="mt-3 max-w-2xl text-base leading-relaxed text-foreground/60 sm:text-lg">

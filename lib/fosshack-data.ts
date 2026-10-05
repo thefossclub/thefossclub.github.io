@@ -8,13 +8,15 @@ export interface FosshackEdition {
   prizePool?: string
   stats?: { label: string; value: string }[]
   timeline?: { date: string; title: string }[]
-  localhosts?: { name: string; venue: string; url?: string }[]
+  localhosts?: { name: string; venue: string; url?: string; mapUrl?: string }[]
   links?: { label: string; url: string }[]
   gallery?: {
     title: string
     description: string
     photos: { src: string; alt: string; caption: string; sourceUrl?: string }[]
   }
+  team?: { name: string; role: string }[]
+  sponsors?: { name: string; tier: string; logo?: string }[]
 }
 
 const fosshack2026GalleryPhotos = [
@@ -56,15 +58,8 @@ export const fosshackEditions: FosshackEdition[] = [
       { date: "28 July, 8:00 PM", title: "Hackathon ends" },
       { date: "4 weeks later", title: "Results announced" },
     ],
-    localhosts: [
-      {
-        name: "Delhi-NCR",
-        venue: "Delhi Technical Campus",
-        url: "https://forum.fossunited.org/t/foss-hack-localhost-dtc-greater-noida/3258",
-      },
-    ],
     gallery: {
-      title: "FOSS Hack 2024 gallery",
+      title: "FOSSHACK 2024 gallery",
       description: "Using FOSS Hack 2026 archive photos until photos from the 2024 edition are added.",
       photos: fosshack2026GalleryPhotos,
     },
@@ -96,18 +91,28 @@ export const fosshackEditions: FosshackEdition[] = [
       { date: "22-23 February 2025", title: "Hackathon days" },
       { date: "20 March 2025", title: "Results announced" },
     ],
-    localhosts: [
-      {
-        name: "Delhi-NCR",
-        venue: "Delhi Technical Campus",
-        url: "https://fossunited.org/hack/fosshack25/host/delhi",
-      },
-    ],
     gallery: {
-      title: "FOSS Hack 2025 gallery",
-      description: "Using FOSS Hack 2026 archive photos until photos from the 2025 edition are added.",
-      photos: fosshack2026GalleryPhotos,
+      title: "FOSSHACK 2025 gallery",
+      description: "Delhi Technical Campus, venue for FOSSHACK 2025.",
+      photos: [
+        { src: "/dtc-optimized.webp", alt: "Delhi Technical Campus", caption: "Delhi Technical Campus venue" },
+      ],
     },
+    sponsors: [{ name: "The Linux Foundation", tier: "Gold", logo: "/fosshack/linux-foundation.png" }],
+    team: [
+      { name: "Vaibhav", role: "Lead Organizer, Graphics Head, Logistics Work" },
+      { name: "Ashwany", role: "Media Head" },
+      { name: "Vanya", role: "Social Media Head" },
+      { name: "Nishchal", role: "Decoration Head, Mess Handling" },
+      { name: "Sachin", role: "Community Partners Head" },
+      { name: "Riyansh", role: "Campus Ambassador Head" },
+      { name: "Sanjam", role: "Content Writing" },
+      { name: "Diti", role: "Auditorium Work" },
+      { name: "Suryansh", role: "Event Handling" },
+      { name: "Satyam", role: "Tasks Master" },
+      { name: "Shresth", role: "Discipline" },
+      { name: "Jayesh", role: "Registration Desk" },
+    ],
     links: [
       { label: "Official event page", url: "https://fossunited.org/fosshack/2025" },
       { label: "Hackathon home", url: "https://fossunited.org/hack/fosshack25" },
