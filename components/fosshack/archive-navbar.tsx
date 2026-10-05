@@ -24,7 +24,7 @@ const edition2026Sections = [
   { label: "Team", href: "#team" },
 ]
 
-export default function FosshackArchiveNavbar() {
+export default function FosshackArchiveNavbar({ sections: sectionOverride }: { sections?: { label: string; href: string }[] } = {}) {
   const [open, setOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
   const pathname = usePathname()
@@ -36,14 +36,14 @@ export default function FosshackArchiveNavbar() {
     ? "2026"
     : pathname.match(/^\/fosshack\/(2024|2025|2026)\/?$/)?.[1]
   const onEditionPage = Boolean(activeYear)
-  const sections = activeYear === "2026" ? edition2026Sections : editionSections
+  const sections = sectionOverride ?? (activeYear === "2026" ? edition2026Sections : editionSections)
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5">
       <nav className="mx-auto flex max-w-6xl items-center justify-between gap-2 rounded-2xl border border-foreground/10 bg-background/80 px-2 py-2.5 shadow-lg shadow-black/5 backdrop-blur-xl sm:gap-3 sm:rounded-full sm:px-5">
         <div className="flex min-w-0 items-center gap-2 sm:gap-3">
           <Link href="/" aria-label="The FOSS Club home" className="flex h-7 w-7 shrink-0 items-center justify-center bg-white sm:h-8 sm:w-8">
-            <img src="/LogoFOSS.webp" alt="" className="h-7 w-7 object-contain sm:h-8 sm:w-8" />
+            <img src="/LogoFOSS-small.webp" alt="" width={32} height={32} className="h-7 w-7 object-contain sm:h-8 sm:w-8" />
           </Link>
           <Link href="/" className="archive-brand-name truncate text-xs font-bold text-foreground sm:text-sm">The FOSS Club</Link>
           <Link href="/fosshack" className="hidden truncate border-l border-foreground/15 pl-3 text-sm font-semibold text-foreground sm:block">FOSSHACK</Link>

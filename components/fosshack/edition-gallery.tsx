@@ -97,7 +97,6 @@ export default function EditionGallery({
 
   return (
     <section
-      id="gallery"
       className="scroll-mt-28"
     >
       <div className="mb-8 flex flex-col justify-between gap-5 sm:flex-row sm:items-end">

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 
 interface ShapeProps {
@@ -8,8 +8,10 @@ interface ShapeProps {
   size: number;
   initialX: number;
   initialY: number;
+  width: number | undefined;
   scrollMultiplier?: number;
   blur?: boolean;
+  scrollYProgress: MotionValue<number>;
 }
 
 function useWindowSize() {
@@ -45,11 +47,10 @@ const Shape = ({
   initialY,
   scrollMultiplier = 1,
   blur = false,
+  width,
+  scrollYProgress,
 }: ShapeProps) => {
   const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    offset: ["start start", "end end"],
-  });
 
   const y = useTransform(scrollYProgress, [0, 1], [0, 300 * scrollMultiplier]);
   const x = useTransform(scrollYProgress, [0, 1], [0, 150 * scrollMultiplier]);
@@ -59,8 +60,8 @@ const Shape = ({
     [0, 180 * scrollMultiplier],
   );
 
-  const { width } = useWindowSize();
   const responsiveSize = width ? (width / 1920) * size : size;
+  const showBlur = blur && (width ?? 1920) >= 768;
 
   return (
     <motion.div
@@ -78,12 +79,12 @@ const Shape = ({
       transition={{ duration: 1.5 }}
     >
       <div
-        className={`${color} ${blur ? "backdrop-blur-md" : ""}`}
+        className={`${color} ${showBlur ? "backdrop-blur-md" : ""}`}
         style={{
           width: responsiveSize,
           height: responsiveSize,
           boxShadow: "0 6px 20px rgba(0, 0, 0, 0.08)",
-          filter: blur ? "blur(6px)" : "none",
+          filter: showBlur ? "blur(6px)" : "none",
         }}
       />
     </motion.div>
@@ -92,8 +93,19 @@ const Shape = ({
 
 export const GeometricShapes = () => {
   const [isMounted, setIsMounted] = useState(false);
+  const { width } = useWindowSize();
+  const { scrollYProgress } = useScroll({
+    offset: ["start start", "end end"],
+  });
 
   useEffect(() => {
+    if (typeof window.requestIdleCallback === "function") {
+      const handle = window.requestIdleCallback(() => setIsMounted(true), {
+        timeout: 2000,
+      });
+      return () => window.cancelIdleCallback(handle);
+    }
+
     setIsMounted(true);
   }, []);
 
@@ -104,6 +116,8 @@ export const GeometricShapes = () => {
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden">
       <Shape
+        width={width}
+        scrollYProgress={scrollYProgress}
         color="bg-[#4AE54A]/55"
         size={80}
         initialX={10}
@@ -112,6 +126,8 @@ export const GeometricShapes = () => {
         blur
       />
       <Shape
+        width={width}
+        scrollYProgress={scrollYProgress}
         color="bg-[#3B82F6]/55"
         size={60}
         initialX={85}
@@ -119,6 +135,8 @@ export const GeometricShapes = () => {
         scrollMultiplier={-0.8}
       />
       <Shape
+        width={width}
+        scrollYProgress={scrollYProgress}
         color="bg-[#4AE54A]/55"
         size={70}
         initialX={75}
@@ -127,6 +145,8 @@ export const GeometricShapes = () => {
         blur
       />
       <Shape
+        width={width}
+        scrollYProgress={scrollYProgress}
         color="bg-[#3B82F6]/55"
         size={65}
         initialX={15}
@@ -134,6 +154,8 @@ export const GeometricShapes = () => {
         scrollMultiplier={-1.2}
       />
       <Shape
+        width={width}
+        scrollYProgress={scrollYProgress}
         color="bg-[#4AE54A]/55"
         size={55}
         initialX={45}
@@ -142,6 +164,8 @@ export const GeometricShapes = () => {
         blur
       />
       <Shape
+        width={width}
+        scrollYProgress={scrollYProgress}
         color="bg-[#3B82F6]/55"
         size={75}
         initialX={65}
@@ -149,6 +173,8 @@ export const GeometricShapes = () => {
         scrollMultiplier={-1}
       />
       <Shape
+        width={width}
+        scrollYProgress={scrollYProgress}
         color="bg-[#4AE54A]/55"
         size={45}
         initialX={25}
@@ -156,6 +182,8 @@ export const GeometricShapes = () => {
         scrollMultiplier={-0.7}
       />
       <Shape
+        width={width}
+        scrollYProgress={scrollYProgress}
         color="bg-[#3B82F6]/55"
         size={50}
         initialX={92}

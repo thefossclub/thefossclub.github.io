@@ -5,6 +5,7 @@ export interface FosshackEdition {
   mode: string
   description: string
   image: string
+  mobileImage?: string
   prizePool?: string
   stats?: { label: string; value: string }[]
   timeline?: { date: string; title: string }[]
@@ -47,6 +48,7 @@ export const fosshackEditions: FosshackEdition[] = [
     description:
       "A hybrid hackathon bringing students and professionals together to build or extend free and open source software.",
     image: "/Hack24.webp",
+    mobileImage: "/Hack24-mobile.webp",
     prizePool: "Up to ₹10 lakh",
     stats: [
       { label: "Participants", value: "3,585" },
@@ -65,9 +67,9 @@ export const fosshackEditions: FosshackEdition[] = [
     },
     links: [
       { label: "Official event page", url: "https://fossunited.org/fosshack/2024" },
+      { label: "Rules", url: "https://fossunited.org/fosshack/rules" },
       { label: "Project submissions", url: "https://fossunited.org/hack/fosshack24/projects/all" },
       { label: "Results announcement", url: "https://forum.fossunited.org/t/foss-hack-2024-results/3964" },
-      { label: "Rules", url: "https://fossunited.org/fosshack/rules" },
     ],
   },
   {
@@ -78,6 +80,7 @@ export const fosshackEditions: FosshackEdition[] = [
     description:
       "A nationwide hybrid hackathon for students and professionals building or extending free and open source software.",
     image: "/Hack25.webp",
+    mobileImage: "/Hack25-mobile.webp",
     prizePool: "₹5,00,000",
     stats: [
       { label: "Participants", value: "5,394" },
@@ -95,7 +98,7 @@ export const fosshackEditions: FosshackEdition[] = [
       title: "FOSSHACK 2025 gallery",
       description: "Delhi Technical Campus, venue for FOSSHACK 2025.",
       photos: [
-        { src: "/dtc-optimized.webp", alt: "Delhi Technical Campus", caption: "Delhi Technical Campus venue" },
+        { src: "/dtc-mobile.webp", alt: "Delhi Technical Campus", caption: "Delhi Technical Campus venue" },
       ],
     },
     sponsors: [{ name: "The Linux Foundation", tier: "Gold", logo: "/fosshack/linux-foundation.png" }],
@@ -116,9 +119,9 @@ export const fosshackEditions: FosshackEdition[] = [
     links: [
       { label: "Official event page", url: "https://fossunited.org/fosshack/2025" },
       { label: "Hackathon home", url: "https://fossunited.org/hack/fosshack25" },
+      { label: "Rules", url: "https://fossunited.org/fosshack/rules" },
       { label: "Project submissions", url: "https://fossunited.org/hack/fosshack25/projects/all" },
       { label: "Results announcement", url: "https://forum.fossunited.org/t/foss-hack-2025-results/5541" },
-      { label: "Rules", url: "https://fossunited.org/fosshack/rules" },
     ],
   },
   {

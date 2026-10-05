@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useTheme } from "next-themes";
 import { motion, useMotionValue, useSpring, type MotionProps } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Link from "next/link";
@@ -37,7 +36,7 @@ import {
   CarouselItem,
   type CarouselApi,
 } from "@/components/ui/carousel";
-import Fosshack2026Navbar from "./navbar";
+import FosshackArchiveNavbar from "@/components/fosshack/archive-navbar";
 
 const DynamicGeometricShapes = dynamic(
   () =>
@@ -510,7 +509,6 @@ const volunteers = [
 ]
 
 export default function Home() {
-  const { theme, setTheme } = useTheme();
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [activeImage, setActiveImage] = useState<number | null>(null);
   const [showAllGallery, setShowAllGallery] = useState(false);
@@ -534,12 +532,9 @@ export default function Home() {
     setShowScrollTop(lenis.scroll > 400);
   });
 
-  const toggleTheme = () =>
-    setTheme(theme === "light" ? "dark" : "light");
-
   return (
     <div className="bg-background text-foreground text-lg relative overflow-hidden">
-      <Fosshack2026Navbar theme={theme ?? "dark"} onToggleTheme={toggleTheme} />
+      <FosshackArchiveNavbar />
 
       <Suspense fallback={<div>Loading...</div>}>
         <DynamicGeometricShapes />
