@@ -18,7 +18,37 @@ export interface FosshackEdition {
   }
   team?: { name: string; role: string }[]
   sponsors?: { name: string; tier: string; logo?: string }[]
+  socialPosts?: { image: string; caption: string; url: string; platform: string }[]
 }
+
+const fosshack2024GalleryPhotos = [
+  { src: "/fosshack2024/gallery1.webp", alt: "Event photograph", caption: "Event photograph" },
+  { src: "/fosshack2024/gallery2.webp", alt: "Event photograph", caption: "Event photograph" },
+  { src: "/fosshack2024/gallery3.webp", alt: "Event photograph", caption: "Event photograph" },
+  { src: "/fosshack2024/gallery4.webp", alt: "Event photograph", caption: "Event photograph" },
+  { src: "/fosshack2024/gallery5.webp", alt: "Event photograph", caption: "Event photograph" },
+  { src: "/fosshack2024/gallery6.webp", alt: "Event photograph", caption: "Event photograph" },
+]
+
+const fosshack2025GalleryPhotos = [
+  { src: "/fosshack2025/gallery1.webp", alt: "Event photograph", caption: "Event photograph" },
+  { src: "/fosshack2025/gallery2.webp", alt: "Event photograph", caption: "Event photograph" },
+  { src: "/fosshack2025/gallery3.webp", alt: "Event photograph", caption: "Event photograph" },
+  { src: "/fosshack2025/gallery4.webp", alt: "Event photograph", caption: "Event photograph" },
+  { src: "/fosshack2025/gallery5.webp", alt: "Event photograph", caption: "Event photograph" },
+  { src: "/fosshack2025/gallery6.webp", alt: "Event photograph", caption: "Event photograph" },
+  { src: "/fosshack2025/gallery7.webp", alt: "Event photograph", caption: "Event photograph" },
+  { src: "/fosshack2025/gallery8.webp", alt: "Event photograph", caption: "Event photograph" },
+  { src: "/fosshack2025/gallery9.webp", alt: "Event photograph", caption: "Event photograph" },
+  { src: "/fosshack2025/gallery10.webp", alt: "Event photograph", caption: "Event photograph" },
+  { src: "/fosshack2025/gallery11.webp", alt: "Event photograph", caption: "Event photograph" },
+  { src: "/fosshack2025/gallery12.webp", alt: "Event photograph", caption: "Event photograph" },
+  { src: "/fosshack2025/gallery13.webp", alt: "Event photograph", caption: "Event photograph" },
+  { src: "/fosshack2025/gallery14.webp", alt: "Event photograph", caption: "Event photograph" },
+  { src: "/fosshack2025/gallery15.webp", alt: "Event photograph", caption: "Event photograph" },
+  { src: "/fosshack2025/gallery16.webp", alt: "Event photograph", caption: "Event photograph" },
+  { src: "/fosshack2025/gallery17.webp", alt: "Event photograph", caption: "Event photograph" },
+]
 
 const fosshack2026GalleryPhotos = [
   { src: "/fosshack2026/register.webp", alt: "Registrations", caption: "Registrations" },
@@ -62,9 +92,14 @@ export const fosshackEditions: FosshackEdition[] = [
     ],
     gallery: {
       title: "FOSSHACK 2024 gallery",
-      description: "Using FOSS Hack 2026 archive photos until photos from the 2024 edition are added.",
-      photos: fosshack2026GalleryPhotos,
+      description: "Moments from the fourth edition of FOSS Hack.",
+      photos: fosshack2024GalleryPhotos,
     },
+    socialPosts: [
+      { image: "/fosshack2024/post1.webp", caption: "FOSS Hack 2024 was a tremendous success", url: "https://www.instagram.com/p/C-QMRf4Se6L/", platform: "Instagram" },
+      { image: "/fosshack2024/post2.webp", caption: "FOSS-HACK 2024 lands at DTC Greater Noida", url: "https://www.instagram.com/p/C8j5m0zy6qP/", platform: "Instagram" },
+      { image: "/fosshack2024/post3.webp", caption: "Hackers from across Delhi NCR gathered for a day of coding and collaboration", url: "https://www.instagram.com/p/C-QLedHSII-/", platform: "Instagram" },
+    ],
     links: [
       { label: "Official event page", url: "https://fossunited.org/fosshack/2024" },
       { label: "Rules", url: "https://fossunited.org/fosshack/rules" },
@@ -96,11 +131,14 @@ export const fosshackEditions: FosshackEdition[] = [
     ],
     gallery: {
       title: "FOSSHACK 2025 gallery",
-      description: "Delhi Technical Campus, venue for FOSSHACK 2025.",
-      photos: [
-        { src: "/dtc-mobile.webp", alt: "Delhi Technical Campus", caption: "Delhi Technical Campus venue" },
-      ],
+      description: "FOSSHACK 2025 at Delhi Technical Campus, Greater Noida.",
+      photos: fosshack2025GalleryPhotos,
     },
+    socialPosts: [
+      { image: "/fosshack2025/post1.webp", caption: "FOSS Hack 2025 venue and dates revealed", url: "https://www.instagram.com/p/DFmAEl5hjiL/", platform: "Instagram" },
+      { image: "/fosshack2025/post2.webp", caption: "FOSS Hack was more than just a hackathon", url: "https://www.instagram.com/p/DIB9QerBezj/?img_index=2", platform: "Instagram" },
+      { image: "/fosshack2025/post3.webp", caption: "Loading… Mission: Reach the Venue", url: "https://www.instagram.com/reel/DGPcXpnSncw/", platform: "Instagram" },
+    ],
     sponsors: [{ name: "The Linux Foundation", tier: "Gold", logo: "/fosshack/linux-foundation.png" }],
     team: [
       { name: "Vaibhav", role: "Lead Organizer, Graphics Head, Logistics Work" },
