@@ -4,7 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { motion, useMotionValue, useSpring, type MotionProps } from "framer-motion"
 import { useInView } from "react-intersection-observer"
-import { ArrowRight, ArrowUp, Calendar, Camera, ExternalLink, MapPin, Trophy, Users } from "lucide-react"
+import { ArrowRight, ArrowUp, Calendar, Camera, ExternalLink, Link2, MapPin, MessageCircle, Send, Trophy, Users } from "lucide-react"
 import { useLenis } from "lenis/react"
 import { useEffect, useState } from "react"
 import FosshackArchiveNavbar from "@/components/fosshack/archive-navbar"
@@ -86,6 +86,39 @@ function Deferred({ id, activeHash, children }: { id: string; activeHash: string
   return <div ref={ref} className="min-h-screen">{visible ? children : null}</div>
 }
 
+function InstagramIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className}>
+      <path d="M12 2.2c3.2 0 3.6 0 4.9.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.9.1-3.2 0-3.6 0-4.8-.1-3.3-.1-4.8-1.7-4.9-4.9-.1-1.3-.1-1.6-.1-4.8s0-3.6.1-4.8C2.4 4 4 2.4 7.2 2.3c1.2-.1 1.6-.1 4.8-.1zm0 2c-3.2 0-3.5 0-4.7.1-2.1.1-3 1-3.1 3.1-.1 1.2-.1 1.5-.1 4.6s0 3.5.1 4.6c.1 2.1 1 3 3.1 3.1 1.2.1 1.5.1 4.6.1s3.5 0 4.6-.1c2.1-.1 3-1 3.1-3.1.1-1.2.1-1.5.1-4.6s0-3.5-.1-4.6c-.1-2.1-1-3-3.1-3.1-1.1-.1-1.4-.1-4.5-.1zm0 3.4a5.4 5.4 0 1 1 0 10.8 5.4 5.4 0 0 1 0-10.8zm0 2a3.4 3.4 0 1 0 0 6.8 3.4 3.4 0 0 0 0-6.8zm5.6-3.5a1.3 1.3 0 1 1 0 2.5 1.3 1.3 0 0 1 0-2.5z" />
+    </svg>
+  )
+}
+
+function XIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className}>
+      <path d="M18.9 1.2h3.7l-8.1 9.2L24 22.8h-7.5l-5.8-7.6-6.7 7.6H.3l8.6-9.9L0 1.2h7.7l5.3 7 5.9-7zm-1.3 19.4h2L6.6 3.3H4.4l13.2 17.3z" />
+    </svg>
+  )
+}
+
+function LinkedInIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className}>
+      <path d="M20.4 20.4h-3.5v-5.6c0-1.3 0-3-1.9-3s-2.1 1.4-2.1 2.9v5.7H9.4V9h3.4v1.6h.1c.5-.9 1.6-1.9 3.4-1.9 3.6 0 4.2 2.4 4.2 5.4v6.3zM5.3 7.4a2 2 0 1 1 0-4.1 2 2 0 0 1 0 4.1zM7.1 20.4H3.6V9h3.5v11.4z" />
+    </svg>
+  )
+}
+
+const presenceLinks = [
+  { title: "Instagram", desc: "Photos, reels and stories from the event", url: "https://instagram.com/thefossclub", icon: InstagramIcon },
+  { title: "X / Twitter", desc: "Live updates and highlights", url: "https://x.com/TheFOSSClub", icon: XIcon },
+  { title: "LinkedIn", desc: "Professional recaps and announcements", url: "https://linkedin.com/company/thefossclub", icon: LinkedInIcon },
+  { title: "Discord Server", desc: "Join our community", url: "https://discord.gg/sjKNEYQPnk", icon: MessageCircle },
+  { title: "Telegram Group", desc: "Join our telegram group", url: "https://t.me/TheFOSSClub", icon: Send },
+  { title: "LinkTree", desc: "Access all our links", url: "https://linktr.ee/thefossclub", icon: Link2 },
+]
+
 export default function ArchiveRecap({ edition }: { edition: FosshackEdition }) {
   const [showScrollTop, setShowScrollTop] = useState(false)
   const [activeHash, setActiveHash] = useState("")
@@ -153,7 +186,12 @@ export default function ArchiveRecap({ edition }: { edition: FosshackEdition }) 
 
       {edition.gallery && <Deferred id="gallery" activeHash={activeHash}><Section id="gallery"><div className="relative z-10 mx-auto w-full max-w-6xl"><SectionTitle>Photo Gallery</SectionTitle><EditionGallery year={edition.year} title={edition.gallery.title} description={edition.gallery.description} photos={edition.gallery.photos} /></div></Section></Deferred>}
 
-      {edition.localhosts?.length ? <Deferred id="presence" activeHash={activeHash}><Section id="presence"><div className="relative z-10 mx-auto w-full max-w-6xl"><SectionTitle>Local Communities</SectionTitle><div className="grid gap-6 sm:grid-cols-2">{edition.localhosts.map((host) => <article key={host.name} className="rounded-2xl border border-foreground/10 bg-background/60 p-8 backdrop-blur"><MapPin className="mb-5 h-6 w-6 text-accent-light-green" /><p className="text-sm font-semibold uppercase tracking-widest text-accent-light-green">Localhost: {host.name}</p><h3 className="mt-3 text-2xl font-bold">{host.venue}</h3><p className="mt-3 leading-relaxed text-foreground/60">The Delhi-NCR venue where hackers came together to create, collaborate, and build open-source projects.</p><div className="mt-6 flex flex-wrap gap-5">{host.mapUrl && <a href={host.mapUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm font-medium text-accent-light-green">View on Maps <MapPin className="h-4 w-4" /></a>}{host.url && <a href={host.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm text-foreground/60 hover:text-accent-light-green">Host details <ExternalLink className="h-4 w-4" /></a>}</div></article>)}</div></div></Section></Deferred> : null}
+      {edition.socialPosts?.length ? <Deferred id="posts" activeHash={activeHash}><Section id="posts"><div className="relative z-10 mx-auto w-full max-w-5xl"><SectionTitle>Our Posts</SectionTitle><motion.p className="mx-auto -mt-6 mb-12 max-w-3xl text-center text-xl text-foreground/70" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15, duration: 1 }}>A few moments we shared online.</motion.p><div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">{edition.socialPosts.map((post, index) => <a key={index} href={post.url} target="_blank" rel="noreferrer" className="group overflow-hidden rounded-2xl border border-foreground/10 bg-background/60 backdrop-blur transition-colors duration-300 hover:border-foreground/30 flex flex-col"><div className="overflow-hidden aspect-square"><Image src={post.image} alt={post.caption} width={400} height={400} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" /></div><div className="flex flex-1 flex-col p-5"><div className="mb-2 text-xs font-semibold uppercase tracking-wide text-accent-light-green">{post.platform}</div><p className="flex-1 text-base leading-relaxed text-foreground/70">{post.caption}</p><div className="mt-4 flex items-center gap-2 text-sm font-semibold text-foreground/60 transition-colors group-hover:text-foreground">View Post <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" /></div></div></a>)}</div></div></Section></Deferred> : null}
+
+      <Deferred id="presence" activeHash={activeHash}><Section id="presence"><div className="relative z-10 mx-auto w-full max-w-5xl"><SectionTitle>Our Online Presence</SectionTitle><motion.p className="mx-auto -mt-6 mb-12 max-w-3xl text-center text-xl text-foreground/70" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15, duration: 1 }}>Relive the moments, see the photos and stay connected with the community.</motion.p><div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">{presenceLinks.map((link) => <div key={link.title} className="relative group/link"><div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-accent-light-green/18 via-accent-purple/14 to-accent-green/10 opacity-0 blur-xl transition-opacity duration-500 group-hover/link:opacity-100" /><a href={link.url} target="_blank" rel="noreferrer" className="relative flex items-center justify-between gap-4 rounded-2xl border border-foreground/10 bg-background/60 p-6 text-foreground transition-colors duration-300 hover:border-foreground/30 hover:bg-background/80"><div className="flex items-center gap-4"><div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-foreground/8"><link.icon className="h-5 w-5 text-accent-light-green" /></div><div><h3 className="text-lg font-semibold text-foreground">{link.title}</h3><p className="text-sm text-foreground/60">{link.desc}</p></div></div><ArrowRight className="h-5 w-5 shrink-0 text-foreground/50 transition-transform duration-300 group-hover/link:translate-x-1" /></a></div>)}</div></div></Section></Deferred>
+
+
+      {edition.localhosts?.length ? <Deferred id="localhosts" activeHash={activeHash}><Section id="localhosts"><div className="relative z-10 mx-auto w-full max-w-6xl"><SectionTitle>Local Communities</SectionTitle><div className="grid gap-6 sm:grid-cols-2">{edition.localhosts.map((host) => <article key={host.name} className="rounded-2xl border border-foreground/10 bg-background/60 p-8 backdrop-blur"><MapPin className="mb-5 h-6 w-6 text-accent-light-green" /><p className="text-sm font-semibold uppercase tracking-widest text-accent-light-green">Localhost: {host.name}</p><h3 className="mt-3 text-2xl font-bold">{host.venue}</h3><p className="mt-3 leading-relaxed text-foreground/60">The Delhi-NCR venue where hackers came together to create, collaborate, and build open-source projects.</p><div className="mt-6 flex flex-wrap gap-5">{host.mapUrl && <a href={host.mapUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm font-medium text-accent-light-green">View on Maps <MapPin className="h-4 w-4" /></a>}{host.url && <a href={host.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm text-foreground/60 hover:text-accent-light-green">Host details <ExternalLink className="h-4 w-4" /></a>}</div></article>)}</div></div></Section></Deferred> : null}
 
       {edition.sponsors?.length ? <Deferred id="sponsors" activeHash={activeHash}><Section id="sponsors"><div className="relative z-10 mx-auto w-full max-w-5xl"><SectionTitle>Our Sponsors</SectionTitle><div className="grid gap-6 sm:grid-cols-2">{edition.sponsors.map((sponsor) => <motion.article key={sponsor.name} whileHover={{ y: -8 }} className="rounded-2xl border border-foreground/10 bg-background/60 p-8 text-center backdrop-blur"><p className="mb-6 text-sm font-semibold uppercase tracking-widest text-accent-light-green">{sponsor.tier} Sponsor</p>{sponsor.logo && <div className="relative mx-auto mb-6 h-24 w-full max-w-xs rounded-xl bg-white p-4"><Image src={sponsor.logo} alt={`${sponsor.name} logo`} fill sizes="320px" className="object-contain p-4" /></div>}<h3 className="text-2xl font-bold">{sponsor.name}</h3></motion.article>)}</div></div></Section></Deferred> : null}
 

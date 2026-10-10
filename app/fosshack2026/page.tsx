@@ -14,6 +14,7 @@ import {
   Link2,
   MapPin,
   MessageCircle,
+  Play,
   Quote,
   Send,
   Trophy,
@@ -190,6 +191,7 @@ interface SubEvent {
   speaker?: string;
   desc: string;
   image: string;
+  videoUrl?: string;
 }
 
 interface EventPhase {
@@ -209,8 +211,9 @@ const eventPhases: EventPhase[] = [
         tag: "Online",
         date: "March 2, 2026",
         time: "6:00 PM – 7:30 PM",
-        desc: "The official kickoff session covering the event flow, team guidelines, submission process, open-source contribution expectations, judging criteria, and support channels — followed by an open Q&A.",
-        image: "/fosshack2026/first_meetup_fosshack2026.webp",
+        desc: "The official kickoff session covering the event flow, team guidelines, submission process, open-source contribution expectations, judging criteria, and support channels, followed by an open Q&A.",
+        image: "/fosshack2026/orientation_session.webp",
+        videoUrl: "https://www.youtube.com/watch?v=gymuK63aOBA",
       },
     ],
   },
@@ -234,8 +237,8 @@ const eventPhases: EventPhase[] = [
         date: "March 16, 2026",
         time: "12:30 PM – 4:30 PM",
         venue: "Auditorium, Delhi Technical Campus",
-        desc: "Our first offline meetup of the season — an overview of FOSS Hack 2026 and its timeline, followed by a speaker session on OpenStreetMap and the open-source mapping ecosystem to kick off OSM Week.",
-        image: "/fosshack2026/firstmeetup_fosshack2026_crowd.webp",
+        desc: "Our first offline meetup of the season, an overview of FOSS Hack 2026 and its timeline, followed by a speaker session on OpenStreetMap and the open-source mapping ecosystem to kick off OSM Week.",
+        image: "/fosshack2026/first_meetup_fosshack2026.webp",
       },
     ],
   },
@@ -252,6 +255,7 @@ const eventPhases: EventPhase[] = [
         speaker: "Kiran Ahire · Community Manager, TomTom",
         desc: "A hands-on online workshop on open mapping and MapRoulette, run in collaboration with TomTom. Participants could win xyz domains, CodeCrafters project courses, and official FOSS Hack tees.",
         image: "/fosshack2026/osmweek_tomtom.webp",
+        videoUrl: "https://www.youtube.com/watch?v=Ye5tgol4ZVc",
       },
       {
         title: "OSM Week Community Call: Mapping with Vespucci",
@@ -259,8 +263,9 @@ const eventPhases: EventPhase[] = [
         date: "March 22, 2026",
         time: "6:00 PM IST",
         speaker: "Akbar",
-        desc: "An open community call guiding hackers through Vespucci and best practices for mapping effectively on Android — from getting started to accurate field workflows.",
+        desc: "An open community call guiding hackers through Vespucci and best practices for mapping effectively on Android, from getting started to accurate field workflows.",
         image: "/fosshack2026/akbar_occ.webp",
+        videoUrl: "https://www.youtube.com/watch?v=eohUumvzYrE",
       },
     ],
   },
@@ -276,6 +281,7 @@ const eventPhases: EventPhase[] = [
         time: "All Day",
         desc: "The last day of FOSS Hack 2026 and the official closing of the event. Hackers put the finishing touches on their projects, celebrated their work, and wrapped up a month of open-source collaboration.",
         image: "/fosshack2026/finalhack.webp",
+        videoUrl: "https://www.youtube.com/watch?v=0EiJ8OAR6oQ",
       },
     ],
   },
@@ -291,6 +297,7 @@ const eventPhases: EventPhase[] = [
         time: "1:30 PM IST",
         desc: "A joint initiative by UN Mappers and The FOSS Club mapping flood-prone villages across the Yamuna Basin to support disaster responders with accurate, real-time data.",
         image: "/fosshack2026/yamuna_mapping.webp",
+        videoUrl: "https://www.youtube.com/watch?v=ohtuR4MRKcQ",
       },
     ],
   },
@@ -407,7 +414,7 @@ const socialPosts = [
   },
 ];
 
-// Event photograph gallery — add as many photos as you like here.
+// Event photograph gallery. Add as many photos as you like here.
 const galleryImages = [
   { src: "/fosshack2026/register.webp", alt: "Registrations" },
   { src: "/fosshack2026/register2.webp", alt: "Photo Booth" },
@@ -627,6 +634,24 @@ export default function Home() {
                 </span>
               </Link>
             </motion.div>
+            <motion.div
+              className="relative mx-auto mt-12 aspect-[16/9] max-w-4xl overflow-hidden rounded-3xl border border-foreground/10 shadow-2xl"
+              initial={{ scale: 0.85 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 0.15, duration: 1, ease: [0.6, -0.05, 0.01, 0.99] }}
+            >
+              <Image
+                src="/fosshack2026/FOSSHack2026-main.webp"
+                alt="FOSSHack 2026 main photograph"
+                width={1200}
+                height={798}
+                priority
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+              <span className="absolute top-4 right-4 rounded-full border border-accent-purple/30 bg-accent-purple/20 px-3 py-1 text-xs font-semibold text-accent-purple backdrop-blur">
+                Hybrid
+              </span>
+            </motion.div>
           </motion.div>
         </div>
       </Section>
@@ -687,7 +712,7 @@ export default function Home() {
                       <div className="relative overflow-hidden aspect-video rounded-t-2xl">
                         <Image
                           src={event.image}
-                          alt={`${event.title} — photo coming soon`}
+                          alt={`${event.title} photo`}
                           width={640}
                           height={400}
                           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
@@ -727,6 +752,17 @@ export default function Home() {
                         <p className="text-base leading-relaxed text-foreground/70">
                           {event.desc}
                         </p>
+                        {event.videoUrl && (
+                          <a
+                            href={event.videoUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-accent-light-green transition-colors hover:text-foreground"
+                          >
+                            <Play className="h-4 w-4" />
+                            Watch the session
+                          </a>
+                        )}
                       </div>
                     </TiltCard>
                   ))}
@@ -873,7 +909,7 @@ export default function Home() {
                               <div className="w-full overflow-hidden aspect-video">
                                 <Image
                                   src={winner.image}
-                                  alt={`${winner.team} — photo coming soon`}
+                                  alt={`${winner.team} photo`}
                                   width={640}
                                   height={400}
                                   className="w-full h-full object-cover"
