@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
+import { m, useScroll, useTransform, type MotionValue } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 
 interface ShapeProps {
@@ -64,7 +64,7 @@ const Shape = ({
   const showBlur = blur && (width ?? 1920) >= 768;
 
   return (
-    <motion.div
+    <m.div
       ref={ref}
       className="absolute"
       style={{
@@ -87,7 +87,7 @@ const Shape = ({
           filter: showBlur ? "blur(6px)" : "none",
         }}
       />
-    </motion.div>
+    </m.div>
   );
 };
 

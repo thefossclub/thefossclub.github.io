@@ -42,11 +42,11 @@ export default function FosshackArchiveNavbar({ sections: sectionOverride }: { s
     <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5">
       <nav className="mx-auto flex max-w-6xl items-center justify-between gap-2 rounded-2xl border border-foreground/10 bg-background/80 px-2 py-2.5 shadow-lg shadow-black/5 backdrop-blur-xl sm:gap-3 sm:rounded-full sm:px-5">
         <div className="flex min-w-0 items-center gap-2 sm:gap-3">
-          <Link href="/" aria-label="The FOSS Club home" className="flex h-7 w-7 shrink-0 items-center justify-center bg-white sm:h-8 sm:w-8">
+          <Link href="/" prefetch={false} aria-label="The FOSS Club home" className="flex h-7 w-7 shrink-0 items-center justify-center bg-white sm:h-8 sm:w-8">
             <img src="/LogoFOSS-small.webp" alt="" width={32} height={32} className="h-7 w-7 object-contain sm:h-8 sm:w-8" />
           </Link>
-          <Link href="/" className="archive-brand-name truncate text-xs font-bold text-foreground sm:text-sm">The FOSS Club</Link>
-          <Link href="/fosshack" className="hidden truncate border-l border-foreground/15 pl-3 text-sm font-semibold text-foreground sm:block">FOSSHACK</Link>
+          <Link href="/" prefetch={false} className="archive-brand-name truncate text-xs font-bold text-foreground sm:text-sm">The FOSS Club</Link>
+          <Link href="/fosshack" prefetch={false} className="hidden truncate border-l border-foreground/15 pl-3 text-sm font-semibold text-foreground sm:block">FOSSHACK</Link>
         </div>
 
         {onEditionPage && (
@@ -60,7 +60,7 @@ export default function FosshackArchiveNavbar({ sections: sectionOverride }: { s
         )}
 
         <div className="flex min-w-0 items-center gap-1 sm:gap-2">
-          <Link href="/fosshack" className={`hidden rounded-full px-3 py-2 text-sm font-medium transition sm:block ${!activeYear ? "bg-accent-light-green/15 text-accent-light-green" : "text-foreground/65 hover:text-foreground"}`}>
+          <Link href="/fosshack" prefetch={false} className={`hidden rounded-full px-3 py-2 text-sm font-medium transition sm:block ${!activeYear ? "bg-accent-light-green/15 text-accent-light-green" : "text-foreground/65 hover:text-foreground"}`}>
             Archive
           </Link>
           <div className="flex shrink-0 items-center rounded-full border border-foreground/10 p-0.5 sm:p-1" aria-label="FOSSHACK editions">
@@ -68,6 +68,7 @@ export default function FosshackArchiveNavbar({ sections: sectionOverride }: { s
               <Link
                 key={year}
                 href={`/fosshack/${year}`}
+                prefetch={false}
                 aria-current={activeYear === String(year) ? "page" : undefined}
                 className={`rounded-full px-1.5 py-1.5 text-[11px] font-semibold transition sm:px-3 sm:text-sm ${activeYear === String(year) ? "bg-accent-light-green text-background" : "text-foreground/60 hover:bg-foreground/8 hover:text-foreground"}`}
               >
