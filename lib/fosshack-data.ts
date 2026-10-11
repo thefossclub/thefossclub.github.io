@@ -22,34 +22,131 @@ export interface FosshackEdition {
 }
 
 const fosshack2024GalleryPhotos = [
-  { src: "/fosshack2024/gallery1.webp", alt: "Event photograph", caption: "Event photograph" },
-  { src: "/fosshack2024/gallery2.webp", alt: "Event photograph", caption: "Event photograph" },
-  { src: "/fosshack2024/gallery3.webp", alt: "Event photograph", caption: "Event photograph" },
-  { src: "/fosshack2024/gallery4.webp", alt: "Event photograph", caption: "Event photograph" },
-  { src: "/fosshack2024/gallery5.webp", alt: "Event photograph", caption: "Event photograph" },
-  { src: "/fosshack2024/gallery6.webp", alt: "Event photograph", caption: "Event photograph" },
+  { src: "/fosshack2024/gallery1.webp", alt: "Speaker addressing attendees from the FOSS Hack 2024 podium", caption: "Stage" },
+  { src: "/fosshack2024/gallery2.webp", alt: "Presenter speaking from the stage beside a projected slide", caption: "Stage" },
+  { src: "/fosshack2024/gallery3.webp", alt: "Auditorium seating and stage prepared for FOSS Hack 4.0", caption: "Auditorium" },
+  { src: "/fosshack2024/gallery4.webp", alt: "FOSS Hack welcome standees displayed outside the venue entrance", caption: "Welcome" },
+  { src: "/fosshack2024/gallery5.webp", alt: "Participants seated at computers during the hackathon", caption: "Labs" },
+  { src: "/fosshack2024/gallery6.webp", alt: "Hackers working at desktop computer stations in the lab", caption: "Labs" },
+  { src: "/fosshack2024/gallery7.webp", alt: "Attendees meeting with the registration desk team over event paperwork", caption: "Registration" },
+  { src: "/fosshack2024/gallery8.webp", alt: "Attendees gathering around the food table during a meal break", caption: "Food & Refreshments" },
+  { src: "/fosshack2024/gallery9.webp", alt: "Participants building projects at computer workstations", caption: "Labs" },
+  { src: "/fosshack2024/gallery10.webp", alt: "Group photo of participants and organizers on the FOSS Hack 2024 stage", caption: "Group Photo" },
+  { src: "/fosshack2024/gallery11.webp", alt: "A volunteer serving refreshments to attendees at the food counter", caption: "Food & Refreshments" },
+  { src: "/fosshack2024/gallery12.webp", alt: "Hackathon attendees seated together in the auditorium during a session", caption: "Auditorium" },
+  { src: "/fosshack2024/gallery13.webp", alt: "Participants sharing ideas and discussing work beside a computer", caption: "Collaboration" },
+  { src: "/fosshack2024/gallery14.webp", alt: "Participants collaborating and reviewing work at a computer station", caption: "Collaboration" },
+  { src: "/fosshack2024/gallery15.webp", alt: "Hackers concentrating on their work at desktop computers", caption: "Labs" },
+  { src: "/fosshack2024/gallery16.webp", alt: "Participants working at computer stations during the hackathon", caption: "Labs" },
 ]
 
 const fosshack2025GalleryPhotos = [
-  { src: "/fosshack2025/gallery1.webp", alt: "Event photograph", caption: "Event photograph" },
-  { src: "/fosshack2025/gallery2.webp", alt: "Event photograph", caption: "Event photograph" },
-  { src: "/fosshack2025/gallery3.webp", alt: "Event photograph", caption: "Event photograph" },
-  { src: "/fosshack2025/gallery4.webp", alt: "Event photograph", caption: "Event photograph" },
-  { src: "/fosshack2025/gallery5.webp", alt: "Event photograph", caption: "Event photograph" },
-  { src: "/fosshack2025/gallery6.webp", alt: "Event photograph", caption: "Event photograph" },
-  { src: "/fosshack2025/gallery7.webp", alt: "Event photograph", caption: "Event photograph" },
-  { src: "/fosshack2025/gallery8.webp", alt: "Event photograph", caption: "Event photograph" },
-  { src: "/fosshack2025/gallery9.webp", alt: "Event photograph", caption: "Event photograph" },
-  { src: "/fosshack2025/gallery10.webp", alt: "Event photograph", caption: "Event photograph" },
-  { src: "/fosshack2025/gallery11.webp", alt: "Event photograph", caption: "Event photograph" },
-  { src: "/fosshack2025/gallery12.webp", alt: "Event photograph", caption: "Event photograph" },
-  { src: "/fosshack2025/gallery13.webp", alt: "Event photograph", caption: "Event photograph" },
-  { src: "/fosshack2025/gallery14.webp", alt: "Event photograph", caption: "Event photograph" },
-  { src: "/fosshack2025/gallery15.webp", alt: "Event photograph", caption: "Event photograph" },
-  { src: "/fosshack2025/gallery16.webp", alt: "Event photograph", caption: "Event photograph" },
-  { src: "/fosshack2025/gallery17.webp", alt: "Event photograph", caption: "Event photograph" },
+  {
+    src: "/fosshack2025/gallery1.webp",
+    alt: "FOSS Hack 2025 participants and organizers posing together at the front of the auditorium",
+    caption: "Group Photo",
+  },
+  {
+    src: "/fosshack2025/gallery2.webp",
+    alt: "Participants collaborating around laptops and desktop computers during the hackathon",
+    caption: "Labs",
+  },
+  {
+    src: "/fosshack2025/gallery3.webp",
+    alt: "A large group of participants posing on stage behind the FOSS Hack 2025 display",
+    caption: "Group Photo",
+  },
+  {
+    src: "/fosshack2025/gallery5.webp",
+    alt: "Attendees gathering at a counter with stacks of event merchandise inside a campus room",
+    caption: "Registration",
+  },
+  {
+    src: "/fosshack2025/gallery6.webp",
+    alt: "A participant working on a laptop at an individual workstation",
+    caption: "Labs",
+  },
+  {
+    src: "/fosshack2025/gallery7.webp",
+    alt: "A mentor standing behind participants and reviewing their work at a computer",
+    caption: "Mentorship",
+  },
+  {
+    src: "/fosshack2025/gallery8.webp",
+    alt: "Participants seated around an outdoor bonfire while a guitarist performs",
+    caption: "Bonfire",
+  },
+  {
+    src: "/fosshack2025/gallery9.webp",
+    alt: "A musician playing guitar beside a bonfire as attendees watch from the courtyard steps",
+    caption: "Bonfire",
+  },
+  {
+    src: "/fosshack2025/gallery10.webp",
+    alt: "Participants gathered around a bonfire in the campus courtyard at night",
+    caption: "Bonfire",
+  },
+  {
+    src: "/fosshack2025/gallery14.webp",
+    alt: "Attendees checking in at an outdoor registration table with organizers",
+    caption: "Registration",
+  },
+  {
+    src: "/fosshack2025/gallery15.webp",
+    alt: "Participants chatting together in a campus corridor during the event",
+    caption: "Mentorship",
+  },
+  {
+    src: "/fosshack2025/gallery16.webp",
+    alt: "Attendees gathering around desks inside a campus room near the registration area",
+    caption: "Registration",
+  },
+  {
+    src: "/fosshack2025/gallery17.webp",
+    alt: "Participants collecting food from an outdoor table covered with plates of refreshments",
+    caption: "Food & Refreshments",
+  },
+  {
+    src: "/fosshack2025/gallery18.webp",
+    alt: "Attendees serving and sharing food at an outdoor refreshment table",
+    caption: "Food & Refreshments",
+  },
+  {
+    src: "/fosshack2025/gallery19.webp",
+    alt: "Rows of auditorium seats facing the stage and event presentation screen",
+    caption: "Auditorium",
+  },
+  {
+    src: "/fosshack2025/gallery21.webp",
+    alt: "Participants discussing their work together around a desktop computer in the lab",
+    caption: "Labs",
+  },
+  {
+    src: "/fosshack2025/gallery22.webp",
+    alt: "Hackathon participants working at a shared workstation with computers and a whiteboard",
+    caption: "Labs",
+  },
+  {
+    src: "/fosshack2025/gallery23.webp",
+    alt: "Mentorship during FOSS Hack 2025",
+    caption: "Mentorship",
+  },
+  {
+    src: "/fosshack2025/gallery24.webp",
+    alt: "Auditorium seating during FOSS Hack 2025",
+    caption: "Auditorium",
+  },
+  {
+    src: "/fosshack2025/gallery25.webp",
+    alt: "The stage during FOSS Hack 2025",
+    caption: "Stage",
+  },
+  {
+    src: "/fosshack2025/gallery26.webp",
+    alt: "A participant receiving an award from an organizer on stage",
+    caption: "Awards",
+  },
 ]
-
 const fosshack2026GalleryPhotos = [
   { src: "/fosshack2026/register.webp", alt: "Registrations", caption: "Registrations" },
   { src: "/fosshack2026/register2.webp", alt: "Photo Booth", caption: "Photo Booth" },
