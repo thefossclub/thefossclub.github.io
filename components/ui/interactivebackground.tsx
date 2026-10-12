@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef } from "react"
+import { usePathname } from "next/navigation"
 
 interface Star {
   x: number
@@ -44,8 +45,14 @@ export default function InteractiveBackground() {
   const mouseRef = useRef({ x: -9999, y: -9999 })
   const rafRef = useRef<number>(0)
   const sizeRef = useRef({ w: 0, h: 0 })
+  const pathname = usePathname()
+
+  const skip =
+    /^\/fosshack\/(2024|2025|2026)\/?$/.test(pathname ?? "") ||
+    /^\/fosshack2026\/?$/.test(pathname ?? "")
 
   useEffect(() => {
+    if (skip) return
     const canvas = canvasRef.current
     if (!canvas) return
     const ctx = canvas.getContext("2d")
@@ -128,7 +135,9 @@ export default function InteractiveBackground() {
       window.removeEventListener("mousemove", onMouseMove)
       window.removeEventListener("mouseleave", onMouseLeave)
     }
-  }, [])
+  }, [skip])
+
+  if (skip) return null
 
   return (
     <canvas

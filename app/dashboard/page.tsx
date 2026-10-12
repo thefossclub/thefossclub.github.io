@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { motion } from "framer-motion"
+import { LazyMotion, domAnimation, m } from "framer-motion"
 import { User, Settings, BarChart2, LogOut } from "lucide-react"
 import Link from "next/link"
 
@@ -35,6 +35,7 @@ export default function Dashboard() {
   }
 
   return (
+    <LazyMotion features={domAnimation} strict>
     <div className="min-h-screen flex bg-gradient-to-br from-black via-[#0f1a13] to-[#101c14] dark:from-black dark:via-[#0f1a13] dark:to-[#101c14]">
       {/* Sidebar */}
       <aside
@@ -67,7 +68,7 @@ export default function Dashboard() {
           <h1 className="text-3xl md:text-4xl font-bold mb-6 text-gradient-green">Dashboard</h1>
 
           {/* User Info Card */}
-          <motion.div className="bg-black/60 dark:bg-black/60 rounded-3xl shadow-2xl p-6 md:p-10 flex flex-col md:flex-row items-center gap-8 mb-10 border border-gray-800"
+          <m.div className="bg-black/60 dark:bg-black/60 rounded-3xl shadow-2xl p-6 md:p-10 flex flex-col md:flex-row items-center gap-8 mb-10 border border-gray-800"
             initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
             <img src={user.avatar} alt="Avatar" className="w-28 h-28 rounded-full border-4 border-gradient-green shadow-lg" />
             <div className="flex-1 w-full">
@@ -108,7 +109,7 @@ export default function Dashboard() {
                 </div>
               )}
             </div>
-          </motion.div>
+          </m.div>
 
           {/* Activity Graph (placeholder) */}
           <div className="bg-black/60 dark:bg-black/60 rounded-3xl shadow-2xl p-6 md:p-10 mb-10 border border-gray-800">
@@ -144,5 +145,6 @@ export default function Dashboard() {
         </div>
       </main>
     </div>
+    </LazyMotion>
   )
 } 

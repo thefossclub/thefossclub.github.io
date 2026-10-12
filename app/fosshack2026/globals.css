@@ -114,3 +114,14 @@ html.light ::-webkit-scrollbar-thumb:hover {
 .bg-background\/85 {
     background-color: rgb(var(--background) / 0.85);
 }
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

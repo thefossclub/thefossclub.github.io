@@ -11,6 +11,7 @@ interface Fosshack2026NavbarProps {
 
 const navLinks = [
   { name: "Home", href: "/" },
+  { name: "Archive", href: "/fosshack" },
   { name: "Overview", href: "#overview" },
   { name: "Journey", href: "#journey" },
   { name: "Gallery", href: "#gallery" },
@@ -42,6 +43,19 @@ export default function Fosshack2026Navbar({
             The FOSS Club
           </span>
         </Link>
+
+        <div className="hidden items-center gap-1 sm:flex">
+          {[2024, 2025, 2026].map((year) => (
+            <Link
+              key={year}
+              href={`/fosshack/${year}`}
+              aria-current={year === 2026 ? "page" : undefined}
+              className={`rounded-full px-3 py-2 text-xs font-semibold transition sm:text-sm ${year === 2026 ? "bg-accent-light-green text-background" : "text-foreground/65 hover:bg-foreground/8 hover:text-foreground"}`}
+            >
+              {year}
+            </Link>
+          ))}
+        </div>
 
         <nav className="hidden items-center gap-6 lg:flex">
           {navLinks.map((link) => (
@@ -94,6 +108,19 @@ export default function Fosshack2026Navbar({
                 {link.name}
               </Link>
             ))}
+            <div className="my-2 flex items-center gap-2 border-y border-foreground/10 py-3">
+              {[2024, 2025, 2026].map((year) => (
+                <Link
+                  key={year}
+                  href={`/fosshack/${year}`}
+                  onClick={() => setOpen(false)}
+                  aria-current={year === 2026 ? "page" : undefined}
+                  className={`flex-1 rounded-full px-3 py-2 text-center text-sm font-semibold ${year === 2026 ? "bg-accent-light-green text-background" : "bg-foreground/5 text-foreground/75"}`}
+                >
+                  {year}
+                </Link>
+              ))}
+            </div>
             <Link
               href="/"
               onClick={() => setOpen(false)}

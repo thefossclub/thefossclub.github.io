@@ -349,7 +349,7 @@ export default function Home() {
         </div>
       </section>
 
-        {/* Upcoming Events Section — disabled for now
+        {/* Upcoming Events Section, disabled for now
         <section className="py-10 sm:py-16 md:py-20 relative z-10 px-2 sm:px-4 lg:px-8">
           <div className="container mx-auto">
             <div className="text-center mb-10 md:mb-12">
@@ -1029,8 +1029,6 @@ export default function Home() {
 
               <button
                 onClick={() => {
-                  // Use Lenis smooth scroll if available, fallback to native
-                  // @ts-expect-error - lenis is added to window by SmoothScroll component
                   if (window.lenis) {
                     // @ts-expect-error - lenis is added to window by SmoothScroll component
                     window.lenis.scrollTo(0, { duration: 1.5 })

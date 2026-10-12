@@ -1,8 +1,8 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "FOSS Hack 2026 Delhi-NCR",
-  description: "Join us for the biggest open-source hackathon in Delhi-NCR",
+  title: "FOSS Hack Archive | The FOSS Club",
+  description: "Explore FOSS Hack editions from 2024, 2025 and 2026.",
 };
 
 export default function FosshackLayout({
