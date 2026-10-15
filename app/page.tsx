@@ -383,17 +383,20 @@ export default function Home() {
         */}
 
       {/* Events Section */}
-      <section ref={sectionRefs.events} id="events" className="py-10 sm:py-16 md:py-20 relative z-10 px-2 sm:px-4 lg:px-8">
+      <section
+          ref={sectionRefs.events}
+          id="events"
+          className="scroll-mt-24 py-10 sm:py-16 md:py-20 relative z-10 px-2 sm:px-4 lg:px-8"
+        >
           <div className="container mx-auto">
             <h2 className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green">
               Events Concluded
             </h2>
-
-            <div className="flex overflow-x-auto gap-4 sm:gap-6 md:gap-8 pb-6 snap-x snap-mandatory scrollbar-hide">
-              {events.map((event, index) => (
+            <div className="flex overflow-x-auto items-stretch gap-4 sm:gap-6 md:gap-8 pb-6 snap-x snap-proximity scrollbar-hide">
+              {[...events].reverse().map((event, index) => (
                 <div 
-                  key={index} 
-                  className="flex-none w-[85%] sm:w-[350px] md:w-[400px] snap-center flex flex-col"
+                  key={index}
+                  className="flex-none w-[85%] sm:w-[350px] md:w-[400px] snap-start flex flex-col"
                 >
                   <EventCard
                     title={event.title}
@@ -407,7 +410,7 @@ export default function Home() {
               ))}
               <div className="w-8 flex-none shrink-0" aria-hidden="true"></div>
             </div>
-          {/*<m.div
+            {/*<m.div
             className="mt-8 sm:mt-12 md:mt-16 p-4 sm:p-6 md:p-8 rounded-3xl border border-green-900/50 bg-gradient-to-r from-green-900/10 to-green-900/30 dark:from-green-900/30 dark:to-green-900/50 shadow-xl shadow-green-500/10"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
