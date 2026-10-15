@@ -329,26 +329,33 @@ export default function Home() {
       </section>
 
       {/* Projects Section */}
-      <section ref={sectionRefs.projects} id="projects" className="py-10 sm:py-16 md:py-20 relative z-10 px-2 sm:px-4 lg:px-8">
-        <div className="container mx-auto">
-          <h2 className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green">
-            Our Projects
-          </h2>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
-            {projects.map((project, index) => (
-              <ProjectCard
-                key={index}
-                title={project.title}
-                description={project.description}
-                link={project.link}
-                index={index}
-              />
-            ))}
+        <section 
+          ref={sectionRefs.projects} 
+          id="projects" 
+          className="scroll-mt-24 py-10 sm:py-16 md:py-20 relative z-10 px-2 sm:px-4 lg:px-8"
+        >
+          <div className="container mx-auto">
+            <h2 className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green">
+              Our Projects
+            </h2>
+            <div className="flex overflow-x-auto items-stretch gap-4 sm:gap-6 md:gap-8 pb-6 snap-x snap-proximity scrollbar-hide">
+              {projects.map((project, index) => (
+                <div
+                  key={index}
+                  className="flex-none w-[85%] sm:w-[350px] md:w-[400px] snap-start flex flex-col"
+                >
+                  <ProjectCard
+                    title={project.title}
+                    description={project.description}
+                    link={project.link}
+                    index={index}
+                  />
+                </div>
+              ))}
+              <div className="w-8 flex-none shrink-0" aria-hidden="true"></div>
+            </div>
           </div>
-        </div>
-      </section>
-
+        </section>
         {/* Upcoming Events Section, disabled for now
         <section className="py-10 sm:py-16 md:py-20 relative z-10 px-2 sm:px-4 lg:px-8">
           <div className="container mx-auto">
@@ -377,25 +384,29 @@ export default function Home() {
 
       {/* Events Section */}
       <section ref={sectionRefs.events} id="events" className="py-10 sm:py-16 md:py-20 relative z-10 px-2 sm:px-4 lg:px-8">
-        <div className="container mx-auto">
-          <h2 className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green">
-            Events Concluded
-          </h2>
+          <div className="container mx-auto">
+            <h2 className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green">
+              Events Concluded
+            </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
-            {events.map((event, index) => (
-              <EventCard
-                key={index}
-                title={event.title}
-                date={event.date}
-                description={event.description}
-                image={event.image}
-                index={index}
-                link={event.link}
-              />
-            ))}
-          </div>
-
+            <div className="flex overflow-x-auto gap-4 sm:gap-6 md:gap-8 pb-6 snap-x snap-mandatory scrollbar-hide">
+              {events.map((event, index) => (
+                <div 
+                  key={index} 
+                  className="flex-none w-[85%] sm:w-[350px] md:w-[400px] snap-center flex flex-col"
+                >
+                  <EventCard
+                    title={event.title}
+                    date={event.date}
+                    description={event.description}
+                    image={event.image}
+                    index={index}
+                    link={event.link}
+                  />
+                </div>
+              ))}
+              <div className="w-8 flex-none shrink-0" aria-hidden="true"></div>
+            </div>
           {/*<m.div
             className="mt-8 sm:mt-12 md:mt-16 p-4 sm:p-6 md:p-8 rounded-3xl border border-green-900/50 bg-gradient-to-r from-green-900/10 to-green-900/30 dark:from-green-900/30 dark:to-green-900/50 shadow-xl shadow-green-500/10"
             initial={{ opacity: 0 }}
@@ -908,11 +919,11 @@ export default function Home() {
                       <li><Link href="https://github.com/thefossclub/Resources" className="text-muted-foreground hover:text-green-500 transition-all hover:translate-x-1 inline-block">Resources</Link></li>
                     </ul>
                   </div>
-                  <div className="flex flex-col col-span-2 md:col-span-1 pt-4 md:pt-0 border-t border-border/50 md:border-none">
+                  <div className="flex flex-col col-span-2 md:col-span-1">
                     <h3 className="text-sm font-bold tracking-wider uppercase text-foreground mb-4 relative inline-block after:content-[''] after:absolute after:-bottom-1.5 after:left-0 after:w-6 after:h-0.5 after:bg-green-500 after:rounded-full">
                       Contact
                     </h3>
-                    <ul className="space-y-3 text-sm flex flex-row md:flex-col gap-4 md:gap-0">
+                    <ul className="space-y-3 text-sm">
                       <li><Link href="https://linktr.ee/thefossclub" target="_blank" className="text-muted-foreground hover:text-green-500 transition-all hover:translate-x-1 inline-block">LinkTree</Link></li>
                       <li><Link href="mailto:contact@thefossclub.org" className="text-muted-foreground hover:text-green-500 transition-all hover:translate-x-1 inline-block">Email Us</Link></li>
                       <li><Link href="https://discord.gg/BgHwhRZg3r" className="text-muted-foreground hover:text-green-500 transition-all hover:translate-x-1 inline-block">Discord</Link></li>
