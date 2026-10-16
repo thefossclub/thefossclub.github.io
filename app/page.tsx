@@ -352,7 +352,6 @@ export default function Home() {
                   />
                 </div>
               ))}
-              <div className="w-8 flex-none shrink-0" aria-hidden="true"></div>
             </div>
           </div>
         </section>
@@ -408,7 +407,6 @@ export default function Home() {
                   />
                 </div>
               ))}
-              <div className="w-8 flex-none shrink-0" aria-hidden="true"></div>
             </div>
             {/*<m.div
             className="mt-8 sm:mt-12 md:mt-16 p-4 sm:p-6 md:p-8 rounded-3xl border border-green-900/50 bg-gradient-to-r from-green-900/10 to-green-900/30 dark:from-green-900/30 dark:to-green-900/50 shadow-xl shadow-green-500/10"
