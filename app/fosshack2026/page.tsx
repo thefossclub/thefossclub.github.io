@@ -549,8 +549,8 @@ export default function Home() {
         </button>
       )}
 
-      <Section id="overview" immediate className="min-h-[90vh] flex flex-col justify-center pt-24 pb-12">
-        <div className="text-center max-w-5xl mx-auto relative z-10 w-full">
+      <Section id="overview" immediate className="min-h-[90vh] flex flex-col justify-center">
+        <div className="text-center max-w-5xl mx-auto relative z-10 w-full mt-30 sm:mt-32">
           <m.div
             className="space-y-8"
             initial={{ y: 50 }}
@@ -1002,7 +1002,7 @@ export default function Home() {
             organizing team.
           </m.p>
           <m.div
-            className="flex w-full overflow-x-auto gap-4 sm:gap-6 pb-8 snap-x snap-mandatory scroll-smooth [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+            className="flex w-full overflow-x-auto gap-4 sm:gap-6 pt-4 pb-8 snap-x snap-mandatory scroll-smooth [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.8 }}
@@ -1034,7 +1034,7 @@ export default function Home() {
             Thank you for your Contribution!
           </m.p>
           <m.div
-            className="flex w-full overflow-x-auto gap-4 sm:gap-6 pb-8 snap-x snap-mandatory scroll-smooth [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+            className="flex w-full overflow-x-auto gap-4 sm:gap-6 pt-4 pb-8 snap-x snap-mandatory scroll-smooth [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.8 }}
