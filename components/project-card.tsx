@@ -13,7 +13,7 @@ interface ProjectCardProps {
 export default function ProjectCard({ title, description, link, index }: ProjectCardProps) {
   return (
     <div
-      className="p-6 rounded-3xl border border-border bg-card transition-all duration-300 group shadow-lg hover:shadow-xl hover:-translate-y-1"
+      className="h-full flex flex-col p-6 rounded-3xl border border-border bg-card transition-all duration-300 group shadow-lg hover:shadow-xl hover:-translate-y-1"
     >
       <div className="h-full flex flex-col">
         <h3 
@@ -21,7 +21,7 @@ export default function ProjectCard({ title, description, link, index }: Project
         >
           {title}
         </h3>
-        <p className="text-muted-foreground mb-6 flex-grow">{description}</p>
+        <p className="text-muted-foreground mb-6 grow">{description}</p>
         <Link
           href={link}
           target="_blank"
