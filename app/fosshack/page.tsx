@@ -23,7 +23,7 @@ export default function FosshackArchivePage() {
               Three editions. Thousands of hackers. A growing community building in the open.
             </p>
             <Link href="#editions" className="inline-flex items-center gap-2 self-start text-sm font-semibold text-accent-light-green transition-transform hover:translate-x-1 sm:self-auto">
-              Explore editions <ArrowDownRight className="h-4 w-4" />
+              Explore Editions <ArrowDownRight className="h-4 w-4" />
             </Link>
           </div>
         </div>
@@ -76,7 +76,7 @@ export default function FosshackArchivePage() {
       <footer className="mx-auto mt-20 max-w-6xl border-t border-foreground/10 pt-6 text-sm text-foreground/55">
         <div className="flex flex-col justify-between gap-3 sm:flex-row">
           <span>FOSS Hack archive by The FOSS Club</span>
-          <Link href="/" className="hover:text-foreground">The FOSS Club home</Link>
+          <Link href="/" className="hover:text-foreground">The FOSS Club Home</Link>
         </div>
       </footer>
     </main>

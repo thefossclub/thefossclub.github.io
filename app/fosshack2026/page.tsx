@@ -49,15 +49,17 @@ const Section = ({
   id,
   immediate = false,
   defer = false,
+  className = "",
 }: {
   children: React.ReactNode;
   id: string;
   immediate?: boolean;
   defer?: boolean;
+  className?: string;
 }) => {
   const [ref, inView] = useInView({
-    triggerOnce: false,
-    threshold: 0,
+    triggerOnce: true,
+    rootMargin: "-50px 0px",
   });
   const [deferRef, deferred] = useInView({
     triggerOnce: true,
@@ -69,10 +71,10 @@ const Section = ({
     <m.section
       id={id}
       ref={ref}
-      initial={immediate ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-      transition={{ duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] }}
-      className="min-h-screen relative flex items-center justify-center scroll-mt-24 p-4 py-10 sm:p-8"
+      initial={immediate ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+      animate={inView || immediate ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      className={`relative w-full scroll-mt-24 px-4 py-8 sm:px-6 md:py-12 ${className}`}
     >
       {defer ? (
         <div ref={deferRef} className="w-full">
@@ -96,14 +98,13 @@ const AnimatedTitle = ({ children }: { children: React.ReactNode }) => {
       ref={ref}
       initial={{ opacity: 0, y: 50 }}
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-      transition={{ duration: 1, ease: [0.6, -0.05, 0.01, 0.99] }}
-      className="text-5xl font-bold mb-12 text-foreground text-center"
+      transition={{ duration: 1, ease: [0.6, -0.05, 0.01, 0.99] }} // Your original bouncy ease
+      className="text-4xl md:text-5xl font-bold mb-12 text-foreground text-center tracking-tight"
     >
       {children}
     </m.h2>
   );
 };
-
 const stats = [
   { label: "Registrations", value: "5430", icon: Users },
   { label: "Projects Submitted", value: "800", icon: Trophy },
@@ -143,18 +144,18 @@ function TiltCard({
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       whileHover={{
-        y: -12,
-        scale: 1.05,
+        y: -8,
+        scale: 1.02,
         boxShadow:
-          "0 30px 80px -20px rgba(var(--accent-light-green), 0.5), 0 0 45px -10px rgba(var(--accent-light-green), 0.35)",
-        borderColor: "rgba(var(--accent-light-green), 0.55)",
-        transition: { type: "spring", stiffness: 260, damping: 18 },
+          "0 30px 80px -20px rgba(var(--accent-light-green), 0.4), 0 0 45px -10px rgba(var(--accent-light-green), 0.25)",
+        borderColor: "rgba(var(--accent-light-green), 0.45)",
+        transition: { type: "spring", stiffness: 300, damping: 20 },
       }}
       style={{
         rotateX,
         rotateY,
-        transformPerspective: 900,
-        boxShadow: "0 12px 40px -18px rgba(0, 0, 0, 0.6)",
+        transformPerspective: 1000,
+        boxShadow: "0 10px 30px -15px rgba(0, 0, 0, 0.5)",
       }}
       className={`group relative rounded-2xl border border-foreground/10 bg-background/60 backdrop-blur will-change-transform ${className}`}
       {...motionProps}
@@ -173,19 +174,19 @@ function GlanceStatCard({
 }) {
   return (
     <TiltCard
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.15 * index, duration: 0.8 }}
-      className="p-6 sm:p-10 text-center"
+      transition={{ delay: 0.1 * index, duration: 0.6 }}
+      className="p-4 sm:p-8 text-center flex flex-col items-center justify-center"
     >
-      <div className="pointer-events-none absolute inset-0 rounded-2xl bg-[radial-gradient(circle_at_30%_0%,rgba(var(--accent-light-green),0.14),transparent_65%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-      <div className="relative mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-foreground/8 transition-all duration-300 group-hover:scale-110 group-hover:bg-[rgba(var(--accent-light-green),0.12)] group-hover:shadow-[0_0_20px_rgba(var(--accent-light-green),0.4)]">
-        <stat.icon className="h-8 w-8 text-accent-light-green" />
+      <div className="pointer-events-none absolute inset-0 rounded-2xl bg-[radial-gradient(circle_at_30%_0%,rgba(var(--accent-light-green),0.12),transparent_65%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+      <div className="relative mx-auto mb-2 sm:mb-4 flex h-10 w-10 sm:h-14 sm:w-14 items-center justify-center rounded-xl sm:rounded-2xl bg-foreground/5 transition-all duration-300 group-hover:scale-110 group-hover:bg-[rgba(var(--accent-light-green),0.1)] group-hover:shadow-[0_0_20px_rgba(var(--accent-light-green),0.3)]">
+        <stat.icon className="h-5 w-5 sm:h-7 sm:w-7 text-accent-light-green" />
       </div>
-      <div className="relative text-4xl font-bold text-foreground">
+      <div className="relative text-2xl sm:text-3xl font-bold text-foreground">
         {stat.value}
       </div>
-      <div className="relative mt-2 text-lg text-foreground/60">
+      <div className="relative mt-1 sm:mt-2 text-[11px] sm:text-base text-foreground/60 uppercase tracking-wide sm:normal-case sm:tracking-normal">
         {stat.label}
       </div>
     </TiltCard>
@@ -447,11 +448,11 @@ function SponsorLogo({
   sponsor: (typeof sponsors)[number];
 }) {
   return (
-    <div className="relative h-[70px] w-full max-w-[200px]">
+    <div className="relative h-[60px] w-full max-w-[150px]">
       <Image
         src={sponsor.logo}
         fill
-        sizes="200px"
+        sizes="150px"
         alt={sponsor.name}
         className="object-contain"
       />
@@ -548,16 +549,16 @@ export default function Home() {
         </button>
       )}
 
-      <Section id="overview" immediate>
-        <div className="text-center max-w-5xl mx-auto relative z-10 pt-10 md:pt-20">
+      <Section id="overview" immediate className="min-h-[90vh] flex flex-col justify-center">
+        <div className="text-center max-w-5xl mx-auto relative z-10 w-full mt-30 sm:mt-32">
           <m.div
-            className="mb-16 space-y-8"
+            className="space-y-8"
             initial={{ y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: [0.6, -0.05, 0.01, 0.99] }}
           >
             <m.h1
-              className="text-4xl sm:text-8xl font-bold text-foreground"
+              className="text-5xl sm:text-7xl md:text-8xl font-extrabold text-foreground tracking-tight"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.2, ease: [0.6, -0.05, 0.01, 0.99] }}
@@ -565,7 +566,7 @@ export default function Home() {
               FOSSHack 2026
             </m.h1>
             <m.p
-              className="text-3xl sm:text-4xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-accent-green to-accent-light-green"
+              className="text-2xl sm:text-3xl md:text-4xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-accent-green to-accent-light-green"
               initial={{ y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1, duration: 1 }}
@@ -573,23 +574,23 @@ export default function Home() {
               That&apos;s a Wrap!
             </m.p>
             <m.div
-              className="flex flex-col sm:flex-row items-center justify-center gap-6 text-base sm:text-xl text-foreground/60"
+              className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 text-base sm:text-lg text-foreground/70"
               initial={{ y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 1 }}
             >
-              <div className="flex items-center gap-3">
-                <Calendar className="w-6 h-6 text-foreground" />
+              <div className="flex items-center gap-2">
+                <Calendar className="w-5 h-5" />
                 <span>March 1-31, 2026</span>
               </div>
-              <div className="hidden sm:block text-2xl">•</div>
-              <div className="flex items-start gap-3">
-                <MapPin className="w-6 h-6 text-foreground" />
-                <span>Delhi Technical Campus, Greater Noida</span>
+              <div className="hidden sm:block text-xl opacity-50">•</div>
+              <div className="flex items-start gap-2">
+                <MapPin className="w-5 h-5" />
+                <span>Delhi Technical Campus</span>
               </div>
             </m.div>
             <m.p
-              className="max-w-3xl mx-auto text-lg sm:text-2xl leading-relaxed text-foreground/70"
+              className="max-w-3xl mx-auto text-lg sm:text-xl md:text-2xl leading-relaxed text-foreground/80 px-4"
               initial={{ y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 1 }}
@@ -599,33 +600,33 @@ export default function Home() {
               partner who made this month of open-source magic possible.
             </m.p>
             <m.div
-              className="flex flex-wrap items-center justify-center gap-4"
+              className="flex flex-wrap items-center justify-center gap-4 pt-4"
               initial={{ y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 1 }}
             >
               <Link
                 href="#journey"
-                className="group relative inline-flex items-center gap-3 px-9 py-4 text-lg font-semibold rounded-full overflow-hidden text-background transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(var(--accent-green),0.6)] focus-visible:ring-offset-2"
+                className="group relative inline-flex items-center gap-3 px-8 py-3.5 text-base font-semibold rounded-full overflow-hidden text-background transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(var(--accent-green),0.6)] focus-visible:ring-offset-2 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
               >
                 <span className="absolute inset-0 rounded-full bg-foreground" />
-                <span className="relative flex items-center gap-3">
-                  <Camera className="w-5 h-5" />
+                <span className="relative flex items-center gap-2">
+                  <Camera className="w-4 h-4" />
                   View Highlights
-                  <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
+                  <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </span>
               </Link>
               <Link
                 href="#winners"
-                className="group relative inline-flex items-center gap-3 px-9 py-4 text-lg font-semibold rounded-full overflow-hidden text-foreground border border-foreground/30 transition-all duration-300 hover:border-foreground/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(var(--accent-light-green),0.6)]"
+                className="group relative inline-flex items-center gap-2 px-8 py-3.5 text-base font-semibold rounded-full overflow-hidden text-foreground border border-foreground/20 bg-background/50 backdrop-blur transition-all duration-300 hover:border-foreground/50 hover:bg-background/80 hover:-translate-y-0.5"
               >
-                <span className="relative flex items-center gap-3">
-                  <Trophy className="w-5 h-5" />
+                <span className="relative flex items-center gap-2">
+                  <Trophy className="w-4 h-4" />
                   See Winners
                 </span>
               </Link>
             </m.div>
-            <div className="relative mx-auto mt-8 aspect-[16/9] max-w-4xl overflow-hidden rounded-3xl border border-foreground/10 shadow-2xl sm:mt-12">
+            <div className="relative mx-auto mt-12 aspect-[16/9] w-full max-w-4xl overflow-hidden rounded-2xl border border-foreground/10 shadow-2xl">
               <picture>
                 <source media="(max-width: 640px)" srcSet="/fosshack2026/FOSSHack2026-main-mobile.webp" />
                 <img
@@ -647,57 +648,56 @@ export default function Home() {
       </Section>
 
       <Section id="stats" defer>
-        <div className="w-full max-w-6xl mx-auto relative z-10">
-          <AnimatedTitle>Event At a Glance</AnimatedTitle>
-          <m.div
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 1 }}
-          >
-            {stats.map((stat, index) => (
-              <GlanceStatCard key={stat.label} stat={stat} index={index} />
-            ))}
-          </m.div>
-        </div>
-      </Section>
-
+          <div className="w-full max-w-5xl mx-auto relative z-10">
+            <AnimatedTitle>Event At a Glance</AnimatedTitle>
+            <m.div
+              className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1, duration: 0.8 }}
+            >
+              {stats.map((stat, index) => (
+                <GlanceStatCard key={stat.label} stat={stat} index={index} />
+              ))}
+            </m.div>
+          </div>
+        </Section>
       <Section id="journey" defer>
-        <div className="w-full max-w-6xl mx-auto relative z-10">
+        <div className="w-full max-w-5xl mx-auto relative z-10">
           <AnimatedTitle>The Journey</AnimatedTitle>
           <m.p
-            className="text-center text-xl text-foreground/70 max-w-3xl mx-auto -mt-6 mb-16"
+            className="text-center text-lg md:text-xl text-foreground/70 max-w-2xl mx-auto -mt-8 mb-16"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.15, duration: 1 }}
+            transition={{ delay: 0.1, duration: 0.8 }}
           >
             A month of building, learning, and mapping
           </m.p>
 
-          <div className="space-y-16">
+          <div className="space-y-12">
             {eventPhases.map((phase, phaseIndex) => (
               <m.div
                 key={phase.phase}
-                initial={{ opacity: 0, y: 50 }}
+                initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 * phaseIndex, duration: 1 }}
+                transition={{ delay: 0.1, duration: 0.8 }}
               >
-                <div className="mb-6 flex flex-col items-center gap-2 text-center">
-                  <h3 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-accent-green to-accent-light-green">
+                <div className="mb-4 flex flex-col items-center gap-2 text-center">
+                  <h3 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-accent-green to-accent-light-green">
                     {phase.phase}
                   </h3>
-                  <div className="h-px w-32 bg-gradient-to-r from-transparent via-foreground/20 to-transparent" />
+                  <div className="h-px w-24 bg-gradient-to-r from-transparent via-foreground/20 to-transparent" />
                 </div>
-                <p className="mb-8 text-lg text-foreground/60 text-center">{phase.intro}</p>
+                <p className="mb-8 text-base text-foreground/60 text-center max-w-2xl mx-auto">{phase.intro}</p>
 
-                <div className="flex flex-wrap justify-center gap-8">
+                <div className="flex flex-wrap justify-center gap-6">
                   {phase.events.map((event, index) => (
                     <TiltCard
                       key={event.title}
-                      initial={{ opacity: 0, y: 30 }}
+                      initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.1 * index, duration: 0.8 }}
-                      className="w-full md:w-[calc(50%-16px)]"
+                      transition={{ delay: 0.1 * index, duration: 0.6 }}
+                      className="w-full md:w-[calc(50%-12px)] flex flex-col"
                     >
                       <div className="relative overflow-hidden aspect-video rounded-t-2xl">
                         <Image
@@ -708,7 +708,7 @@ export default function Home() {
                           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                         />
                         <span
-                          className={`absolute top-4 right-4 rounded-full px-3 py-1 text-xs font-semibold backdrop-blur ${
+                          className={`absolute top-4 right-4 rounded-full px-2.5 py-1 text-xs font-semibold backdrop-blur ${
                             event.tag === "Online"
                               ? "bg-accent-light-green/20 text-accent-light-green border border-accent-light-green/30"
                               : "bg-accent-green/20 text-accent-green border border-accent-green/30"
@@ -717,29 +717,29 @@ export default function Home() {
                           {event.tag}
                         </span>
                       </div>
-                      <div className="p-6">
-                        <div className="flex items-center gap-3 text-sm text-foreground/60 mb-3">
-                          <Calendar className="w-4 h-4" />
+                      <div className="p-6 flex-grow flex flex-col">
+                        <div className="flex items-center gap-2 text-xs text-foreground/60 mb-3 uppercase tracking-wider">
+                          <Calendar className="w-3.5 h-3.5" />
                           <span>{event.date}</span>
                           <span>•</span>
                           <span>{event.time}</span>
                         </div>
-                        <h4 className="text-2xl font-bold mb-2 text-foreground">
+                        <h4 className="text-xl font-bold mb-3 text-foreground leading-snug">
                           {event.title}
                         </h4>
                         {event.speaker && (
-                          <div className="flex items-center gap-2 text-base text-foreground/70 mb-3">
-                            <Users className="w-4 h-4 text-accent-light-green" />
+                          <div className="flex items-center gap-2 text-sm text-foreground/70 mb-2">
+                            <Users className="w-3.5 h-3.5 text-accent-light-green" />
                             <span>{event.speaker}</span>
                           </div>
                         )}
                         {event.venue && (
-                          <div className="flex items-center gap-2 text-base text-foreground/70 mb-3">
-                            <MapPin className="w-4 h-4 text-accent-green" />
+                          <div className="flex items-center gap-2 text-sm text-foreground/70 mb-3">
+                            <MapPin className="w-3.5 h-3.5 text-accent-green" />
                             <span>{event.venue}</span>
                           </div>
                         )}
-                        <p className="text-base leading-relaxed text-foreground/70">
+                        <p className="text-sm leading-relaxed text-foreground/70 flex-grow">
                           {event.desc}
                         </p>
                         {event.videoUrl && (
@@ -747,9 +747,9 @@ export default function Home() {
                             href={event.videoUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-accent-light-green transition-colors hover:text-foreground"
+                            className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-accent-light-green transition-colors hover:text-foreground"
                           >
-                            <Play className="h-4 w-4" />
+                            <Play className="h-3.5 w-3.5" />
                             Watch the session
                           </a>
                         )}
@@ -764,29 +764,29 @@ export default function Home() {
       </Section>
 
       <Section id="gallery" defer>
-        <div className="w-full max-w-6xl mx-auto relative z-10">
+        <div className="w-full max-w-5xl mx-auto relative z-10">
           <AnimatedTitle>Photo Gallery</AnimatedTitle>
           <m.p
-            className="text-center text-xl text-foreground/70 max-w-3xl mx-auto -mt-6 mb-12"
+            className="text-center text-lg md:text-xl text-foreground/70 max-w-2xl mx-auto -mt-8 mb-12"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.15, duration: 1 }}
+            transition={{ delay: 0.1, duration: 0.8 }}
           >
             A collection of our favourite moments from FOSS Hack 2026.
           </m.p>
           <div className="relative">
             <m.div
-              className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4"
-              initial={{ opacity: 0, y: 50 }}
+              className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4"
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 1 }}
+              transition={{ delay: 0.1, duration: 0.8 }}
             >
               {galleryImages
                 .slice(0, showAllGallery ? galleryImages.length : 8)
                 .map((img, index) => (
                   <div
                     key={index}
-                    className="group relative overflow-hidden rounded-2xl border border-foreground/10 aspect-square cursor-pointer transition-transform duration-500 hover:scale-[1.03]"
+                    className="group relative overflow-hidden rounded-xl border border-foreground/10 aspect-square cursor-pointer transition-transform duration-500 hover:scale-[1.02] shadow-sm"
                     onClick={() => setActiveImage(index)}
                   >
                     <Image
@@ -804,15 +804,15 @@ export default function Home() {
               <m.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.3, duration: 0.8 }}
-                className="pointer-events-none absolute inset-0 z-10 flex items-end justify-center bg-gradient-to-t from-black/95 via-black/45 to-transparent rounded-2xl"
+                transition={{ delay: 0.2, duration: 0.6 }}
+                className="pointer-events-none absolute inset-0 z-10 flex items-end justify-center bg-gradient-to-t from-background via-background/40 to-transparent rounded-xl"
               >
                 <button
                   onClick={() => setShowAllGallery(true)}
-                  className="pointer-events-auto mb-10 flex items-center gap-2 rounded-full border border-foreground/30 px-8 py-3.5 text-base font-semibold text-white bg-black/40 backdrop-blur transition-colors duration-300 hover:border-foreground/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(var(--accent-light-green),0.6)]"
+                  className="pointer-events-auto mb-8 flex items-center gap-2 rounded-full border border-foreground/20 px-6 py-2.5 text-sm font-semibold text-foreground bg-background/80 backdrop-blur transition-all duration-300 hover:border-foreground/40 hover:bg-background shadow-sm"
                 >
                   Show More
-                  <ArrowDown className="h-4 w-4 transition-transform duration-300" />
+                  <ArrowDown className="h-4 w-4" />
                 </button>
               </m.div>
             )}
@@ -822,11 +822,11 @@ export default function Home() {
                 onClick={() => setShowAllGallery(false)}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.8 }}
-                className="mx-auto mt-10 flex items-center gap-2 rounded-full border border-foreground/30 px-8 py-3.5 text-base font-semibold text-foreground transition-colors duration-300 hover:border-foreground/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(var(--accent-light-green),0.6)]"
+                transition={{ delay: 0.1, duration: 0.6 }}
+                className="mx-auto mt-8 flex items-center gap-2 rounded-full border border-foreground/20 px-6 py-2.5 text-sm font-semibold text-foreground bg-background/50 backdrop-blur transition-all duration-300 hover:border-foreground/40 hover:bg-background shadow-sm"
               >
                 Show Less
-                <ArrowUp className="h-4 w-4 transition-transform duration-300" />
+                <ArrowUp className="h-4 w-4" />
               </m.button>
             )}
           </div>
@@ -849,26 +849,26 @@ export default function Home() {
       </Section>
 
       <Section id="testimonials" defer>
-        <div className="w-full max-w-6xl mx-auto relative z-10">
+        <div className="w-full max-w-5xl mx-auto relative z-10">
           <AnimatedTitle>What People Said</AnimatedTitle>
           <m.div
-            className="grid grid-cols-1 md:grid-cols-3 gap-8"
-            initial={{ opacity: 0, y: 50 }}
+            className="flex w-full overflow-x-auto gap-6 pb-8 snap-x snap-mandatory scroll-smooth [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 1 }}
+            transition={{ delay: 0.1, duration: 0.8 }}
           >
             {testimonials.map((t, index) => (
               <div
                 key={index}
-                className="rounded-2xl border border-foreground/10 bg-background/60 backdrop-blur p-8 flex flex-col"
+                className="flex-none w-[85vw] sm:w-[350px] snap-center rounded-2xl border border-foreground/10 bg-background/60 backdrop-blur p-6 sm:p-8 flex flex-col shadow-sm"
               >
-                <Quote className="h-8 w-8 mb-4 text-accent-light-green" />
-                <p className="flex-1 text-lg leading-relaxed text-foreground/80">
+                <Quote className="h-6 w-6 mb-4 text-accent-light-green opacity-80" />
+                <p className="flex-1 text-base leading-relaxed text-foreground/80 italic">
                   &ldquo;{t.quote}&rdquo;
                 </p>
-                <div className="mt-6">
-                  <div className="font-semibold">{t.author}</div>
-                  <div className="text-sm text-foreground/60">{t.role}</div>
+                <div className="mt-6 pt-4 border-t border-foreground/5">
+                  <div className="font-semibold text-sm">{t.author}</div>
+                  <div className="text-xs text-foreground/50 tracking-wide uppercase mt-0.5">{t.role}</div>
                 </div>
               </div>
             ))}
@@ -880,23 +880,28 @@ export default function Home() {
         <div className="max-w-5xl mx-auto relative z-10">
           <AnimatedTitle>Our Posts</AnimatedTitle>
           <m.p
-            className="text-center text-xl text-foreground/70 max-w-3xl mx-auto -mt-6 mb-12"
+            className="text-center text-lg md:text-xl text-foreground/70 max-w-2xl mx-auto -mt-8 mb-10"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.15, duration: 1 }}
+            transition={{ delay: 0.1, duration: 0.8 }}
           >
             A few moments we shared online.
           </m.p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          <m.div 
+            className="flex w-full md:justify-center overflow-x-auto gap-6 pb-8 snap-x snap-mandatory scroll-smooth [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, duration: 0.8 }}
+          >
             {socialPosts.map((post, index) => (
               <a
                 key={index}
                 href={post.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group rounded-2xl border border-foreground/10 bg-background/60 backdrop-blur overflow-hidden hover:border-foreground/30 transition-colors duration-300 flex flex-col"
+                className="flex-none w-[85vw] sm:w-[320px] snap-center group rounded-2xl border border-foreground/10 bg-background/60 backdrop-blur overflow-hidden hover:border-foreground/30 transition-all duration-300 flex flex-col shadow-sm hover:shadow-md"
               >
-                <div className="overflow-hidden aspect-square">
+                <div className="overflow-hidden aspect-square relative border-b border-foreground/5">
                   <Image
                     src={post.image}
                     alt={post.caption}
@@ -906,83 +911,37 @@ export default function Home() {
                   />
                 </div>
                 <div className="p-5 flex-1 flex flex-col">
-                  <div className="text-xs font-semibold uppercase tracking-wide text-accent-light-green mb-2">
+                  <div className="text-[10px] font-bold uppercase tracking-wider text-accent-light-green mb-1.5">
                     {post.platform}
                   </div>
-                  <p className="text-base leading-relaxed text-foreground/70 flex-1">
+                  <p className="text-sm leading-relaxed text-foreground/80 flex-1">
                     {post.caption}
                   </p>
-                  <div className="mt-4 flex items-center gap-2 text-sm font-semibold text-foreground/60 group-hover:text-foreground transition-colors">
+                  <div className="mt-4 flex items-center gap-1.5 text-xs font-semibold text-foreground/50 group-hover:text-foreground transition-colors">
                     View Post
-                    <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                    <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
                   </div>
                 </div>
               </a>
             ))}
-          </div>
-        </div>
-      </Section>
-
-      <Section id="presence" defer>
-        <div className="max-w-5xl mx-auto relative z-10">
-          <AnimatedTitle>Our Online Presence</AnimatedTitle>
-          <m.p
-            className="text-center text-xl text-foreground/70 max-w-3xl mx-auto -mt-6 mb-10"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.15, duration: 1 }}
-          >
-            Relive the moments, see the photos and stay connected with the
-            community.
-          </m.p>
-          <m.div
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 1 }}
-          >
-            {presenceLinks.map((link, index) => (
-              <div key={link.title} className="relative group/link">
-                <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-accent-light-green/18 via-accent-purple/14 to-accent-green/10 opacity-0 blur-xl group-hover/link:opacity-100 transition-opacity duration-500" />
-                <Link
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="relative flex items-center justify-between gap-4 p-6 rounded-2xl transition-colors duration-300 border bg-background/60 text-foreground border-foreground/10 hover:border-foreground/30 hover:bg-background/80"
-                >
-                  <div className="flex items-center gap-4">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-foreground/8">
-                      <link.icon className="h-5 w-5 text-accent-light-green" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-semibold text-foreground">
-                        {link.title}
-                      </h3>
-                      <p className="text-sm text-foreground/60">{link.desc}</p>
-                    </div>
-                  </div>
-                  <ArrowRight className="h-5 w-5 flex-shrink-0 text-foreground/50 transition-transform duration-300 group-hover/link:translate-x-1" />
-                </Link>
-              </div>
-            ))}
           </m.div>
         </div>
       </Section>
-
+ 
       <Section id="credits" defer>
         <div className="max-w-5xl mx-auto relative z-10">
           <AnimatedTitle>Our Sponsors & Communities</AnimatedTitle>
 
           <m.div
-            className="flex flex-wrap justify-center gap-6 mb-12"
-            initial={{ opacity: 0, y: 30 }}
+            className="flex flex-wrap justify-center gap-4 sm:gap-6 mb-12"
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1, duration: 0.8 }}
+            transition={{ delay: 0.1, duration: 0.6 }}
           >
             {sponsors.map((sponsor, index) => (
               <div
                 key={index}
-                className="rounded-2xl border border-foreground/10 bg-white p-4 flex items-center justify-center min-h-[90px] w-[calc(50%-12px)] md:w-[calc(25%-18px)]"
+                className="rounded-2xl border border-foreground/10 bg-white p-4 flex items-center justify-center min-h-[70px] w-[calc(33.33%-12px)] sm:w-[calc(25%-18px)] shadow-sm"
               >
                 {sponsor.url ? (
                   <Link
@@ -1002,26 +961,26 @@ export default function Home() {
           </m.div>
 
           <m.div
-            className="flex flex-wrap justify-center gap-6 mb-16"
-            initial={{ opacity: 0, y: 30 }}
+            className="flex w-full overflow-x-auto gap-4 sm:gap-6 mb-12 pb-6 snap-x snap-mandatory scroll-smooth [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.8 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
           >
             {communities.map((community, index) => (
               <div
                 key={index}
-                className="rounded-xl bg-background/80 flex flex-col items-center justify-center border border-foreground/10 p-4 w-[calc(50%-12px)] sm:w-[calc(33.333%-16px)] md:w-[calc(25%-18px)]"
+                className="flex-none w-[140px] sm:w-[160px] snap-center rounded-xl bg-background/50 backdrop-blur flex flex-col items-center justify-center border border-foreground/10 p-4 shadow-sm transition-transform hover:-translate-y-0.5"
               >
-                <div className="relative w-full h-20">
+                <div className="relative w-full h-12 mb-2">
                   <Image
                     src={community.logo}
                     fill
-                    sizes="160px"
+                    sizes="120px"
                     alt={community.name}
                     className="object-contain"
                   />
                 </div>
-                <h3 className="mt-3 text-base font-semibold text-foreground text-center">
+                <h3 className="text-xs font-medium text-foreground text-center">
                   {community.name}
                 </h3>
               </div>
@@ -1031,32 +990,32 @@ export default function Home() {
       </Section>
 
       <Section id="team" defer>
-        <div className="max-w-6xl mx-auto relative z-10">
+        <div className="max-w-5xl mx-auto relative z-10">
           <AnimatedTitle>Thank You, Team</AnimatedTitle>
           <m.p
-            className="text-center text-xl text-foreground/70 max-w-3xl mx-auto -mt-6 mb-12"
+            className="text-center text-lg md:text-xl text-foreground/70 max-w-2xl mx-auto -mt-8 mb-12"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.15, duration: 1 }}
+            transition={{ delay: 0.1, duration: 0.6 }}
           >
             None of this would have been possible without our incredible
             organizing team.
           </m.p>
           <m.div
-            className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8"
-            initial={{ opacity: 0, y: 50 }}
+            className="flex w-full overflow-x-auto gap-4 sm:gap-6 pt-4 pb-8 snap-x snap-mandatory scroll-smooth [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 1 }}
+            transition={{ delay: 0.2, duration: 0.8 }}
           >
             {team.map((member, i) => (
-              <div key={i} className="text-center">
-                <div className="w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-4 rounded-full flex items-center justify-center bg-foreground/8 transition-transform duration-300 hover:scale-105">
-                  <Users className="w-8 h-8 sm:w-10 sm:h-10 text-foreground" />
+              <div key={i} className="flex-none w-[120px] sm:w-[140px] snap-start text-center group">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-3 rounded-full flex items-center justify-center bg-foreground/5 border border-foreground/10 transition-all duration-300 group-hover:scale-105 group-hover:bg-foreground/10 group-hover:border-foreground/20">
+                  <Users className="w-6 h-6 sm:w-8 sm:h-8 text-foreground/70 group-hover:text-foreground" />
                 </div>
-                <h3 className="text-lg sm:text-xl font-medium mb-1 text-foreground">
+                <h3 className="text-sm font-semibold mb-0.5 text-foreground leading-snug">
                   {member.name}
                 </h3>
-                <p className="text-sm text-foreground/60">{member.title}</p>
+                <p className="text-[11px] text-foreground/50 px-1">{member.title}</p>
               </div>
             ))}
           </m.div>
@@ -1064,31 +1023,31 @@ export default function Home() {
       </Section>
 
      <Section id="volunteers" defer>
-        <div className="max-w-6xl mx-auto relative z-10">
+        <div className="max-w-5xl mx-auto relative z-10">
           <AnimatedTitle>New Faces</AnimatedTitle>
           <m.p
-            className="text-center text-xl text-foreground/70 max-w-3xl mx-auto -mt-6 mb-12"
+            className="text-center text-lg md:text-xl text-foreground/70 max-w-2xl mx-auto -mt-8 mb-12"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.15, duration: 1 }}
+            transition={{ delay: 0.1, duration: 0.6 }}
           >
             Thank you for your Contribution!
           </m.p>
           <m.div
-            className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8"
-            initial={{ opacity: 0, y: 50 }}
+            className="flex w-full overflow-x-auto gap-4 sm:gap-6 pt-4 pb-8 snap-x snap-mandatory scroll-smooth [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 1 }}
+            transition={{ delay: 0.2, duration: 0.8 }}
           >
             {volunteers.map((member, i) => (
-              <div key={i} className="text-center">
-                <div className="w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-4 rounded-full flex items-center justify-center bg-foreground/8 transition-transform duration-300 hover:scale-105">
-                  <Users className="w-8 h-8 sm:w-10 sm:h-10 text-foreground" />
+              <div key={i} className="flex-none w-[120px] sm:w-[140px] snap-start text-center group">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-3 rounded-full flex items-center justify-center bg-foreground/5 border border-foreground/10 transition-all duration-300 group-hover:scale-105 group-hover:bg-foreground/10 group-hover:border-foreground/20">
+                  <Users className="w-6 h-6 sm:w-8 sm:h-8 text-foreground/70 group-hover:text-foreground" />
                 </div>
-                <h3 className="text-lg sm:text-xl font-medium mb-1 text-foreground">
+                <h3 className="text-sm font-semibold mb-0.5 text-foreground leading-snug">
                   {member.name}
                 </h3>
-                <p className="text-sm text-foreground/60">{member.title}</p>
+                <p className="text-[11px] text-foreground/50 px-1">{member.title}</p>
               </div>
             ))}
           </m.div>
@@ -1096,22 +1055,45 @@ export default function Home() {
       </Section>
 
       <m.footer
-        className="relative z-10 border-t border-foreground/15 bg-background/60 backdrop-blur-md py-14 px-8"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1.5 }}
-      >
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-foreground/5 to-transparent" />
-        <div className="max-w-5xl mx-auto text-center text-foreground/70">
-          <p className="text-xl">
-            &copy; 2026 FOSS Hack Delhi-NCR. All rights reserved.
-          </p>
-          <p className="mt-2 text-foreground/50">
-            Made with ❤ by The FOSS Club
-          </p>
-        </div>
-      </m.footer>
-    </div>
+          className="relative z-10 border-t border-foreground/10 bg-background/80 backdrop-blur-md py-10 sm:py-14 px-6"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+        >
+          <div className="max-w-5xl mx-auto flex flex-col gap-8">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="text-center md:text-left">
+                <h3 className="text-lg font-bold text-foreground mb-1">Our Online Presence</h3>
+                <p className="text-sm text-foreground/60">Stay connected with the community and relive the moments.</p>
+              </div>
+              <div className="flex flex-wrap items-center justify-center gap-3">
+                {presenceLinks.map((link) => (
+                  <Link
+                    key={link.title}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={link.title}
+                    title={link.title}
+                    className="flex h-11 w-11 items-center justify-center rounded-full bg-foreground/5 border border-foreground/10 text-foreground/70 transition-all duration-300 hover:scale-110 hover:bg-foreground/10 hover:border-foreground/20 hover:text-accent-light-green shadow-sm"
+                  >
+                    <link.icon className="h-5 w-5" />
+                  </Link>
+                ))}
+              </div>
+            </div>
+            <div className="h-px w-full bg-foreground/10" />
+            <div className="flex flex-col sm:flex-row justify-between items-center text-sm text-foreground/60 gap-3 text-center sm:text-left">
+              <p>
+                &copy; 2026 FOSS Hack Delhi-NCR. All rights reserved.
+              </p>
+              <p className="flex items-center gap-1.5">
+                Made with <span className="text-green-500">❤</span> by The FOSS Club
+              </p>
+            </div>
+          </div>
+        </m.footer>
+      </div>
     </LazyMotion>
   );
 }

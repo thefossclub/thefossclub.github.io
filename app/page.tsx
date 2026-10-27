@@ -329,26 +329,32 @@ export default function Home() {
       </section>
 
       {/* Projects Section */}
-      <section ref={sectionRefs.projects} id="projects" className="py-10 sm:py-16 md:py-20 relative z-10 px-2 sm:px-4 lg:px-8">
-        <div className="container mx-auto">
-          <h2 className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green">
-            Our Projects
-          </h2>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
-            {projects.map((project, index) => (
-              <ProjectCard
-                key={index}
-                title={project.title}
-                description={project.description}
-                link={project.link}
-                index={index}
-              />
-            ))}
+        <section 
+          ref={sectionRefs.projects} 
+          id="projects" 
+          className="scroll-mt-24 py-10 sm:py-16 md:py-20 relative z-10 px-2 sm:px-4 lg:px-8"
+        >
+          <div className="container mx-auto">
+            <h2 className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green">
+              Our Projects
+            </h2>
+            <div className="flex overflow-x-auto items-stretch gap-4 sm:gap-6 md:gap-8 pb-6 snap-x snap-proximity scrollbar-hide">
+              {projects.map((project, index) => (
+                <div
+                  key={index}
+                  className="flex-none w-[85%] sm:w-[350px] md:w-[400px] snap-start flex flex-col"
+                >
+                  <ProjectCard
+                    title={project.title}
+                    description={project.description}
+                    link={project.link}
+                    index={index}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
-
+        </section>
         {/* Upcoming Events Section, disabled for now
         <section className="py-10 sm:py-16 md:py-20 relative z-10 px-2 sm:px-4 lg:px-8">
           <div className="container mx-auto">
@@ -376,27 +382,33 @@ export default function Home() {
         */}
 
       {/* Events Section */}
-      <section ref={sectionRefs.events} id="events" className="py-10 sm:py-16 md:py-20 relative z-10 px-2 sm:px-4 lg:px-8">
-        <div className="container mx-auto">
-          <h2 className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green">
-            Events Concluded
-          </h2>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
-            {events.map((event, index) => (
-              <EventCard
-                key={index}
-                title={event.title}
-                date={event.date}
-                description={event.description}
-                image={event.image}
-                index={index}
-                link={event.link}
-              />
-            ))}
-          </div>
-
-          {/*<m.div
+      <section
+          ref={sectionRefs.events}
+          id="events"
+          className="scroll-mt-24 py-10 sm:py-16 md:py-20 relative z-10 px-2 sm:px-4 lg:px-8"
+        >
+          <div className="container mx-auto">
+            <h2 className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green">
+              Events Concluded
+            </h2>
+            <div className="flex overflow-x-auto items-stretch gap-4 sm:gap-6 md:gap-8 pb-6 snap-x snap-proximity scrollbar-hide">
+              {[...events].reverse().map((event, index) => (
+                <div 
+                  key={index}
+                  className="flex-none w-[85%] sm:w-[350px] md:w-[400px] snap-start flex flex-col"
+                >
+                  <EventCard
+                    title={event.title}
+                    date={event.date}
+                    description={event.description}
+                    image={event.image}
+                    index={index}
+                    link={event.link}
+                  />
+                </div>
+              ))}
+            </div>
+            {/*<m.div
             className="mt-8 sm:mt-12 md:mt-16 p-4 sm:p-6 md:p-8 rounded-3xl border border-green-900/50 bg-gradient-to-r from-green-900/10 to-green-900/30 dark:from-green-900/30 dark:to-green-900/50 shadow-xl shadow-green-500/10"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -829,226 +841,123 @@ export default function Home() {
       </section>
 
       {/* Footer - Render only when mounted */}
-      {mounted && (
-        <footer className="py-8 sm:py-10 md:py-12 border-t border-border px-2 sm:px-4 lg:px-8 bg-background">
-          <div className="container mx-auto">
-            <div className="flex flex-col md:flex-row justify-between items-center mb-8 sm:mb-10 md:mb-12">
-              <div className="mb-6 sm:mb-8 md:mb-0 text-center md:text-left">
-                <div className="flex items-center justify-center md:justify-start mb-4">
-                  <div className="w-10 h-10 md:w-12 md:h-12 bg-white flex items-center justify-center mr-2 sm:mr-3 md:mr-4 glow-effect shadow-lg shadow-green-500/20 ">
-                    <img
-                      src="/LogoFOSS.webp"
-                      alt="FC"
-                      className="w-16 h-16 md:w-20 md:h-20 object-contain mx-auto"
-                    />
+        {mounted && (
+          <footer className="py-8 md:py-12 border-t border-border px-2 sm:px-4 lg:px-8 bg-background relative overflow-hidden">
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80%] h-32 bg-green-500/5 blur-[100px] pointer-events-none"></div>
+
+            <div className="container mx-auto relative z-10">
+              <div className="flex flex-col md:flex-row justify-between items-center md:items-start mb-10 md:mb-16 gap-8">
+                <div className="flex flex-col items-center md:items-start text-center md:text-left max-w-sm">
+                  <div className="flex items-center mb-4">
+                    <div className="w-10 h-10 bg-white flex items-center justify-center mr-3 glow-effect shadow-lg shadow-green-500/20 rounded-xl overflow-hidden">
+                      <img
+                        src="/LogoFOSS.webp"
+                        alt="FC"
+                        className="w-14 h-14 object-contain mx-auto"
+                      />
+                    </div>
+                    <h3 className="text-xl font-bold text-foreground tracking-tight">
+                      The FOSS Club
+                    </h3>
                   </div>
-                  <h3 className="text-base sm:text-lg font-bold text-foreground">The FOSS Club</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+                    Learn, build, and collaborate with fellow open-source
+                    enthusiasts in a community dedicated to free and open source
+                    software.
+                  </p>
+                  <div className="flex flex-wrap justify-center md:justify-start gap-2">
+                    <a href="https://github.com/thefossclub" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-muted/50 rounded-lg text-muted-foreground hover:text-green-500 hover:bg-muted transition-all shadow-sm">
+                      <FaGithub className="h-4 w-4" />
+                      <span className="sr-only">GitHub</span>
+                    </a>
+                    <a href="https://discord.gg/BgHwhRZg3r" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-muted/50 rounded-lg text-muted-foreground hover:text-green-500 hover:bg-muted transition-all shadow-sm">
+                      <FaDiscord className="h-4 w-4" />
+                      <span className="sr-only">Discord</span>
+                    </a>
+                    <a href="https://twitter.com/thefossclub" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-muted/50 rounded-lg text-muted-foreground hover:text-green-500 hover:bg-muted transition-all shadow-sm">
+                      <FaTwitter className="h-4 w-4" />
+                      <span className="sr-only">Twitter</span>
+                    </a>
+                    <a href="https://linkedin.com/company/thefossclub" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-muted/50 rounded-lg text-muted-foreground hover:text-green-500 hover:bg-muted transition-all shadow-sm">
+                      <FaLinkedin className="h-4 w-4" />
+                      <span className="sr-only">LinkedIn</span>
+                    </a>
+                    <a href="https://instagram.com/thefossclub" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-muted/50 rounded-lg text-muted-foreground hover:text-green-500 hover:bg-muted transition-all shadow-sm">
+                      <FaInstagram className="h-4 w-4" />
+                      <span className="sr-only">Instagram</span>
+                    </a>
+                    <a href="https://matrix.to/#/#thefossclub:matrix.org" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-muted/50 rounded-lg text-muted-foreground hover:text-green-500 hover:bg-muted transition-all shadow-sm">
+                      <PiMatrixLogoFill className="h-4 w-4" />
+                      <span className="sr-only">Matrix</span>
+                    </a>
+                    <a href="https://mas.to/@thefossclub" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-muted/50 rounded-lg text-muted-foreground hover:text-green-500 hover:bg-muted transition-all shadow-sm">
+                      <FaMastodon className="h-4 w-4" />
+                      <span className="sr-only">Mastodon</span>
+                    </a>
+                  </div>
                 </div>
-                <p className="text-muted-foreground max-w-xs sm:max-w-md text-sm sm:text-base md:text-lg">
-                  Learn, build, and collaborate with fellow open-source enthusiasts in a community dedicated to free and
-                  open source software.
+
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 w-full md:w-auto text-left">
+                  <div className="flex flex-col">
+                    <h3 className="text-sm font-bold tracking-wider uppercase text-foreground mb-4 relative inline-block after:content-[''] after:absolute after:-bottom-1.5 after:left-0 after:w-6 after:h-0.5 after:bg-green-500 after:rounded-full">
+                      Quick Links
+                    </h3>
+                    <ul className="space-y-3 text-sm">
+                      <li><Link href="#home" className="text-muted-foreground hover:text-green-500 transition-all hover:translate-x-1 inline-block">Home</Link></li>
+                      <li><Link href="#about" className="text-muted-foreground hover:text-green-500 transition-all hover:translate-x-1 inline-block">About</Link></li>
+                      <li><Link href="#projects" className="text-muted-foreground hover:text-green-500 transition-all hover:translate-x-1 inline-block">Projects</Link></li>
+                      <li><Link href="#events" className="text-muted-foreground hover:text-green-500 transition-all hover:translate-x-1 inline-block">Events</Link></li>
+                    </ul>
+                  </div>
+                  <div className="flex flex-col">
+                    <h3 className="text-sm font-bold tracking-wider uppercase text-foreground mb-4 relative inline-block after:content-[''] after:absolute after:-bottom-1.5 after:left-0 after:w-6 after:h-0.5 after:bg-green-500 after:rounded-full">
+                      Organization
+                    </h3>
+                    <ul className="space-y-3 text-sm">
+                      <li><Link href="https://github.com/thefossclub/CodeofConduct" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-green-500 transition-all hover:translate-x-1 inline-block">Code of Conduct</Link></li>
+                      <li><Link href="https://github.com/thefossclub/Branding" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-green-500 transition-all hover:translate-x-1 inline-block">Branding</Link></li>
+                      <li><Link href="https://github.com/thefossclub/whitepaper" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-green-500 transition-all hover:translate-x-1 inline-block">Whitepaper</Link></li>
+                      <li><Link href="https://github.com/thefossclub/Resources" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-green-500 transition-all hover:translate-x-1 inline-block">Resources</Link></li>
+                    </ul>
+                  </div>
+                  <div className="flex flex-col col-span-2 md:col-span-1">
+                    <h3 className="text-sm font-bold tracking-wider uppercase text-foreground mb-4 relative inline-block after:content-[''] after:absolute after:-bottom-1.5 after:left-0 after:w-6 after:h-0.5 after:bg-green-500 after:rounded-full">
+                      Contact
+                    </h3>
+                    <ul className="space-y-3 text-sm">
+                      <li><Link href="https://linktr.ee/thefossclub" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-green-500 transition-all hover:translate-x-1 inline-block">LinkTree</Link></li>
+                      <li><Link href="mailto:contact@thefossclub.org" className="text-muted-foreground hover:text-green-500 transition-all hover:translate-x-1 inline-block">Email Us</Link></li>
+                      <li><Link href="https://discord.gg/BgHwhRZg3r" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-green-500 transition-all hover:translate-x-1 inline-block">Discord</Link></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div className="pt-6 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4 relative">
+                <p className="text-muted-foreground text-xs sm:text-sm text-center md:text-left">
+                  © {new Date().getFullYear()} The FOSS Club. All rights reserved.
                 </p>
-              </div>
-              <div className="flex flex-wrap justify-center gap-2 sm:gap-4 md:gap-6">
-                <a
-                  href="https://github.com/thefossclub"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2.5 md:p-3 bg-muted rounded-full text-muted-foreground hover:text-green-500 dark:hover:text-green-400 hover:bg-muted/80 transition-all shadow-md hover:shadow-green-500/20"
-                >
-                  <FaGithub className="h-5 w-5 md:h-6 md:w-6" />
-                  <span className="sr-only">GitHub</span>
-                </a>
-                <a
-                  href="https://discord.gg/BgHwhRZg3r"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2.5 md:p-3 bg-muted rounded-full text-muted-foreground hover:text-green-500 dark:hover:text-green-400 hover:bg-muted/80 transition-all shadow-md hover:shadow-green-500/20"
-                >
-                  <FaDiscord className="h-5 w-5 md:h-6 md:w-6" />
-                  <span className="sr-only">Discord</span>
-                </a>
-                <a
-                  href="https://twitter.com/thefossclub"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2.5 md:p-3 bg-muted rounded-full text-muted-foreground hover:text-green-500 dark:hover:text-green-400 hover:bg-muted/80 transition-all shadow-md hover:shadow-green-500/20"
-                >
-                  <FaTwitter className="h-5 w-5 md:h-6 md:w-6" />
-                  <span className="sr-only">Twitter</span>
-                </a>
-                <a
-                  href="https://linkedin.com/company/thefossclub"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2.5 md:p-3 bg-muted rounded-full text-muted-foreground hover:text-green-500 dark:hover:text-green-400 hover:bg-muted/80 transition-all shadow-md hover:shadow-green-500/20"
-                >
-                  <FaLinkedin className="h-5 w-5 md:h-6 md:w-6" />
-                  <span className="sr-only">LinkedIn</span>
-                </a>
-                <a
-                  href="https://instagram.com/thefossclub"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2.5 md:p-3 bg-muted rounded-full text-muted-foreground hover:text-green-500 dark:hover:text-green-400 hover:bg-muted/80 transition-all shadow-md hover:shadow-green-500/20"
-                >
-                  <FaInstagram className="h-5 w-5 md:h-6 md:w-6" />
-                  <span className="sr-only">Instagram</span>
-                </a>
-                <a
-                  href="https://matrix.to/#/#thefossclub:matrix.org"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2.5 md:p-3 bg-muted rounded-full text-muted-foreground hover:text-green-500 dark:hover:text-green-400 hover:bg-muted/80 transition-all shadow-md hover:shadow-green-500/20"
-                >
-                  <PiMatrixLogoFill className="h-5 w-5 md:h-6 md:w-6" />
-                  <span className="sr-only">Matrix</span>
-                </a>   
-                <a
-                  href="https://mas.to/@thefossclub"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2.5 md:p-3 bg-muted rounded-full text-muted-foreground hover:text-green-500 dark:hover:text-green-400 hover:bg-muted/80 transition-all shadow-md hover:shadow-green-500/20"
-                >
-                  <FaMastodon className="h-5 w-5 md:h-6 md:w-6" />
-                  <span className="sr-only">Mastodon</span>
-                </a>   
-              </div>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-10 mb-6 sm:mb-8">
-              <div className="p-5 md:p-6 rounded-2xl border border-border bg-card shadow-md">
-                <h3 className="text-lg sm:text-xl font-semibold mb-3 md:mb-4 text-gradient-green">Quick Links</h3>
-                <ul className="space-y-2 md:space-y-3 text-sm sm:text-base">
-                  <li>
-                    <Link
-                      href="#home"
-                      className="text-muted-foreground hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
-                    >
-                      Home
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="#about"
-                      className="text-muted-foreground hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
-                    >
-                      About
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="#projects"
-                      className="text-muted-foreground hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
-                    >
-                      Projects
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="#events"
-                      className="text-muted-foreground hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
-                    >
-                      Events
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-              <div className="p-5 md:p-6 rounded-2xl border border-border bg-card shadow-md">
-                <h3 className="text-lg sm:text-xl font-semibold mb-3 md:mb-4 text-gradient-green">Organization</h3>
-                <ul className="space-y-2 md:space-y-3 text-sm sm:text-base">
-                  <li>
-                    <Link
-                      href="https://github.com/thefossclub/CodeofConduct"
-                      target="_blank"
-                      className="text-muted-foreground hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
-                    >
-                      Code of Conduct
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="https://github.com/thefossclub/Branding"
-                      className="text-muted-foreground hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
-                    >
-                      Branding
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="https://github.com/thefossclub/whitepaper"
-                      className="text-muted-foreground hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
-                    >
-                      whitepaper
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="https://github.com/thefossclub/Resources"
-                      className="text-muted-foreground hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
-                    >
-                      Resources
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-              <div className="p-5 md:p-6 rounded-2xl border border-border bg-card shadow-md">
-                <h3 className="text-lg sm:text-xl font-semibold mb-3 md:mb-4 text-gradient-green">Contact</h3>
-                <ul className="space-y-2 md:space-y-3 text-sm sm:text-base">
-                  <li>
-                    <Link
-                      href="https://linktr.ee/thefossclub"
-                      target="_blank"
-                      className="text-muted-foreground hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
-                    >
-                      LinkTree
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="mailto:contact@thefossclub.org"
-                      className="text-muted-foreground hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
-                    >
-                      Email Us
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="https://discord.gg/BgHwhRZg3r"
-                      className="text-muted-foreground hover:text-green-500 dark:hover:text-green-400 transition-colors footer-link"
-                    >
-                      Join Discord
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-            </div>
+                <p className="text-muted-foreground text-xs sm:text-sm text-center md:text-right pr-0 md:pr-12">
+                  Made with <span className="text-green-500">💚</span> by open source enthusiasts
+                </p>
 
-            <div className="text-center pt-4 sm:pt-6 border-t border-border relative">
-              <p className="text-muted-foreground text-sm sm:text-base">© {new Date().getFullYear()} The FOSS Club. All rights reserved.</p>
-              <p className="text-muted-foreground mt-1 md:mt-2 text-xs sm:text-sm">Made with 💚 by open source enthusiasts</p>
-
-              <button
-                onClick={() => {
-                  if (window.lenis) {
-                    // @ts-expect-error - lenis is added to window by SmoothScroll component
-                    window.lenis.scrollTo(0, { duration: 1.5 })
-                  } else {
-                    window.scrollTo({ top: 0, behavior: 'smooth' })
-                  }
-                }}
-                className="absolute right-0 bottom-0 mb-0 mr-0 group bg-gradient-green p-2 sm:p-2.5 md:p-3 rounded-full text-white hover:opacity-90 transition-all shadow-lg hover:shadow-green-500/30 flex items-center justify-center"
-                aria-label="Back to top"
-              >
-                <ChevronUp className="h-4 w-4 md:h-5 md:w-5 transition-transform group-hover:-translate-y-0.5" />
-                <span className="absolute right-full mr-2 text-sm bg-gray-900 text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-300 pointer-events-none hidden sm:block">
-                  Back to Top
-                </span>
-              </button>
+                <button
+                  onClick={() => {
+                    if (window.lenis) {
+                      // @ts-expect-error - lenis is added to window by SmoothScroll component
+                      window.lenis.scrollTo(0, { duration: 1.5 });
+                    } else {
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    }
+                  }}
+                  className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 group bg-muted hover:bg-green-500/10 border border-transparent hover:border-green-500/30 p-2.5 rounded-xl text-foreground hover:text-green-500 transition-all flex items-center justify-center"
+                  aria-label="Back to top"
+                >
+                  <ChevronUp className="h-4 w-4 transition-transform group-hover:-translate-y-0.5" />
+                </button>
+              </div>
             </div>
-          </div>
-        </footer>
-      )}
-    </div>
+          </footer>
+        )}    </div>
     </LazyMotion>
   )
 }
