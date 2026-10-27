@@ -914,10 +914,10 @@ export default function Home() {
                       Organization
                     </h3>
                     <ul className="space-y-3 text-sm">
-                      <li><Link href="https://github.com/thefossclub/CodeofConduct" target="_blank" className="text-muted-foreground hover:text-green-500 transition-all hover:translate-x-1 inline-block">Code of Conduct</Link></li>
-                      <li><Link href="https://github.com/thefossclub/Branding" className="text-muted-foreground hover:text-green-500 transition-all hover:translate-x-1 inline-block">Branding</Link></li>
-                      <li><Link href="https://github.com/thefossclub/whitepaper" className="text-muted-foreground hover:text-green-500 transition-all hover:translate-x-1 inline-block">Whitepaper</Link></li>
-                      <li><Link href="https://github.com/thefossclub/Resources" className="text-muted-foreground hover:text-green-500 transition-all hover:translate-x-1 inline-block">Resources</Link></li>
+                      <li><Link href="https://github.com/thefossclub/CodeofConduct" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-green-500 transition-all hover:translate-x-1 inline-block">Code of Conduct</Link></li>
+                      <li><Link href="https://github.com/thefossclub/Branding" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-green-500 transition-all hover:translate-x-1 inline-block">Branding</Link></li>
+                      <li><Link href="https://github.com/thefossclub/whitepaper" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-green-500 transition-all hover:translate-x-1 inline-block">Whitepaper</Link></li>
+                      <li><Link href="https://github.com/thefossclub/Resources" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-green-500 transition-all hover:translate-x-1 inline-block">Resources</Link></li>
                     </ul>
                   </div>
                   <div className="flex flex-col col-span-2 md:col-span-1">
@@ -925,9 +925,9 @@ export default function Home() {
                       Contact
                     </h3>
                     <ul className="space-y-3 text-sm">
-                      <li><Link href="https://linktr.ee/thefossclub" target="_blank" className="text-muted-foreground hover:text-green-500 transition-all hover:translate-x-1 inline-block">LinkTree</Link></li>
+                      <li><Link href="https://linktr.ee/thefossclub" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-green-500 transition-all hover:translate-x-1 inline-block">LinkTree</Link></li>
                       <li><Link href="mailto:contact@thefossclub.org" className="text-muted-foreground hover:text-green-500 transition-all hover:translate-x-1 inline-block">Email Us</Link></li>
-                      <li><Link href="https://discord.gg/BgHwhRZg3r" className="text-muted-foreground hover:text-green-500 transition-all hover:translate-x-1 inline-block">Discord</Link></li>
+                      <li><Link href="https://discord.gg/BgHwhRZg3r" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-green-500 transition-all hover:translate-x-1 inline-block">Discord</Link></li>
                     </ul>
                   </div>
                 </div>
