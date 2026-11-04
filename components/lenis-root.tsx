@@ -25,6 +25,15 @@ function GlobalLenisExposer() {
       if (anchor) {
         const href = anchor.getAttribute("href")
         if (href && href.startsWith("#")) {
+          if (href === "#") {
+            e.preventDefault()
+            lenis.scrollTo(0, {
+              offset: 0,
+              duration: 0.8,
+            })
+            return
+          }
+
           const targetElement = document.querySelector(href)
           if (targetElement) {
             e.preventDefault()

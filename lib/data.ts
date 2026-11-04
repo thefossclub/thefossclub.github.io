@@ -205,7 +205,7 @@ export const coreTeam = [
     name: "Ritesh Kumar Rana",
     role: "Community Manager",
     color: "bg-indigo-500",
-    link: "https://github.com/r17e8h/",
+    link: "https://r17e8h.is-a.dev/",
   },
   {
     name: "Sejal Madaan",
