@@ -1,6 +1,7 @@
 import type React from "react"
 import OrgTopBar from "@/components/organisation/org-topbar"
 import GridBackground from "@/components/grid-background"
+import SiteFooter from "@/components/organisation/org-footer"
 
 /**
  * Global layout wrapper for all FOSS Club organisation documents.
@@ -18,6 +19,7 @@ export default function OrganisationLayout({
       <GridBackground />
       <OrgTopBar />
       {children}
+      <SiteFooter />
     </>
   )
 }

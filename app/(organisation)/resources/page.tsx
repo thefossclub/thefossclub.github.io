@@ -2,7 +2,6 @@ import Link from "next/link"
 import { ExternalLink, BookOpen, Video, Globe, Lightbulb, Code2, FileCode, GitPullRequest } from "lucide-react"
 import OrgContentSection from "@/components/organisation/org-content-section"
 import OrgCard from "@/components/organisation/org-card"
-import OrgFooter from "@/components/organisation/org-footer"
 
 export const metadata = {
   title: "Resources | The FOSS Club",
@@ -474,8 +473,6 @@ export default function ResourcesPage() {
         </OrgCard>
       </OrgContentSection>
 
-      {/* Standard organisation footer and home navigation */}
-      <OrgFooter label="The FOSS Club — Ultimate Resource Pack" />
     </main>
   )
 }

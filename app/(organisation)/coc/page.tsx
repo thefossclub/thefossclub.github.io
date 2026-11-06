@@ -1,7 +1,6 @@
 import OrgContentSection from "@/components/organisation/org-content-section"
 import OrgCard from "@/components/organisation/org-card"
 import OrgListItem from "@/components/organisation/org-list-item"
-import OrgFooter from "@/components/organisation/org-footer"
 
 export const metadata = {
   title: "Code of Conduct | The FOSS Club",
@@ -354,8 +353,6 @@ export default function CodeOfConductPage() {
         </OrgCard>
       </OrgContentSection>
 
-      {/* Document Provenance: Standardised organisation footer and home navigation */}
-      <OrgFooter label="Code of Conduct — The FOSS Club" />
     </main>
   )
 }

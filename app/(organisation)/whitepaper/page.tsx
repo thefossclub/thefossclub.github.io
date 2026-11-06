@@ -2,7 +2,6 @@ import { ExternalLink, FileText, Download, GitBranch, Calendar, User } from "luc
 import OrgContentSection from "@/components/organisation/org-content-section"
 import OrgCard from "@/components/organisation/org-card"
 import OrgListItem from "@/components/organisation/org-list-item"
-import OrgFooter from "@/components/organisation/org-footer"
 
 export const metadata = {
   title: "Whitepaper | The FOSS Club",
@@ -852,8 +851,6 @@ export default function WhitepaperPage() {
         </OrgCard>
       </OrgContentSection>
 
-      {/* Document Provenance: Standardised organisation footer and publication timestamp */}
-      <OrgFooter label="The FOSS Club Whitepaper — Updated April 2025" />
     </main>
   )
 }
