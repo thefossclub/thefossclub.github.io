@@ -115,7 +115,7 @@ export const events = [
     date: "October 13, 2026",
     description:
       "An engaging session celebrating the 30th anniversary of KDE, featuring interactive discussions on KDE’s history, Linux desktop environments, and the open-source software ecosystem, followed by guidance on navigating the KDE community and making meaningful first contributions.",
-    image: "/kde-30th-anniversary.webp",
+    image: "/kde-30th-anniversary-2.webp",
   },
 ];
 
