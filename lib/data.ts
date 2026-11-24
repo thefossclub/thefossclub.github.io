@@ -110,6 +110,13 @@ export const events = [
       "An introductory session where participants participated in an interactive discussion about Git, Github, OSM, Linux, AI and starting open-source contributions, making first repository and contributing to the community in a meaningful way",
     image: "/the-commit-theory.webp",
   },
+  {
+    title: "KDE 30th Anniversary Celebration",
+    date: "October 13, 2026",
+    description:
+      "An engaging session celebrating the 30th anniversary of KDE, featuring interactive discussions on KDE’s history, Linux desktop environments, and the open-source software ecosystem, followed by guidance on navigating the KDE community and making meaningful first contributions.",
+    image: "/kde-30th-anniversary-2.webp",
+  },
 ];
 
 export const Mentors = [
