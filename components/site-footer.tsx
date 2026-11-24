@@ -7,7 +7,9 @@ import { FaDiscord, FaMastodon, FaGithub, FaInstagram, FaLinkedin, FaTwitter } f
 import { PiMatrixLogoFill } from "react-icons/pi"
 
 /**
- * footer used on all of the organisation subpages.
+ * Shared site-wide footer used on the homepage and all organisation subpages.
+ * Contains the FOSS Club branding, social links, quick links, organisation
+ * document links, contact info, copyright, and a scroll-to-top button.
  */
 export default function SiteFooter() {
   const [mounted, setMounted] = useState(false)

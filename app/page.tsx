@@ -18,6 +18,7 @@ import { useTheme } from "next-themes"
 import ScrollProgressIndicator from "@/components/scroll-progress-indicator"
 import ScrollIndicator from "@/components/scroll-indicator"
 import OCCScrollCard from "@/components/occ-scroll-card"
+import SiteFooter from "@/components/site-footer"
 // import UpcomingEventCard from "@/components/upcoming-event-card"
 import {projects, events, Mentors, coreTeam, tools, timelineEvents} from "@/lib/data"
 
@@ -837,6 +838,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Footer */}
+      <SiteFooter />
     </div>
     </LazyMotion>
   )
