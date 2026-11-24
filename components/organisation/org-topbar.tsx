@@ -45,14 +45,17 @@ export default function OrgTopBar({ pageTitle: customPageTitle, backHref = "/" }
     setTheme(resolvedTheme === "dark" ? "light" : "dark")
   }
 
+  const PAGE_TITLES: Record<string, string> = {
+    coc: "Code of Conduct",
+    whitepaper: "Whitepaper",
+    resources: "Resources",
+    branding: "Branding",
+  }
+
   const getPageTitle = () => {
     if (customPageTitle) return customPageTitle
-    if (!pathname) return "Code of Conduct"
-    if (pathname.includes("whitepaper")) return "Whitepaper"
-    if (pathname.includes("resources")) return "Resources"
-    if (pathname.includes("branding")) return "Branding"
-    if (pathname.includes("coc")) return "Code of Conduct"
-    return "Code of Conduct"
+    const segment = pathname?.split("/").filter(Boolean)[0] ?? ""
+    return PAGE_TITLES[segment] ?? ""
   }
 
   const activeTitle = getPageTitle()
@@ -114,10 +117,14 @@ export default function OrgTopBar({ pageTitle: customPageTitle, backHref = "/" }
                 }`}
               >
                 <span>The FOSS Club</span>
-                <span className="text-muted-foreground/40 font-normal select-none">|</span>
-                <span className="text-sm sm:text-base font-semibold text-green-500 truncate">
-                  {activeTitle}
-                </span>
+                {activeTitle && (
+                  <>
+                    <span className="text-muted-foreground/40 font-normal select-none">|</span>
+                    <span className="text-sm sm:text-base font-semibold text-green-500 truncate">
+                      {activeTitle}
+                    </span>
+                  </>
+                )}
               </div>
             </Link>
           </div>

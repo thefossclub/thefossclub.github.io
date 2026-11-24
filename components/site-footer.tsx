@@ -1,6 +1,5 @@
 "use client"
 
-import { useState, useEffect } from "react"
 import Link from "next/link"
 import { ChevronUp } from "lucide-react"
 import { FaDiscord, FaMastodon, FaGithub, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa"
@@ -12,14 +11,6 @@ import { PiMatrixLogoFill } from "react-icons/pi"
  * document links, contact info, copyright, and a scroll-to-top button.
  */
 export default function SiteFooter() {
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  if (!mounted) return null
-
   return (
     <footer className="py-8 md:py-12 border-t border-border px-2 sm:px-4 lg:px-8 bg-background relative overflow-hidden">
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80%] h-32 bg-green-500/5 blur-[100px] pointer-events-none"></div>
@@ -112,7 +103,7 @@ export default function SiteFooter() {
           </div>
         </div>
         <div className="pt-6 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4 relative">
-          <p className="text-muted-foreground text-xs sm:text-sm text-center md:text-left">
+          <p className="text-muted-foreground text-xs sm:text-sm text-center md:text-left" suppressHydrationWarning>
             © {new Date().getFullYear()} The FOSS Club. All rights reserved.
           </p>
           <p className="text-muted-foreground text-xs sm:text-sm text-center md:text-right pr-0 md:pr-12">
