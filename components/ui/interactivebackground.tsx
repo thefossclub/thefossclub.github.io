@@ -21,6 +21,12 @@ const REPULSION_FORCE = 1.8
 const FRICTION = 0.76
 const BASE_SPEED = 0.09
 const STAR_COLOR = "34,197,94"
+const OPACITY_LEVELS = 12
+const MAX_OPACITY = 0.65
+const LEVEL_FILLS = Array.from(
+  { length: OPACITY_LEVELS },
+  (_, i) => `rgba(${STAR_COLOR},${(((i + 0.5) / OPACITY_LEVELS) * MAX_OPACITY).toFixed(3)})`
+)
 
 function rand(a: number, b: number) {
   return a + Math.random() * (b - a)
@@ -78,10 +84,13 @@ export default function InteractiveBackground() {
       mouseRef.current = { x: -9999, y: -9999 }
     }
 
+    const levels: Star[][] = Array.from({ length: OPACITY_LEVELS }, () => [])
+
     const draw = () => {
       const { w, h } = sizeRef.current
       ctx.clearRect(0, 0, w, h)
       const { x: mx, y: my } = mouseRef.current
+      for (const level of levels) level.length = 0
 
       for (const s of starsRef.current) {
         const dx = s.x - mx
@@ -117,9 +126,19 @@ export default function InteractiveBackground() {
           s.twinkleSpeed = rand(0.008, 0.022)
         }
 
+        const level = Math.min(OPACITY_LEVELS - 1, Math.floor((s.opacity / MAX_OPACITY) * OPACITY_LEVELS))
+        levels[Math.max(0, level)].push(s)
+      }
+
+      for (let i = 0; i < OPACITY_LEVELS; i++) {
+        const stars = levels[i]
+        if (stars.length === 0) continue
         ctx.beginPath()
-        ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(${STAR_COLOR},${s.opacity.toFixed(3)})`
+        for (const s of stars) {
+          ctx.moveTo(s.x + s.radius, s.y)
+          ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2)
+        }
+        ctx.fillStyle = LEVEL_FILLS[i]
         ctx.fill()
       }
 
