@@ -14,12 +14,16 @@ interface EventCardProps {
 
 export default function EventCard({ title, date, description, image, link }: EventCardProps) {
   const card = (
-    <div className="h-full flex flex-col rounded-3xl overflow-hidden border border-border bg-card group shadow-lg hover:shadow-xl transition-shadow duration-300">
+    <div
+      className={`h-full flex flex-col rounded-3xl overflow-hidden border border-border bg-card shadow-lg ${
+        link ? "group transition-ui duration-200 hover:border-green-500/40" : ""
+      }`}
+    >
       <div className="relative h-48 overflow-hidden">
         <img
           src={image || "/placeholder.svg"}
           alt={title}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          className="w-full h-full object-cover transition-transform duration-300 ease-smooth group-hover:scale-[1.03]"
           loading="lazy"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent pointer-events-none"></div>

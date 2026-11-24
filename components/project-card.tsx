@@ -13,11 +13,11 @@ interface ProjectCardProps {
 export default function ProjectCard({ title, description, link, index }: ProjectCardProps) {
   return (
     <div
-      className="h-full flex flex-col p-6 rounded-3xl border border-border bg-card transition-all duration-300 group shadow-lg hover:shadow-xl hover:-translate-y-1"
+      className="h-full flex flex-col p-6 rounded-3xl border border-border bg-card shadow-lg"
     >
       <div className="h-full flex flex-col">
         <h3 
-          className="text-2xl font-bold mb-3 text-gradient-green group-hover:opacity-80 transition-opacity"
+          className="text-2xl font-bold mb-3 text-gradient-green"
         >
           {title}
         </h3>
@@ -26,11 +26,11 @@ export default function ProjectCard({ title, description, link, index }: Project
           href={link}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center text-sm font-medium text-gradient-green-dark hover:opacity-80 transition-opacity"
+          className="group/link inline-flex items-center self-start text-sm font-medium text-gradient-green-dark transition-ui hover:opacity-80"
         >
           <FaGithub className="mr-2 h-4 w-4" />
           View on GitHub
-          <span className="ml-1 transition-transform duration-300 group-hover:translate-x-1">→</span>
+          <span className="ml-1 transition-ui group-hover/link:translate-x-1">→</span>
         </Link>
       </div>
     </div>

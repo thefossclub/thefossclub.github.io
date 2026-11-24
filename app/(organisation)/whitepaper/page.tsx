@@ -388,7 +388,7 @@ export default function WhitepaperPage() {
               href="https://github.com/thefossclub/whitepaper/raw/main/whitepaper.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-gradient-green text-white shadow-md shadow-green-500/20 hover:opacity-95 transition-all"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-gradient-green text-white shadow-md shadow-green-500/20 hover:opacity-95 transition-ui"
             >
               <Download className="w-4 h-4" />
               <span>Download PDF</span>
@@ -398,7 +398,7 @@ export default function WhitepaperPage() {
               href="https://github.com/thefossclub/whitepaper"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-medium border border-border/80 bg-card hover:border-green-500/40 text-foreground transition-all"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-medium border border-border/80 bg-card hover:border-green-500/40 text-foreground transition-ui"
             >
               <ExternalLink className="w-4 h-4" />
               <span>GitHub Repository</span>
@@ -408,7 +408,7 @@ export default function WhitepaperPage() {
               href="https://github.com/thefossclub/whitepaper/blob/main/main.tex"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-medium border border-border/80 bg-card hover:border-green-500/40 text-muted-foreground hover:text-foreground transition-all"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-medium border border-border/80 bg-card hover:border-green-500/40 text-muted-foreground hover:text-foreground transition-ui"
             >
               <FileText className="w-4 h-4" />
               <span>LaTeX Source (main.tex)</span>
@@ -829,14 +829,14 @@ export default function WhitepaperPage() {
                 href={ref.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group p-3 rounded-2xl border border-primary/20 bg-primary/5 dark:bg-primary/10 hover:border-primary/40 flex items-start justify-between gap-2.5 transition-all"
+                className="group p-3 rounded-2xl border border-primary/20 bg-primary/5 dark:bg-primary/10 hover:border-primary/40 flex items-start justify-between gap-2.5 transition-ui"
               >
                 <div className="flex items-start gap-2.5 min-w-0">
                   <span className="font-mono text-green-600 dark:text-green-400 text-xs font-bold pt-0.5">
                     [{idx + 1}]
                   </span>
                   <div className="min-w-0">
-                    <span className="font-semibold text-foreground group-hover:text-green-500 dark:group-hover:text-green-400 transition-colors block truncate">
+                    <span className="font-semibold text-foreground group-hover:text-green-500 dark:group-hover:text-green-400 transition-ui block truncate">
                       {ref.title} {ref.year ? `(${ref.year})` : ""}
                     </span>
                     <span className="text-xs text-muted-foreground leading-relaxed line-clamp-2 mt-0.5">
@@ -844,7 +844,7 @@ export default function WhitepaperPage() {
                     </span>
                   </div>
                 </div>
-                <ExternalLink className="w-3.5 h-3.5 text-muted-foreground group-hover:text-green-500 flex-shrink-0 mt-0.5" />
+                <ExternalLink className="w-3.5 h-3.5 text-muted-foreground group-hover:text-green-500 transition-ui flex-shrink-0 mt-0.5" />
               </a>
             ))}
           </div>

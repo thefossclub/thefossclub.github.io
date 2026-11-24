@@ -1,12 +1,14 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { m } from "framer-motion"
+import { m, useReducedMotion } from "framer-motion"
 import { useTheme } from "next-themes"
+import { fadeIn } from "@/lib/motion"
 
 export default function HeroSphere() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const { theme } = useTheme()
+  const reducedMotion = useReducedMotion()
   const radius = 150
   const numPoints = 300 // Reduced for better performance
   const points = useRef<Array<{ x: number; y: number; z: number; size: number; speed: number; angle: number }>>([])
@@ -105,7 +107,7 @@ export default function HeroSphere() {
         ctx.fill()
       }
 
-      animationFrameId.current = requestAnimationFrame(animate)
+      animationFrameId.current = reducedMotion ? null : requestAnimationFrame(animate)
     }
 
     if (points.current.length === 0) {
@@ -140,15 +142,10 @@ export default function HeroSphere() {
       }
       if (canvas) observer.unobserve(canvas)
     }
-  }, [theme])
+  }, [theme, reducedMotion])
 
   return (
-    <m.div
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 1 }}
-      className="relative"
-    >
+    <m.div variants={fadeIn} initial="hidden" animate="visible" className="relative">
     <canvas ref={canvasRef} width={500} height={500} className="opacity-90" />
     </m.div>
   )

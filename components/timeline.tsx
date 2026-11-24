@@ -39,12 +39,12 @@ export default function Timeline({ events }: TimelineProps) {
           {/* The line */}
           <div className="relative h-[2px]">
             <div
-              className="absolute inset-0 bg-gradient-to-r from-green-500/20 via-green-500 to-green-400 origin-left transition-transform duration-1000 ease-out"
+              className="absolute inset-0 bg-gradient-to-r from-green-500/20 via-green-500 to-green-400 origin-left transition-transform duration-700 ease-smooth"
               style={{ transform: visible ? "scaleX(1)" : "scaleX(0)" }}
             />
             {/* Glow behind the line */}
             <div
-              className="absolute inset-0 bg-gradient-to-r from-green-500/0 via-green-500/50 to-green-400/80 blur-sm origin-left transition-transform duration-1000 ease-out"
+              className="absolute inset-0 bg-gradient-to-r from-green-500/0 via-green-500/50 to-green-400/80 blur-sm origin-left transition-transform duration-700 ease-smooth"
               style={{ transform: visible ? "scaleX(1)" : "scaleX(0)" }}
             />
           </div>
@@ -57,13 +57,13 @@ export default function Timeline({ events }: TimelineProps) {
             return (
               <div
                 key={i}
-                className="absolute flex flex-col items-center transition-all duration-700"
+                className="absolute flex flex-col items-center transition-[opacity,transform] duration-400 ease-smooth"
                 style={{
                   left: `${pct}%`,
                   bottom: 12,
                   transform: `translateX(-50%)`,
                   opacity: visible ? 1 : 0,
-                  transitionDelay: `${400 + i * 120}ms`,
+                  transitionDelay: `${200 + i * 60}ms`,
                 }}
               >
                 {/* Label */}
@@ -83,7 +83,6 @@ export default function Timeline({ events }: TimelineProps) {
                   />
                   {isLast && (
                     <>
-                      <span className="absolute w-7 h-7 rounded-full bg-green-400/30 animate-ping" />
                       <span className="absolute w-6 h-6 rounded-full bg-green-500/15" />
                     </>
                   )}
@@ -99,7 +98,7 @@ export default function Timeline({ events }: TimelineProps) {
         <div className="relative ml-3">
           {/* Vertical line */}
           <div
-            className="absolute left-0 top-0 bottom-0 w-[2px] origin-top transition-transform duration-1000 ease-out"
+            className="absolute left-0 top-0 bottom-0 w-[2px] origin-top transition-transform duration-700 ease-smooth"
             style={{ transform: visible ? "scaleY(1)" : "scaleY(0)" }}
           >
             <div className="w-full h-full bg-gradient-to-b from-green-500/20 via-green-500 to-green-400" />
@@ -112,11 +111,11 @@ export default function Timeline({ events }: TimelineProps) {
             return (
               <div
                 key={i}
-                className="relative flex items-start pl-8 pb-8 last:pb-0 transition-all duration-700"
+                className="relative flex items-start pl-8 pb-8 last:pb-0 transition-[opacity,transform] duration-400 ease-smooth"
                 style={{
                   opacity: visible ? 1 : 0,
                   transform: visible ? "translateX(0)" : "translateX(-8px)",
-                  transitionDelay: `${400 + i * 120}ms`,
+                  transitionDelay: `${200 + i * 60}ms`,
                 }}
               >
                 {/* Dot */}
@@ -126,7 +125,6 @@ export default function Timeline({ events }: TimelineProps) {
                   />
                   {isLast && (
                     <>
-                      <span className="absolute w-6 h-6 rounded-full bg-green-400/30 animate-ping" />
                       <span className="absolute w-5 h-5 rounded-full bg-green-500/15" />
                     </>
                   )}

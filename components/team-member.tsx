@@ -41,7 +41,7 @@ export default function TeamMember({ name, role, color, index }: TeamMemberProps
   return (
     <div className="flex flex-col items-center text-center">
       <div
-        className={`relative w-16 h-16 rounded-full ${color} flex items-center justify-center overflow-hidden transition-transform hover:scale-110`}
+        className={`relative w-16 h-16 rounded-full ${color} flex items-center justify-center overflow-hidden`}
         style={{
           boxShadow: mounted
             ? isDark
@@ -52,7 +52,7 @@ export default function TeamMember({ name, role, color, index }: TeamMemberProps
       >
         <span className="text-lg font-bold text-white drop-shadow-sm">{initials}</span>
       </div>
-      <h3 className="text-sm font-semibold mt-2 text-foreground">{name}</h3>
+      <h3 className="text-sm font-semibold mt-2 text-foreground transition-ui group-hover:text-green-500">{name}</h3>
       <p className="text-xs text-muted-foreground">{role}</p>
     </div>
   )

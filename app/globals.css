@@ -45,6 +45,14 @@
   --color-gray-800: #1f2937;
   --color-gray-900: #111827;
   --color-gray-950: #030712;
+
+  --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@utility transition-ui {
+  transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, translate, scale, rotate;
+  transition-duration: 150ms;
+  transition-timing-function: var(--ease-smooth);
 }
 
 @layer base {
@@ -378,25 +386,6 @@
   background: radial-gradient(circle, rgba(34, 197, 94, 0.6) 0%, rgba(34, 197, 94, 0) 70%);
 }
 
-/* Improved card hover effects */
-.card-hover-effect {
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.card-hover-effect:hover {
-  transform: translateY(-10px) scale(1.02);
-}
-
-.dark .card-hover-effect:hover {
-  /* box-shadow: 0 20px 25px -5px rgba(34, 197, 94, 0.2), 0 10px 10px -5px rgba(34, 197, 94, 0.1); */
-  box-shadow: 0 8px 15px rgba(22, 101, 52, 0.25), 0 3px 6px rgba(22, 101, 52, 0.2); /* Darker green, softer */
-}
-
-.light .card-hover-effect:hover {
-  /* box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.03); */
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.06), 0 3px 6px rgba(0, 0, 0, 0.04); /* Softer black */
-}
-
 /* Beautiful footer styles */
 .footer-gradient {
   background: linear-gradient(to bottom, transparent, rgba(34, 179, 79, 0.05));
@@ -404,26 +393,6 @@
 
 .dark .footer-gradient {
   background: linear-gradient(to bottom, transparent, rgba(34, 179, 79, 0.1));
-}
-
-.footer-link {
-  position: relative;
-  transition: color 0.3s ease;
-}
-
-.footer-link::after {
-  content: "";
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  background-color: #22b34f;
-  transition: width 0.3s ease;
-}
-
-.footer-link:hover::after {
-  width: 100%;
 }
 
 /* Text contrast improvements - using theme-defined gray colors */

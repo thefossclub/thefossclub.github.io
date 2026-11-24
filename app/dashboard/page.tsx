@@ -1,9 +1,10 @@
 "use client"
 
 import { useState } from "react"
-import { LazyMotion, domAnimation, m } from "framer-motion"
+import { m } from "framer-motion"
 import { User, Settings, BarChart2, LogOut } from "lucide-react"
 import Link from "next/link"
+import { fadeRise } from "@/lib/motion"
 
 const mockUser = {
   name: "John Doe",
@@ -35,7 +36,6 @@ export default function Dashboard() {
   }
 
   return (
-    <LazyMotion features={domAnimation} strict>
     <div className="min-h-screen flex bg-gradient-to-br from-black via-[#0f1a13] to-[#101c14] dark:from-black dark:via-[#0f1a13] dark:to-[#101c14]">
       {/* Sidebar */}
       <aside
@@ -53,12 +53,12 @@ export default function Dashboard() {
           <span className="text-2xl font-bold tracking-tight">FOSS Club</span>
         </div>
         <nav className="flex flex-col space-y-4">
-          <Link href="#" className="flex items-center gap-2 font-medium hover:text-green-200 transition"><User className="w-5 h-5" /> Account</Link>
-          <Link href="#" className="flex items-center gap-2 font-medium hover:text-green-200 transition"><Settings className="w-5 h-5" /> Settings</Link>
-          <Link href="#" className="flex items-center gap-2 font-medium hover:text-green-200 transition"><BarChart2 className="w-5 h-5" /> Activity</Link>
+          <Link href="#" className="flex items-center gap-2 font-medium transition-ui hover:text-green-200"><User className="w-5 h-5" /> Account</Link>
+          <Link href="#" className="flex items-center gap-2 font-medium transition-ui hover:text-green-200"><Settings className="w-5 h-5" /> Settings</Link>
+          <Link href="#" className="flex items-center gap-2 font-medium transition-ui hover:text-green-200"><BarChart2 className="w-5 h-5" /> Activity</Link>
         </nav>
         <div className="mt-auto">
-          <button className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-green text-white font-semibold shadow hover:opacity-90 transition"><LogOut className="w-4 h-4" /> Logout</button>
+          <button className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-green text-white font-semibold shadow transition-ui hover:opacity-90"><LogOut className="w-4 h-4" /> Logout</button>
         </div>
       </aside>
 
@@ -69,7 +69,7 @@ export default function Dashboard() {
 
           {/* User Info Card */}
           <m.div className="bg-black/60 dark:bg-black/60 rounded-3xl shadow-2xl p-6 md:p-10 flex flex-col md:flex-row items-center gap-8 mb-10 border border-gray-800"
-            initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+            variants={fadeRise} initial="hidden" animate="visible">
             <img src={user.avatar} alt="Avatar" className="w-28 h-28 rounded-full border-4 border-gradient-green shadow-lg" />
             <div className="flex-1 w-full">
               {editMode ? (
@@ -83,8 +83,8 @@ export default function Dashboard() {
                     <input type="email" className="w-full rounded-lg border px-3 py-2 bg-gray-900 dark:bg-gray-900 border-gray-700 dark:border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-green-400" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} />
                   </div>
                   <div className="flex gap-2 mt-2">
-                    <button className="px-4 py-2 rounded-full bg-gradient-green text-white font-semibold shadow hover:opacity-90 transition" onClick={handleSave}>Save</button>
-                    <button className="px-4 py-2 rounded-full bg-gray-800 text-gray-200 font-semibold shadow hover:opacity-90 transition" onClick={handleCancel}>Cancel</button>
+                    <button className="px-4 py-2 rounded-full bg-gradient-green text-white font-semibold shadow transition-ui hover:opacity-90" onClick={handleSave}>Save</button>
+                    <button className="px-4 py-2 rounded-full bg-gray-800 text-gray-200 font-semibold shadow transition-ui hover:opacity-90" onClick={handleCancel}>Cancel</button>
                   </div>
                 </div>
               ) : (
@@ -105,7 +105,7 @@ export default function Dashboard() {
                       <span className="text-xs text-gray-400">Projects</span>
                     </div>
                   </div>
-                  <button className="mt-4 px-4 py-2 rounded-full bg-gradient-green text-white font-semibold shadow hover:opacity-90 transition" onClick={handleEdit}>Edit</button>
+                  <button className="mt-4 px-4 py-2 rounded-full bg-gradient-green text-white font-semibold shadow transition-ui hover:opacity-90" onClick={handleEdit}>Edit</button>
                 </div>
               )}
             </div>
@@ -145,6 +145,5 @@ export default function Dashboard() {
         </div>
       </main>
     </div>
-    </LazyMotion>
   )
 } 

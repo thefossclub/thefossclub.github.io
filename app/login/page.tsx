@@ -53,13 +53,13 @@ export default function LoginPage() {
           className="group"
           onClick={() => router.push("/")}
         >
-          <ArrowLeft className="mr-1 h-4 w-4 transition-transform group-hover:-translate-x-1" />
+          <ArrowLeft className="mr-1 h-4 w-4 transition-ui group-hover:-translate-x-1" />
           Back to Home
         </Button>
       </div>
       
       <div className="flex flex-1 items-center justify-center p-4 md:p-8">
-        <Card className="mx-auto w-full max-w-md border-none shadow-xl card-hover-effect">
+        <Card className="mx-auto w-full max-w-md border-none shadow-xl">
           <CardHeader className="space-y-1">
             <div className="flex justify-center mb-4">
               <div className="w-12 h-12 flex items-center justify-center glow-effect shadow-lg shadow-green-500/30">

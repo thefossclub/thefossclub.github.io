@@ -1,10 +1,9 @@
 "use client"
 
-import { useEffect, useRef, useState, useCallback } from "react"
-import { LazyMotion, domAnimation, m } from "framer-motion"
+import { useEffect, useRef, useState } from "react"
+import { m } from "framer-motion"
 import Link from "next/link"
 import { ArrowRight, ChevronDown, ChevronUp } from "lucide-react"
-import { useLenis } from "lenis/react"
 import Navbar from "@/components/navbar"
 import ProjectCard from "@/components/project-card"
 import EventCard from "@/components/event-card"
@@ -19,11 +18,12 @@ import ScrollProgressIndicator from "@/components/scroll-progress-indicator"
 import ScrollIndicator from "@/components/scroll-indicator"
 import OCCScrollCard from "@/components/occ-scroll-card"
 import SiteFooter from "@/components/site-footer"
+import { Reveal } from "@/components/motion"
+import { fadeRise, stagger } from "@/lib/motion"
 // import UpcomingEventCard from "@/components/upcoming-event-card"
 import {projects, events, Mentors, coreTeam, tools, timelineEvents} from "@/lib/data"
 
 export default function Home() {
-  const heroRef = useRef<HTMLElement>(null)
   const [activeSection, setActiveSection] = useState("home")
   const { theme, setTheme } = useTheme()
   const [coreTeamExpanded, setCoreTeamExpanded] = useState(true)
@@ -66,16 +66,6 @@ export default function Home() {
     return () => observers.forEach((o) => o.disconnect())
   }, [])
 
-  useLenis((lenis) => {
-    if (heroRef.current) {
-      const scrollY = lenis.scroll
-      const opacity = Math.max(0, 1 - scrollY / 300)
-      const scale = Math.max(0.9, 1 - scrollY / 3000)
-      heroRef.current.style.opacity = String(opacity)
-      heroRef.current.style.transform = `scale(${scale}) translateZ(0)`
-    }
-  })
-
   useEffect(() => {
     setMounted(true)
     // Force a theme update to fix initial font color issues
@@ -85,7 +75,6 @@ export default function Home() {
 
  
   return (
-    <LazyMotion features={domAnimation} strict>
     <div
       className="relative min-h-screen overflow-hidden text-black dark:text-white"
     >
@@ -95,58 +84,42 @@ export default function Home() {
 
       {/* Hero Section */}
       <section
-        ref={(el) => {
-          sectionRefs.home.current = el
-          heroRef.current = el
-        }}
+        ref={sectionRefs.home}
         id="home"
-        className="relative h-screen flex items-center justify-center overflow-hidden z-10 px-2 sm:px-4 lg:px-8 will-change-[transform,opacity]"
-        style={{
-          backfaceVisibility: 'hidden',
-        }}
+        className="relative h-screen flex items-center justify-center overflow-hidden z-10 px-2 sm:px-4 lg:px-8"
       >
         <div className="absolute inset-0 flex items-center justify-center hidden md:flex">
           <HeroSphere />
         </div>
 
-        <div className="container mx-auto z-10 flex flex-col md:flex-row items-center justify-between px-2 sm:px-4 lg:px-8">
+        <m.div
+          className="container mx-auto z-10 flex flex-col md:flex-row items-center justify-between px-2 sm:px-4 lg:px-8"
+          variants={stagger(0.1)}
+          initial="hidden"
+          animate="visible"
+        >
           {/* Hero Text Container */}
           <m.div
             className="w-full md:w-1/2 text-center md:text-left mb-8 md:mb-0 px-2 sm:px-4"
-            initial="hidden"
-            animate="visible"
-            variants={{
-              hidden: { opacity: 0 },
-              visible: {
-                opacity: 1,
-                transition: {
-                  staggerChildren: 0.2,
-                  delayChildren: 0.1,
-                }
-              }
-            }}
+            variants={stagger()}
           >
             <m.h1
               className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-gradient-green"
-              variants={{ hidden: { opacity: 0, x: -50 }, visible: { opacity: 1, x: 0, transition: { duration: 0.6 } } }}
+              variants={fadeRise}
             >
               Welcome to The FOSS Club!
             </m.h1>
             <m.p
               className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 md:mb-8 text-foreground"
-              variants={{ hidden: { opacity: 0, x: -50 }, visible: { opacity: 1, x: 0, transition: { duration: 0.6 } } }}
+              variants={fadeRise}
             >
               <span className="font-semibold">Learn, build, and collaborate</span> with fellow open-source enthusiasts.
             </m.p>
-            <m.div
-              className="inline-block"
-              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5 } } }}
-              whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
-            >
+            <m.div className="inline-block" variants={fadeRise}>
               <Link
                 href="https://chat.whatsapp.com/DvgeodmqhyMBwOvlJqlixu"
                 target="_blank"
-                className="inline-flex items-center px-5 py-2.5 md:px-6 md:py-3 bg-gradient-green text-white rounded-full font-medium text-base md:text-lg hover:opacity-90 hover:brightness-110 transition-all shadow-lg shadow-green-500/20 hover:shadow-green-500/40"
+                className="inline-flex items-center px-5 py-2.5 md:px-6 md:py-3 bg-gradient-green text-white rounded-full font-medium text-base md:text-lg shadow-lg shadow-green-500/20 transition-ui hover:opacity-90 active:scale-[0.98]"
               >
                 Join Now <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5" />
               </Link>
@@ -155,76 +128,12 @@ export default function Home() {
 
           <m.div
             className="w-full md:w-1/2 mt-8 md:mt-0 relative px-2 sm:px-4"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{
-              opacity: 1,
-              scale: 1,
-            }}
-            transition={{
-              duration: 0.8,
-              delay: 0.2,
-            }}
+            variants={fadeRise}
           >
-            {/* Add keyframes and styles for hover effects */}
-            <style jsx>{`
-              @keyframes sweep {
-                0% { transform: translateX(-100%); }
-                100% { transform: translateX(100%); }
-              }
-              @keyframes rotateGlow {
-                from { transform: rotate(0deg); }
-                to { transform: rotate(360deg); }
-              }
-              .wafer-circle {
-                position: relative; /* Needed for pseudo-elements */
-                transition: transform 0.3s ease-out; /* Subtle scale on hover */
-              }
-              .wafer-circle:hover {
-                 transform: scale(1.03); /* Slightly enlarge on hover */
-              }
-              .wafer-bg::before, .wafer-bg::after {
-                content: '';
-                position: absolute;
-                top: 0; left: 0; right: 0; bottom: 0;
-                border-radius: 50%;
-                opacity: 0;
-                pointer-events: none; /* Prevent pseudo-elements interfering */
-                transition: opacity 0.4s ease-in-out;
-              }
-              /* Sweeping Shine */
-              .wafer-bg::before {
-                background: linear-gradient(100deg, transparent 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%);
-                transform: translateX(-100%);
-                z-index: 2; /* Above pattern, below text */
-              }
-              .wafer-circle:hover .wafer-bg::before {
-                opacity: 1;
-                animation: sweep 1s ease-in-out infinite; 
-              }
-              /* Rotating Circumference Glow */
-              .wafer-bg::after {
-                background: radial-gradient(circle at center top, rgba(255, 255, 255, 0.6) 0%, transparent 40%);
-                z-index: 1; /* Below sweeping shine */
-                animation: rotateGlow 5s linear infinite paused; /* Paused initially */
-              }
-               .wafer-circle:hover .wafer-bg::after {
-                 opacity: 0.6; /* Make glow visible */
-                 animation-play-state: running; /* Run animation on hover */
-               }
-              .wafer-pattern {
-                 opacity: 0.2; /* Further reduced pattern opacity */
-              }
-              .wafer-text {
-                 text-shadow: 0 1px 4px rgba(0,0,0,0.6); /* Softened text shadow */
-              }
-            `}</style>
-
-            {/* Apply class to the main container for hover targeting */}
             {/* Restored size */}
-            <div className="relative w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 mx-auto wafer-circle">
-              {/* Base background, pattern container, and pseudo-elements */}
+            <div className="relative w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 mx-auto">
               <div
-                className="absolute inset-0 rounded-full shadow-xl shadow-green-400/30 overflow-hidden wafer-bg"
+                className="absolute inset-0 rounded-full shadow-xl shadow-green-400/30 overflow-hidden"
                 style={{
                   // Use #17a54b as the main highlight color
                   background: 'radial-gradient(circle, #17a54b 0%, rgba(15, 100, 50, 1) 100%)',
@@ -235,7 +144,7 @@ export default function Home() {
 
                 {/* Wafer Pattern Overlay */}
                 <div
-                  className="absolute inset-0 wafer-pattern"
+                  className="absolute inset-0 opacity-20"
                   style={{
                     backgroundImage: `
                       repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0, rgba(0, 0, 0, 0.4) 15px, transparent 15px, transparent 30px),
@@ -257,16 +166,16 @@ export default function Home() {
               {/* Text container */}
               <div className="absolute inset-0 flex items-center justify-center text-center p-6 z-10"> {/* Restored padding */}
                 {/* Restored text size */}
-                <h2 className="text-2xl md:text-3xl font-bold leading-tight text-white wafer-text">
+                <h2 className="text-2xl md:text-3xl font-bold leading-tight text-white [text-shadow:0_1px_4px_rgba(0,0,0,0.6)]">
                   Free & Open Source and Hacker Culture at DTC
                 </h2>
               </div>
             </div>
           </m.div>
-        </div>
+        </m.div>
 
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2">
-          <ScrollIndicator targetSection="about" preset="default" color="#FFFFFF" />
+          <ScrollIndicator targetSection="about" color="#FFFFFF" />
         </div>
       </section>
 
@@ -277,7 +186,7 @@ export default function Home() {
             About Us
           </h2>
 
-          <div className="max-w-full sm:max-w-4xl mx-auto p-4 sm:p-6 md:p-8 rounded-3xl border border-border bg-card shadow-lg">
+          <Reveal className="max-w-full sm:max-w-4xl mx-auto p-4 sm:p-6 md:p-8 rounded-3xl border border-border bg-card shadow-lg">
             <p className="text-base sm:text-lg mb-6 md:mb-8 leading-relaxed text-foreground">
               The FOSS Club is a student community-based group in the{" "}
               <a
@@ -291,7 +200,7 @@ export default function Home() {
               for enthusiasts focused on contributing to
               <span className="relative mx-2 text-green-500 font-bold group">
                 Free and Open Source Software
-                <span className="absolute opacity-0 group-hover:opacity-100 bg-gray-900 dark:bg-gray-900 text-xs text-white p-2 rounded -bottom-8 left-0 transition-opacity duration-300 shadow-lg">
+                <span className="absolute opacity-0 group-hover:opacity-100 bg-gray-900 dark:bg-gray-900 text-xs text-white p-2 rounded -bottom-8 left-0 transition-ui shadow-lg">
                   Yes! That's the full form of FOSS
                 </span>
               </span>
@@ -302,21 +211,21 @@ export default function Home() {
               Core Pillars
             </h3>
             <ul className="space-y-2 sm:space-y-3 md:space-y-4 text-foreground">
-              <li className="p-3 md:p-4 bg-primary/10 rounded-2xl border-gradient border-gradient-green shadow-md hover:shadow-green-500/10 hover:translate-x-2 transition-all text-sm sm:text-base">
+              <li className="p-3 md:p-4 bg-primary/10 rounded-2xl border-gradient border-gradient-green shadow-md text-sm sm:text-base">
                 <strong className="text-foreground mr-1">Open Source:</strong> The FOSS Club promotes open-source
                 software, FOSS philosophy, self-hosting, Linux, and collaborative development.
               </li>
-              <li className="p-3 md:p-4 bg-primary/10 rounded-2xl border-gradient border-gradient-green shadow-md hover:shadow-green-500/10 hover:translate-x-2 transition-all text-sm sm:text-base">
+              <li className="p-3 md:p-4 bg-primary/10 rounded-2xl border-gradient border-gradient-green shadow-md text-sm sm:text-base">
                 <strong className="text-foreground mr-1">Cyber Security:</strong> The FOSS Club explores ethical hacking,
                 CTFs, reverse engineering, digital privacy, OSINT, and cybersecurity research.
               </li>
-              <li className="p-3 md:p-4 bg-primary/10 rounded-2xl border-gradient border-gradient-green shadow-md hover:shadow-green-500/10 hover:translate-x-2 transition-all text-sm sm:text-base">
+              <li className="p-3 md:p-4 bg-primary/10 rounded-2xl border-gradient border-gradient-green shadow-md text-sm sm:text-base">
                 <strong className="text-foreground mr-1">Hardware:</strong> The FOSS Club will focus on self-hosted
                 systems, open hardware, embedded devices, SBCs (like Raspberry Pi and RISC-V boards), firmware hacking,
                 retro computing, and all the cool hardware stuff.
               </li>
             </ul>
-          </div>
+          </Reveal>
 
           <div className="mt-10 sm:mt-16 md:mt-20">
             <h3 className="text-2xl sm:text-3xl font-bold mb-8 text-center text-foreground drop-shadow-md">
@@ -337,6 +246,7 @@ export default function Home() {
             <h2 className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green">
               Our Projects
             </h2>
+            <Reveal>
             <div className="flex overflow-x-auto items-stretch gap-4 sm:gap-6 md:gap-8 pb-6 snap-x snap-proximity scrollbar-hide">
               {projects.map((project, index) => (
                 <div
@@ -352,6 +262,7 @@ export default function Home() {
                 </div>
               ))}
             </div>
+            </Reveal>
           </div>
         </section>
         {/* Upcoming Events Section, disabled for now
@@ -390,6 +301,7 @@ export default function Home() {
             <h2 className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green">
               Events Concluded
             </h2>
+            <Reveal>
             <div className="flex overflow-x-auto items-stretch gap-4 sm:gap-6 md:gap-8 pb-6 snap-x snap-proximity scrollbar-hide">
               {[...events].reverse().map((event, index) => (
                 <div 
@@ -407,6 +319,7 @@ export default function Home() {
                 </div>
               ))}
             </div>
+            </Reveal>
             {/*<m.div
             className="mt-8 sm:mt-12 md:mt-16 p-4 sm:p-6 md:p-8 rounded-3xl border border-green-900/50 bg-gradient-to-r from-green-900/10 to-green-900/30 dark:from-green-900/30 dark:to-green-900/50 shadow-xl shadow-green-500/10"
             initial={{ opacity: 0 }}
@@ -468,9 +381,9 @@ export default function Home() {
               Open Community Calls
             </h2>
                         
-            <div className="container mx-auto">
+            <Reveal className="container mx-auto">
               <OCCScrollCard />
-            </div>
+            </Reveal>
             
           </div>
         </section>
@@ -501,7 +414,7 @@ export default function Home() {
               </h3>
               <button
                 onClick={() => setMentorsExpanded(!MentorsExpanded)}
-                className="flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-gradient-green text-white rounded-full text-xs sm:text-sm font-medium hover:opacity-90 transition-all"
+                className="flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-gradient-green text-white rounded-full text-xs sm:text-sm font-medium transition-ui hover:opacity-90 active:scale-[0.98]"
                 style={{
                   boxShadow:
                     mounted
@@ -526,14 +439,14 @@ export default function Home() {
             </div>
 
             {MentorsExpanded && (
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-4 md:gap-6">
+              <Reveal className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-4 md:gap-6">
                 {Mentors.map((Mentors, index) => (
                   <a
                     key={index}
                     href={Mentors.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block w-full h-full hover:scale-105 transition-transform"
+                    className="group block w-full h-full rounded-2xl"
                     style={{ pointerEvents: "auto" }}
                   >
                     <TeamMember
@@ -545,7 +458,7 @@ export default function Home() {
                     />
                   </a>
                 ))}
-              </div>
+              </Reveal>
             )}
           </div>
 
@@ -557,7 +470,7 @@ export default function Home() {
               </h3>
               <button
                 onClick={() => setCoreTeamExpanded(!coreTeamExpanded)}
-                className="flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-gradient-green text-white rounded-full text-xs sm:text-sm font-medium hover:opacity-90 transition-all"
+                className="flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-gradient-green text-white rounded-full text-xs sm:text-sm font-medium transition-ui hover:opacity-90 active:scale-[0.98]"
                 style={{
                   boxShadow:
                     mounted
@@ -582,14 +495,14 @@ export default function Home() {
             </div>
 
             {coreTeamExpanded && (
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-4 md:gap-6">
+              <Reveal className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-4 md:gap-6">
                 {coreTeam.map((member, index) => (
                   <a
                     key={index}
                     href={member.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block w-full h-full hover:scale-105 transition-transform"
+                    className="group block w-full h-full rounded-2xl"
                     style={{ pointerEvents: "auto" }}
                   >
                     <TeamMember
@@ -601,7 +514,7 @@ export default function Home() {
                     />
                   </a>
                 ))}
-              </div>
+              </Reveal>
             )}
           </div>
 
@@ -619,7 +532,7 @@ export default function Home() {
               </m.h3>
               <button
                 onClick={() => setMembersExpanded(!membersExpanded)}
-                className="flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-gradient-green text-white rounded-full text-xs sm:text-sm font-medium hover:opacity-90 transition-all"
+                className="flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-gradient-green text-white rounded-full text-xs sm:text-sm font-medium transition-ui hover:opacity-90 active:scale-[0.98]"
                 style={{
                   boxShadow:
                     mounted
@@ -667,65 +580,65 @@ export default function Home() {
             Resources
           </h2>
 
-          <div className="max-w-full sm:max-w-4xl mx-auto p-4 sm:p-6 md:p-8 rounded-3xl border border-border bg-card shadow-lg">
+          <Reveal className="max-w-full sm:max-w-4xl mx-auto p-4 sm:p-6 md:p-8 rounded-3xl border border-border bg-card shadow-lg">
             <ul className="space-y-2 sm:space-y-3 md:space-y-4">
-              <li className="p-3 md:p-4 bg-primary/10 rounded-2xl transition-all shadow-sm hover:shadow-md hover:translate-x-1">
+              <li className="bg-primary/10 rounded-2xl shadow-sm transition-ui hover:bg-primary/15">
                 <Link
                   href="https://github.com/thefossclub/resources#unlock-the-web-frontend--backend-secrets"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center text-base sm:text-lg text-foreground hover:text-primary transition-colors font-medium"
+                  className="flex items-center p-3 md:p-4 rounded-2xl text-base sm:text-lg text-foreground font-medium transition-ui hover:text-primary"
                 >
                   <ArrowRight className="mr-2 h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
                   Web Development Fundamentals (Frontend & Backend)
                 </Link>
               </li>
-              <li className="p-3 md:p-4 bg-primary/10 rounded-2xl transition-all shadow-sm hover:shadow-md hover:translate-x-1">
+              <li className="bg-primary/10 rounded-2xl shadow-sm transition-ui hover:bg-primary/15">
                 <Link
                   href="https://github.com/thefossclub/resources#level-up-your-game-dev-journey-starts-here"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center text-base sm:text-lg text-foreground hover:text-primary transition-colors font-medium"
+                  className="flex items-center p-3 md:p-4 rounded-2xl text-base sm:text-lg text-foreground font-medium transition-ui hover:text-primary"
                 >
                   <ArrowRight className="mr-2 h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
                   Introduction to Game Development Concepts
                 </Link>
               </li>
-              <li className="p-3 md:p-4 bg-primary/10 rounded-2xl transition-all shadow-sm hover:shadow-md hover:translate-x-1">
+              <li className="bg-primary/10 rounded-2xl shadow-sm transition-ui hover:bg-primary/15">
                 <Link
                   href="https://github.com/thefossclub/resources#mobile-mastery-build-your-first-app"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center text-base sm:text-lg text-foreground hover:text-primary transition-colors font-medium"
+                  className="flex items-center p-3 md:p-4 rounded-2xl text-base sm:text-lg text-foreground font-medium transition-ui hover:text-primary"
                 >
                   <ArrowRight className="mr-2 h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
                   Mobile Application Development Resources
                 </Link>
               </li>
-              <li className="p-3 md:p-4 bg-primary/10 rounded-2xl transition-all shadow-sm hover:shadow-md hover:translate-x-1">
+              <li className="bg-primary/10 rounded-2xl shadow-sm transition-ui hover:bg-primary/15">
                 <Link
                   href="https://github.com/thefossclub/resources#linux-command-line--version-control"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center text-base sm:text-lg text-foreground hover:text-primary transition-colors font-medium"
+                  className="flex items-center p-3 md:p-4 rounded-2xl text-base sm:text-lg text-foreground font-medium transition-ui hover:text-primary"
                 >
                   <ArrowRight className="mr-2 h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
                   Linux, Command Line Interface, and Git Essentials
                 </Link>
               </li>
-              <li className="p-3 md:p-4 bg-primary/10 rounded-2xl transition-all shadow-sm hover:shadow-md hover:translate-x-1">
+              <li className="bg-primary/10 rounded-2xl shadow-sm transition-ui hover:bg-primary/15">
                 <Link
                   href="https://github.com/thefossclub/resources#cybersecurity--ethical-hacking"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center text-base sm:text-lg text-foreground hover:text-primary transition-colors font-medium"
+                  className="flex items-center p-3 md:p-4 rounded-2xl text-base sm:text-lg text-foreground font-medium transition-ui hover:text-primary"
                 >
                   <ArrowRight className="mr-2 h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
                   Cybersecurity and Ethical Hacking Principles
                 </Link>
               </li>
             </ul>
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -736,12 +649,12 @@ export default function Home() {
             Frequently Asked Questions
           </h2>
 
-          <div className="max-w-full sm:max-w-4xl mx-auto space-y-2 sm:space-y-4 md:space-y-6">
-            <div className="rounded-3xl overflow-hidden border border-border bg-card shadow-md transition-all">
+          <Reveal className="max-w-full sm:max-w-4xl mx-auto space-y-2 sm:space-y-4 md:space-y-6">
+            <div className="rounded-3xl overflow-hidden border border-border bg-card shadow-md">
               <details className="group">
                 <summary className="flex items-center justify-between p-4 md:p-6 cursor-pointer">
                   <h3 className="text-lg sm:text-xl font-semibold text-foreground">What is FOSS?</h3>
-                  <span className="transition-transform duration-300 group-open:rotate-180">
+                  <span className="transition-transform duration-200 ease-smooth group-open:rotate-180">
                     <ArrowRight className="h-5 w-5 rotate-90 text-green-500" />
                   </span>
                 </summary>
@@ -754,13 +667,13 @@ export default function Home() {
               </details>
             </div>
 
-            <div className="rounded-3xl overflow-hidden border border-border bg-card shadow-md transition-all">
+            <div className="rounded-3xl overflow-hidden border border-border bg-card shadow-md">
               <details className="group">
                 <summary className="flex items-center justify-between p-4 md:p-6 cursor-pointer">
                   <h3 className="text-lg sm:text-xl font-semibold text-foreground">
                     How can I join the FOSS Club?
                   </h3>
-                  <span className="transition-transform duration-300 group-open:rotate-180">
+                  <span className="transition-transform duration-200 ease-smooth group-open:rotate-180">
                     <ArrowRight className="h-5 w-5 rotate-90 text-green-500" />
                   </span>
                 </summary>
@@ -773,13 +686,13 @@ export default function Home() {
               </details>
             </div>
 
-            <div className="rounded-3xl overflow-hidden border border-border bg-card shadow-md transition-all">
+            <div className="rounded-3xl overflow-hidden border border-border bg-card shadow-md">
               <details className="group">
                 <summary className="flex items-center justify-between p-4 md:p-6 cursor-pointer">
                   <h3 className="text-lg sm:text-xl font-semibold text-foreground">
                     Do I need programming experience to join?
                   </h3>
-                  <span className="transition-transform duration-300 group-open:rotate-180">
+                  <span className="transition-transform duration-200 ease-smooth group-open:rotate-180">
                     <ArrowRight className="h-5 w-5 rotate-90 text-green-500" />
                   </span>
                 </summary>
@@ -793,13 +706,13 @@ export default function Home() {
               </details>
             </div>
 
-            <div className="rounded-3xl overflow-hidden border border-border bg-card shadow-md transition-all">
+            <div className="rounded-3xl overflow-hidden border border-border bg-card shadow-md">
               <details className="group">
                 <summary className="flex items-center justify-between p-4 md:p-6 cursor-pointer">
                   <h3 className="text-lg sm:text-xl font-semibold text-foreground">
                     How often does the club meet?
                   </h3>
-                  <span className="transition-transform duration-300 group-open:rotate-180">
+                  <span className="transition-transform duration-200 ease-smooth group-open:rotate-180">
                     <ArrowRight className="h-5 w-5 rotate-90 text-green-500" />
                   </span>
                 </summary>
@@ -811,7 +724,7 @@ export default function Home() {
                 </div>
               </details>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>      
 
@@ -821,7 +734,7 @@ export default function Home() {
           <h2 className="text-3xl sm:text-4xl font-extrabold mb-10 md:mb-12 text-center text-gradient-green">
             Get in Touch
           </h2>
-          <div className="mx-auto max-w-4xl p-6 sm:p-8 md:p-10 rounded-3xl border border-border bg-card/70 backdrop-blur-md shadow-xl hover:shadow-2xl transition-all duration-300">
+          <Reveal className="mx-auto max-w-4xl p-6 sm:p-8 md:p-10 rounded-3xl border border-border bg-card/70 backdrop-blur-md shadow-xl">
             <p className="text-base sm:text-lg md:text-xl leading-relaxed text-center text-foreground">
               Have questions, ideas, or just want to collaborate?
               <br className="hidden sm:block" />
@@ -830,18 +743,17 @@ export default function Home() {
             <div className="mt-6 flex justify-center">
               <a
                 href="mailto:contact@thefossclub.org"
-                className="px-6 py-2 rounded-full bg-green-500 text-black font-semibold hover:bg-green-400 transition-all duration-200 shadow-md hover:scale-105"
+                className="px-6 py-2 rounded-full bg-green-500 text-black font-semibold shadow-md transition-ui hover:bg-green-400 active:scale-[0.98]"
               >
                 contact@thefossclub.org
               </a>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* Footer */}
       <SiteFooter />
     </div>
-    </LazyMotion>
   )
 }

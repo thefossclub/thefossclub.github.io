@@ -1,7 +1,6 @@
 "use client"
 
 import { CalendarDays, Mic2, ZoomIn, ChevronLeft, ChevronRight } from "lucide-react"
-import { m } from "framer-motion"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa"
 import {
@@ -178,7 +177,7 @@ export default function OCCScrollCard({ cards = defaultOccCards }: OCCScrollCard
           type="button"
           aria-label="Scroll cards left"
           onClick={() => scrollCards("left")}
-          className="absolute -left-3 top-1/2 z-40 hidden sm:flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-card/90 text-foreground shadow-md backdrop-blur-sm transition hover:text-green-500 sm:-left-5"
+          className="absolute -left-3 top-1/2 z-40 hidden sm:flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-card/90 text-foreground shadow-md backdrop-blur-sm transition-ui hover:text-green-500 sm:-left-5"
         >
           <FaAngleLeft className="h-4 w-4" />
         </button>
@@ -189,7 +188,7 @@ export default function OCCScrollCard({ cards = defaultOccCards }: OCCScrollCard
           type="button"
           aria-label="Scroll cards right"
           onClick={() => scrollCards("right")}
-          className="absolute -right-3 top-1/2 z-40 hidden sm:flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-card/90 text-foreground shadow-md backdrop-blur-sm transition hover:text-green-500 sm:-right-5"
+          className="absolute -right-3 top-1/2 z-40 hidden sm:flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-card/90 text-foreground shadow-md backdrop-blur-sm transition-ui hover:text-green-500 sm:-right-5"
         >
           <FaAngleRight className="h-4 w-4" />
         </button>
@@ -201,14 +200,10 @@ export default function OCCScrollCard({ cards = defaultOccCards }: OCCScrollCard
         onScroll={checkScroll}
         className="flex snap-x snap-mandatory gap-3.5 sm:gap-5 overflow-x-auto py-2 px-1 sm:px-0 scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
       >
-        {cards.map((card, index) => (
-          <m.article
+        {cards.map((card) => (
+          <article
             key={card.id}
-            className="group flex flex-col w-[58vw] min-w-[190px] max-w-[220px] sm:w-[280px] sm:min-w-[280px] sm:max-w-[280px] md:w-[320px] md:min-w-[320px] md:max-w-[320px] flex-shrink-0 snap-start overflow-hidden rounded-xl sm:rounded-3xl border border-border bg-card shadow-md shadow-black/10 transition-all duration-300 hover:-translate-y-1 hover:border-green-500/40 hover:shadow-xl"
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.45, delay: index * 0.08 }}
+            className="group flex flex-col w-[58vw] min-w-[190px] max-w-[220px] sm:w-[280px] sm:min-w-[280px] sm:max-w-[280px] md:w-[320px] md:min-w-[320px] md:max-w-[320px] flex-shrink-0 snap-start overflow-hidden rounded-xl sm:rounded-3xl border border-border bg-card shadow-md shadow-black/10 transition-ui duration-200 hover:border-green-500/40"
           >
             {/* Poster flyer container with full A4 portrait aspect ratio (1587:2245) */}
             <div
@@ -227,12 +222,12 @@ export default function OCCScrollCard({ cards = defaultOccCards }: OCCScrollCard
               <img
                 src={card.image}
                 alt={card.title}
-                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                className="h-full w-full object-cover transition-transform duration-300 ease-smooth group-hover:scale-[1.03]"
                 loading="lazy"
               />
 
               {/* Click to enlarge overlay */}
-              <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 backdrop-blur-[2px] transition-opacity duration-300 group-hover:opacity-100">
+              <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 backdrop-blur-[2px] transition-ui duration-200 group-hover:opacity-100">
                 <span className="flex items-center gap-1 rounded-full border border-white/20 bg-black/75 px-2 py-0.5 sm:px-3.5 sm:py-1.5 text-[10px] sm:text-xs font-medium text-white shadow-lg backdrop-blur-md">
                   <ZoomIn className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-green-400" />
                   View Full Flyer
@@ -258,7 +253,7 @@ export default function OCCScrollCard({ cards = defaultOccCards }: OCCScrollCard
                 </div>
               </div>
             </div>
-          </m.article>
+          </article>
         ))}
       </div>
 
@@ -270,10 +265,11 @@ export default function OCCScrollCard({ cards = defaultOccCards }: OCCScrollCard
             type="button"
             aria-label={`Go to slide ${idx + 1}`}
             onClick={() => scrollToCard(idx)}
-            className={`transition-all duration-300 rounded-full ${
+            aria-current={activeCardIndex === idx}
+            className={`h-1.5 w-1.5 rounded-full transition-ui ${
               activeCardIndex === idx
-                ? "h-1.5 w-5 bg-green-500"
-                : "h-1.5 w-1.5 bg-muted-foreground/30 hover:bg-muted-foreground/50"
+                ? "bg-green-500"
+                : "bg-muted-foreground/30 hover:bg-muted-foreground/50"
             }`}
           />
         ))}
@@ -315,7 +311,7 @@ export default function OCCScrollCard({ cards = defaultOccCards }: OCCScrollCard
                   type="button"
                   onClick={handlePrev}
                   disabled={!hasPrev}
-                  className="inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs sm:text-sm font-medium text-muted-foreground transition hover:text-foreground disabled:opacity-40 disabled:pointer-events-none"
+                  className="inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs sm:text-sm font-medium text-muted-foreground transition-ui hover:text-foreground disabled:opacity-40 disabled:pointer-events-none"
                 >
                   <ChevronLeft className="h-4 w-4" />
                   <span>Previous</span>
@@ -327,7 +323,7 @@ export default function OCCScrollCard({ cards = defaultOccCards }: OCCScrollCard
                   type="button"
                   onClick={handleNext}
                   disabled={!hasNext}
-                  className="inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs sm:text-sm font-medium text-muted-foreground transition hover:text-foreground disabled:opacity-40 disabled:pointer-events-none"
+                  className="inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs sm:text-sm font-medium text-muted-foreground transition-ui hover:text-foreground disabled:opacity-40 disabled:pointer-events-none"
                 >
                   <span>Next</span>
                   <ChevronRight className="h-4 w-4" />

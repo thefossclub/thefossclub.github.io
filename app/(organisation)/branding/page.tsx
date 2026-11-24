@@ -261,7 +261,7 @@ export default function BrandingPage() {
               <a
                 href={asset.href}
                 download={asset.filename}
-                className="inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium border border-border bg-background hover:bg-card hover:border-green-500/40 text-foreground transition-all"
+                className="inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium border border-border bg-background hover:bg-card hover:border-green-500/40 text-foreground transition-ui"
               >
                 <Download className="w-4 h-4 text-green-500" />
                 <span>Download File</span>

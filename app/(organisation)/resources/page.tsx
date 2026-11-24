@@ -52,14 +52,14 @@ function ResourceList({ items }: { items: ResourceItem[] }) {
           href={item.link}
           target="_blank"
           rel="noopener noreferrer"
-          className="group p-3 rounded-xl border border-border/80 bg-background/50 hover:bg-card hover:border-green-500/40 text-foreground transition-all flex flex-col justify-between"
+          className="group p-3 rounded-xl border border-border/80 bg-background/50 hover:bg-card hover:border-green-500/40 text-foreground transition-ui flex flex-col justify-between"
         >
           <div className="flex items-start justify-between gap-2 mb-2">
             <ResourceBadge type={item.type} />
-            <ExternalLink className="w-3.5 h-3.5 text-muted-foreground group-hover:text-green-500 dark:group-hover:text-green-400 transition-colors flex-shrink-0" />
+            <ExternalLink className="w-3.5 h-3.5 text-muted-foreground group-hover:text-green-500 dark:group-hover:text-green-400 transition-ui flex-shrink-0" />
           </div>
           <div>
-            <span className="text-xs sm:text-sm font-semibold text-foreground group-hover:text-green-500 dark:group-hover:text-green-400 transition-colors block">
+            <span className="text-xs sm:text-sm font-semibold text-foreground group-hover:text-green-500 dark:group-hover:text-green-400 transition-ui block">
               {item.label}
             </span>
             {item.authorOrHost && (
@@ -321,7 +321,7 @@ export default function ResourcesPage() {
               <a
                 key={nav.href}
                 href={nav.href}
-                className="px-3 py-1 rounded-lg text-xs font-medium border border-border/70 bg-card/60 hover:bg-card hover:border-green-500/40 text-foreground hover:text-green-500 dark:hover:text-green-400 transition-all"
+                className="px-3 py-1 rounded-lg text-xs font-medium border border-border/70 bg-card/60 hover:bg-card hover:border-green-500/40 text-foreground hover:text-green-500 dark:hover:text-green-400 transition-ui"
               >
                 {nav.name}
               </a>
@@ -334,7 +334,7 @@ export default function ResourcesPage() {
               href="https://github.com/thefossclub/resources"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-gradient-green text-white shadow-md shadow-green-500/20 hover:opacity-95 transition-all"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-gradient-green text-white shadow-md shadow-green-500/20 hover:opacity-95 transition-ui"
             >
               <ExternalLink className="w-4 h-4" />
               <span>View on GitHub</span>
@@ -344,7 +344,7 @@ export default function ResourcesPage() {
               href="https://github.com/thefossclub/resources/issues"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-medium border border-border/80 bg-card hover:border-green-500/40 text-foreground transition-all"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-medium border border-border/80 bg-card hover:border-green-500/40 text-foreground transition-ui"
             >
               <GitPullRequest className="w-4 h-4 text-green-500" />
               <span>Suggest a Resource</span>
@@ -458,14 +458,14 @@ export default function ResourcesPage() {
               href="https://github.com/thefossclub/resources/blob/main/README.md"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-gradient-green text-white shadow-md shadow-green-500/20 hover:opacity-95 transition-all"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-gradient-green text-white shadow-md shadow-green-500/20 hover:opacity-95 transition-ui"
             >
               <ExternalLink className="w-4 h-4" />
               <span>Edit on GitHub</span>
             </a>
             <Link
               href="/coc"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-medium border border-border/80 bg-card hover:border-green-500/40 text-foreground transition-all"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-medium border border-border/80 bg-card hover:border-green-500/40 text-foreground transition-ui"
             >
               <span>Code of Conduct</span>
             </Link>

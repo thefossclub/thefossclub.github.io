@@ -13,7 +13,7 @@ interface OrgCardProps {
 export default function OrgCard({ children, className = "" }: OrgCardProps) {
   return (
     <div
-      className={`w-full p-5 sm:p-7 md:p-8 rounded-3xl border border-border bg-card/85 backdrop-blur-sm shadow-md transition-all duration-200 ${className}`}
+      className={`w-full p-5 sm:p-7 md:p-8 rounded-3xl border border-border bg-card/85 backdrop-blur-sm shadow-md ${className}`}
     >
       {children}
     </div>

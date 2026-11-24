@@ -122,7 +122,7 @@ export default function CodeOfConductPage() {
               ].map((item) => (
                 <div
                   key={item}
-                  className="p-3.5 bg-primary/5 dark:bg-primary/10 rounded-2xl border border-primary/20 hover:border-primary/40 shadow-sm text-sm sm:text-base text-foreground transition-all duration-200"
+                  className="p-3.5 bg-primary/5 dark:bg-primary/10 rounded-2xl border border-primary/20 shadow-sm text-sm sm:text-base text-foreground"
                 >
                   {item}
                 </div>
@@ -272,7 +272,7 @@ export default function CodeOfConductPage() {
             you can report an issue:
           </p>
           <ul className="space-y-3 sm:space-y-4 text-foreground mb-6">
-            <li className="p-4 md:p-5 bg-primary/5 dark:bg-primary/10 rounded-2xl border border-primary/20 hover:border-primary/40 shadow-sm text-sm sm:text-base text-foreground transition-all duration-200">
+            <li className="p-4 md:p-5 bg-primary/5 dark:bg-primary/10 rounded-2xl border border-primary/20 shadow-sm text-sm sm:text-base text-foreground">
               <strong className="text-foreground">Email:</strong>{" "}
               Please send an email to{" "}
               <a
@@ -285,12 +285,12 @@ export default function CodeOfConductPage() {
               such as where and when the incident occurred, the people involved, and any
               witnesses.
             </li>
-            <li className="p-4 md:p-5 bg-primary/5 dark:bg-primary/10 rounded-2xl border border-primary/20 hover:border-primary/40 shadow-sm text-sm sm:text-base text-foreground transition-all duration-200">
+            <li className="p-4 md:p-5 bg-primary/5 dark:bg-primary/10 rounded-2xl border border-primary/20 shadow-sm text-sm sm:text-base text-foreground">
               <strong className="text-foreground">Phone:</strong>{" "}
               If urgent, contact us at{" "}
               <strong className="text-green-600 dark:text-green-400">+91 8882895216</strong>.
             </li>
-            <li className="p-4 md:p-5 bg-primary/5 dark:bg-primary/10 rounded-2xl border border-primary/20 hover:border-primary/40 shadow-sm text-sm sm:text-base text-foreground transition-all duration-200">
+            <li className="p-4 md:p-5 bg-primary/5 dark:bg-primary/10 rounded-2xl border border-primary/20 shadow-sm text-sm sm:text-base text-foreground">
               <strong className="text-foreground">In-person:</strong>{" "}
               If attending an event, you can report the issue directly to a board member
               or the faculty coordinator,{" "}

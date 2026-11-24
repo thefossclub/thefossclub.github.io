@@ -24,12 +24,10 @@ export default function ScrollingTools({ tools }: ScrollingToolsProps) {
   const extendedTools = useMemo(() => tools.concat(tools), [tools])
 
   // Single GPU-friendly marquee animation (no JS intervals).
-  // Duration is based on total content width so the perceived speed stays high.
   const marqueeDurationSeconds = useMemo(() => {
     const sequencePx = tools.length * STEP
-    const speedPxPerSec = 200
-    const raw = sequencePx / speedPxPerSec
-    return Math.max(2.5, Math.min(20, raw))
+    const speedPxPerSec = 60
+    return sequencePx / speedPxPerSec
   }, [tools.length])
 
   return (

@@ -36,31 +36,31 @@ export default function SiteFooter() {
               software.
             </p>
             <div className="flex flex-wrap justify-center md:justify-start gap-2">
-              <a href="https://github.com/thefossclub" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-muted/50 rounded-lg text-muted-foreground hover:text-green-500 hover:bg-muted transition-all shadow-sm">
+              <a href="https://github.com/thefossclub" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-muted/50 rounded-lg text-muted-foreground shadow-sm transition-ui hover:text-green-500 hover:bg-muted">
                 <FaGithub className="h-4 w-4" />
                 <span className="sr-only">GitHub</span>
               </a>
-              <a href="https://discord.gg/BgHwhRZg3r" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-muted/50 rounded-lg text-muted-foreground hover:text-green-500 hover:bg-muted transition-all shadow-sm">
+              <a href="https://discord.gg/BgHwhRZg3r" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-muted/50 rounded-lg text-muted-foreground shadow-sm transition-ui hover:text-green-500 hover:bg-muted">
                 <FaDiscord className="h-4 w-4" />
                 <span className="sr-only">Discord</span>
               </a>
-              <a href="https://twitter.com/thefossclub" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-muted/50 rounded-lg text-muted-foreground hover:text-green-500 hover:bg-muted transition-all shadow-sm">
+              <a href="https://twitter.com/thefossclub" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-muted/50 rounded-lg text-muted-foreground shadow-sm transition-ui hover:text-green-500 hover:bg-muted">
                 <FaTwitter className="h-4 w-4" />
                 <span className="sr-only">Twitter</span>
               </a>
-              <a href="https://linkedin.com/company/thefossclub" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-muted/50 rounded-lg text-muted-foreground hover:text-green-500 hover:bg-muted transition-all shadow-sm">
+              <a href="https://linkedin.com/company/thefossclub" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-muted/50 rounded-lg text-muted-foreground shadow-sm transition-ui hover:text-green-500 hover:bg-muted">
                 <FaLinkedin className="h-4 w-4" />
                 <span className="sr-only">LinkedIn</span>
               </a>
-              <a href="https://instagram.com/thefossclub" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-muted/50 rounded-lg text-muted-foreground hover:text-green-500 hover:bg-muted transition-all shadow-sm">
+              <a href="https://instagram.com/thefossclub" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-muted/50 rounded-lg text-muted-foreground shadow-sm transition-ui hover:text-green-500 hover:bg-muted">
                 <FaInstagram className="h-4 w-4" />
                 <span className="sr-only">Instagram</span>
               </a>
-              <a href="https://matrix.to/#/#thefossclub:matrix.org" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-muted/50 rounded-lg text-muted-foreground hover:text-green-500 hover:bg-muted transition-all shadow-sm">
+              <a href="https://matrix.to/#/#thefossclub:matrix.org" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-muted/50 rounded-lg text-muted-foreground shadow-sm transition-ui hover:text-green-500 hover:bg-muted">
                 <PiMatrixLogoFill className="h-4 w-4" />
                 <span className="sr-only">Matrix</span>
               </a>
-              <a href="https://mas.to/@thefossclub" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-muted/50 rounded-lg text-muted-foreground hover:text-green-500 hover:bg-muted transition-all shadow-sm">
+              <a href="https://mas.to/@thefossclub" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-muted/50 rounded-lg text-muted-foreground shadow-sm transition-ui hover:text-green-500 hover:bg-muted">
                 <FaMastodon className="h-4 w-4" />
                 <span className="sr-only">Mastodon</span>
               </a>
@@ -73,10 +73,10 @@ export default function SiteFooter() {
                 Quick Links
               </h3>
               <ul className="space-y-3 text-sm">
-                <li><Link href="/#home" className="text-muted-foreground hover:text-green-500 transition-all hover:translate-x-1 inline-block">Home</Link></li>
-                <li><Link href="/#about" className="text-muted-foreground hover:text-green-500 transition-all hover:translate-x-1 inline-block">About</Link></li>
-                <li><Link href="/#projects" className="text-muted-foreground hover:text-green-500 transition-all hover:translate-x-1 inline-block">Projects</Link></li>
-                <li><Link href="/#events" className="text-muted-foreground hover:text-green-500 transition-all hover:translate-x-1 inline-block">Events</Link></li>
+                <li><Link href="/#home" className="inline-block text-muted-foreground transition-ui hover:text-green-500">Home</Link></li>
+                <li><Link href="/#about" className="inline-block text-muted-foreground transition-ui hover:text-green-500">About</Link></li>
+                <li><Link href="/#projects" className="inline-block text-muted-foreground transition-ui hover:text-green-500">Projects</Link></li>
+                <li><Link href="/#events" className="inline-block text-muted-foreground transition-ui hover:text-green-500">Events</Link></li>
               </ul>
             </div>
             <div className="flex flex-col">
@@ -84,10 +84,10 @@ export default function SiteFooter() {
                 Organization
               </h3>
               <ul className="space-y-3 text-sm">
-                <li><Link href="/coc" className="text-muted-foreground hover:text-green-500 transition-all hover:translate-x-1 inline-block">Code of Conduct</Link></li>
-                <li><Link href="/branding" className="text-muted-foreground hover:text-green-500 transition-all hover:translate-x-1 inline-block">Branding</Link></li>
-                <li><Link href="/whitepaper" className="text-muted-foreground hover:text-green-500 transition-all hover:translate-x-1 inline-block">Whitepaper</Link></li>
-                <li><Link href="/resources" className="text-muted-foreground hover:text-green-500 transition-all hover:translate-x-1 inline-block">Resources</Link></li>
+                <li><Link href="/coc" className="inline-block text-muted-foreground transition-ui hover:text-green-500">Code of Conduct</Link></li>
+                <li><Link href="/branding" className="inline-block text-muted-foreground transition-ui hover:text-green-500">Branding</Link></li>
+                <li><Link href="/whitepaper" className="inline-block text-muted-foreground transition-ui hover:text-green-500">Whitepaper</Link></li>
+                <li><Link href="/resources" className="inline-block text-muted-foreground transition-ui hover:text-green-500">Resources</Link></li>
               </ul>
             </div>
             <div className="flex flex-col col-span-2 md:col-span-1">
@@ -95,9 +95,9 @@ export default function SiteFooter() {
                 Contact
               </h3>
               <ul className="space-y-3 text-sm">
-                <li><Link href="https://linktr.ee/thefossclub" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-green-500 transition-all hover:translate-x-1 inline-block">LinkTree</Link></li>
-                <li><Link href="mailto:contact@thefossclub.org" className="text-muted-foreground hover:text-green-500 transition-all hover:translate-x-1 inline-block">Email Us</Link></li>
-                <li><Link href="https://discord.gg/BgHwhRZg3r" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-green-500 transition-all hover:translate-x-1 inline-block">Discord</Link></li>
+                <li><Link href="https://linktr.ee/thefossclub" target="_blank" rel="noopener noreferrer" className="inline-block text-muted-foreground transition-ui hover:text-green-500">LinkTree</Link></li>
+                <li><Link href="mailto:contact@thefossclub.org" className="inline-block text-muted-foreground transition-ui hover:text-green-500">Email Us</Link></li>
+                <li><Link href="https://discord.gg/BgHwhRZg3r" target="_blank" rel="noopener noreferrer" className="inline-block text-muted-foreground transition-ui hover:text-green-500">Discord</Link></li>
               </ul>
             </div>
           </div>
@@ -119,10 +119,10 @@ export default function SiteFooter() {
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }
             }}
-            className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 group bg-muted hover:bg-green-500/10 border border-transparent hover:border-green-500/30 p-2.5 rounded-xl text-foreground hover:text-green-500 transition-all items-center justify-center"
+            className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 group bg-muted hover:bg-green-500/10 border border-transparent hover:border-green-500/30 p-2.5 rounded-xl text-foreground hover:text-green-500 transition-ui items-center justify-center"
             aria-label="Back to top"
           >
-            <ChevronUp className="h-4 w-4 transition-transform group-hover:-translate-y-0.5" />
+            <ChevronUp className="h-4 w-4 transition-ui group-hover:-translate-y-0.5" />
           </button>
         </div>
       </div>

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react"
 import { usePathname } from "next/navigation"
+import { useReducedMotion } from "framer-motion"
 
 interface Star {
   x: number
@@ -46,6 +47,7 @@ export default function InteractiveBackground() {
   const rafRef = useRef<number>(0)
   const sizeRef = useRef({ w: 0, h: 0 })
   const pathname = usePathname()
+  const reducedMotion = useReducedMotion()
 
   const skip =
     /^\/fosshack\/(2024|2025|2026)\/?$/.test(pathname ?? "") ||
@@ -65,6 +67,7 @@ export default function InteractiveBackground() {
       starsRef.current = Array.from({ length: STAR_COUNT }, () =>
         makeStar(canvas.width, canvas.height)
       )
+      if (reducedMotion) draw()
     }
 
     const onMouseMove = (e: MouseEvent) => {
@@ -120,7 +123,7 @@ export default function InteractiveBackground() {
         ctx.fill()
       }
 
-      rafRef.current = requestAnimationFrame(draw)
+      if (!reducedMotion) rafRef.current = requestAnimationFrame(draw)
     }
 
     init()
@@ -135,7 +138,7 @@ export default function InteractiveBackground() {
       window.removeEventListener("mousemove", onMouseMove)
       window.removeEventListener("mouseleave", onMouseLeave)
     }
-  }, [skip])
+  }, [skip, reducedMotion])
 
   if (skip) return null
 
